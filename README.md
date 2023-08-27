@@ -1,3 +1,7 @@
+<img width=100% src="https://capsule-render.vercel.app/api?type=waving&color=48A3A9&height=120&section=header"/>
+
+---
+
 # Maremansa-kids
 
 
@@ -11,6 +15,7 @@
 ---
 
 ### ✦ | Sobre o Repositório 🤖
+*Neste repositório, o fruto do esforço coletivo da equipe é evidente no projeto de prática profissional dedicado à concepção de uma loja de roupas de banho infantil funcional e encantadora. Através da fusão entre criatividade, conhecimento empresarial e proficiência em desenvolvimento, o projeto visou suprir as demandas particulares de pais em busca de trajes de banho seguros, confortáveis e elegantes para seus filhos.*
 
 ---
 
@@ -50,3 +55,15 @@
 </tbody>
 </table>
 </div>
+
+---
+
+<div align="center">
+<br><p align="centre"><b>Visitors Count</b></p>  
+<p align="center"><img align="center" src="https://profile-counter.glitch.me/{amandanpb}/count.svg" /></p> 
+<br>
+</div>
+
+---
+
+<img width=100% src="https://capsule-render.vercel.app/api?type=waving&color=48A3A9&height=120&section=footer"/>
