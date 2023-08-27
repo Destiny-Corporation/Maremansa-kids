@@ -1,6 +1,5 @@
 <img width=100% src="https://capsule-render.vercel.app/api?type=waving&color=48A3A9&height=120&section=header"/>
 
----
 
 # Maremansa-kids
 
@@ -63,7 +62,5 @@
 <p align="center"><img align="center" src="https://profile-counter.glitch.me/{amandanpb}/count.svg" /></p> 
 <br>
 </div>
-
----
 
 <img width=100% src="https://capsule-render.vercel.app/api?type=waving&color=48A3A9&height=120&section=footer"/>
