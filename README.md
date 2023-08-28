@@ -21,6 +21,7 @@
 ---
 
 ### ✦ | Definição de Tecnologias 🖥️
+- *Frameworks: API para Login com o Google, APIs para Consulta de CEP e Cálculo de - Frete dos Correios;*
 - *IDE:*
   
 <img src="https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white" height="25"/>  
@@ -39,8 +40,7 @@
 <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" height="25">
 <img src="https://img.shields.io/badge/figma-0078D6?style=for-the-badge&logo=figma&logoColor=white" height="25">
 <img src="https://img.shields.io/badge/nodejs-001700?style=for-the-badge&logo=nodejs&logoColor=white" height="25">
-  
-- *Frameworks: API para Login com o Google, APIs para Consulta de CEP e Cálculo de - Frete dos Correios;*
+
 ---
 
 ### ✦ | Equipe 👩‍💻
