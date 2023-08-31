@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Stylish&display=swap');
 
 * {
  margin: 0;
@@ -20,12 +21,13 @@ body{
 .wrapper{
     width: 420px;
     background: transparent;
-    border: 2px solid rgba(255, 255, 255, .2);
+    border: 2px solid rgba(255, 255, 255, 0);
     backdrop-filter: blur(20px);
     box-shadow: 0 0 10px rgba(0, 0, 0, -2);
     color: #fff;
     border-radius: 10px;
     padding: 30px 40px;
+    align-items: center;
 }
 
 .wrapper h1{
@@ -51,11 +53,11 @@ body{
     font-size: 16px;
     color:#fff;
     padding: 20px 45px 20px 20px;
+    padding-left: 45px;
 }
 
 .input-box input::placeholder{
     color:#fff;
-    padding-left: 25px;
 }
 
 .input-box i {
