@@ -39,7 +39,8 @@
 <img src="https://img.shields.io/badge/Firebase-00000F?style=for-the-badge&logo=firebase&logoColor=white" height="25"/>
 <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" height="25">
 <img src="https://img.shields.io/badge/figma-0078D6?style=for-the-badge&logo=figma&logoColor=white" height="25">
-<img src="https://img.shields.io/badge/nodejs-001700?style=for-the-badge&logo=nodejs&logoColor=white" height="25">
+<img src="https://img.shields.io/static/v1?style=for-the-badge&message=ClickUp&color=7B68EE&logo=ClickUp&logoColor=FFFFFF&label=" height="25"/>
+<img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" height="25"/>
 
 ---
 
