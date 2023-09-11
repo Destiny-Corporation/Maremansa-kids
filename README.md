@@ -16,7 +16,7 @@
 ---
 
 ### ✦ | Sobre o Repositório 🤖
-*Neste repositório, o fruto do esforço coletivo da equipe é evidente no projeto de prática profissional dedicado à confepção de um site para uma loja de roupas de banho infantil moderna e encantadora. Através da fusão entre criatividade, conhecimento empresarial e proficiência em desenvolvimento, o projeto visou suprir as demandas particulares de pais em busca de trajes de banho seguros, confortáveis e elegantes para seus filhos.*
+*Neste repositório, o fruto do esforço coletivo da equipe é evidente no projeto de prática profissional dedicado à confecção de um site para uma loja de roupas de banho infantil moderna e encantadora. Através da fusão entre criatividade, conhecimento empresarial e proficiência em desenvolvimento, o projeto visou suprir as demandas particulares de pais em busca de trajes de banho seguros, confortáveis e elegantes para seus filhos.*
 
 ---
 
