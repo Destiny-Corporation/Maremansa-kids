@@ -10,6 +10,7 @@ import About from "./routes/About";
 import Login from "./routes/Login";
 import Register from "./routes/Register";
 import ErrorPage from "./routes/ErrorPage";
+import _builder from "./builder.js";
 
 const router = createBrowserRouter([
   {
