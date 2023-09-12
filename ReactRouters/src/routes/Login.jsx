@@ -1,6 +1,9 @@
 import React from "react";
 import "./Login.css";
 import { Route } from "react-router-dom";
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/firestore';
 
 const Login = () => {
   const firebaseConfig = {
@@ -150,7 +153,8 @@ const Login = () => {
               placeholder="EMAIL"
               id="email"
               name="email"
-              onchange="onChangeEmail()"
+              onchange={onChangeEmail()}
+              
             />
             <div className="error" id="email-required-error">
               Email é obrigatório
@@ -167,7 +171,7 @@ const Login = () => {
               placeholder="PASSWORD"
               id="password"
               name="password"
-              onchange="onChangePassword()"
+              onchange={onChangePassword()}
             />
             <div className="error" id="password-required-error">
               Senha é obrigatória
@@ -183,13 +187,13 @@ const Login = () => {
               className="remember-link"
               href="#"
               id="recover-password-button"
-              onclick="recoverPassword()"
+              onclick={recoverPassword()}
             >
               ESQUECI MINHA SENHA.
             </a>
           </div>
 
-          <button type="button" class="btn" id="login-button" onclick="login()">
+          <button type="button" class="btn" id="login-button" onclick={login()}>
             ENTRAR
           </button>
 
