@@ -11,6 +11,10 @@
     list-style: none;
 }
 
+.main-container {
+  height: 100vh;
+}
+
 .bt-header {
   font-size: 28px;
   padding: 2px;
