@@ -12,14 +12,14 @@ function login() {
     firebase.auth().signInWithEmailAndPassword(
         form.email().value, form.password().value
     ).then(() => {
-        window.location.href = "pages/home/home.html";
+        window.location.href = "Home/home.html";
     }).catch(error => {
         alert(getErrorMessage(error));
     });
 }
 
 function register() {
-    window.location.href = "pages/register/register.html";
+    window.location.href = "Register/register.html";
 }
 
 function recoverPassword() {
