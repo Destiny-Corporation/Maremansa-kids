@@ -12,14 +12,14 @@ function login() {
     firebase.auth().signInWithEmailAndPassword(
         form.email().value, form.password().value
     ).then(() => {
-        window.location.href = "Home/home.html";
+        window.location.href = "pages/home/home.html";
     }).catch(error => {
         alert(getErrorMessage(error));
     });
 }
 
 function register() {
-    window.location.href = "Register/register.html";
+    window.location.href = "pages/register/register.html";
 }
 
 function recoverPassword() {
@@ -48,23 +48,17 @@ function toggleEmailErrors() {
 }
 
 function togglePasswordErrors() {
-    const passwordRequiredError = document.getElementById("password-required-error");
-   passwordRequiredError.style.display = password ? "none" : "block";
+    const password = form.password().value;
+    form.passwordRequiredError().style.display = password ? "none" : "block";
 }
-
-
-
 
 function toggleButtonsDisable() {
     const emailValid = isEmailValid();
-    const recoverPasswordButton = document.getElementById("recover-password-button");
-    recoverPasswordButton.disabled = !emailValid;
+    form.recoverPasswordButton().disabled = !emailValid;
 
     const passwordValid = isPasswordValid();
-    const loginButton = document.getElementById("login-button");
-    loginButton.disabled = !emailValid || !passwordValid;
+    form.loginButton().disabled = !emailValid || !passwordValid;
 }
-
 
 function isEmailValid() {
     const email = form.email().value;

@@ -44,11 +44,14 @@
             <h1>Login</h1>
             <div class="input-box">
                 <input type="email" placeholder="EMAIL" id="email" name="email" onchange="onChangeEmail()"/>
+                <div class="error" id="email-required-error">Email é obrigatório</div>
+                <div class="error" id="email-invalid-error">Email é inválido</div>
                 <i class='bx bx-user' style='color:#ffffff' ></i>
             </div>
 
             <div class="input-box">
                 <input type="password" placeholder="PASSWORD" id="password" name="password" onchange="onChangePassword()"/>
+                <div class="error" id="password-required-error">Senha é obrigatória</div>
                 <i class='bx bx-lock-alt' style='color:#ffffff' ></i>
             </div>
 
