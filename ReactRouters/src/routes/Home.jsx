@@ -1,5 +1,7 @@
 import React from "react";
 import "./Home.css";
+import Login from "./Login";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (

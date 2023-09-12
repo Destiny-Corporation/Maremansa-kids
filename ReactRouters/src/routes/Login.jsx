@@ -1,48 +1,64 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Login.css";
-import { Route } from "react-router-dom";
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/firestore';
+import { Link } from "react-router-dom";
+import { initializeApp } from 'firebase/app';
+import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDTKUI6nV-DZjIsUo1BMkjIUWOQbT9gU3Q",
+  authDomain: "auth-amanda.firebaseapp.com",
+  projectId: "auth-amanda",
+  storageBucket: "auth-amanda.appspot.com",
+  messagingSenderId: "376069750475",
+  appId: "1:376069750475:web:bfb216cfd8928a23e8a54e",
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
+const auth = getAuth(firebaseApp);
 
 const Login = () => {
-  const firebaseConfig = {
-    apiKey: "AIzaSyDTKUI6nV-DZjIsUo1BMkjIUWOQbT9gU3Q",
-    authDomain: "auth-amanda.firebaseapp.com",
-    projectId: "auth-amanda",
-    storageBucket: "auth-amanda.appspot.com",
-    messagingSenderId: "376069750475",
-    appId: "1:376069750475:web:bfb216cfd8928a23e8a54e",
-  };
-  firebase.initializeApp(firebaseConfig);
-  function onChangeEmail() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  function onChangeEmail(event) {
+    setEmail(event.target.value);
     toggleButtonsDisable();
     toggleEmailErrors();
   }
 
-  function onChangePassword() {
+  function onChangePassword(event) {
+    setPassword(event.target.value);
     toggleButtonsDisable();
     togglePasswordErrors();
   }
 
   function login() {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(form.email().value, form.password().value)
+    signInWithEmailAndPassword(auth, email, password)
       .then(() => {
-        window.location.href = "Home/home.html";
+        // Redirecione para a página inicial após o login bem-sucedido
+        window.location.href = "/";
       })
       .catch((error) => {
         alert(getErrorMessage(error));
       });
   }
 
-  function register() {
-    window.location.href = "Register/register.html";
+  function recoverPassword() {
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        alert("Email enviado com sucesso");
+      })
+      .catch((error) => {
+        alert(getErrorMessage(error));
+      });
   }
 
-  function recoverPassword() {
-    firebase
+  //function register() {
+    //window.location.href = "Register/register.html";
+  //}
+
+  /*function recoverPassword() {
+    firebaseApp
       .auth()
       .sendPasswordResetEmail(form.email().value)
       .then(() => {
@@ -51,7 +67,7 @@ const Login = () => {
       .catch((error) => {
         alert(getErrorMessage(error));
       });
-  }
+  }*/
 
   function getErrorMessage(error) {
     if (error.code == "auth/user-not-found") {
@@ -117,7 +133,7 @@ const Login = () => {
         <div className="logo">
           <img src="/images/logo.png" alt="Logo" />
         </div>
-        <div classNamw="icons">
+        <div className="icons">
           <a href="#">
             <i
               className="bx bx-user bt-header"
@@ -153,7 +169,7 @@ const Login = () => {
               placeholder="EMAIL"
               id="email"
               name="email"
-              onchange={onChangeEmail()}
+              onChange={onChangeEmail}
               
             />
             <div className="error" id="email-required-error">
@@ -162,7 +178,7 @@ const Login = () => {
             <div className="error" id="email-invalid-error">
               Email é inválido
             </div>
-            <i className="bx bx-user" style="color:#ffffff"></i>
+            <i className="bx bx-user" style={{color:'#ffffff'}}></i>
           </div>
 
           <div className="input-box">
@@ -171,7 +187,7 @@ const Login = () => {
               placeholder="PASSWORD"
               id="password"
               name="password"
-              onchange={onChangePassword()}
+              onChange={onChangePassword}
             />
             <div className="error" id="password-required-error">
               Senha é obrigatória
@@ -187,20 +203,20 @@ const Login = () => {
               className="remember-link"
               href="#"
               id="recover-password-button"
-              onclick={recoverPassword()}
+              onClick={recoverPassword}
             >
               ESQUECI MINHA SENHA.
             </a>
           </div>
 
-          <button type="button" class="btn" id="login-button" onclick={login()}>
+          <button type="button" className="btn" id="login-button" onClick={login}>
             ENTRAR
           </button>
 
           <div className="register-link">
             <p>
               {" "}
-              Não possui cadastro? <a href="#">CRIAR CONTA</a>
+              Não possui cadastro? <Link to="/register">CRIAR CONTA</Link>
             </p>
           </div>
         </form>
@@ -209,7 +225,7 @@ const Login = () => {
       <footer>
         <div className="footer-content">
           <div className="footer-left">
-            <img src="/images/prancha.png" alt="Sobre Nós" class="icon-image" />
+            <img src="/images/prancha.png" alt="Sobre Nós" className="icon-image" />
             <a className="footer-link" href="#">
               SOBRE NÓS
             </a>
