@@ -1,4 +1,4 @@
-import './App.css';
+import "./App.css";
 
 // reaproveitamento de estrutura
 import { Outlet } from "react-router-dom";
@@ -16,4 +16,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
