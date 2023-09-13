@@ -215,7 +215,8 @@ body {
 
 footer {
   position: static;
-  margin: 20px;
+  margin: 0;
+  bottom: 0;
   width: 100%;
   background-color: #48a3a9;
   color: #fff;

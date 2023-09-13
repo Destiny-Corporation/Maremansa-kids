@@ -131,7 +131,7 @@ const Login = () => {
     <>
       <header className="main-header">
         <div className="logo">
-          <img src="/images/logo.png" alt="Logo" />
+          <img src="src/assets/logo.png" alt="Logo" />
         </div>
         <div className="icons">
           <a href="#">
@@ -158,7 +158,7 @@ const Login = () => {
       <div className="wrapper">
         <form action="">
           <img
-            src="/images/logo2.png"
+            src="src/assets/logo2.png"
             alt="Logo de Login"
             className="login-image"
           />
@@ -225,7 +225,7 @@ const Login = () => {
       <footer>
         <div className="footer-content">
           <div className="footer-left">
-            <img src="/images/prancha.png" alt="Sobre Nós" className="icon-image" />
+            <img src="src/assets/prancha.png" alt="Sobre Nós" className="icon-image" />
             <a className="footer-link" href="#">
               SOBRE NÓS
             </a>
