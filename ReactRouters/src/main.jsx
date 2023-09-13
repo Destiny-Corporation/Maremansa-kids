@@ -11,6 +11,7 @@ import Login from "./routes/Login";
 import Register from "./routes/Register";
 import ErrorPage from "./routes/ErrorPage";
 
+
 const router = createBrowserRouter([
   {
     path: "/",
