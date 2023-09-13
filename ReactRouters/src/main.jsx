@@ -6,9 +6,16 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Home from "./routes/Home";
-import About from "./routes/About";
+import Company from "./routes/Company";
 import Login from "./routes/Login";
 import Register from "./routes/Register";
+import Cart from "./routes/Cart";
+import Wishlist from "./routes/Wishlist";
+import Female from "./routes/Female";
+import Male from "./routes/Male";
+import Props from "./routes/Props";
+import Sale from "./routes/Sale";
+import PhysicalStore from "./routes/PhysicalStore";
 import ErrorPage from "./routes/ErrorPage";
 
 const router = createBrowserRouter([
@@ -17,16 +24,44 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: "/about",
-    element: <About />,
-  },
-  {
     path: "/login",
     element: <Login />,
   },
   {
     path: "/register",
     element: <Register />,
+  },
+  {
+    path: "/cart",
+    element: <Cart />,
+  },
+  {
+    path: "/wishlist",
+    element: <Wishlist />,
+  },
+  {
+    path: "/female",
+    element: <Female />,
+  },
+  {
+    path: "/male",
+    element: <Male />,
+  },
+  {
+    path: "/props",
+    element: <Props />,
+  },
+  {
+    path: "/sale",
+    element: <Sale />,
+  },
+  {
+    path: "/physicalstore",
+    element: <PhysicalStore />,
+  },
+  {
+    path: "/company",
+    element: <Company />,
   },
 ]);
 

@@ -1,6 +1,10 @@
 import React from "react";
 import "./Home.css";
 import Login from "./Login";
+import Wishlist from "./Wishlist";
+import Cart from "./Cart";
+import PhysicalStore from "./PhysicalStore";
+import Company from "./Company";
 import { Link } from "react-router-dom";
 
 const Home = () => {
@@ -11,9 +15,9 @@ const Home = () => {
                     <img src="src/assets/logo.png" alt="Logo"/>
                 </div>
                 <div className="icons">
-                    <a href="#"><i className='bx bx-user bt-header' style={{ color: '#ffffff' }}></i></a>
-                    <a href="#"><i className='bx bx-heart bt-header' style={{ color: '#ffffff' }}></i></a>
-                    <a href="#"><i className='bx bx-cart bt-header' style={{ color: '#ffffff' }}></i></a>
+                    <a href="#"><Link to='/login'><i className='bx bx-user bt-header' style={{ color: '#ffffff' }}></i></Link></a>
+                    <a href="#"><Link to="/wishlist"><i className='bx bx-heart bt-header' style={{ color: '#ffffff' }}></i></Link></a>
+                    <a href="#"><Link to="/cart"><i className='bx bx-cart bt-header' style={{ color: '#ffffff' }}></i></Link></a>
                 </div>
             </header>
 
@@ -57,23 +61,25 @@ const Home = () => {
  
 <div className="container-menu-buttons">
   <div className="button-menu">
-    <img src="src/assets/sale.png" alt=""/>
-    <h7>PROMOÇÕES</h7>
+    <Link to="/sale"><img src="src/assets/sale.png" alt=""/></Link>
+    <Link to="/sale"><h7>PROMOÇÕES</h7></Link>
   </div>
 
   <div className="button-menu">
-    <img src="src/assets/accessories.png" alt=""/>
-    <h7>ACESSÓRIOS</h7>
+    <Link to="/props"><img src="src/assets/accessories.png" alt=""/></Link>
+    <Link to="/props"><h7>ACESSÓRIOS</h7></Link>
   </div>
 
   <div className="button-menu">
-    <img src="src/assets/feminino.png" alt=""/>
-    <h7>FEMININO</h7>
+    <Link to="female"><img src="src/assets/feminino.png" alt=""/></Link>
+    <Link to="female"><h7>FEMININO</h7></Link>
+    
   </div>
 
   <div className="button-menu">
-    <img src="src/assets/masculino.png" alt=""/>
-    <h7>MASCULINO</h7>
+    <Link to="male"><img src="src/assets/masculino.png" alt=""/></Link>
+    <Link to="male"><h7>MASCULINO</h7></Link>
+    
   </div>
 </div>
  
@@ -116,8 +122,8 @@ const Home = () => {
 
 		<div className="footer-section-div">
 			<h3>SOBRE NÓS</h3>
-			<li><a href="#">A EMPRESA</a></li>
-			<li><a href="#">CONHEÇA NOSSA LOJA FÍSICA</a></li>
+			<li><a href="#"><Link to="/company">A EMPRESA</Link></a></li>
+			<li><a href="#"><Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link></a></li>
 			<li><a href="#">NOSSOS PARCEIROS</a></li>
 		</div>
 

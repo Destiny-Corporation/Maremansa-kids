@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import "./Register.css";
-import { Route } from "react-router-dom"
+import { Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { initializeApp } from 'firebase/app';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { getDatabase, ref, set } from 'firebase/database';
