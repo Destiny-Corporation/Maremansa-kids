@@ -1,8 +1,10 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Isso garante que o conteúdo ocupe pelo menos a altura da tela. */
+  width: 100%;
+  justify-content: space-between; /* Isso alinha o conteúdo verticalmente. */
+  align-items: center; /* Isso alinha o conteúdo horizontalmente. */
 }
 
 .logo {

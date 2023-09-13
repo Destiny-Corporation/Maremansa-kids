@@ -128,7 +128,7 @@ const Login = () => {
     return /\S+@\S+\.\S+/.test(email);
   }
   return (
-    <div>
+    <>
       <header className="main-header">
         <div className="logo">
           <img src="/images/logo.png" alt="Logo" />
@@ -261,7 +261,7 @@ const Login = () => {
       <div className="sub-footer">
         <p>maremansa</p>
       </div>
-    </div>
+    </>
   );
 };
 

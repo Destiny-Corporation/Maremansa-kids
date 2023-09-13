@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <div>
+    <>
       <header className="main-header">
         <div className="logo">
           <img src="img/logo.png" alt="Logo" />
@@ -56,7 +56,7 @@ const Home = () => {
       </div>
 
       <footer>{/* Conteúdo do rodapé */}</footer>
-    </div>
+    </>
   );
 };
 

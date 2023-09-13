@@ -1,60 +1,56 @@
-import React, { useEffect } from "react";
+import React, { useState } from 'react';
 import "./Register.css";
-import { Route } from "react-router-dom";
-import { initializeApp } from "firebase/app";
+import { Route } from "react-router-dom"
+import { initializeApp } from 'firebase/app';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { getDatabase, ref, set } from 'firebase/database';
 import { getAnalytics } from "firebase/analytics";
-import { getDatabase, ref, push } from "firebase/database";
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDTKUI6nV-DZjIsUo1BMkjIUWOQbT9gU3Q",
+  authDomain: "auth-amanda.firebaseapp.com",
+  projectId: "auth-amanda",
+  storageBucket: "auth-amanda.appspot.com",
+  messagingSenderId: "376069750475",
+  appId: "1:376069750475:web:bfb216cfd8928a23e8a54e",
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app); // Variável `auth` declarada aqui
+const database = getDatabase(app);
+const analytics = getAnalytics(app);
+
 const Register = () => {
-  // Import the functions you need from the SDKs you need
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+  const handleRegister = async () => {
+    try {
+      // Crie uma conta de usuário no Firebase Authentication
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyDrfWXHL4pWdFvTqY04lRXdkdiESv1gxFo",
-    authDomain: "registerdev1.firebaseapp.com",
-    projectId: "registerdev1",
-    storageBucket: "registerdev1.appspot.com",
-    messagingSenderId: "657998287997",
-    appId: "1:657998287997:web:1170e52ae48fd9d2ca0d14",
-    measurementId: "G-6BXVTX23HB",
-  };
+      // Após o registro, você pode salvar informações adicionais no Firebase Realtime Database
+      const user = userCredential.user;
+      await set(ref(database, `users/${user.uid}`), {
+        email: user.email,
+        // Outros dados do usuário, se necessário
+      });
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-  const db = getDatabase();
-
-  useEffect(() => {
-    var userEmail = document.getElementById("email");
-    var userPassword = document.getElementById("password");
-    var register = document.getElementById("btnn");
-
-    register.addEventListener("click", function () {
-      create(userEmail.value, userPassword.value);
-    });
-
-    function create(email, password) {
-      var data = {
-        email: email,
-        password: password,
-      };
-      const database = getDatabase();
-      const databaseRef = ref(database, "users");
-      push(databaseRef, data)
-        .then(() => {
-          console.log("Dados enviados com sucesso.");
-        })
-        .catch((error) => {
-          console.error("Erro ao enviar dados:", error);
-        });
+      alert('Registro bem-sucedido!');
+    } catch (error) {
+      console.error(error);
+      alert('Erro durante o registro');
     }
-  }, []);
+  };
+  
 
   return (
-    <div>
+    <>
       <header className="main-header">
         <div className="logo">
           <img src="/images/logo.png" alt="Logo" />
@@ -78,12 +74,22 @@ const Register = () => {
           />
           <h1>Cadastre-se</h1>
           <div className="input-box">
-            <input id="email" type="text" placeholder="EMAIL" required />
+            <input
+              type="text"
+              placeholder="EMAIL"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
             <i className="bx bx-user"></i>
           </div>
 
           <div className="input-box">
-            <input id="password" type="password" placeholder="SENHA" required />
+            <input
+              type="password"
+              placeholder="SENHA"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
             <i className="bx bx-lock-alt"></i>
           </div>
 
@@ -92,14 +98,13 @@ const Register = () => {
             <i className="bx bx-lock-alt"></i>
           </div>
 
-          <button id="btnn" type="submit" className="btn">
+          <button id="btnn" type="button" onClick={handleRegister} className="btn">
             CRIAR CONTA
           </button>
 
           <div className="register-link">
             <p>
-              Já tem uma conta?
-              <a href="#">ENTRAR</a>
+              Já tem uma conta? <a href="#">ENTRAR</a>
             </p>
           </div>
         </form>
@@ -145,7 +150,7 @@ const Register = () => {
       <div className="sub-footer">
         <p>maremansa</p>
       </div>
-    </div>
+    </>
   );
 };
 
