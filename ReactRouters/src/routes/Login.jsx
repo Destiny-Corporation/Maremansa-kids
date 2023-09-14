@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
 
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyDTKUI6nV-DZjIsUo1BMkjIUWOQbT9gU3Q",
   authDomain: "auth-amanda.firebaseapp.com",
@@ -221,6 +223,8 @@ const Login = () => {
           </div>
         </form>
       </div>
+
+
 
       <footer>
         <div className="footer-content">
