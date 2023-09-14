@@ -6,31 +6,33 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import Home from "./routes/Home";
-import Company from "./routes/Company";
-import Login from "./routes/Login";
-import Register from "./routes/Register";
-import Cart from "./routes/Cart";
-import Wishlist from "./routes/Wishlist";
-import Female from "./routes/Female";
-import Male from "./routes/Male";
-import Props from "./routes/Props";
-import Sale from "./routes/Sale";
-import PhysicalStore from "./routes/PhysicalStore";
-import Exchanges from "./routes/Exchanges";
-import Partners from "./routes/Partners";
-import Services from "./routes/Services";
-import Sitemap from "./routes/Sitemap";
-import Lookmarinheiro from "./routes/Lookmarinheiro";
+import Company from "./routes/About/Company.jsx";
+import Login from "./routes/User/Login.jsx";
+import Register from "./routes/User/Register.jsx";
+import Cart from "./routes/HeaderPaths/Cart.jsx";
+import Wishlist from "./routes/HeaderPaths/Wishlist.jsx";
+import Female from "./routes/ProductTypes/Female.jsx";
+import Male from "./routes/ProductTypes/Male.jsx";
+import Props from "./routes/ProductTypes/Props.jsx";
+import Sale from "./routes/ProductTypes/Sale.jsx";
+import PhysicalStore from "./routes/About/PhysicalStore.jsx";
+import Exchanges from "./routes/Support/Exchanges.jsx";
+import Partners from "./routes/About/Partners.jsx";
+import Services from "./routes/Support/Services.jsx";
+import Sitemap from "./routes/Support/Sitemap.jsx";
+import Product from "./routes/Product.jsx";
+import Protected from "./routes/Protected.jsx";
+import Requests from "./routes/HeaderPaths/Requests.jsx";
 import ErrorPage from "./routes/ErrorPage";
 
 const router = createBrowserRouter([
   {
-    path: "/exchange",
+    path: "/exchanges",
     element: <Exchanges />,
   },
   {
-    path: "/lookmarinheiro",
-    element: <Lookmarinheiro />,
+    path: "/product",
+    element: <Product />,
   },
   {
     path: "/partners",
@@ -87,6 +89,14 @@ const router = createBrowserRouter([
   {
     path: "/company",
     element: <Company />,
+  },
+  {
+    path: "/protected",
+    element: <Protected />,
+  },
+  {
+    path: "/requests",
+    element: <Requests />,
   },
 ]);
 

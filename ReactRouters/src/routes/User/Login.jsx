@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Login.css";
+import "../../styles/User/Login.css";
 import { Link } from "react-router-dom";
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
@@ -36,7 +36,7 @@ const Login = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then(() => {
         // Redirecione para a página inicial após o login bem-sucedido
-        window.location.href = "/";
+        window.location.href = "/protected";
       })
       .catch((error) => {
         alert(getErrorMessage(error));
@@ -52,22 +52,6 @@ const Login = () => {
         alert(getErrorMessage(error));
       });
   }
-
-  //function register() {
-    //window.location.href = "Register/register.html";
-  //}
-
-  /*function recoverPassword() {
-    firebaseApp
-      .auth()
-      .sendPasswordResetEmail(form.email().value)
-      .then(() => {
-        alert("Email enviado com sucesso");
-      })
-      .catch((error) => {
-        alert(getErrorMessage(error));
-      });
-  }*/
 
   function getErrorMessage(error) {
     if (error.code == "auth/user-not-found") {
@@ -131,26 +115,32 @@ const Login = () => {
     <>
       <header className="main-header">
         <div className="logo">
-          <img src="src/assets/logo.png" alt="Logo" />
+        <Link to="/"> <img src="src/assets/logo.png" alt="Logo" /> </Link>
         </div>
         <div className="icons">
           <a href="#">
-            <i
-              className="bx bx-user bt-header"
-              style={{ color: "#ffffff" }}
-            ></i>
+            <Link to="/login">
+              <i
+                className="bx bx-user bt-header"
+                style={{ color: "#ffffff" }}
+              ></i>
+            </Link>
           </a>
           <a href="#">
-            <i
-              className="bx bx-heart bt-header"
-              style={{ color: "#ffffff" }}
-            ></i>
+            <Link to="/wishlist">
+              <i
+                className="bx bx-heart bt-header"
+                style={{ color: "#ffffff" }}
+              ></i>
+            </Link>
           </a>
           <a href="#">
-            <i
-              className="bx bx-cart bt-header"
-              style={{ color: "#ffffff" }}
-            ></i>
+            <Link to="/cart">
+              <i
+                className="bx bx-cart bt-header"
+                style={{ color: "#ffffff" }}
+              ></i>
+            </Link>
           </a>
         </div>
       </header>
@@ -173,10 +163,7 @@ const Login = () => {
               
             />
             <div className="error" id="email-required-error">
-              Email é obrigatório
-            </div>
-            <div className="error" id="email-invalid-error">
-              Email é inválido
+              *Campo vazio ou email inválido
             </div>
             <i className="bx bx-user" style={{color:'#ffffff'}}></i>
           </div>
@@ -190,7 +177,7 @@ const Login = () => {
               onChange={onChangePassword}
             />
             <div className="error" id="password-required-error">
-              Senha é obrigatória
+            *Campo vazio ou senha inválido
             </div>
             <i className="bx bx-lock-alt" style={{ color: "#ffffff" }}></i>
           </div>
@@ -226,8 +213,8 @@ const Login = () => {
         <div className="footer-content">
           <div className="footer-left">
             <img src="src/assets/prancha.png" alt="Sobre Nós" className="icon-image" />
-            <a className="footer-link" href="#">
-              SOBRE NÓS
+            <a href="#">
+                <Link to="/company" className="footer-link">SOBRE NÓS</Link>
             </a>
           </div>
           <div className="footer-right">

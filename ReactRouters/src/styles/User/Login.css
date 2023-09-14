@@ -19,6 +19,15 @@ body {
   background-position: center;
 }
 
+.error {
+  font-size: 8px;
+  letter-spacing: 2px;
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  margin-left: 16px;
+  margin-top: 4px;
+}
+
 .bt-header {
   font-size: 28px;
   padding: 2px;
@@ -95,6 +104,7 @@ body {
   border-radius: 28px;
   padding: 30px 40px;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .wrapper h1 {
@@ -202,15 +212,17 @@ body {
   font-size: 8px;
   letter-spacing: 2px;
   color: #fff;
-  margin-top: -10px;
-  margin-bottom: 5px;
+  margin-top: 14px;
+  margin-bottom: 8px;
   padding-left: 20px;
+  margin-left: -12px;
 }
 
 .remember-link {
   font-size: 8px;
   letter-spacing: 2px;
   color: rgb(147, 202, 206);
+  padding-left: 10px;
 }
 
 footer {
@@ -267,6 +279,7 @@ footer {
   font-family: "Stylish", sans-serif;
   font-size: 20px;
   color: #ffffff;
+  margin-top: 3px;
 }
 
 .social-icons {
