@@ -1,11 +1,11 @@
 import React from "react";
-import "./Cart.css";
+import "./Sitemap.css";
 import { Link } from "react-router-dom";
 
-const Cart = () => {
+const Sitemap = () => {
   return (
     <div>
-      <h1>Carrinho de compras</h1>
+      <h1>Mapa do site</h1>
       <a href="#">
         <Link to="/home">Voltar para a HOME</Link>
       </a>
@@ -13,4 +13,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default Sitemap;

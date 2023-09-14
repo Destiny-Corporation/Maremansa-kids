@@ -1,5 +1,5 @@
 import React from "react";
-import "./Cart.css";
+import "./Lookmarinheiro.css";
 import { Link } from "react-router-dom";
 
 const Cart = () => {

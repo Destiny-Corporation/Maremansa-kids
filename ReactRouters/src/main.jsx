@@ -16,9 +16,34 @@ import Male from "./routes/Male";
 import Props from "./routes/Props";
 import Sale from "./routes/Sale";
 import PhysicalStore from "./routes/PhysicalStore";
+import Exchanges from "./routes/Exchanges";
+import Partners from "./routes/Partners";
+import Services from "./routes/Services";
+import Sitemap from "./routes/Sitemap";
+import Lookmarinheiro from "./routes/Lookmarinheiro";
 import ErrorPage from "./routes/ErrorPage";
 
 const router = createBrowserRouter([
+  {
+    path: "/exchange",
+    element: <Exchanges />,
+  },
+  {
+    path: "/lookmarinheiro",
+    element: <Lookmarinheiro />,
+  },
+  {
+    path: "/partners",
+    element: <Partners />,
+  },
+  {
+    path: "/services",
+    element: <Services />,
+  },
+  {
+    path: "/sitemap",
+    element: <Sitemap />,
+  },
   {
     path: "/",
     element: <Home />,
