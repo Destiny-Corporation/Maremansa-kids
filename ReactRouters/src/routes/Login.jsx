@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import "./Login.css";
 import { Link } from "react-router-dom";
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
-
-
+import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, signInWithPopup, GoogleAuthProvider} from 'firebase/auth';
+import { GoogleLogo } from "phosphor-react";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDTKUI6nV-DZjIsUo1BMkjIUWOQbT9gU3Q",
@@ -115,6 +114,18 @@ const Login = () => {
     return form.password().value ? true : false;
   }
 
+  function signInWithGoogle() {
+    const provider = new GoogleAuthProvider();
+
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        console.log(result.user);
+        setUser(result.user);
+
+      }).catch((error) => {
+        console.log(error);
+      });
+  }
   const form = {
     email: () => document.getElementById("email"),
     emailInvalidError: () => document.getElementById("email-invalid-error"),
@@ -223,8 +234,12 @@ const Login = () => {
           </div>
         </form>
       </div>
-
-
+      <div className="container">
+        <button type="button" onClick={signInWithGoogle} className="button">
+         <GoogleLogo />
+         SignIn with Google
+        </button>
+      </div>
 
       <footer>
         <div className="footer-content">
