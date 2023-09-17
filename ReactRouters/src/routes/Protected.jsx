@@ -1,13 +1,8 @@
 import React from "react";
-import "../styles/Home.css";
-import Login from "./User/Login";
-import Wishlist from "./HeaderPaths/Wishlist";
-import Cart from "./HeaderPaths/Cart";
-import PhysicalStore from "./About/PhysicalStore";
-import Company from "./About/Company";
+import "../styles/Protected.css";
 import { Link } from "react-router-dom";
 
-const Home = () => {
+const Protected = () => {
   return (
     <>
       <header className="main-header">
@@ -16,7 +11,7 @@ const Home = () => {
         </div>
         <div className="icons">
           <a href="#">
-            <Link to="/login">
+            <Link to="/requests">
               <i
                 className="bx bx-user bt-header"
                 style={{ color: "#ffffff" }}
@@ -269,4 +264,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Protected;
