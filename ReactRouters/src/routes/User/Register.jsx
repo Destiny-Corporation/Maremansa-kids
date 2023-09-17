@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import "./Register.css";
-import { Route } from "react-router-dom"
+import "../../styles/User/Register.css";
+import { Route } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { initializeApp } from 'firebase/app';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { getDatabase, ref, set } from 'firebase/database';
@@ -53,15 +54,33 @@ const Register = () => {
     <>
       <header className="main-header">
         <div className="logo">
-          <img src="src/assets/logo.png" alt="Logo" />
+        <Link to="/"> <img src="src/assets/logo.png" alt="Logo" /> </Link>
         </div>
         <div className="icons">
-          <a href="#"></a>
-          <i className="bx bx-user bt-header" style={{ color: "#ffffff" }}></i>
-          <a href="#"></a>
-          <i className="bx bx-heart bt-header" style={{ color: "#ffffff" }}></i>
-          <a href="#"></a>
-          <i className="bx bx-cart bt-header" style={{ color: "#ffffff" }}></i>
+          <a href="#">
+            <Link to="/login">
+              <i
+                className="bx bx-user bt-header"
+                style={{ color: "#ffffff" }}
+              ></i>
+            </Link>
+          </a>
+          <a href="#">
+            <Link to="/wishlist">
+              <i
+                className="bx bx-heart bt-header"
+                style={{ color: "#ffffff" }}
+              ></i>
+            </Link>
+          </a>
+          <a href="#">
+            <Link to="/cart">
+              <i
+                className="bx bx-cart bt-header"
+                style={{ color: "#ffffff" }}
+              ></i>
+            </Link>
+          </a>
         </div>
       </header>
 
@@ -104,7 +123,7 @@ const Register = () => {
 
           <div className="register-link">
             <p>
-              Já tem uma conta? <a href="#">ENTRAR</a>
+              Já tem uma conta? <a href="#"><Link to="/login">ENTRAR</Link></a>
             </p>
           </div>
         </form>
