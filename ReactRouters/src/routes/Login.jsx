@@ -20,6 +20,7 @@ const auth = getAuth(firebaseApp);
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [user, setUser] = useState("")
 
   function onChangeEmail(event) {
     setEmail(event.target.value);
@@ -114,18 +115,20 @@ const Login = () => {
     return form.password().value ? true : false;
   }
 
+
   function signInWithGoogle() {
     const provider = new GoogleAuthProvider();
-
+  
     signInWithPopup(auth, provider)
       .then((result) => {
         console.log(result.user);
-        setUser(result.user);
-
+        setUser(result.user); // Atualiza o estado googleUser com o usuário autenticado
+        window.location.href = "/";
       }).catch((error) => {
         console.log(error);
       });
   }
+  
   const form = {
     email: () => document.getElementById("email"),
     emailInvalidError: () => document.getElementById("email-invalid-error"),
