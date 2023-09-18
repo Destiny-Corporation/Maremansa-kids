@@ -107,7 +107,7 @@ const Login = () => {
       .then((result) => {
         console.log(result.user);
         setUser(result.user); // Atualiza o estado googleUser com o usuário autenticado
-        window.location.href = "/";
+        window.location.href = "/protected";
       }).catch((error) => {
         console.log(error);
       });
@@ -222,13 +222,12 @@ const Login = () => {
               Não possui cadastro? <Link to="/register">CRIAR CONTA</Link>
             </p>
           </div>
-        </form>
-      </div>
-      <div className="container">
-        <button type="button" onClick={signInWithGoogle} className="button">
-         <GoogleLogo />
-         SignIn with Google
+    
+        <button type="button" onClick={signInWithGoogle} className="btn-google">
+         <GoogleLogo /> ENTRAR COM O GOOGLE
         </button>
+    
+        </form>
       </div>
 
       <footer>
