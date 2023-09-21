@@ -224,7 +224,7 @@ const Login = () => {
           </div>
     
         <button type="button" onClick={signInWithGoogle} className="btn-google">
-         <GoogleLogo /> ENTRAR COM O GOOGLE
+        <i className='bx bxl-google' style={{fontSize: '18px', verticalAlign: 'middle'}}  ></i> ENTRAR COM O GOOGLE
         </button>
     
         </form>
