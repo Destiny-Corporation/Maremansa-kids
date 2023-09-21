@@ -169,6 +169,27 @@ body {
   font-weight: 600;
 }
 
+.btn-google {
+  width: 100%;
+  height: 45px;
+  background-color: #ffffff;
+  outline: none;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  font-size: 14px;
+  letter-spacing: 2.5px;
+  color: #247479;
+  font-weight: 600;
+}
+
+.wrapper .btn-google:hover {
+  background-color:  rgb(93, 171, 177);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
 .wrapper .btn:hover {
   background-color: rgb(124, 184, 189);
   color: #ffffff;
