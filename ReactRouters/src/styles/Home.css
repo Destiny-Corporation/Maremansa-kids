@@ -10,7 +10,7 @@
   list-style: none;
 }
 
-body {
+/*body {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,6 +18,13 @@ body {
   min-height: 100vh;
   background: white;
   background-position: center;
+}*/
+
+.main {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background: rgb(245, 252, 252);
 }
 
 .bt-header {
@@ -139,8 +146,8 @@ body {
 }
 
 .carousel-inner img {
-  border: 2px solid #ffffff; /* Cor e largura da borda */
-  border-radius: 10px; /* Raio da borda (borda arredondada) */
+  border: 2px solid #ffffff; 
+  border-radius: 10px; 
 }
 
 .carousel-control-prev-icon,
@@ -176,7 +183,7 @@ body {
   font-size: 12px;
   margin-top: 5px;
   letter-spacing: 2px;
-  color: #ffffff;
+  color: #48a3a9;
 }
 
 .button-menu img:hover {
@@ -225,7 +232,7 @@ body {
 .text-card {
   font-size: 12px;
   margin: 4px 0 2px;
-  color: #ffffff;
+  color: #48a3a9;
   letter-spacing: 2px;
 }
 

@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <>
+    <div className="main">
       <header className="main-header">
         <div className="logo">
           <img src="src/assets/logo.png" alt="Logo" />
@@ -265,7 +265,7 @@ const Home = () => {
       <div className="last-text">
         <p className="text-sub-footer">maremansa</p>
       </div>
-    </>
+    </div>
   );
 };
 
