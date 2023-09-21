@@ -6,6 +6,12 @@ const Wishlist = () => {
   return (
     <>
     <header className="main-header">
+        <div className="search-container">
+            <input type="text" className="search-bar" placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"/>
+                <button className="search-button" type="submit">
+                  <i className="bx bx-search"></i>
+                </button>
+        </div>
         <div className="logo">
         <Link to="/"> <img src="src/assets/logo.png" alt="Logo" /> </Link>
         </div>
@@ -36,7 +42,22 @@ const Wishlist = () => {
           </a>
         </div>
       </header>
-      <h1>Lista de desejos</h1>
+
+      <div class="container-subheader">
+        <li><i class='bx bx-heart bt-header'> <h10> | Lista de desejos (0)</h10></i></li>
+      </div>
+
+      <div class="cart-vazio">
+        <img src="src/assets/wishes-vazio.png" />
+      </div>
+
+      <div class="effect">
+        <div class="button">
+          <img src="src/assets/button-compras.png" />
+        </div>
+      </div>
+      
+
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">

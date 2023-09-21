@@ -6,6 +6,12 @@ const Cart = () => {
   return (
     <>
     <header className="main-header">
+        <div className="search-container">
+          <input type="text" className="search-bar" placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"/>
+            <button className="search-button" type="submit">
+              <i className="bx bx-search"></i>
+            </button>
+        </div>
         <div className="logo">
         <Link to="/"> <img src="src/assets/logo.png" alt="Logo" /> </Link>
         </div>
@@ -35,8 +41,24 @@ const Cart = () => {
             </Link>
           </a>
         </div>
+
       </header>
-      <h1>Carrinho de compras</h1>
+
+      <div className="container-subheader">
+        <li><i className='bx bx-cart bt-header'><h10> | Carrinho (0)</h10></i></li>
+      </div>
+
+      <div className="cart-vazio">
+        <img src="src/assets/cart-vazio.png" />
+      </div>
+
+      <div className="effect">
+        <div className="button">
+          <img src="src/assets/button-compras.png" />
+        </div>
+      </div>
+
+
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
