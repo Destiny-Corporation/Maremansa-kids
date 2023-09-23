@@ -97,7 +97,7 @@
   color: #ffffff;
 }
 
-.título{
+.title{
   margin-top: 1rem;
   color: #48A3A9;
   align-items: justify;
@@ -109,22 +109,22 @@
 }
 
 
-.sobre{
+.about{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 2rem;
     align-items: center;
     margin-top: 0.5rem;   
+    padding: 2%;
 }
 
 .empresa img{
     width: 100%;
     height: auto;
-    padding: 1%;
 }
 
-.historia {
+.history {
     color: #48a3a9;
     font-weight: 400;
     margin-top: 1rem;
