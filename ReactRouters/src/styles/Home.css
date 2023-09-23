@@ -222,7 +222,6 @@ hr {
   opacity: 1;
 }
 
-
 .container-card-1{
     display: flex;
     justify-content: center;
@@ -264,7 +263,7 @@ hr {
 }
 
 .clothes img{
-    width: 200px;
+    width: 250px;
     height: auto;
 }
 

@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-auto-rows: minmax(200px, auto);
-    gap: 6px; /* Espaçamento vertical entre as células */
+    gap: 6px; 
 }
 
 .product {
@@ -10,12 +10,11 @@
     border: transparent;
     padding: 10px;
     margin-top: 5px;
-    /* Use margin negativo para reduzir o espaçamento horizontal entre as colunas */
-    margin-right: -6px; /* Ajuste o valor negativo para combinar com o valor do gap */
+    margin-right: -6px; 
 }
 
 .hr-sections {
-    width: 95%; 
+    width: 85%; 
     height: 2px;
     background-color: #50b2b9; 
     border: none; 
@@ -30,7 +29,7 @@
     align-items: center; 
   }
 
-  .general-title {
+.general-title {
     color: #48A3A9;
     text-transform: uppercase;
     letter-spacing: 14px;
@@ -38,9 +37,8 @@
     font-size: 34px; 
     font-weight: bold; 
     margin-top: 18px;
-  }
+}
   
-
 .product img {
     max-width: 80%;
     height: auto;
