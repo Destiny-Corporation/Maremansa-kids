@@ -36,7 +36,38 @@ const Male = () => {
           </a>
         </div>
       </header>
-      <h1>Sessão Masculina</h1>
+
+      <div className="search-container">
+        <input
+          type="text"
+          className="search-bar"
+          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
+        />
+        <button className="search-button" type="submit">
+          <i className="bx bx-search"></i>
+        </button>
+      </div>
+
+      <hr size="1" />
+      <div class= "título">
+        <li>MASCULINO</li>
+      </div>
+
+        <div className="Container-roupas">
+            <div className="roupa">
+              <a><Link to="#"><img src="src/assets/male-baby.png" /></Link></a>
+            </div>
+
+
+           <div className="roupa">
+            <a><Link to="#"><img src="src/assets/male-infantil.png" /></Link></a>
+          </div>
+
+          <div className="roupa">
+            <a><Link to="#"><img src="src/assets/male-juvenil.png" /></Link></a>
+          </div>
+        </div>
+
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">

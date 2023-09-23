@@ -36,7 +36,38 @@ const Female = () => {
           </a>
         </div>
       </header>
-      <h1>Sessão Feminina</h1>
+
+      <div className="search-container">
+        <input
+          type="text"
+          className="search-bar"
+          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
+        />
+        <button className="search-button" type="submit">
+          <i className="bx bx-search"></i>
+        </button>
+      </div>
+
+      <hr size="1" />
+      <div class= "título">
+        <li>FEMININO</li>
+      </div>
+
+        <div className="Container-roupas">
+            <div className="roupa">
+              <a><Link to="#"><img src="src/assets/female-baby.png" /></Link></a>
+            </div>
+
+
+           <div className="roupa">
+            <a><Link to="#"><img src="src/assets/female-infantil.png" /></Link></a>
+          </div>
+
+          <div className="roupa">
+            <a><Link to="#"><img src="src/assets/female-juvenil.png" /></Link></a>
+          </div>
+        </div>
+
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
@@ -46,17 +77,17 @@ const Female = () => {
           <div className="footer-section-div">
             <h3>SOBRE NÓS</h3>
             <li>
-              <a href="#">
+              <a>
                 <Link to="/company">A EMPRESA</Link>
               </a>
             </li>
             <li>
-              <a href="#">
+              <a>
                 <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
               </a>
             </li>
             <li>
-              <a href="#">
+              <a>
                 <Link to="/partners">NOSSOS PARCEIROS</Link>
               </a>
             </li>
@@ -65,17 +96,17 @@ const Female = () => {
           <div className="footer-section-div">
             <h3>SUPORTE</h3>
             <li>
-              <a href="#">
+              <a>
                 <Link to="/services">ATENDIMENTO</Link>
               </a>
             </li>
             <li>
-              <a href="#">
+              <a>
                 <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
               </a>
             </li>
             <li>
-              <a href="#">
+              <a>
                 <Link to="/sitemap">MAPA DO SITE</Link>
               </a>
             </li>
@@ -83,13 +114,13 @@ const Female = () => {
 
           <div className="footer-section-div">
             <h3>CONTATOS</h3>
-            <a href="#">
+            <a>
               <i className="fa fa-whatsapp"></i>
             </a>
-            <a href="#">
+            <a>
               <i className="fa fa-google"></i>
             </a>
-            <a href="#">
+            <a>
               <i className="fa fa-instagram"></i>
             </a>
           </div>
