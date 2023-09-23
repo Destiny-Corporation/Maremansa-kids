@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Protected = () => {
   return (
-    <>
+    <div className='main'>
       <header className="main-header">
         <div className="logo">
           <img src="src/assets/logo.png" alt="Logo" />
@@ -167,7 +167,7 @@ const Protected = () => {
       <hr size="1" />
 
       <div className="container-clothes">
-        <i className="bx bx-chevron-left" style={{ color: "#ffffff" }}></i>
+        <i className="bx bx-chevron-left" style={{ color: "#48A3A9" }}></i>
         <div className="clothes">
           <Link to="/product">
             <img src="src/assets/modelo_1.png" alt="" />
@@ -195,10 +195,10 @@ const Protected = () => {
           <h6 className="text-card">CONJUNTO PIRATA</h6>
           <h8 className="text-card">POR R$ 47,90</h8>
         </div>
-        <i className="bx bx-chevron-right" style={{ color: "#ffffff" }}></i>
+        <i className="bx bx-chevron-right" style={{ color: "#48A3A9" }}></i>
       </div>
 
-      <footer>
+      <footer style={{position: "static" }}>
         <section className="footer-section">
           <div className="footer-section-div">
             <img src="src/assets/baleia.png" />
@@ -260,7 +260,7 @@ const Protected = () => {
       <div className="last-text">
         <p className="text-sub-footer">maremansa</p>
       </div>
-    </>
+    </div>
   );
 };
 

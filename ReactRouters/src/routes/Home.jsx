@@ -1,15 +1,9 @@
 import React from "react";
 import "../styles/Home.css";
-import Login from "./User/Login";
-import Wishlist from "./HeaderPaths/Wishlist";
-import Cart from "./HeaderPaths/Cart";
-import PhysicalStore from "./About/PhysicalStore";
-import Company from "./About/Company";
 import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <div className="main">
     <div className='main'>
       <header className="main-header">
         <div className="logo">
@@ -266,7 +260,6 @@ const Home = () => {
       <div className="last-text">
         <p className="text-sub-footer">maremansa</p>
       </div>
-    </div>
     </div>
   );
 };
