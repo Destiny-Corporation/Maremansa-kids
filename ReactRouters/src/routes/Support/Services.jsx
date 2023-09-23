@@ -6,6 +6,16 @@ const Services = () => {
   return (
     <div className="main">
     <header className="main-header">
+    <div className="search-container">
+        <input
+          type="text"
+          className="search-bar"
+          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
+        />
+        <button className="search-button" type="submit">
+          <i className="bx bx-search"></i>
+        </button>
+      </div>
         <div className="logo">
         <Link to="/"> <img src="src/assets/logo.png" alt="Logo" /> </Link>
         </div>
