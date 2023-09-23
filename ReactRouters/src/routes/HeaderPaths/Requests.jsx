@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Sale = () => {
   return (
-    <>
+    <div>
     <header className="main-header">
         <div className="search-container">
           <input type="text" className="search-bar" placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"/>
@@ -116,7 +116,7 @@ const Sale = () => {
           </div>
         </section>
       </footer>
-    </>
+    </div>
   );
 };
 

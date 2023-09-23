@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Cart = () => {
   return (
-    <>
+    <div>
     <header className="main-header">
         <div className="search-container">
           <input type="text" className="search-bar" placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"/>
@@ -117,7 +117,7 @@ const Cart = () => {
           </div>
         </section>
       </footer>
-    </>
+    </div>
   );
 };
 
