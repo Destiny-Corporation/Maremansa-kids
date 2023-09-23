@@ -12,9 +12,12 @@
     list-style: none;
 }
 
-body{
-  background-color: #fff;
-}
+.main {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background: rgb(245, 252, 252);
+  }
 
 .main-container {
   height: 100vh;
@@ -149,7 +152,7 @@ body{
   }
 
 .título{
-  color: #fff;
+  color: #48A3A9;
   align-items: center;
   font-size: 60px;
   display: flex;

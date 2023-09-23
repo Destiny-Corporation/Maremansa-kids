@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Female = () => {
   return (
-    <>
+    <div className="main">
     <header className="main-header">
         <div className="logo">
         <Link to="/"> <img src="src/assets/logo.png" alt="Logo" /> </Link>
@@ -48,11 +48,12 @@ const Female = () => {
         </button>
       </div>
 
-      <hr size="1" />
       <div class= "título">
         <li>FEMININO</li>
       </div>
 
+      <hr size="1" />
+      
         <div className="Container-roupas">
             <div className="roupa">
               <a><Link to="#"><img src="src/assets/female-baby.png" /></Link></a>
@@ -126,7 +127,7 @@ const Female = () => {
           </div>
         </section>
       </footer>
-    </>
+    </div>
   );
 };
 
