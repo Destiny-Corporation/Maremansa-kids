@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Sale = () => {
   return (
-    <div>
+    <div className="main">
     <header className="main-header">
         <div className="search-container">
           <input type="text" className="search-bar" placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"/>
@@ -17,7 +17,7 @@ const Sale = () => {
         <Link to="/"> <img src="src/assets/logo.png" alt="Logo" /> </Link>
         </div>
         <div className="icons">
-          <a href="#">
+          <a>
             <Link to="/login">
               <i
                 className="bx bx-user bt-header"
@@ -25,7 +25,7 @@ const Sale = () => {
               ></i>
             </Link>
           </a>
-          <a href="#">
+          <a>
             <Link to="/wishlist">
               <i
                 className="bx bx-heart bt-header"
@@ -33,7 +33,7 @@ const Sale = () => {
               ></i>
             </Link>
           </a>
-          <a href="#">
+          <a>
             <Link to="/cart">
               <i
                 className="bx bx-cart bt-header"
@@ -67,17 +67,17 @@ const Sale = () => {
           <div className="footer-section-div">
             <h3>SOBRE NÓS</h3>
             <li>
-              <a href="#">
+              <a>
                 <Link to="/company">A EMPRESA</Link>
               </a>
             </li>
             <li>
-              <a href="#">
+              <a>
                 <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
               </a>
             </li>
             <li>
-              <a href="#">
+              <a>
                 <Link to="/partners">NOSSOS PARCEIROS</Link>
               </a>
             </li>
@@ -86,17 +86,17 @@ const Sale = () => {
           <div className="footer-section-div">
             <h3>SUPORTE</h3>
             <li>
-              <a href="#">
+              <a>
                 <Link to="/services">ATENDIMENTO</Link>
               </a>
             </li>
             <li>
-              <a href="#">
+              <a>
                 <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
               </a>
             </li>
             <li>
-              <a href="#">
+              <a>
                 <Link to="/sitemap">MAPA DO SITE</Link>
               </a>
             </li>
@@ -104,13 +104,13 @@ const Sale = () => {
 
           <div className="footer-section-div">
             <h3>CONTATOS</h3>
-            <a href="#">
+            <a>
               <i className="fa fa-whatsapp"></i>
             </a>
-            <a href="#">
+            <a>
               <i className="fa fa-google"></i>
             </a>
-            <a href="#">
+            <a>
               <i className="fa fa-instagram"></i>
             </a>
           </div>

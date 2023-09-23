@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Company = () => {
   return (
-    <>
+    <div className="main">
     <header className="main-header">
         <div className="logo">
         <Link to="/"> <img src="src/assets/logo.png" alt="Logo" /> </Link>
@@ -36,7 +36,21 @@ const Company = () => {
           </a>
         </div>
       </header>
-      <h1>A Empresa</h1>
+
+      <div className= "title">
+    <h4>MareMansa Kids | A Empresa</h4>
+  </div>
+  
+      <hr size="1" />
+
+  <div className="about">
+    <div classname="empresa">
+      <img src="src/assets/empresa.png" />
+    </div>
+  </div>
+
+        <hr size="1" />
+
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
@@ -46,17 +60,17 @@ const Company = () => {
           <div className="footer-section-div">
             <h3>SOBRE NÓS</h3>
             <li>
-              <a href="#">
+              <a>
                 <Link to="/company">A EMPRESA</Link>
               </a>
             </li>
             <li>
-              <a href="#">
+              <a>
                 <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
               </a>
             </li>
             <li>
-              <a href="#">
+              <a>
                 <Link to="/partners">NOSSOS PARCEIROS</Link>
               </a>
             </li>
@@ -65,17 +79,17 @@ const Company = () => {
           <div className="footer-section-div">
             <h3>SUPORTE</h3>
             <li>
-              <a href="#">
+              <a>
                 <Link to="/services">ATENDIMENTO</Link>
               </a>
             </li>
             <li>
-              <a href="#">
+              <a>
                 <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
               </a>
             </li>
             <li>
-              <a href="#">
+              <a>
                 <Link to="/sitemap">MAPA DO SITE</Link>
               </a>
             </li>
@@ -95,7 +109,7 @@ const Company = () => {
           </div>
         </section>
       </footer>
-    </>
+    </div>
   );
 };
 
