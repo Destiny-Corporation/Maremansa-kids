@@ -212,6 +212,17 @@ body {
   font-size: 88px;
 }
 
+hr {
+  width: 90%; 
+  height: 2px;
+  background-color: #50b2b9; 
+  border: none; 
+  margin: 0 auto;
+  margin-top: 18px;
+  opacity: 1;
+}
+
+
 .container-card-1{
     display: flex;
     justify-content: center;
