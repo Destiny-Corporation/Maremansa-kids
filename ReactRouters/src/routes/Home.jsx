@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
+    <div className="main">
     <div className='main'>
       <header className="main-header">
         <div className="logo">
@@ -265,6 +266,7 @@ const Home = () => {
       <div className="last-text">
         <p className="text-sub-footer">maremansa</p>
       </div>
+    </div>
     </div>
   );
 };
