@@ -172,7 +172,7 @@ const Home = () => {
       <hr size="1" />
 
       <div className="container-clothes">
-        <i className="bx bx-chevron-left" style={{ color: "#ffffff" }}></i>
+        <i className="bx bx-chevron-left" style={{ color: "#48A3A9" }}></i>
         <div className="clothes">
           <Link to="/product">
             <img src="src/assets/modelo_1.png" alt="" />
@@ -200,10 +200,10 @@ const Home = () => {
           <h6 className="text-card">CONJUNTO PIRATA</h6>
           <h8 className="text-card">POR R$ 47,90</h8>
         </div>
-        <i className="bx bx-chevron-right" style={{ color: "#ffffff" }}></i>
+        <i className="bx bx-chevron-right" style={{ color: "#48A3A9" }}></i>
       </div>
 
-      <footer>
+      <footer style={{position: "static" }}>
         <section className="footer-section">
           <div className="footer-section-div">
             <img src="src/assets/baleia.png" />
