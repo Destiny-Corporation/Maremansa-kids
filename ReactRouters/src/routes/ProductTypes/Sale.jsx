@@ -124,7 +124,7 @@ const Sale = () => {
       <div className="container-clothes">
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/modelo_1.png" alt="" />
+            <img src="src/assets/model-1.png" alt="" />
             <h6 className="text-card">PRODUTO 1</h6>
           </Link>
           <h8 className="text-card">R$ 59,90</h8>
@@ -132,7 +132,7 @@ const Sale = () => {
 
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/modelo_2.png" alt="" />
+            <img src="src/assets/model-2.png" alt="" />
             <h6 className="text-card">PRODUTO 2</h6>
           </Link>
           <h8 className="text-card">R$ 59,90</h8>
@@ -140,7 +140,7 @@ const Sale = () => {
 
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/modelo_3.png" alt="" />
+            <img src="src/assets/model-3.png" alt="" />
             <h6 className="text-card">PRODUTO 3</h6>
           </Link>
           <h8 className="text-card">R$ 59,90</h8>
@@ -148,7 +148,7 @@ const Sale = () => {
 
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/modelo_4.png" alt="" />
+            <img src="src/assets/model-4.png" alt="" />
             <h6 className="text-card">PRODUTO 4</h6>
           </Link>
           <h8 className="text-card">R$ 59,90</h8>
@@ -158,7 +158,7 @@ const Sale = () => {
       <div className="container-clothes">
       <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/modelo_1.png" alt="" />
+            <img src="src/assets/model-1.png" alt="" />
             <h6 className="text-card">PRODUTO 5</h6>
           </Link>
           <h8 className="text-card">R$ 59,90</h8>
@@ -166,7 +166,7 @@ const Sale = () => {
 
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/modelo_2.png" alt="" />
+            <img src="src/assets/model-2.png" alt="" />
             <h6 className="text-card">PRODUTO 6</h6>
           </Link>
           <h8 className="text-card">R$ 59,90</h8>
@@ -174,7 +174,7 @@ const Sale = () => {
 
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/modelo_3.png" alt="" />
+            <img src="src/assets/model-3.png" alt="" />
             <h6 className="text-card">PRODUTO 7</h6>
           </Link>
           <h8 className="text-card">R$ 59,90</h8>
@@ -182,7 +182,7 @@ const Sale = () => {
 
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/modelo_4.png" alt="" />
+            <img src="src/assets/model-4.png" alt="" />
             <h6 className="text-card">PRODUTO 8</h6>
           </Link>
           <h8 className="text-card">R$ 59,90</h8>
@@ -192,7 +192,7 @@ const Sale = () => {
       <div className="container-clothes">
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/modelo_1.png" alt="" />
+            <img src="src/assets/model-1.png" alt="" />
           </Link>
           <Link to="/product">
             <h6 className="text-card">PRDOUTO 9</h6>
@@ -202,7 +202,7 @@ const Sale = () => {
 
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/modelo_2.png" alt="" />
+            <img src="src/assets/model-2.png" alt="" />
             <h6 className="text-card">PRODUTO 10</h6>
           </Link>
           <h8 className="text-card">R$ 59,90</h8>
@@ -210,7 +210,7 @@ const Sale = () => {
 
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/modelo_3.png" alt="" />
+            <img src="src/assets/model-3.png" alt="" />
             <h6 className="text-card">PRODUTO 11</h6>
           </Link>
           <h8 className="text-card">R$ 59,90</h8>
@@ -218,7 +218,7 @@ const Sale = () => {
 
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/modelo_4.png" alt="" />
+            <img src="src/assets/model-4.png" alt="" />
             <h6 className="text-card">PRODUTO 12</h6>
           </Link>
           <h8 className="text-card">R$ 59,90</h8>
@@ -228,7 +228,7 @@ const Sale = () => {
       <div className="container-clothes">
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/modelo_1.png" alt="" />
+            <img src="src/assets/model-1.png" alt="" />
           </Link>
           <Link to="/product">
             <h6 className="text-card">PRODUTO 13</h6>
@@ -238,7 +238,7 @@ const Sale = () => {
 
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/modelo_2.png" alt="" />
+            <img src="src/assets/model-2.png" alt="" />
             <h6 className="text-card">PRODUTO 14</h6>
           </Link>
           <h8 className="text-card">R$ 59,90</h8>
@@ -246,7 +246,7 @@ const Sale = () => {
 
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/modelo_3.png" alt="" />
+            <img src="src/assets/model-3.png" alt="" />
             <h6 className="text-card">PRODUTO 15</h6>
           </Link>
           <h8 className="text-card">R$ 59,90</h8>
@@ -254,7 +254,7 @@ const Sale = () => {
 
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/modelo_4.png" alt="" />
+            <img src="src/assets/model-4.png" alt="" />
             <h6 className="text-card">PRODUTO 16</h6>
           </Link>
           <h8 className="text-card">R$ 59,90</h8>
@@ -264,7 +264,7 @@ const Sale = () => {
       <div className="container-clothes">
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/modelo_1.png" alt="" />
+            <img src="src/assets/model-1.png" alt="" />
           </Link>
           <Link to="/product">
             <h6 className="text-card">PRODUTO 17</h6>
@@ -274,7 +274,7 @@ const Sale = () => {
 
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/modelo_2.png" alt="" />
+            <img src="src/assets/model-2.png" alt="" />
             <h6 className="text-card">PRODUTO 18</h6>
           </Link>
           <h8 className="text-card">R$ 59,90</h8>
@@ -282,7 +282,7 @@ const Sale = () => {
 
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/modelo_3.png" alt="" />
+            <img src="src/assets/model-3.png" alt="" />
             <h6 className="text-card">PRODUTO 19</h6>
           </Link>
           <h8 className="text-card">R$ 59,90</h8>
@@ -290,7 +290,7 @@ const Sale = () => {
 
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/modelo_4.png" alt="" />
+            <img src="src/assets/model-4.png" alt="" />
             <h6 className="text-card">PRODUTO 20</h6>
           </Link>
           <h8 className="text-card">R$ 59,90</h8>
@@ -338,7 +338,7 @@ const Sale = () => {
           </div>
         </section>
       </footer>
-    </>
+    </div>
   );
 };
 

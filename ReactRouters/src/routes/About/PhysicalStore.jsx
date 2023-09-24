@@ -43,8 +43,8 @@ const PhysicalStore = () => {
       <hr size="1" />
 
       <div className="about">
-    <div classname="empresa">
-      <img src="src/assets/empresa.png" />
+    <div classname="company">
+      <img src="src/assets/company.png" />
     </div>
   </div>
 
