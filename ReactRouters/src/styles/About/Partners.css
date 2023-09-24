@@ -51,6 +51,26 @@
   font-size: 14px;
 }
 
+.company {
+  display: flex;
+  justify-content: center;
+}
+
+.company img{
+    width: 80%;
+    height: auto;
+}
+
+.general-title-h6 {
+  color: #48A3A9;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  display: inline-block;
+  font-size: 20px; 
+  font-weight: bold; 
+  margin-top: 8px;
+}
+
 .search-container:hover {
   background-color: #bdd6d6;
 }

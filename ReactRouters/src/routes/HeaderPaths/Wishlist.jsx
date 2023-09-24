@@ -6,14 +6,14 @@ const Wishlist = () => {
   return (
     <div className="main">
     <header className="main-header">
-        <div className="search-container">
-            <input type="text" className="search-bar" placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"/>
-                <button className="search-button" type="submit">
+        <div className="search-container-header">
+            <input type="text" className="search-bar-header" placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"/>
+                <button className="search-button-header" type="submit">
                   <i className="bx bx-search"></i>
                 </button>
         </div>
         <div className="logo">
-        <Link to="/"> <img src="src/assets/logo.png" alt="Logo" /> </Link>
+        <Link to="/"> <img src="src/assets/logo.png" alt="Logo" className="header-logo-center"/> </Link>
         </div>
         <div className="icons">
             <Link to="/requests">
@@ -93,6 +93,9 @@ const Wishlist = () => {
           </div>
         </section>
       </footer>
+      <div className="last-text">
+        <p className="text-sub-footer">maremansa</p>
+      </div>
     </div>
   );
 };

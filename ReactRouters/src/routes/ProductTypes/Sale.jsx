@@ -31,7 +31,7 @@ const Sale = () => {
         </div>
       </header>
 
-      <div className="search-container">
+      <div className="search-container-geral">
         <input type="text" className="search-bar" placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"/>
         <button className="search-button" type="submit">
           <i className="bx bx-search"></i>
@@ -74,7 +74,7 @@ const Sale = () => {
 
             <div className="carousel-item">
               <img
-                src="src/assets/banner.png"
+                src="src/assets/banner-sale.png"
                 className="d-block w-100"
                 alt="..."
               />
@@ -82,7 +82,7 @@ const Sale = () => {
 
             <div className="carousel-item">
               <img
-                src="src/assets/banner.png"
+                src="src/assets/banner-sale-2.png"
                 className="d-block w-100"
                 alt="..."
               />
@@ -338,6 +338,9 @@ const Sale = () => {
           </div>
         </section>
       </footer>
+      <div className="last-text">
+        <p className="text-sub-footer">maremansa</p>
+      </div>
     </div>
   );
 };

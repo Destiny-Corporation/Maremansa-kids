@@ -7,37 +7,31 @@ const Sitemap = () => {
     <div className='main'>
       <header className="main-header">
         <div className="logo">
-          <img src="src/assets/logo.png" alt="Logo" />
+        <Link to="/"> <img src="src/assets/logo.png" alt="Logo" /> </Link>
         </div>
         <div className="icons">
-          <a href="#">
             <Link to="/login">
               <i
                 className="bx bx-user bt-header"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
-          </a>
-          <a href="#">
             <Link to="/wishlist">
               <i
                 className="bx bx-heart bt-header"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
-          </a>
-          <a href="#">
             <Link to="/cart">
               <i
                 className="bx bx-cart bt-header"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
-          </a>
         </div>
       </header>
 
-      <div className="search-container">
+      <div className="search-container-geral">
         <input
           type="text"
           className="search-bar"
@@ -84,7 +78,7 @@ const Sitemap = () => {
 
             <div className="carousel-item">
               <img
-                src="src/assets/banner.png"
+                src="src/assets/banner-sale.png"
                 className="d-block w-100"
                 alt="..."
               />
@@ -92,7 +86,7 @@ const Sitemap = () => {
 
             <div className="carousel-item">
               <img
-                src="src/assets/banner.png"
+                src="src/assets/banner-sale-2.png"
                 className="d-block w-100"
                 alt="..."
               />
@@ -127,13 +121,24 @@ const Sitemap = () => {
       </div>
 
       <div className="title-section">
-      <h1 className="general-title">MAPA DO SITE</h1>
+      <h1 className="general-title">MAREMANSA | MAPA DO SITE</h1>
       <hr className="hr-sections"></hr>
       </div>
 
-      <p className="map-text">Reunimos aqui todas as novidades e tendências que a Maremansa Kids tem para você.
-             Encontre tudo em moda praia feminina e masculina que vai do infantil ao teen. Além de acessórios que farão um 
-             complemento fabuloso aos lookinhos de verão do seu pequeno. Confira!</p>
+      <div className="about">
+    <div className="company">
+      <img src="src/assets/banner-maremansa.png" />
+    </div>
+  </div>
+
+  <hr className="hr-sections"></hr>
+
+  <div className="history">
+      <h3 className="general-title-h3">O QUE VOCÊ VAI ENCONTRAR?</h3><br></br>
+      <p className="about-text">Apresentamos a você todas as últimas novidades e tendências da Maremansa Kids, 
+      onde você encontrará uma ampla seleção de moda praia tanto para meninas quanto para meninos, abrangendo desde 
+      o infantil até o teen. Além disso, oferecemos uma variedade de acessórios fabulosos para complementar os trajes 
+      de verão dos seus pequenos. Não deixe de conferir as opções incríveis que temos para você!</p></div>
 
     <div className="site-map">
         <ul>     
@@ -198,6 +203,9 @@ const Sitemap = () => {
           </div>
         </section>
       </footer>
+      <div className="last-text">
+        <p className="text-sub-footer">maremansa</p>
+      </div>
     </div>
   );
 };

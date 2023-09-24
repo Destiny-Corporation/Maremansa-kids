@@ -119,8 +119,13 @@
     padding: 2%;
 }
 
+.company {
+  display: flex;
+  justify-content: center;
+}
+
 .company img{
-    width: 100%;
+    width: 80%;
     height: auto;
 }
 

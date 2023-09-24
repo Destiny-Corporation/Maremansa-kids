@@ -2,14 +2,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 
 
+.company {
+  display: flex;
+  justify-content: center;
+}
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Montserrat", sans-serif;
-    text-decoration: none;
-    list-style: none;
+.company img{
+    width: 80%;
+    height: auto;
 }
 
 .main-container {

@@ -42,8 +42,9 @@ const Female = () => {
         </button>
       </div>
 
-      <div class= "title">
-        <li>FEMININO</li>
+      <div className="title-section">
+      <h1 className="general-title">FEMININO</h1>
+      <hr className="hr-sections"></hr>
       </div>
 
       <hr size="1" />
@@ -102,6 +103,9 @@ const Female = () => {
           </div>
         </section>
       </footer>
+      <div className="last-text">
+        <p className="text-sub-footer">maremansa</p>
+      </div>
     </div>
   );
 };
