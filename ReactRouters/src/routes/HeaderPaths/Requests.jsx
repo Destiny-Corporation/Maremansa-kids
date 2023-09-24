@@ -1,8 +1,50 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../../styles/HeaderPaths/Requests.css";
 import { Link } from "react-router-dom";
+import { initializeApp } from 'firebase/app';
+import { getAuth, signOut } from 'firebase/auth';
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDTKUI6nV-DZjIsUo1BMkjIUWOQbT9gU3Q",
+  authDomain: "auth-amanda.firebaseapp.com",
+  projectId: "auth-amanda",
+  storageBucket: "auth-amanda.appspot.com",
+  messagingSenderId: "376069750475",
+  appId: "1:376069750475:web:bfb216cfd8928a23e8a54e",
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
+const auth = getAuth(firebaseApp);
+
 
 const Sale = () => {
+  const [user, setUser] = useState(null); // Estado do usuário
+
+  // Função para fazer logout
+  const logout = () => {
+    signOut(auth)
+      .then(() => {
+        // Limpa o usuário do estado e do armazenamento local
+        setUser(null);
+        localStorage.removeItem("user");
+
+        // Redirecione para a página de login ou qualquer outra página desejada
+        window.location.href = "/login"; // Por exemplo, redirecione para a página de login
+      })
+      .catch((error) => {
+        console.error("Erro ao fazer logout:", error);
+      });
+  };
+
+  useEffect(() => {
+    // Carregar usuário do armazenamento local ao montar o componente
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
   return (
     <div className="main">
     <header className="main-header">
@@ -55,6 +97,16 @@ const Sale = () => {
       </div>
 
 
+      <div className="remember-forgot">
+        {"Quer sair? "}
+        <button
+          className="logout-link"
+          onClick={logout}
+          style={{ color: 'white', background: 'none', border: 'none', cursor: 'pointer' }}
+        >
+          SAIR
+        </button>
+      </div>
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
