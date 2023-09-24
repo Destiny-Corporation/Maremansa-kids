@@ -16,45 +16,40 @@ const Cart = () => {
         <Link to="/"> <img src="src/assets/logo.png" alt="Logo" /> </Link>
         </div>
         <div className="icons">
-          <a href="#">
-            <Link to="/login">
+            <Link to="/requests">
               <i
                 className="bx bx-user bt-header"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
-          </a>
-          <a href="#">
             <Link to="/wishlist">
               <i
                 className="bx bx-heart bt-header"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
-          </a>
-          <a href="#">
             <Link to="/cart">
               <i
                 className="bx bx-cart bt-header"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
-          </a>
         </div>
-
       </header>
 
       <div className="container-subheader">
-        <li><i className='bx bx-cart bt-header'><h10> | Carrinho (0)</h10></i></li>
+        <div className="container-cart">
+          <i className='bx bx-cart bt-header'></i>
+          <h6>| Carrinho (0)</h6>
+        </div>
       </div>
 
-      <div className="cart-vazio">
-        <img src="src/assets/cart-vazio.png" />
-      </div>
-
-      <div className="effect">
+      <div className="empty-cart">
+        <img src="src/assets/empty-cart.png" alt="Carrinho Vazio" />
+        <div className="effect">
         <div className="button">
-          <img src="src/assets/button-compras.png" />
+          <img src="src/assets/shopping-button.png" alt="Botão de Compras" />
+        </div>
         </div>
       </div>
 
@@ -62,58 +57,40 @@ const Cart = () => {
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
-            <img src="src/assets/baleia.png" />
+            <img src="src/assets/whale.png" />
           </div>
 
           <div className="footer-section-div">
             <h3>SOBRE NÓS</h3>
             <li>
-              <a href="#">
                 <Link to="/company">A EMPRESA</Link>
-              </a>
             </li>
             <li>
-              <a href="#">
                 <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
-              </a>
             </li>
             <li>
-              <a href="#">
                 <Link to="/partners">NOSSOS PARCEIROS</Link>
-              </a>
             </li>
           </div>
 
           <div className="footer-section-div">
             <h3>SUPORTE</h3>
             <li>
-              <a href="#">
                 <Link to="/services">ATENDIMENTO</Link>
-              </a>
             </li>
             <li>
-              <a href="#">
                 <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
-              </a>
             </li>
             <li>
-              <a href="#">
                 <Link to="/sitemap">MAPA DO SITE</Link>
-              </a>
             </li>
           </div>
 
           <div className="footer-section-div">
             <h3>CONTATOS</h3>
-            <a href="#">
               <i className="fa fa-whatsapp"></i>
-            </a>
-            <a href="#">
               <i className="fa fa-google"></i>
-            </a>
-            <a href="#">
               <i className="fa fa-instagram"></i>
-            </a>
           </div>
         </section>
       </footer>

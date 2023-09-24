@@ -10,30 +10,24 @@ const Female = () => {
         <Link to="/"> <img src="src/assets/logo.png" alt="Logo" /> </Link>
         </div>
         <div className="icons">
-          <a href="#">
             <Link to="/login">
               <i
                 className="bx bx-user bt-header"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
-          </a>
-          <a href="#">
             <Link to="/wishlist">
               <i
                 className="bx bx-heart bt-header"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
-          </a>
-          <a href="#">
             <Link to="/cart">
               <i
                 className="bx bx-cart bt-header"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
-          </a>
         </div>
       </header>
 
@@ -48,82 +42,63 @@ const Female = () => {
         </button>
       </div>
 
-      <div class= "título">
+      <div class= "title">
         <li>FEMININO</li>
       </div>
 
       <hr size="1" />
       
-        <div className="Container-roupas">
-            <div className="roupa">
-              <a><Link to="#"><img src="src/assets/female-baby.png" /></Link></a>
+        <div className="container-clothes-section">
+            <div className="clothes-section">
+              <Link to="#"><img src="src/assets/female-baby.png" /></Link>
             </div>
 
-
-           <div className="roupa">
-            <a><Link to="#"><img src="src/assets/female-infantil.png" /></Link></a>
+           <div className="clothes-section">
+            <Link to="#"><img src="src/assets/female-children.png" /></Link>
           </div>
 
-          <div className="roupa">
-            <a><Link to="#"><img src="src/assets/female-juvenil.png" /></Link></a>
+          <div className="clothes-section">
+            <Link to="#"><img src="src/assets/female-juvenile.png" /></Link>
           </div>
         </div>
 
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
-            <img src="src/assets/baleia.png" />
+            <img src="src/assets/whale.png" />
           </div>
 
           <div className="footer-section-div">
             <h3>SOBRE NÓS</h3>
             <li>
-              <a>
                 <Link to="/company">A EMPRESA</Link>
-              </a>
             </li>
             <li>
-              <a>
                 <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
-              </a>
             </li>
             <li>
-              <a>
                 <Link to="/partners">NOSSOS PARCEIROS</Link>
-              </a>
             </li>
           </div>
 
           <div className="footer-section-div">
             <h3>SUPORTE</h3>
             <li>
-              <a>
                 <Link to="/services">ATENDIMENTO</Link>
-              </a>
             </li>
             <li>
-              <a>
                 <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
-              </a>
             </li>
             <li>
-              <a>
                 <Link to="/sitemap">MAPA DO SITE</Link>
-              </a>
             </li>
           </div>
 
           <div className="footer-section-div">
             <h3>CONTATOS</h3>
-            <a>
               <i className="fa fa-whatsapp"></i>
-            </a>
-            <a>
               <i className="fa fa-google"></i>
-            </a>
-            <a>
               <i className="fa fa-instagram"></i>
-            </a>
           </div>
         </section>
       </footer>

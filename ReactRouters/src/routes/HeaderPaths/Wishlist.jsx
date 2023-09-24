@@ -16,103 +16,80 @@ const Wishlist = () => {
         <Link to="/"> <img src="src/assets/logo.png" alt="Logo" /> </Link>
         </div>
         <div className="icons">
-          <a href="#">
-            <Link to="/login">
+            <Link to="/requests">
               <i
                 className="bx bx-user bt-header"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
-          </a>
-          <a href="#">
             <Link to="/wishlist">
               <i
                 className="bx bx-heart bt-header"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
-          </a>
-          <a href="#">
             <Link to="/cart">
               <i
                 className="bx bx-cart bt-header"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
-          </a>
         </div>
       </header>
 
-      <div class="container-subheader">
-        <li><i class='bx bx-heart bt-header'> <h10> | Lista de desejos (0)</h10></i></li>
-      </div>
-
-      <div class="cart-vazio">
-        <img src="src/assets/wishes-vazio.png" />
-      </div>
-
-      <div class="effect">
-        <div class="button">
-          <img src="src/assets/button-compras.png" />
+      <div className="container-subheader">
+        <div className="container-wishlist">
+          <i className='bx bx-heart bt-header'></i>
+          <h6>| Lista de Desejos (0)</h6>
         </div>
       </div>
-      
+
+      <div className="empty-wishlist">
+        <img src="src/assets/empty-wishlist.png" />
+        <div className="effect">
+         <div className="button">
+            <img src="src/assets/shopping-button.png" alt="Ir às Compras" />
+         </div>
+        </div>
+      </div>
 
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
-            <img src="src/assets/baleia.png" />
+            <img src="src/assets/whale.png" />
           </div>
 
           <div className="footer-section-div">
             <h3>SOBRE NÓS</h3>
             <li>
-              <a>
                 <Link to="/company">A EMPRESA</Link>
-              </a>
             </li>
             <li>
-              <a>
                 <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
-              </a>
             </li>
             <li>
-              <a>
                 <Link to="/partners">NOSSOS PARCEIROS</Link>
-              </a>
             </li>
           </div>
 
           <div className="footer-section-div">
             <h3>SUPORTE</h3>
             <li>
-              <a>
                 <Link to="/services">ATENDIMENTO</Link>
-              </a>
             </li>
             <li>
-              <a>
                 <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
-              </a>
             </li>
             <li>
-              <a>
                 <Link to="/sitemap">MAPA DO SITE</Link>
-              </a>
             </li>
           </div>
 
           <div className="footer-section-div">
             <h3>CONTATOS</h3>
-            <a>
               <i className="fa fa-whatsapp"></i>
-            </a>
-            <a>
               <i className="fa fa-google"></i>
-            </a>
-            <a>
               <i className="fa fa-instagram"></i>
-            </a>
           </div>
         </section>
       </footer>

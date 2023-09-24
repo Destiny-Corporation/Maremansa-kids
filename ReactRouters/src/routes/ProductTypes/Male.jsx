@@ -48,82 +48,64 @@ const Male = () => {
         </button>
       </div>
 
-      <div class= "título">
+      <div class= "title">
         <li>MASCULINO</li>
       </div>
 
       <hr size="1" />
 
-        <div className="Container-roupas">
-            <div className="roupa">
-              <a><Link to="#"><img src="src/assets/male-baby.png" /></Link></a>
+        <div className="container-clothes-section">
+            <div className="clothes-section">
+              <Link to="#"><img src="src/assets/male-baby.png" /></Link>
             </div>
 
 
-           <div className="roupa">
-            <a><Link to="#"><img src="src/assets/male-infantil.png" /></Link></a>
+           <div className="clothes-section">
+            <Link to="#"><img src="src/assets/male-children.png" /></Link>
           </div>
 
-          <div className="roupa">
-            <a><Link to="#"><img src="src/assets/male-juvenil.png" /></Link></a>
+          <div className="clothes-section">
+            <Link to="#"><img src="src/assets/male-juvenile.png" /></Link>
           </div>
         </div>
 
-      <footer>
+        <footer>
         <section className="footer-section">
           <div className="footer-section-div">
-            <img src="src/assets/baleia.png" />
+            <img src="src/assets/whale.png" />
           </div>
 
           <div className="footer-section-div">
             <h3>SOBRE NÓS</h3>
             <li>
-              <a href="#">
                 <Link to="/company">A EMPRESA</Link>
-              </a>
             </li>
             <li>
-              <a href="#">
                 <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
-              </a>
             </li>
             <li>
-              <a href="#">
                 <Link to="/partners">NOSSOS PARCEIROS</Link>
-              </a>
             </li>
           </div>
 
           <div className="footer-section-div">
             <h3>SUPORTE</h3>
             <li>
-              <a href="#">
                 <Link to="/services">ATENDIMENTO</Link>
-              </a>
             </li>
             <li>
-              <a href="#">
                 <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
-              </a>
             </li>
             <li>
-              <a href="#">
                 <Link to="/sitemap">MAPA DO SITE</Link>
-              </a>
             </li>
           </div>
 
           <div className="footer-section-div">
             <h3>CONTATOS</h3>
-            <a href="#">
               <i className="fa fa-whatsapp"></i>
-            </a>
-            <a href="#">
               <i className="fa fa-google"></i>
-            </a>
-            <a href="#">
               <i className="fa fa-instagram"></i>
-            </a>
           </div>
         </section>
       </footer>

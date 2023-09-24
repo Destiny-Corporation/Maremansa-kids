@@ -151,7 +151,7 @@
     letter-spacing: 2px;
   }
 
-.título{
+.title{
   color: #48A3A9;
   align-items: center;
   font-size: 60px;
@@ -161,7 +161,7 @@
 }
 
 
-.Container-roupas{
+.container-clothes-section {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -171,19 +171,19 @@
     
 }
 
-.Container-roupas img:hover{
+.container-clothes-section img:hover{
     transform: scale(0.9) translateY(-5px);
     cursor: pointer;
     transition: 0.3s;
 
 }
 
-.roupa img{
+.clothes-section img{
     width: 400px;
     height: auto;
 }
 
-.roupa{
+.clothes-section{
     color: #48A3A9;
 }
 

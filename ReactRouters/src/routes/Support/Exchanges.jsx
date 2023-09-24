@@ -54,8 +54,8 @@ const Exchanges = () => {
       <hr size="1" />
 
       <div className="about">
-    <div classname="empresa">
-      <img src="src/assets/empresa.png" />
+    <div classname="company">
+      <img src="src/assets/company.png" />
     </div>
   </div>
 
@@ -107,7 +107,7 @@ const Exchanges = () => {
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
-            <img src="src/assets/baleia.png" />
+            <img src="src/assets/whale.png" />
           </div>
 
           <div className="footer-section-div">
