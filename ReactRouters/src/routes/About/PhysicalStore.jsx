@@ -4,8 +4,14 @@ import { Link } from "react-router-dom";
 
 const PhysicalStore = () => {
   return (
-    <div className='main'>
+    <div className="main">
     <header className="main-header">
+    <div className="search-container">
+        <input type="text" className="search-bar" placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"/>
+          <button className="search-button" type="submit">
+            <i className="bx bx-search"></i>
+          </button>
+      </div>
         <div className="logo">
         <Link to="/"> <img src="src/assets/logo.png" alt="Logo" /> </Link>
         </div>
@@ -30,7 +36,36 @@ const PhysicalStore = () => {
             </Link>
         </div>
       </header>
-      <h1>Nossa Loja Física</h1>
+      <div className= "title">
+       <h4>MareMansa Kids | Loja Física</h4>
+      </div>
+  
+      <hr size="1" />
+
+      <div className="about">
+    <div classname="empresa">
+      <img src="src/assets/empresa.png" />
+    </div>
+  </div>
+
+        <hr size="1" />
+
+
+      <div className="history">
+        <div className="maremansa">
+          <h5>Visite Nossa Loja Física e Conheça o Encanto em Pessoa!</h5><br></br>
+          <p> Estamos entusiasmados em convidar você a uma experiência única de compra em nossa loja física, onde a magia ganha vida e a qualidade ganha forma. Em [Nome da Loja Online], entendemos o valor do contato direto e da oportunidade de conhecer nossos clientes pessoalmente.</p><br></br>
+        
+          <h5>Localização:</h5><br></br>
+          <p> 📍 Endereço: R. Francisco Glicério, 290 - Maraponga</p>
+          <p> ⏰ Horário de Funcionamento: 09:00 às 18:00 </p>
+          <p> 📞 Telefone: +55 (85) 98174-0078</p><br></br>
+
+          <p>Nossa loja física é uma extensão do nosso compromisso com produtos de alta qualidade, atendimento excepcional e um ambiente que reflete nossa paixão pelo que fazemos.</p>
+
+        </div>
+      </div>
+
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
