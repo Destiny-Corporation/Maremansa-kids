@@ -18,7 +18,7 @@ const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp);
 
 
-const Sale = () => {
+const Requests = () => {
   const [user, setUser] = useState(null); // Estado do usuário
 
   // Função para fazer logout
@@ -151,4 +151,4 @@ const Sale = () => {
   );
 };
 
-export default Sale;
+export default Requests;
