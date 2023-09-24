@@ -133,7 +133,7 @@ const Register = () => {
         <div className="footer-content">
           <div className="footer-left">
             <img
-              src="src/assets/prancha.png"
+              src="src/assets/board.png"
               alt="Sobre Nós"
               className="icon-image"
             />

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Male = () => {
   return (
-    <>
+    <div className="main">
     <header className="main-header">
         <div className="logo">
         <Link to="/"> <img src="src/assets/logo.png" alt="Logo" /> </Link>
@@ -36,66 +36,80 @@ const Male = () => {
           </a>
         </div>
       </header>
-      <h1>Sessão Masculina</h1>
-      <footer>
+
+      <div className="search-container">
+        <input
+          type="text"
+          className="search-bar"
+          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
+        />
+        <button className="search-button" type="submit">
+          <i className="bx bx-search"></i>
+        </button>
+      </div>
+
+      <div class= "title">
+        <li>MASCULINO</li>
+      </div>
+
+      <hr size="1" />
+
+        <div className="container-clothes-section">
+            <div className="clothes-section">
+              <Link to="#"><img src="src/assets/male-baby.png" /></Link>
+            </div>
+
+
+           <div className="clothes-section">
+            <Link to="#"><img src="src/assets/male-children.png" /></Link>
+          </div>
+
+          <div className="clothes-section">
+            <Link to="#"><img src="src/assets/male-juvenile.png" /></Link>
+          </div>
+        </div>
+
+        <footer>
         <section className="footer-section">
           <div className="footer-section-div">
-            <img src="src/assets/baleia.png" />
+            <img src="src/assets/whale.png" />
           </div>
 
           <div className="footer-section-div">
             <h3>SOBRE NÓS</h3>
             <li>
-              <a href="#">
                 <Link to="/company">A EMPRESA</Link>
-              </a>
             </li>
             <li>
-              <a href="#">
                 <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
-              </a>
             </li>
             <li>
-              <a href="#">
                 <Link to="/partners">NOSSOS PARCEIROS</Link>
-              </a>
             </li>
           </div>
 
           <div className="footer-section-div">
             <h3>SUPORTE</h3>
             <li>
-              <a href="#">
                 <Link to="/services">ATENDIMENTO</Link>
-              </a>
             </li>
             <li>
-              <a href="#">
                 <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
-              </a>
             </li>
             <li>
-              <a href="#">
                 <Link to="/sitemap">MAPA DO SITE</Link>
-              </a>
             </li>
           </div>
 
           <div className="footer-section-div">
             <h3>CONTATOS</h3>
-            <a href="#">
               <i className="fa fa-whatsapp"></i>
-            </a>
-            <a href="#">
               <i className="fa fa-google"></i>
-            </a>
-            <a href="#">
               <i className="fa fa-instagram"></i>
-            </a>
           </div>
         </section>
       </footer>
-    </>
+    </div>
   );
 };
 
