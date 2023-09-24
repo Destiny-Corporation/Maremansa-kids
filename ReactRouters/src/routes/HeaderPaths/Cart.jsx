@@ -4,98 +4,97 @@ import { Link } from "react-router-dom";
 
 const Cart = () => {
   return (
-    <>
+    <div className="main">
     <header className="main-header">
+        <div className="search-container">
+          <input type="text" className="search-bar" placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"/>
+            <button className="search-button" type="submit">
+              <i className="bx bx-search"></i>
+            </button>
+        </div>
         <div className="logo">
         <Link to="/"> <img src="src/assets/logo.png" alt="Logo" /> </Link>
         </div>
         <div className="icons">
-          <a href="#">
-            <Link to="/login">
+            <Link to="/requests">
               <i
                 className="bx bx-user bt-header"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
-          </a>
-          <a href="#">
             <Link to="/wishlist">
               <i
                 className="bx bx-heart bt-header"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
-          </a>
-          <a href="#">
             <Link to="/cart">
               <i
                 className="bx bx-cart bt-header"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
-          </a>
         </div>
       </header>
-      <h1>Carrinho de compras</h1>
+
+      <div className="container-subheader">
+        <div className="container-cart">
+          <i className='bx bx-cart bt-header'></i>
+          <h6>| Carrinho (0)</h6>
+        </div>
+      </div>
+
+      <div className="empty-cart">
+        <img src="src/assets/empty-cart.png" alt="Carrinho Vazio" />
+        <div className="effect">
+        <div className="button">
+          <img src="src/assets/shopping-button.png" alt="Botão de Compras" />
+        </div>
+        </div>
+      </div>
+
+
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
-            <img src="src/assets/baleia.png" />
+            <img src="src/assets/whale.png" />
           </div>
 
           <div className="footer-section-div">
             <h3>SOBRE NÓS</h3>
             <li>
-              <a href="#">
                 <Link to="/company">A EMPRESA</Link>
-              </a>
             </li>
             <li>
-              <a href="#">
                 <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
-              </a>
             </li>
             <li>
-              <a href="#">
                 <Link to="/partners">NOSSOS PARCEIROS</Link>
-              </a>
             </li>
           </div>
 
           <div className="footer-section-div">
             <h3>SUPORTE</h3>
             <li>
-              <a href="#">
                 <Link to="/services">ATENDIMENTO</Link>
-              </a>
             </li>
             <li>
-              <a href="#">
                 <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
-              </a>
             </li>
             <li>
-              <a href="#">
                 <Link to="/sitemap">MAPA DO SITE</Link>
-              </a>
             </li>
           </div>
 
           <div className="footer-section-div">
             <h3>CONTATOS</h3>
-            <a href="#">
               <i className="fa fa-whatsapp"></i>
-            </a>
-            <a href="#">
               <i className="fa fa-google"></i>
-            </a>
-            <a href="#">
               <i className="fa fa-instagram"></i>
-            </a>
           </div>
         </section>
       </footer>
-    </>
+    </div>
   );
 };
 

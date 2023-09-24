@@ -41,25 +41,19 @@ const Cart = () => {
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
-            <img src="src/assets/baleia.png" />
+            <img src="src/assets/whale.png" />
           </div>
 
           <div className="footer-section-div">
             <h3>SOBRE NÓS</h3>
             <li>
-              <a href="#">
                 <Link to="/company">A EMPRESA</Link>
-              </a>
             </li>
             <li>
-              <a href="#">
                 <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
-              </a>
             </li>
             <li>
-              <a href="#">
                 <Link to="/partners">NOSSOS PARCEIROS</Link>
-              </a>
             </li>
           </div>
 

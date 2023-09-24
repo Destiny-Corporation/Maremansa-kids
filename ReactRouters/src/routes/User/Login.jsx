@@ -253,39 +253,44 @@ const Login = () => {
       </div>
 
       <footer>
-        <div className="footer-content">
-          <div className="footer-left">
-            <img src="src/assets/prancha.png" alt="Sobre Nós" className="icon-image" />
-            <a href="#">
-                <Link to="/company" className="footer-link">SOBRE NÓS</Link>
-            </a>
+        <section className="footer-section">
+          <div className="footer-section-div">
+            <img src="src/assets/whale.png" />
           </div>
-          <div className="footer-right">
-            <div className="contacts">
-              <p>CONTATOS</p>
-              <div className="social-icons">
-                <a href="#">
-                  <i
-                    className="bx bxl-gmail bt-social"
-                    style={{ color: "#ffffff" }}
-                  ></i>
-                </a>
-                <a href="#">
-                  <i
-                    className="bx bxl-instagram bt-social"
-                    style={{ color: "#ffffff" }}
-                  ></i>
-                </a>
-                <a href="#">
-                  <i
-                    className="bx bxl-pinterest-alt bt-social"
-                    style={{ color: "#ffffff" }}
-                  ></i>
-                </a>
-              </div>
-            </div>
+
+          <div className="footer-section-div">
+            <h3>SOBRE NÓS</h3>
+            <li>
+                <Link to="/company">A EMPRESA</Link>
+            </li>
+            <li>
+                <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
+            </li>
+            <li>
+                <Link to="/partners">NOSSOS PARCEIROS</Link>
+            </li>
           </div>
-        </div>
+
+          <div className="footer-section-div">
+            <h3>SUPORTE</h3>
+            <li>
+                <Link to="/services">ATENDIMENTO</Link>
+            </li>
+            <li>
+                <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
+            </li>
+            <li>
+                <Link to="/sitemap">MAPA DO SITE</Link>
+            </li>
+          </div>
+
+          <div className="footer-section-div">
+            <h3>CONTATOS</h3>
+              <i className="fa fa-whatsapp"></i>
+              <i className="fa fa-google"></i>
+              <i className="fa fa-instagram"></i>
+          </div>
+        </section>
       </footer>
 
       <div className="sub-footer">

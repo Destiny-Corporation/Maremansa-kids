@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Props = () => {
   return (
-    <div className="main">
+    <div className='main'>
     <header className="main-header">
         <div className="logo">
         <Link to="/"> <img src="src/assets/logo.png" alt="Logo" /> </Link>
@@ -305,7 +305,7 @@ const Props = () => {
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
-            <img src="src/assets/baleia.png" />
+            <img src="src/assets/whale.png" />
           </div>
 
           <div className="footer-section-div">
@@ -336,22 +336,12 @@ const Props = () => {
 
           <div className="footer-section-div">
             <h3>CONTATOS</h3>
-            <a href="#">
               <i className="fa fa-whatsapp"></i>
-            </a>
-            <a href="#">
               <i className="fa fa-google"></i>
-            </a>
-            <a href="#">
               <i className="fa fa-instagram"></i>
-            </a>
           </div>
         </section>
       </footer>
-
-      <div className="last-text">
-        <p className="text-sub-footer">maremansa</p>
-      </div>
     </div>
   );
 };

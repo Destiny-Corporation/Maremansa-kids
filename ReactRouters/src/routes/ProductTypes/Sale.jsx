@@ -301,7 +301,7 @@ const Sale = () => {
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
-            <img src="src/assets/baleia.png" />
+            <img src="src/assets/whale.png" />
           </div>
 
           <div className="footer-section-div">
@@ -332,23 +332,13 @@ const Sale = () => {
 
           <div className="footer-section-div">
             <h3>CONTATOS</h3>
-            <a href="#">
               <i className="fa fa-whatsapp"></i>
-            </a>
-            <a href="#">
               <i className="fa fa-google"></i>
-            </a>
-            <a href="#">
               <i className="fa fa-instagram"></i>
-            </a>
           </div>
         </section>
       </footer>
-
-      <div className="last-text">
-        <p className="text-sub-footer">maremansa</p>
-      </div>
-    </div>
+    </>
   );
 };
 
@@ -526,7 +516,7 @@ export default Sale;
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
-            <img src="src/assets/baleia.png" />
+            <img src="src/assets/whale.png" />
           </div>
 
           <div className="footer-section-div">
@@ -557,15 +547,9 @@ export default Sale;
 
           <div className="footer-section-div">
             <h3>CONTATOS</h3>
-            <a href="#">
               <i className="fa fa-whatsapp"></i>
-            </a>
-            <a href="#">
               <i className="fa fa-google"></i>
-            </a>
-            <a href="#">
               <i className="fa fa-instagram"></i>
-            </a>
           </div>
         </section>
       </footer>
@@ -573,6 +557,7 @@ export default Sale;
       <div className="last-text">
         <p className="text-sub-footer">maremansa</p>
       </div>
+    </div>
     </div>
   );
 };
