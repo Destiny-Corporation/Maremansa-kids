@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../styles/User/Login.css";
 import { Link } from "react-router-dom";
 import { initializeApp } from 'firebase/app';
@@ -20,7 +20,18 @@ const auth = getAuth(firebaseApp);
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState("")
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const loadLocalStorageUser = () => {
+      const storedUser = localStorage.getItem("user");
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      }
+    };
+
+    loadLocalStorageUser();
+  }, []);
 
   function onChangeEmail(event) {
     setEmail(event.target.value);
@@ -36,7 +47,13 @@ const Login = () => {
 
   function login() {
     signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
+      .then((userCredential) => {
+        const user = userCredential.user;
+        setUser(user);
+
+        // Armazene o usuário no localStorage
+        localStorage.setItem("user", JSON.stringify(user));
+
         // Redirecione para a página inicial após o login bem-sucedido
         window.location.href = "/protected";
       })
@@ -56,10 +73,10 @@ const Login = () => {
   }
 
   function getErrorMessage(error) {
-    if (error.code == "auth/user-not-found") {
-      return "Usuário nao encontrado";
+    if (error.code === "auth/user-not-found") {
+      return "Usuário não encontrado";
     }
-    if (error.code == "auth/wrong-password") {
+    if (error.code === "auth/wrong-password") {
       return "Senha inválida";
     }
     return error.message;
@@ -99,20 +116,24 @@ const Login = () => {
     return form.password().value ? true : false;
   }
 
-
   function signInWithGoogle() {
     const provider = new GoogleAuthProvider();
-  
+
     signInWithPopup(auth, provider)
       .then((result) => {
         console.log(result.user);
-        setUser(result.user); // Atualiza o estado googleUser com o usuário autenticado
+        setUser(result.user);
+
+        // Armazene o usuário no localStorage
+        localStorage.setItem("user", JSON.stringify(result.user));
+
         window.location.href = "/protected";
-      }).catch((error) => {
+      })
+      .catch((error) => {
         console.log(error);
       });
   }
-  
+
   const form = {
     email: () => document.getElementById("email"),
     emailInvalidError: () => document.getElementById("email-invalid-error"),
@@ -124,6 +145,7 @@ const Login = () => {
     recoverPasswordButton: () =>
       document.getElementById("recover-password-button"),
   };
+
   function validateEmail(email) {
     return /\S+@\S+\.\S+/.test(email);
   }

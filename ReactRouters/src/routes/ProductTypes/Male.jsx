@@ -48,11 +48,10 @@ const Male = () => {
         </button>
       </div>
 
-      <div class= "title">
-        <li>MASCULINO</li>
+      <div className="title-section">
+      <h1 className="general-title">MASCULINO</h1>
+      <hr className="hr-sections"></hr>
       </div>
-
-      <hr size="1" />
 
         <div className="container-clothes-section">
             <div className="clothes-section">
@@ -109,6 +108,9 @@ const Male = () => {
           </div>
         </section>
       </footer>
+      <div className="last-text">
+        <p className="text-sub-footer">maremansa</p>
+      </div>
     </div>
   );
 };

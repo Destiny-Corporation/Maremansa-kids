@@ -10,21 +10,17 @@
   list-style: none;
 }
 
-/*body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  min-height: 100vh;
-  background: white;
-  background-position: center;
-}*/
+body {
+  margin: 0;
+}
 
 .main {
   margin: 0;
   padding: 0;
   width: 100%;
   background: rgb(245, 252, 252);
+  flex-grow: 1;
+  height: 100%;
 }
 
 .bt-header {
@@ -93,7 +89,7 @@
   }
 }
 
-.search-container {
+.search-container-geral {
   width: 98%;
   height: 40px;
   margin: 12px auto;
@@ -184,6 +180,7 @@
   margin-top: 5px;
   letter-spacing: 2px;
   color: #48a3a9;
+  color: #48A3A9;
 }
 
 .button-menu img:hover {
@@ -214,6 +211,26 @@
 
 .bx-chevron-left {
   font-size: 88px;
+}
+
+hr {
+  width: 90%; 
+  height: 2px;
+  background-color: #50b2b9; 
+  border: none; 
+  margin: 0 auto;
+  margin-top: 18px;
+  opacity: 1;
+}
+
+hr {
+  width: 90%; 
+  height: 2px;
+  background-color: #50b2b9; 
+  border: none; 
+  margin: 0 auto;
+  margin-top: 18px;
+  opacity: 1;
 }
 
 .container-card-1 {
@@ -256,32 +273,32 @@
   transition: 0.3s;
 }
 
-.clothes img {
-  width: 200px;
-  height: auto;
+.clothes img{
+    width: 250px;
+    height: auto;
 }
 
 footer {
-  position: static;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  margin: 0 !important;
-  background-color: #48a3a9;
-  color: #fff;
-  text-align: center;
-  z-index: 999;
-  margin-top: 20px !important;
+    position: static;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin: 0 !important;
+    background-color: #48A3A9;
+    color: #fff;
+    text-align: center;
+    z-index: 999;
+    margin-top: 20px !important;
 }
 
 .footer-section {
-  gap: 1rem;
-  justify-content: space-around;
-  background-color: #48a3a9;
-  padding: 18px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, auto));
-  align-items: flex-start;
+    gap: 1rem; 
+    justify-content: space-around;
+    background-color: #48A3A9;
+    padding: 18px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+    align-items: flex-start; 
 }
 
 .footer-section .footer-section-div {
@@ -349,19 +366,18 @@ hr {
 
 .last-text {
   position: static;
-  margin-top: -22px;
+  bottom: 0;
   width: 100%;
-  height: 50px;
   background-color: #247479;
-  padding: 10px 0;
+  color: #fff;
   text-align: center;
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  height: 30px;
 }
 
 .text-sub-footer {
   font-family: "Stylish", sans-serif;
   font-size: 20px;
-  margin-top: 8px;
   letter-spacing: 1px;
   color: white;
 }

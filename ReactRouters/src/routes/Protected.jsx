@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Protected = () => {
   return (
-    <>
+    <div className='main'>
       <header className="main-header">
         <div className="logo">
           <img src="src/assets/logo.png" alt="Logo" />
@@ -76,7 +76,7 @@ const Protected = () => {
           <div className="carousel-inner">
             <div className="carousel-item active">
               <img
-                src="src/assets/banner.png"
+                src="src/assets/banner-sale.png"
                 className="d-block w-100"
                 alt="..."
               />
@@ -92,7 +92,7 @@ const Protected = () => {
 
             <div className="carousel-item">
               <img
-                src="src/assets/banner.png"
+                src="src/assets/banner-sale-2.png"
                 className="d-block w-100"
                 alt="..."
               />
@@ -132,7 +132,7 @@ const Protected = () => {
             <img src="src/assets/sale.png" alt="" />
           </Link>
           <Link to="/sale">
-            <h7>PROMOÇÕES</h7>
+            <h6>PROMOÇÕES</h6>
           </Link>
         </div>
 
@@ -141,25 +141,25 @@ const Protected = () => {
             <img src="src/assets/accessories.png" alt="" />
           </Link>
           <Link to="/props">
-            <h7>ACESSÓRIOS</h7>
+            <h6>ACESSÓRIOS</h6>
           </Link>
         </div>
 
         <div className="button-menu">
           <Link to="female">
-            <img src="src/assets/feminino.png" alt="" />
+            <img src="src/assets/female.png" alt="" />
           </Link>
           <Link to="female">
-            <h7>FEMININO</h7>
+            <h6>FEMININO</h6>
           </Link>
         </div>
 
         <div className="button-menu">
           <Link to="male">
-            <img src="src/assets/masculino.png" alt="" />
+            <img src="src/assets/male.png" alt="" />
           </Link>
           <Link to="male">
-            <h7>MASCULINO</h7>
+            <h6>MASCULINO</h6>
           </Link>
         </div>
       </div>
@@ -167,92 +167,74 @@ const Protected = () => {
       <hr size="1" />
 
       <div className="container-clothes">
-        <i className="bx bx-chevron-left" style={{ color: "#ffffff" }}></i>
+        <i className="bx bx-chevron-left" style={{ color: "#48A3A9" }}></i>
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/modelo_1.png" alt="" />
+            <img src="src/assets/model-1.png" alt="" />
           </Link>
           <Link to="/product">
             <h6 className="text-card">CONJUNTO MARINHEIRO</h6>
           </Link>
-          <h8 className="text-card">POR R$ 37,90</h8>
+          <h6 className="text-card">POR R$ 37,90</h6>
         </div>
 
         <div className="clothes">
-          <img src="src/assets/modelo_2.png" alt="" />
+          <img src="src/assets/model-2.png" alt="" />
           <h6 className="text-card">MAIÔ CANDY</h6>
-          <h8 className="text-card">POR R$ 49,90</h8>
+          <h6 className="text-card">POR R$ 49,90</h6>
         </div>
 
         <div className="clothes">
-          <img src="src/assets/modelo_3.png" alt="" />
+          <img src="src/assets/model-3.png" alt="" />
           <h6 className="text-card">CONJUNTO SEREIA</h6>
-          <h8 className="text-card">POR R$ 47,90</h8>
+          <h6 className="text-card">POR R$ 47,90</h6>
         </div>
 
         <div className="clothes">
-          <img src="src/assets/modelo_4.png" alt="" />
+          <img src="src/assets/model-4.png" alt="" />
           <h6 className="text-card">CONJUNTO PIRATA</h6>
-          <h8 className="text-card">POR R$ 47,90</h8>
+          <h6 className="text-card">POR R$ 47,90</h6>
         </div>
-        <i className="bx bx-chevron-right" style={{ color: "#ffffff" }}></i>
+        <i className="bx bx-chevron-right" style={{ color: "#48A3A9" }}></i>
       </div>
 
-      <footer>
+      <footer style={{position: "static" }}>
         <section className="footer-section">
           <div className="footer-section-div">
-            <img src="src/assets/baleia.png" />
+            <img src="src/assets/whale.png" />
           </div>
 
           <div className="footer-section-div">
             <h3>SOBRE NÓS</h3>
             <li>
-              <a href="#">
                 <Link to="/company">A EMPRESA</Link>
-              </a>
             </li>
             <li>
-              <a href="#">
                 <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
-              </a>
             </li>
             <li>
-              <a href="#">
                 <Link to="/partners">NOSSOS PARCEIROS</Link>
-              </a>
             </li>
           </div>
 
           <div className="footer-section-div">
             <h3>SUPORTE</h3>
             <li>
-              <a href="#">
                 <Link to="/services">ATENDIMENTO</Link>
-              </a>
             </li>
             <li>
-              <a href="#">
                 <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
-              </a>
             </li>
             <li>
-              <a href="#">
                 <Link to="/sitemap">MAPA DO SITE</Link>
-              </a>
             </li>
           </div>
 
           <div className="footer-section-div">
             <h3>CONTATOS</h3>
-            <a href="#">
               <i className="fa fa-whatsapp"></i>
-            </a>
-            <a href="#">
               <i className="fa fa-google"></i>
-            </a>
-            <a href="#">
               <i className="fa fa-instagram"></i>
-            </a>
           </div>
         </section>
       </footer>
@@ -260,7 +242,7 @@ const Protected = () => {
       <div className="last-text">
         <p className="text-sub-footer">maremansa</p>
       </div>
-    </>
+    </div>
   );
 };
 
