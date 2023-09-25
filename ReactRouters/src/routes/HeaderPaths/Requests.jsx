@@ -55,14 +55,15 @@ const Requests = () => {
   return (
     <div className="main">
     <header className="main-header">
-        <div className="search-container">
-          <input type="text" className="search-bar" placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"/>
-            <button className="search-button" type="submit">
+        <div className="search-container-header">
+          <input type="text" className="search-bar-header" placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"/>
+            <button className="search-button-header" type="submit">
               <i className="bx bx-search"></i>
             </button>
         </div>
         
         <div className="logo">
+        <Link to="/"> <img src="src/assets/logo.png" alt="Logo" className="header-logo-center"/> </Link>
         <Link to="/protected"> <img src="src/assets/logo.png" alt="Logo" /> </Link>
         </div>
         <div className="icons">
@@ -92,7 +93,27 @@ const Requests = () => {
           <i className='bx bx-box bt-header'></i>
           <h6>| Meus Pedidos (0)</h6>
         </div>
+
+        <div className="remember-forgot">
+        {" "}
+        <button
+          className="logout-link"
+          onClick={logout}
+          style={{ color: '#267777', background: 'none', border: 'none', cursor: 'pointer' }}>
+          <i class='bx bx-log-out' style={{fontSize: '28px'}}></i>
+        </button>
       </div>
+      </div>
+
+      <div className="empty-request">
+        <img src="src/assets/empty-requests.png" />
+        <div className="effect">
+         <div className="button">
+            <img src="src/assets/shopping-button.png" alt="Ir às Compras" />
+         </div>
+        </div>
+      </div>
+
       {isLoggedIn ? (
   <div>
     <div className="empty-request">
@@ -164,8 +185,8 @@ const Requests = () => {
           </div>
         </section>
       </footer>
-    </div>
+    <div className="last-text">
+    <p className="text-sub-footer">maremansa</p>
+  </div>
+</div>
   );
-};
-
-export default Requests;

@@ -31,7 +31,7 @@ const Props = () => {
         </div>
       </header>
 
-      <div className="search-container">
+      <div className="search-container-geral">
         <input
           type="text"
           className="search-bar"
@@ -78,7 +78,7 @@ const Props = () => {
 
             <div className="carousel-item">
               <img
-                src="src/assets/banner.png"
+                src="src/assets/banner-sale.png"
                 className="d-block w-100"
                 alt="..."
               />
@@ -86,7 +86,7 @@ const Props = () => {
 
             <div className="carousel-item">
               <img
-                src="src/assets/banner.png"
+                src="src/assets/banner-sale-2.png"
                 className="d-block w-100"
                 alt="..."
               />
@@ -342,6 +342,9 @@ const Props = () => {
           </div>
         </section>
       </footer>
+      <div className="last-text">
+        <p className="text-sub-footer">maremansa</p>
+      </div>
     </div>
   );
 };
