@@ -10,7 +10,7 @@ const Home = () => {
           <img src="src/assets/logo.png" alt="Logo" />
         </div>
         <div className="icons">
-          <Link to="/login">
+          <Link to="/requests">
             <i
               className="bx bx-user bt-header"
               style={{ color: "#ffffff" }}

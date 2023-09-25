@@ -3,6 +3,13 @@ import "../../styles/HeaderPaths/Cart.css";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
+  let isLoggedIn = false
+
+if (localStorage.getItem("user") !== null) {
+    localStorage.setItem("loggedIn", "true");
+    isLoggedIn = true
+};
+
   return (
     <div className="main">
     <header className="main-header">
@@ -43,7 +50,7 @@ const Cart = () => {
           <h6>| Carrinho (0)</h6>
         </div>
       </div>
-
+      {isLoggedIn ? (
       <div className="empty-cart">
         <img src="src/assets/empty-cart.png" alt="Carrinho Vazio" />
         <div className="effect">
@@ -52,6 +59,13 @@ const Cart = () => {
         </div>
         </div>
       </div>
+      ) : (
+        // Componente de login/mensagem quando o usuário não está logado
+        <div className="login-message">
+          <p>Por favor, faça o login para acessar seu carrinho.</p>
+          <Link to="/login">Login</Link>
+        </div>
+      )}
 
 
       <footer>
