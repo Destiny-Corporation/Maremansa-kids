@@ -25,7 +25,6 @@ body {
   font-family: "Montserrat", sans-serif;
   text-transform: uppercase;
   margin-left: 16px;
-  margin-top: 4px;
 }
 
 .bt-header {
@@ -131,7 +130,7 @@ body {
   font-size: 12px;
   letter-spacing: 2px;
   color: #fff;
-  padding: 20px 45px 20px 20px;
+  padding: 20px 60px 20px 20px;
   padding-left: 45px;
 }
 
@@ -239,11 +238,15 @@ body {
   margin-left: -12px;
 }
 
-.remember-link {
+#recover-password-button {
   font-size: 8px;
   letter-spacing: 2px;
-  color: rgb(147, 202, 206);
+  color: rgb(162, 222, 226);
   padding-left: 10px;
+}
+
+#recover-password-button :hover {
+  color: rgb(180, 236, 240);
 }
 
 footer {

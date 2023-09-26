@@ -19,6 +19,12 @@ const auth = getAuth(firebaseApp);
 
 
 const Requests = () => {
+  let isLoggedIn = false
+
+if (localStorage.getItem("user") !== null) {
+    localStorage.setItem("loggedIn", "true");
+    isLoggedIn = true
+};
   const [user, setUser] = useState(null); // Estado do usuário
 
   // Função para fazer logout
@@ -80,31 +86,48 @@ const Requests = () => {
         </div>
       </header>
 
-      <div className="container-subheader">
+     <div className="container-subheader">
         <div className="container-request">
-          <i className='bx bx-box bt-header'></i>
+          <i className='bx bx-heart bt-header'></i>
           <h6>| Meus Pedidos (0)</h6>
         </div>
-
+      </div>
+      {isLoggedIn ? (
         <div className="remember-forgot">
-        {" "}
-        <button
-          className="logout-link"
-          onClick={logout}
-          style={{ color: '#267777', background: 'none', border: 'none', cursor: 'pointer' }}>
-          <i class='bx bx-log-out' style={{fontSize: '28px'}}></i>
-        </button>
-      </div>
-      </div>
-
-      <div className="empty-request">
-        <img src="src/assets/empty-requests.png" />
-        <div className="effect">
-         <div className="button">
-            <img src="src/assets/shopping-button.png" alt="Ir às Compras" />
-         </div>
+          {" "}
+          <button
+            className="logout-link"
+            onClick={logout}
+            style={{ 
+              color: '#267777',
+              background: 'none', 
+              border: 'none',
+              cursor: 'pointer', }}>
+            <i class='bx bx-log-out' style={{ fontSize: '28px' }}></i>
+          </button>
+    
+          <div className="empty-request">
+            <img src="src/assets/empty-requests.png" />
+            <div className="effect">
+              <div className="button">
+                <img src="src/assets/shopping-button.png" alt="Ir às Compras" />
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      ) : (
+        // Componente de login/mensagem quando o usuário não está logado
+        <div className="login-message">
+          <div className="empty-request">
+            <img src="src/assets/empty-requests-login.png" />
+            <div className="effect">
+              <div className="button">
+              <Link to="/login"><img src="src/assets/login.png" alt="Ir às Compras" /></Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       <footer>
         <section className="footer-section">

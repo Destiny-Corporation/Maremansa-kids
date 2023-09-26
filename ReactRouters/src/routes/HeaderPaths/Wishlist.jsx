@@ -3,6 +3,14 @@ import "../../styles/HeaderPaths/Wishlist.css";
 import { Link } from "react-router-dom";
 
 const Wishlist = () => {
+
+let isLoggedIn = false
+
+if (localStorage.getItem("user") !== null) {
+    localStorage.setItem("loggedIn", "true");
+    isLoggedIn = true
+};
+
   return (
     <div className="main">
     <header className="main-header">
@@ -43,16 +51,39 @@ const Wishlist = () => {
           <h6>| Lista de Desejos (0)</h6>
         </div>
       </div>
-
-      <div className="empty-wishlist">
-        <img src="src/assets/empty-wishlist.png" />
-        <div className="effect">
-         <div className="button">
-            <img src="src/assets/shopping-button.png" alt="Ir às Compras" />
-         </div>
+      {isLoggedIn ? (
+        // Conteúdo da Lista de Desejos quando o usuário está logado
+        <div className="wishlist-content">
+          <div className="empty-wishlist">
+            <img src="src/assets/empty-wishlist.png" alt="Lista de Desejos Vazia" />
+            <div className="effect">
+              <div className="button">
+                <img
+                  src="src/assets/shopping-button.png"
+                  alt="Ir às Compras"
+                />
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-
+      ) : (
+        // Componente de login/mensagem quando o usuário não está logado
+        <div className="login-message">
+          <div className="wishlist-content">
+          <div className="empty-wishlist">
+          <Link to="/login"><img src="src/assets/empty-wishlist-login.png" alt="Lista de Desejos Vazia" /></Link>
+            <div className="effect">
+              <div className="button">
+                <img
+                  src="src/assets/login.png"
+                  alt="Ir às Compras"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      )}
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
