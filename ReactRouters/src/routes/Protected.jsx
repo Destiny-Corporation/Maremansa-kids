@@ -1,14 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../styles/Protected.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate  } from "react-router-dom";
 
 const Protected = () => {
-  let isLoggedIn = false
+  const navigate = useNavigate();
+  const isLoggedIn = localStorage.getItem("user") !== null;
 
-  if (localStorage.getItem("user") !== null) {
-      localStorage.setItem("loggedIn", "true");
-      isLoggedIn = true
-  };
+  useEffect(() => {
+    if (!isLoggedIn) {
+      // Redirecione para a página de login se o usuário não estiver logado
+      navigate("/login");
+    }
+  }, [isLoggedIn, navigate]);
+
+  if (!isLoggedIn) {
+    // Retorne null ou qualquer coisa que desejar se o redirecionamento estiver em andamento
+    return null;
+  }
+
   return (
     <div className='main'>
       <header className="main-header">
@@ -43,8 +52,7 @@ const Protected = () => {
         </div>
       </header>
 
-    {isLoggedIn ? (
-      <><div className="search-container">
+    <div className="search-container">
           <input
             type="text"
             className="search-bar"
@@ -191,14 +199,8 @@ const Protected = () => {
               <h6 className="text-card">POR R$ 47,90</h6>
             </div>
             <i className="bx bx-chevron-right" style={{ color: "#48A3A9" }}></i>
-          </div></>
-       ) : (
-        // Componente de login/mensagem quando o usuário não está logado
-        <div className="login-message">
-          <p>Por favor, faça o login para acessar a rota protegida.</p>
-          <Link to="/login">Login</Link>
-        </div>
-      )}
+          </div>
+       
 
       <footer style={{position: "static" }}>
         <section className="footer-section">

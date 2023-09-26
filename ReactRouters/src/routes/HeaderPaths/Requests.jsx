@@ -118,8 +118,14 @@ if (localStorage.getItem("user") !== null) {
       ) : (
         // Componente de login/mensagem quando o usuário não está logado
         <div className="login-message">
-          <p>Por favor, faça o login para acessar seus pedidos.</p>
-          <Link to="/login">Login</Link>
+          <div className="empty-request">
+            <img src="src/assets/empty-requests-login.png" />
+            <div className="effect">
+              <div className="button">
+              <Link to="/login"><img src="src/assets/login.png" alt="Ir às Compras" /></Link>
+              </div>
+            </div>
+          </div>
         </div>
       )}
 
