@@ -169,9 +169,9 @@ const Protected = () => {
                 <h6>MASCULINO</h6>
               </Link>
             </div>
-          </div><hr size="1" /><div className="container-clothes">
+          </div><hr size="1" /><div className="container-clothes-main">
             <i className="bx bx-chevron-left" style={{ color: "#48A3A9" }}></i>
-            <div className="clothes">
+            <div className="clothes-main">
               <Link to="/product">
                 <img src="/assets/model-1.png" alt="" />
               </Link>
@@ -181,19 +181,19 @@ const Protected = () => {
               <h6 className="text-card">POR R$ 37,90</h6>
             </div>
 
-            <div className="clothes">
+            <div className="clothes-main">
               <img src="/assets/model-2.png" alt="" />
               <h6 className="text-card">MAIÔ CANDY</h6>
               <h6 className="text-card">POR R$ 49,90</h6>
             </div>
 
-            <div className="clothes">
+            <div className="clothes-main">
               <img src="/assets/model-3.png" alt="" />
               <h6 className="text-card">CONJUNTO SEREIA</h6>
               <h6 className="text-card">POR R$ 47,90</h6>
             </div>
 
-            <div className="clothes">
+            <div className="clothes-main">
               <img src="/assets/model-4.png" alt="" />
               <h6 className="text-card">CONJUNTO PIRATA</h6>
               <h6 className="text-card">POR R$ 47,90</h6>

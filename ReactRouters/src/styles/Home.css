@@ -105,6 +105,7 @@ body {
   font-size: 14px;
 }
 
+
 .search-container:hover {
   background-color: #bdd6d6;
 }
@@ -274,6 +275,26 @@ hr {
 }
 
 .clothes img{
+    width: 250px;
+    height: auto;
+}
+
+.container-clothes-main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.container-clothes-main img:hover {
+  transform: scale(0.9) translateY(-5px);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.clothes-main img{
     width: 250px;
     height: auto;
 }
