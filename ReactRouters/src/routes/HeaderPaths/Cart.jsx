@@ -20,7 +20,7 @@ if (localStorage.getItem("user") !== null) {
             </button>
         </div>
         <div className="logo">
-        <Link to="/"> <img src="src/assets/logo.png" alt="Logo" className="header-logo-center"/> </Link>
+        <Link to="/"> <img src="/assets/logo.png" alt="Logo" className="header-logo-center"/> </Link>
         </div>
         <div className="icons">
             <Link to="/requests">
@@ -52,21 +52,21 @@ if (localStorage.getItem("user") !== null) {
       </div>
       {isLoggedIn ? (
       <div className="empty-cart">
-        <img src="src/assets/empty-cart.png" alt="Carrinho Vazio" />
+        <img src="/assets/empty-cart.png" alt="Carrinho Vazio" />
         <div className="effect">
         <div className="button">
-          <img src="src/assets/shopping-button.png" alt="Botão de Compras" />
+          <img src="/assets/shopping-button.png" alt="Botão de Compras" />
         </div>
         </div>
       </div>
       ) : (
-        // Componente de login/mensagem quando o usuário não está logado
+        // usuário não está logado:
         <div className="login-message">
           <div className="empty-cart">
-        <img src="src/assets/empty-cart-login.png" alt="Carrinho Vazio" />
+        <img src="/assets/empty-cart-login.png" alt="Carrinho Vazio" />
         <div className="effect">
         <div className="button">
-          <Link to="/login"> <img src="src/assets/login.png" alt="Botão de Compras" /></Link>
+          <Link to="/login"> <img src="/assets/login.png" alt="Botão de Compras" /></Link>
         </div>
         </div>
       </div>
@@ -77,7 +77,7 @@ if (localStorage.getItem("user") !== null) {
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
-            <img src="src/assets/whale.png" />
+            <img src="/assets/whale.png" />
           </div>
 
           <div className="footer-section-div">

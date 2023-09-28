@@ -7,33 +7,27 @@ const Male = () => {
     <div className="main">
     <header className="main-header">
         <div className="logo">
-        <Link to="/"> <img src="src/assets/logo.png" alt="Logo" /> </Link>
+        <Link to="/"> <img src="/assets/logo.png" alt="Logo" /> </Link>
         </div>
         <div className="icons">
-          <a href="#">
-            <Link to="/login">
+            <Link to="/requests">
               <i
                 className="bx bx-user bt-header"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
-          </a>
-          <a href="#">
             <Link to="/wishlist">
               <i
                 className="bx bx-heart bt-header"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
-          </a>
-          <a href="#">
             <Link to="/cart">
               <i
                 className="bx bx-cart bt-header"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
-          </a>
         </div>
       </header>
 
@@ -55,23 +49,23 @@ const Male = () => {
 
         <div className="container-clothes-section">
             <div className="clothes-section">
-              <Link to="#"><img src="src/assets/male-baby.png" /></Link>
+              <Link to="/male/male-baby"><img src="/assets/male-baby.png" /></Link>
             </div>
 
 
            <div className="clothes-section">
-            <Link to="#"><img src="src/assets/male-children.png" /></Link>
+            <Link to="/male/male-children"><img src="/assets/male-children.png" /></Link>
           </div>
 
           <div className="clothes-section">
-            <Link to="#"><img src="src/assets/male-juvenile.png" /></Link>
+            <Link to="/male/male-juvenile"><img src="/assets/male-juvenile.png" /></Link>
           </div>
         </div>
 
         <footer>
         <section className="footer-section">
           <div className="footer-section-div">
-            <img src="src/assets/whale.png" />
+            <img src="/assets/whale.png" />
           </div>
 
           <div className="footer-section-div">

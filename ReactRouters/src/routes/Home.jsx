@@ -7,7 +7,7 @@ const Home = () => {
     <div className='main'>
       <header className="main-header">
         <div className="logo">
-          <img src="src/assets/logo.png" alt="Logo" />
+          <img src="/assets/logo.png" alt="Logo" />
         </div>
         <div className="icons">
           <Link to="/requests">
@@ -69,21 +69,21 @@ const Home = () => {
           <div className="carousel-inner">
             <div className="carousel-item active">
               <img
-                src="src/assets/banner-sale.png"
+                src="/assets/banner-sale.png"
                 className="d-block w-100"
                 alt="..." />
             </div>
 
             <div className="carousel-item">
               <img
-                src="src/assets/banner-sale-2.png"
+                src="/assets/banner-sale-2.png"
                 className="d-block w-100"
                 alt="..." />
             </div>
 
             <div className="carousel-item">
               <img
-                src="src/assets/banner.png"
+                src="/assets/banner.png"
                 className="d-block w-100"
                 alt="..." />
             </div>
@@ -118,7 +118,7 @@ const Home = () => {
       <div className="container-menu-buttons">
         <div className="button-menu">
           <Link to="/sale">
-            <img src="src/assets/sale.png" alt="" />
+            <img src="/assets/sale.png" alt="" />
           </Link>
           <Link to="/sale">
             <h6>PROMOÇÕES</h6>
@@ -127,7 +127,7 @@ const Home = () => {
 
         <div className="button-menu">
           <Link to="/props">
-            <img src="src/assets/accessories.png" alt="" />
+            <img src="/assets/accessories.png" alt="" />
           </Link>
           <Link to="/props">
             <h6>ACESSÓRIOS</h6>
@@ -136,7 +136,7 @@ const Home = () => {
 
         <div className="button-menu">
           <Link to="female">
-            <img src="src/assets/female.png" alt="" />
+            <img src="/assets/female.png" alt="" />
           </Link>
           <Link to="female">
             <h6>FEMININO</h6>
@@ -145,7 +145,7 @@ const Home = () => {
 
         <div className="button-menu">
           <Link to="male">
-            <img src="src/assets/male.png" alt="" />
+            <img src="/assets/male.png" alt="" />
           </Link>
           <Link to="male">
             <h6>MASCULINO</h6>
@@ -159,7 +159,7 @@ const Home = () => {
         <i className="bx bx-chevron-left" style={{ color: "#48A3A9" }}></i>
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/model-1.png" alt="" />
+            <img src="/assets/model-1.png" alt="" />
           </Link>
           <Link to="/product">
             <h6 className="text-card">CONJUNTO MARINHEIRO</h6>
@@ -168,19 +168,19 @@ const Home = () => {
         </div>
 
         <div className="clothes">
-          <img src="src/assets/model-2.png" alt="" />
+          <img src="/assets/model-2.png" alt="" />
           <h6 className="text-card">MAIÔ CANDY</h6>
           <h6 className="text-card">POR R$ 49,90</h6>
         </div>
 
         <div className="clothes">
-          <img src="src/assets/model-3.png" alt="" />
+          <img src="/assets/model-3.png" alt="" />
           <h6 className="text-card">CONJUNTO SEREIA</h6>
           <h6 className="text-card">POR R$ 47,90</h6>
         </div>
 
         <div className="clothes">
-          <img src="src/assets/model-4.png" alt="" />
+          <img src="/assets/model-4.png" alt="" />
           <h6 className="text-card">CONJUNTO PIRATA</h6>
           <h6 className="text-card">POR R$ 47,90</h6>
         </div>
@@ -190,7 +190,7 @@ const Home = () => {
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
-            <img src="src/assets/whale.png" />
+            <img src="/assets/whale.png" />
           </div>
 
           <div className="footer-section-div">

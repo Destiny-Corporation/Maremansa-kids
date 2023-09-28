@@ -7,7 +7,7 @@ const Sitemap = () => {
     <div className='main'>
       <header className="main-header">
         <div className="logo">
-        <Link to="/"> <img src="src/assets/logo.png" alt="Logo" /> </Link>
+        <Link to="/"> <img src="/assets/logo.png" alt="Logo" /> </Link>
         </div>
         <div className="icons">
             <Link to="/login">
@@ -70,7 +70,7 @@ const Sitemap = () => {
           <div className="carousel-inner">
             <div className="carousel-item active">
               <img
-                src="src/assets/banner.png"
+                src="/assets/banner.png"
                 className="d-block w-100"
                 alt="..."
               />
@@ -78,7 +78,7 @@ const Sitemap = () => {
 
             <div className="carousel-item">
               <img
-                src="src/assets/banner-sale.png"
+                src="/assets/banner-sale.png"
                 className="d-block w-100"
                 alt="..."
               />
@@ -86,7 +86,7 @@ const Sitemap = () => {
 
             <div className="carousel-item">
               <img
-                src="src/assets/banner-sale-2.png"
+                src="/assets/banner-sale-2.png"
                 className="d-block w-100"
                 alt="..."
               />
@@ -127,7 +127,7 @@ const Sitemap = () => {
 
       <div className="about">
     <div className="company">
-      <img src="src/assets/banner-maremansa.png" />
+      <img src="/assets/banner-maremansa.png" />
     </div>
   </div>
 
@@ -166,7 +166,7 @@ const Sitemap = () => {
       <footer style={{position: "static" }}>
         <section className="footer-section">
           <div className="footer-section-div">
-            <img src="src/assets/whale.png" />
+            <img src="/assets/whale.png" />
           </div>
 
           <div className="footer-section-div">

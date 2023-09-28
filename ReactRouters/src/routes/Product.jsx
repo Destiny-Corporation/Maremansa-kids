@@ -7,7 +7,7 @@ const Cart = () => {
     <>
     <header className="main-header">
         <div className="logo">
-        <Link to="/"> <img src="src/assets/logo.png" alt="Logo" /> </Link>
+        <Link to="/"> <img src="/assets/logo.png" alt="Logo" /> </Link>
         </div>
         <div className="icons">
           <a href="#">
@@ -41,7 +41,7 @@ const Cart = () => {
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
-            <img src="src/assets/whale.png" />
+            <img src="/assets/whale.png" />
           </div>
 
           <div className="footer-section-div">

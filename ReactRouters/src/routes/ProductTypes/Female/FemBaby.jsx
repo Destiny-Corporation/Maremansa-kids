@@ -1,16 +1,16 @@
-import React from "react";
-import "../../styles/ProductTypes/Props.css";
+import React from 'react';
+import "../../../styles/ProductTypes/Female/Fembaby.css";
 import { Link } from "react-router-dom";
 
-const Props = () => {
+const FemBaby = () => {
   return (
     <div className='main'>
     <header className="main-header">
         <div className="logo">
-        <Link to="/"> <img src="src/assets/logo.png" alt="Logo" /> </Link>
+        <Link to="/"> <img src="/assets/logo.png" alt="Logo" /> </Link>
         </div>
         <div className="icons">
-            <Link to="/login">
+            <Link to="/requests">
               <i
                 className="bx bx-user bt-header"
                 style={{ color: "#ffffff" }}
@@ -70,7 +70,7 @@ const Props = () => {
           <div className="carousel-inner">
             <div className="carousel-item active">
               <img
-                src="src/assets/banner.png"
+                src="/assets/banner.png"
                 className="d-block w-100"
                 alt="..."
               />
@@ -78,7 +78,7 @@ const Props = () => {
 
             <div className="carousel-item">
               <img
-                src="src/assets/banner-sale.png"
+                src="/assets/banner-sale.png"
                 className="d-block w-100"
                 alt="..."
               />
@@ -86,7 +86,7 @@ const Props = () => {
 
             <div className="carousel-item">
               <img
-                src="src/assets/banner-sale-2.png"
+                src="/assets/banner-sale-2.png"
                 className="d-block w-100"
                 alt="..."
               />
@@ -121,14 +121,14 @@ const Props = () => {
       </div>
 
       <div className="title-section">
-      <h1 className="general-title">ACESSÓRIOS</h1>
+      <h1 className="general-title">FEMININO | BABYS</h1>
       <hr className="hr-sections"></hr>
       </div>
       
       <div className="container-clothes">
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/model-1.png" alt="" />
+            <img src="/assets/model-1.png" alt="" />
             <h6 className="text-card">PRODUTO 1</h6>
           </Link>
           <h8 className="text-card">R$ 59,90</h8>
@@ -136,7 +136,7 @@ const Props = () => {
 
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/model-2.png" alt="" />
+            <img src="/assets/model-2.png" alt="" />
             <h6 className="text-card">PRODUTO 2</h6>
           </Link>
           <h8 className="text-card">R$ 59,90</h8>
@@ -144,7 +144,7 @@ const Props = () => {
 
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/model-3.png" alt="" />
+            <img src="/assets/model-3.png" alt="" />
             <h6 className="text-card">PRODUTO 3</h6>
           </Link>
           <h8 className="text-card">R$ 59,90</h8>
@@ -152,7 +152,7 @@ const Props = () => {
 
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/model-4.png" alt="" />
+            <img src="/assets/model-4.png" alt="" />
             <h6 className="text-card">PRODUTO 4</h6>
           </Link>
           <h8 className="text-card">R$ 59,90</h8>
@@ -162,7 +162,7 @@ const Props = () => {
       <div className="container-clothes">
       <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/model-1.png" alt="" />
+            <img src="/assets/model-1.png" alt="" />
             <h6 className="text-card">PRODUTO 5</h6>
           </Link>
           <h8 className="text-card">R$ 59,90</h8>
@@ -170,7 +170,7 @@ const Props = () => {
 
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/model-2.png" alt="" />
+            <img src="/assets/model-2.png" alt="" />
             <h6 className="text-card">PRODUTO 6</h6>
           </Link>
           <h8 className="text-card">R$ 59,90</h8>
@@ -178,7 +178,7 @@ const Props = () => {
 
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/model-3.png" alt="" />
+            <img src="/assets/model-3.png" alt="" />
             <h6 className="text-card">PRODUTO 7</h6>
           </Link>
           <h8 className="text-card">R$ 59,90</h8>
@@ -186,7 +186,7 @@ const Props = () => {
 
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/model-4.png" alt="" />
+            <img src="/assets/model-4.png" alt="" />
             <h6 className="text-card">PRODUTO 8</h6>
           </Link>
           <h8 className="text-card">R$ 59,90</h8>
@@ -196,7 +196,7 @@ const Props = () => {
       <div className="container-clothes">
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/model-1.png" alt="" />
+            <img src="/assets/model-1.png" alt="" />
           </Link>
           <Link to="/product">
             <h6 className="text-card">PRDOUTO 9</h6>
@@ -206,7 +206,7 @@ const Props = () => {
 
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/model-2.png" alt="" />
+            <img src="/assets/model-2.png" alt="" />
             <h6 className="text-card">PRODUTO 10</h6>
           </Link>
           <h8 className="text-card">R$ 59,90</h8>
@@ -214,7 +214,7 @@ const Props = () => {
 
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/model-3.png" alt="" />
+            <img src="/assets/model-3.png" alt="" />
             <h6 className="text-card">PRODUTO 11</h6>
           </Link>
           <h8 className="text-card">R$ 59,90</h8>
@@ -222,7 +222,7 @@ const Props = () => {
 
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/model-4.png" alt="" />
+            <img src="/assets/model-4.png" alt="" />
             <h6 className="text-card">PRODUTO 12</h6>
           </Link>
           <h8 className="text-card">R$ 59,90</h8>
@@ -232,7 +232,7 @@ const Props = () => {
       <div className="container-clothes">
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/model-1.png" alt="" />
+            <img src="/assets/model-1.png" alt="" />
           </Link>
           <Link to="/product">
             <h6 className="text-card">PRODUTO 13</h6>
@@ -242,7 +242,7 @@ const Props = () => {
 
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/model-2.png" alt="" />
+            <img src="/assets/model-2.png" alt="" />
             <h6 className="text-card">PRODUTO 14</h6>
           </Link>
           <h8 className="text-card">R$ 59,90</h8>
@@ -250,7 +250,7 @@ const Props = () => {
 
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/model-3.png" alt="" />
+            <img src="/assets/model-3.png" alt="" />
             <h6 className="text-card">PRODUTO 15</h6>
           </Link>
           <h8 className="text-card">R$ 59,90</h8>
@@ -258,7 +258,7 @@ const Props = () => {
 
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/model-4.png" alt="" />
+            <img src="/assets/model-4.png" alt="" />
             <h6 className="text-card">PRODUTO 16</h6>
           </Link>
           <h8 className="text-card">R$ 59,90</h8>
@@ -268,7 +268,7 @@ const Props = () => {
       <div className="container-clothes">
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/model-1.png" alt="" />
+            <img src="/assets/model-1.png" alt="" />
           </Link>
           <Link to="/product">
             <h6 className="text-card">PRODUTO 17</h6>
@@ -278,7 +278,7 @@ const Props = () => {
 
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/model-2.png" alt="" />
+            <img src="/assets/model-2.png" alt="" />
             <h6 className="text-card">PRODUTO 18</h6>
           </Link>
           <h8 className="text-card">R$ 59,90</h8>
@@ -286,7 +286,7 @@ const Props = () => {
 
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/model-3.png" alt="" />
+            <img src="/assets/model-3.png" alt="" />
             <h6 className="text-card">PRODUTO 19</h6>
           </Link>
           <h8 className="text-card">R$ 59,90</h8>
@@ -294,7 +294,7 @@ const Props = () => {
 
         <div className="clothes">
           <Link to="/product">
-            <img src="src/assets/model-4.png" alt="" />
+            <img src="/assets/model-4.png" alt="" />
             <h6 className="text-card">PRODUTO 20</h6>
           </Link>
           <h8 className="text-card">R$ 59,90</h8>
@@ -305,7 +305,7 @@ const Props = () => {
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
-            <img src="src/assets/whale.png" />
+            <img src="/assets/whale.png" />
           </div>
 
           <div className="footer-section-div">
@@ -349,4 +349,4 @@ const Props = () => {
   );
 };
 
-export default Props;
+export default FemBaby;
