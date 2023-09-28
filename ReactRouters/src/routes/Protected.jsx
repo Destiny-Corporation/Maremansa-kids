@@ -153,19 +153,19 @@ const Protected = () => {
             </div>
 
             <div className="button-menu">
-              <Link to="female">
+              <Link to="/female">
                 <img src="src/assets/female.png" alt="" />
               </Link>
-              <Link to="female">
+              <Link to="/female">
                 <h6>FEMININO</h6>
               </Link>
             </div>
 
             <div className="button-menu">
-              <Link to="male">
+              <Link to="/male">
                 <img src="src/assets/male.png" alt="" />
               </Link>
-              <Link to="male">
+              <Link to="/male">
                 <h6>MASCULINO</h6>
               </Link>
             </div>
