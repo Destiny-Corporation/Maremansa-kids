@@ -1,33 +1,65 @@
 import React from "react";
 import "../../styles/ProductTypes/Props.css";
 import { Link } from "react-router-dom";
+import { initializeApp } from "firebase/app";
+import { getStorage } from "firebase/storage";
+import { getFirestore, collection, doc, getDocs } from "firebase/firestore";
+import { useState, useEffect } from "react";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDTKUI6nV-DZjIsUo1BMkjIUWOQbT9gU3Q",
+  authDomain: "auth-amanda.firebaseapp.com",
+  projectId: "auth-amanda",
+  storageBucket: "auth-amanda.appspot.com",
+  messagingSenderId: "376069750475",
+  appId: "1:376069750475:web:bfb216cfd8928a23e8a54e",
+};
+
+export const app = initializeApp(firebaseConfig);
+export const storage = getStorage(app);
+export const firestore = getFirestore(app);
 
 const Props = () => {
+  const [produtos, setProdutos] = useState([]);
+
+  useEffect(() => {
+    const fetchProdutos = async () => {
+      const produtosCollection = collection(firestore, "Props");
+      const produtosSnapshot = await getDocs(produtosCollection);
+      const produtosData = produtosSnapshot.docs.map((doc) => doc.data());
+      setProdutos(produtosData);
+    };
+
+    fetchProdutos();
+  }, []);
   return (
-    <div className='main'>
-    <header className="main-header">
+    <div className="main">
+      <header className="main-header">
         <div className="logo">
-        <Link to="/"> <img src="src/assets/logo.png" alt="Logo" /> </Link>
+          <Link to="/">
+            {" "}
+            <img src="src/assets/logo.png" alt="Logo" />{" "}
+          </Link>
         </div>
         <div className="icons">
-            <Link to="/login">
-              <i
-                className="bx bx-user bt-header"
-                style={{ color: "#ffffff" }}
-              ></i>
-            </Link>
-            <Link to="/wishlist">
-              <i
-                className="bx bx-heart bt-header"
-                style={{ color: "#ffffff" }}
-              ></i>
-            </Link>
-            <Link to="/cart">
-              <i
-                className="bx bx-cart bt-header"
-                style={{ color: "#ffffff" }}
-              ></i>
-            </Link>
+          <Link to="/login">
+            <i
+              className="bx bx-user bt-header"
+              style={{ color: "#ffffff" }}
+            ></i>
+          </Link>
+          <Link to="/wishlist">
+            <i
+              className="bx bx-heart bt-header"
+              style={{ color: "#ffffff" }}
+            ></i>
+          </Link>
+          <Link to="/cart">
+            <i
+              className="bx bx-cart bt-header"
+              style={{ color: "#ffffff" }}
+            ></i>
+          </Link>
         </div>
       </header>
 
@@ -121,187 +153,24 @@ const Props = () => {
       </div>
 
       <div className="title-section">
-      <h1 className="general-title">ACESSÓRIOS</h1>
-      <hr className="hr-sections"></hr>
-      </div>
-      
-      <div className="container-clothes">
-        <div className="clothes">
-          <Link to="/product">
-            <img src="src/assets/model-1.png" alt="" />
-            <h6 className="text-card">PRODUTO 1</h6>
-          </Link>
-          <h8 className="text-card">R$ 59,90</h8>
-        </div>
-
-        <div className="clothes">
-          <Link to="/product">
-            <img src="src/assets/model-2.png" alt="" />
-            <h6 className="text-card">PRODUTO 2</h6>
-          </Link>
-          <h8 className="text-card">R$ 59,90</h8>
-        </div>
-
-        <div className="clothes">
-          <Link to="/product">
-            <img src="src/assets/model-3.png" alt="" />
-            <h6 className="text-card">PRODUTO 3</h6>
-          </Link>
-          <h8 className="text-card">R$ 59,90</h8>
-        </div>
-
-        <div className="clothes">
-          <Link to="/product">
-            <img src="src/assets/model-4.png" alt="" />
-            <h6 className="text-card">PRODUTO 4</h6>
-          </Link>
-          <h8 className="text-card">R$ 59,90</h8>
-        </div>
+        <h1 className="general-title">ACESSÓRIOS</h1>
+        <hr className="hr-sections"></hr>
       </div>
 
       <div className="container-clothes">
-      <div className="clothes">
-          <Link to="/product">
-            <img src="src/assets/model-1.png" alt="" />
-            <h6 className="text-card">PRODUTO 5</h6>
-          </Link>
-          <h8 className="text-card">R$ 59,90</h8>
-        </div>
-
-        <div className="clothes">
-          <Link to="/product">
-            <img src="src/assets/model-2.png" alt="" />
-            <h6 className="text-card">PRODUTO 6</h6>
-          </Link>
-          <h8 className="text-card">R$ 59,90</h8>
-        </div>
-
-        <div className="clothes">
-          <Link to="/product">
-            <img src="src/assets/model-3.png" alt="" />
-            <h6 className="text-card">PRODUTO 7</h6>
-          </Link>
-          <h8 className="text-card">R$ 59,90</h8>
-        </div>
-
-        <div className="clothes">
-          <Link to="/product">
-            <img src="src/assets/model-4.png" alt="" />
-            <h6 className="text-card">PRODUTO 8</h6>
-          </Link>
-          <h8 className="text-card">R$ 59,90</h8>
-        </div>
+        {produtos.map((produto, index) => (
+          <div className="clothes" key={index}>
+            <Link to="/product">
+              <img src={produto.url_image} alt={produto.nome_prop} />
+            </Link>
+            <Link to="/product">
+              <h6 className="text-card">{produto.nome_prop}</h6>
+            </Link>
+            <h6 className="text-card">R$ {produto.preço}</h6>
+          </div>
+        ))}
       </div>
 
-      <div className="container-clothes">
-        <div className="clothes">
-          <Link to="/product">
-            <img src="src/assets/model-1.png" alt="" />
-          </Link>
-          <Link to="/product">
-            <h6 className="text-card">PRDOUTO 9</h6>
-          </Link>
-          <h8 className="text-card">R$ 37,90</h8>
-        </div>
-
-        <div className="clothes">
-          <Link to="/product">
-            <img src="src/assets/model-2.png" alt="" />
-            <h6 className="text-card">PRODUTO 10</h6>
-          </Link>
-          <h8 className="text-card">R$ 59,90</h8>
-        </div>
-
-        <div className="clothes">
-          <Link to="/product">
-            <img src="src/assets/model-3.png" alt="" />
-            <h6 className="text-card">PRODUTO 11</h6>
-          </Link>
-          <h8 className="text-card">R$ 59,90</h8>
-        </div>
-
-        <div className="clothes">
-          <Link to="/product">
-            <img src="src/assets/model-4.png" alt="" />
-            <h6 className="text-card">PRODUTO 12</h6>
-          </Link>
-          <h8 className="text-card">R$ 59,90</h8>
-        </div>
-      </div>
-
-      <div className="container-clothes">
-        <div className="clothes">
-          <Link to="/product">
-            <img src="src/assets/model-1.png" alt="" />
-          </Link>
-          <Link to="/product">
-            <h6 className="text-card">PRODUTO 13</h6>
-          </Link>
-          <h8 className="text-card">R$ 37,90</h8>
-        </div>
-
-        <div className="clothes">
-          <Link to="/product">
-            <img src="src/assets/model-2.png" alt="" />
-            <h6 className="text-card">PRODUTO 14</h6>
-          </Link>
-          <h8 className="text-card">R$ 59,90</h8>
-        </div>
-
-        <div className="clothes">
-          <Link to="/product">
-            <img src="src/assets/model-3.png" alt="" />
-            <h6 className="text-card">PRODUTO 15</h6>
-          </Link>
-          <h8 className="text-card">R$ 59,90</h8>
-        </div>
-
-        <div className="clothes">
-          <Link to="/product">
-            <img src="src/assets/model-4.png" alt="" />
-            <h6 className="text-card">PRODUTO 16</h6>
-          </Link>
-          <h8 className="text-card">R$ 59,90</h8>
-        </div>
-      </div>
-
-      <div className="container-clothes">
-        <div className="clothes">
-          <Link to="/product">
-            <img src="src/assets/model-1.png" alt="" />
-          </Link>
-          <Link to="/product">
-            <h6 className="text-card">PRODUTO 17</h6>
-          </Link>
-          <h8 className="text-card">R$ 37,90</h8>
-        </div>
-
-        <div className="clothes">
-          <Link to="/product">
-            <img src="src/assets/model-2.png" alt="" />
-            <h6 className="text-card">PRODUTO 18</h6>
-          </Link>
-          <h8 className="text-card">R$ 59,90</h8>
-        </div>
-
-        <div className="clothes">
-          <Link to="/product">
-            <img src="src/assets/model-3.png" alt="" />
-            <h6 className="text-card">PRODUTO 19</h6>
-          </Link>
-          <h8 className="text-card">R$ 59,90</h8>
-        </div>
-
-        <div className="clothes">
-          <Link to="/product">
-            <img src="src/assets/model-4.png" alt="" />
-            <h6 className="text-card">PRODUTO 20</h6>
-          </Link>
-          <h8 className="text-card">R$ 59,90</h8>
-        </div>
-      </div>
-
-      
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
@@ -311,34 +180,34 @@ const Props = () => {
           <div className="footer-section-div">
             <h3>SOBRE NÓS</h3>
             <li>
-                <Link to="/company">A EMPRESA</Link>
+              <Link to="/company">A EMPRESA</Link>
             </li>
             <li>
-                <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
+              <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
             </li>
             <li>
-                <Link to="/partners">NOSSOS PARCEIROS</Link>
+              <Link to="/partners">NOSSOS PARCEIROS</Link>
             </li>
           </div>
 
           <div className="footer-section-div">
             <h3>SUPORTE</h3>
             <li>
-                <Link to="/services">ATENDIMENTO</Link>
+              <Link to="/services">ATENDIMENTO</Link>
             </li>
             <li>
-                <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
+              <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
             </li>
             <li>
-                <Link to="/sitemap">MAPA DO SITE</Link>
+              <Link to="/sitemap">MAPA DO SITE</Link>
             </li>
           </div>
 
           <div className="footer-section-div">
             <h3>CONTATOS</h3>
-              <i className="fa fa-whatsapp"></i>
-              <i className="fa fa-google"></i>
-              <i className="fa fa-instagram"></i>
+            <i className="fa fa-whatsapp"></i>
+            <i className="fa fa-google"></i>
+            <i className="fa fa-instagram"></i>
           </div>
         </section>
       </footer>
