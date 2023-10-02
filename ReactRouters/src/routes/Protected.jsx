@@ -52,6 +52,7 @@ const Protected = () => {
         </div>
       </header>
 
+    <div className='space'>
     <div className="search-container">
           <input
             type="text"
@@ -200,7 +201,7 @@ const Protected = () => {
             </div>
             <i className="bx bx-chevron-right" style={{ color: "#48A3A9" }}></i>
           </div>
-       
+       </div>
 
       <footer style={{position: "static" }}>
         <section className="footer-section">

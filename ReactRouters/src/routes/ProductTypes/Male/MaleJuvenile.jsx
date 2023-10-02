@@ -31,6 +31,7 @@ const MaleJuvenile = () => {
           </div>
         </header>
   
+       <div className='space'>
         <div className="search-container-geral">
           <input
             type="text"
@@ -300,7 +301,7 @@ const MaleJuvenile = () => {
             <h8 className="text-card">R$ 59,90</h8>
           </div>
         </div>
-  
+  </div>
         
         <footer>
           <section className="footer-section">

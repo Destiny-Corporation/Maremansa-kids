@@ -89,6 +89,10 @@ body {
   }
 }
 
+.space {
+  margin: 50px;
+}
+
 .search-container-geral {
   width: 98%;
   height: 40px;
@@ -295,7 +299,7 @@ hr {
 }
 
 .clothes-main img{
-    width: 250px;
+    width: 200px;
     height: auto;
 }
 

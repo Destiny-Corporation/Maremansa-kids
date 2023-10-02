@@ -159,7 +159,7 @@ const Sale = () => {
 
       <div className="container-clothes">
         {produtos.map((produto, index) => (
-          <div className="clothes" key={index}>
+          <div className="clothes" key={index} style={{ width: '20%' }}>
             <Link to="/product">
               <img src={produto.url_image} alt={produto.nome_prodpromo} />
             </Link>

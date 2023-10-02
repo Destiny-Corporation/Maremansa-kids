@@ -63,6 +63,7 @@ const Props = () => {
         </div>
       </header>
 
+    <div className="space">
       <div className="search-container-geral">
         <input
           type="text"
@@ -159,7 +160,7 @@ const Props = () => {
 
       <div className="container-clothes">
         {produtos.map((produto, index) => (
-          <div className="clothes" key={index}>
+          <div className="clothes" key={index} style={{ width: '20%' }}>
             <Link to="/product">
               <img src={produto.url_image} alt={produto.nome_prop} />
             </Link>
@@ -169,6 +170,7 @@ const Props = () => {
             <h6 className="text-card">R$ {produto.preço}</h6>
           </div>
         ))}
+      </div>
       </div>
 
       <footer>

@@ -31,6 +31,7 @@ const Home = () => {
         </div>
       </header>
 
+    <div className ='space'>
       <div className="search-container-geral">
         <input
           type="text"
@@ -156,7 +157,7 @@ const Home = () => {
       <hr size="1" />
 
       <div className="container-clothes-main">
-        <i className="bx bx-chevron-left" style={{ color: "#48A3A9" }}></i>
+        <i className="bx bx-chevron-left" style={{ color: "#48A3A9"}}></i>
         <div className="clothes-main">
           <Link to="/product">
             <img src="/assets/model-1.png" alt="" />
@@ -185,6 +186,7 @@ const Home = () => {
           <h6 className="text-card">POR R$ 47,90</h6>
         </div>
         <i className="bx bx-chevron-right" style={{ color: "#48A3A9" }}></i>
+      </div>
       </div>
 
       <footer>
