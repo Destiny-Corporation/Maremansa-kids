@@ -21,7 +21,7 @@ if (localStorage.getItem("user") !== null) {
                 </button>
         </div>
         <div className="logo">
-        <Link to="/"> <img src="src/assets/logo.png" alt="Logo" className="header-logo-center"/> </Link>
+        <Link to="/"> <img src="/assets/logo.png" alt="Logo" className="header-logo-center"/> </Link>
         </div>
         <div className="icons">
             <Link to="/requests">
@@ -52,14 +52,13 @@ if (localStorage.getItem("user") !== null) {
         </div>
       </div>
       {isLoggedIn ? (
-        // Conteúdo da Lista de Desejos quando o usuário está logado
         <div className="wishlist-content">
           <div className="empty-wishlist">
-            <img src="src/assets/empty-wishlist.png" alt="Lista de Desejos Vazia" />
+            <img src="/assets/empty-wishlist.png" alt="Lista de Desejos Vazia" />
             <div className="effect">
               <div className="button">
                 <img
-                  src="src/assets/shopping-button.png"
+                  src="/assets/shopping-button.png"
                   alt="Ir às Compras"
                 />
               </div>
@@ -67,15 +66,14 @@ if (localStorage.getItem("user") !== null) {
           </div>
         </div>
       ) : (
-        // Componente de login/mensagem quando o usuário não está logado
         <div className="login-message">
           <div className="wishlist-content">
           <div className="empty-wishlist">
-          <Link to="/login"><img src="src/assets/empty-wishlist-login.png" alt="Lista de Desejos Vazia" /></Link>
+          <Link to="/login"><img src="/assets/empty-wishlist-login.png" alt="Lista de Desejos Vazia" /></Link>
             <div className="effect">
               <div className="button">
                 <img
-                  src="src/assets/login.png"
+                  src="/assets/login.png"
                   alt="Ir às Compras"
                 />
               </div>
@@ -87,7 +85,7 @@ if (localStorage.getItem("user") !== null) {
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
-            <img src="src/assets/whale.png" />
+            <img src="/assets/whale.png" />
           </div>
 
           <div className="footer-section-div">

@@ -24,6 +24,12 @@ import Sitemap from "./routes/Support/Sitemap.jsx";
 import Product from "./routes/Product.jsx";
 import Protected from "./routes/Protected.jsx";
 import Requests from "./routes/HeaderPaths/Requests.jsx";
+import FemBaby from './routes/ProductTypes/Female/FemBaby.jsx';
+import FemChildren from './routes/ProductTypes/Female/FemChildren.jsx';
+import FemJuvenile from './routes/ProductTypes/Female/FemJuvenile.jsx';
+import MaleBaby from './routes/ProductTypes/Male/MaleBaby.jsx';
+import MaleChildren from './routes/ProductTypes/Male/MaleChildren.jsx';
+import MaleJuvenile from './routes/ProductTypes/Male/MaleJuvenile.jsx';
 import ErrorPage from "./routes/ErrorPage";
 
 
@@ -73,8 +79,32 @@ const router = createBrowserRouter([
     element: <Female />,
   },
   {
+    path: "/female/fem-baby",
+    element: <FemBaby />,
+  },
+  {
+    path: "/female/fem-children",
+    element: <FemChildren />,
+  },
+  {
+    path: "/female/fem-juvenile",
+    element: <FemJuvenile />,
+  },
+  {
     path: "/male",
     element: <Male />,
+  },
+  {
+    path: "/male/male-baby",
+    element: <MaleBaby />,
+  },
+  {
+    path: "/male/male-children",
+    element: <MaleChildren />,
+  },
+  {
+    path: "/male/male-juvenile",
+    element: <MaleJuvenile />,
   },
   {
     path: "/props",

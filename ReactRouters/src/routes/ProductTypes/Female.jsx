@@ -1,16 +1,19 @@
 import React from "react";
 import "../../styles/ProductTypes/Female.css";
 import { Link } from "react-router-dom";
+import FemBaby from './Female/FemBaby';
+import FemInfantil from './Female/FemChildren';
+import FemJuvenil from './Female/FemJuvenile';
 
 const Female = () => {
   return (
     <div className="main">
     <header className="main-header">
         <div className="logo">
-        <Link to="/"> <img src="src/assets/logo.png" alt="Logo" /> </Link>
+        <Link to="/"> <img src="/assets/logo.png" alt="Logo" /> </Link>
         </div>
         <div className="icons">
-            <Link to="/login">
+            <Link to="/requests">
               <i
                 className="bx bx-user bt-header"
                 style={{ color: "#ffffff" }}
@@ -46,27 +49,25 @@ const Female = () => {
       <h1 className="general-title">FEMININO</h1>
       <hr className="hr-sections"></hr>
       </div>
-
-      <hr size="1" />
       
         <div className="container-clothes-section">
             <div className="clothes-section">
-              <Link to="#"><img src="src/assets/female-baby.png" /></Link>
+              <Link to="/female/fem-baby"><img src="/assets/female-baby.png" /></Link>
             </div>
 
            <div className="clothes-section">
-            <Link to="#"><img src="src/assets/female-children.png" /></Link>
+            <Link to="/female/fem-children"><img src="/assets/female-children.png" /></Link>
           </div>
 
           <div className="clothes-section">
-            <Link to="#"><img src="src/assets/female-juvenile.png" /></Link>
+            <Link to="/female/fem-juvenile"><img src="/assets/female-juvenile.png" /></Link>
           </div>
         </div>
 
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
-            <img src="src/assets/whale.png" />
+            <img src="/assets/whale.png" />
           </div>
 
           <div className="footer-section-div">
