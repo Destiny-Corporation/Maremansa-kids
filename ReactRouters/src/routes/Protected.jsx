@@ -157,7 +157,7 @@ const Protected = () => {
               <Link to="/female">
                 <img src="/assets/female.png" alt="" />
               </Link>
-              <Link to="female">
+              <Link to="/female">
                 <h6>FEMININO</h6>
               </Link>
             </div>
@@ -166,7 +166,7 @@ const Protected = () => {
               <Link to="/male">
                 <img src="/assets/male.png" alt="" />
               </Link>
-              <Link to="male">
+              <Link to="/male">
                 <h6>MASCULINO</h6>
               </Link>
             </div>
