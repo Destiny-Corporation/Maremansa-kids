@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../../styles/ProductTypes/Props.css";
 import { Link } from "react-router-dom";
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 import { getFirestore, collection, doc, getDocs } from "firebase/firestore";
-import { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
 
 const firebaseConfig = {
@@ -24,6 +23,7 @@ const perPage = 12; // Número de produtos por página
 const Props = () => {
   const [produtos, setProdutos] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     const fetchProdutos = async () => {
@@ -59,6 +59,11 @@ const Props = () => {
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected);
   };
+
+  // Filtrar os produtos com base no termo de pesquisa
+  const filteredProdutos = produtos.filter((produto) =>
+    produto.nome_prop.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="main">
@@ -97,88 +102,15 @@ const Props = () => {
             type="text"
             className="search-bar"
             placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
           <button className="search-button" type="submit">
             <i className="bx bx-search"></i>
           </button>
-        </div>
-
-        <div className="carousel-container">
-          <div id="carouselExampleIndicators" className="carousel slide">
-            <div className="carousel-indicators">
-              <button
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide-to="0"
-                className="active btc"
-                aria-current="true"
-                aria-label="Slide 1"
-              ></button>
-              <button
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide-to="1"
-                aria-label="Slide 2"
-              ></button>
-              <button
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide-to="2"
-                aria-label="Slide 3"
-              ></button>
-            </div>
-
-            <div className="carousel-inner">
-              <div className="carousel-item active">
-                <img
-                  src="/assets/banner.png"
-                  className="d-block w-100"
-                  alt="..."
-                />
-              </div>
-
-              <div className="carousel-item">
-                <img
-                  src="/assets/banner-sale.png"
-                  className="d-block w-100"
-                  alt="..."
-                />
-              </div>
-
-              <div className="carousel-item">
-                <img
-                  src="/assets/banner-sale-2.png"
-                  className="d-block w-100"
-                  alt="..."
-                />
-              </div>
-            </div>
-
-            <button
-              className="carousel-control-prev"
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide="prev"
-            >
-              <span
-                className="carousel-control-prev-icon"
-                aria-hidden="true"
-              ></span>
-              <span className="visually-hidden">Previous</span>
-            </button>
-            <button
-              className="carousel-control-next"
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide="next"
-            >
-              <span
-                className="carousel-control-next-icon"
-                aria-hidden="true"
-              ></span>
-              <span className="visually-hidden">Next</span>
-            </button>
-          </div>
+          {searchTerm && (
+            <button onClick={() => setSearchTerm("")}>Limpar pesquisa</button>
+          )}
         </div>
 
         <div className="title-section">
@@ -187,7 +119,7 @@ const Props = () => {
         </div>
 
         <div className="container-clothes">
-          {currentPageProdutos.map((produto, index) => (
+          {filteredProdutos.map((produto, index) => (
             <div className="clothes" key={index} style={{ width: "20%" }}>
               <Link to="/product">
                 <img src={produto.url_image} alt={produto.nome_prop} />
@@ -220,7 +152,7 @@ const Props = () => {
       </div>
 
       <footer>
-        <section className="footer-section">
+      <section className="footer-section">
           <div className="footer-section-div">
             <img src="/assets/whale.png" />
           </div>
