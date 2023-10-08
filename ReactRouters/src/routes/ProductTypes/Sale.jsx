@@ -5,6 +5,7 @@ import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 import { getFirestore, collection, doc, getDocs } from "firebase/firestore";
 import { useState, useEffect } from "react";
+import ReactPaginate from "react-paginate";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDTKUI6nV-DZjIsUo1BMkjIUWOQbT9gU3Q",
@@ -18,9 +19,11 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const storage = getStorage(app);
 export const firestore = getFirestore(app);
+const perPage = 12; // Número de produtos por página
 
 const Sale = () => {
   const [produtos, setProdutos] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
     const fetchProdutos = async () => {
@@ -32,6 +35,30 @@ const Sale = () => {
 
     fetchProdutos();
   }, []);
+
+  const pageCount = Math.ceil(produtos.length / perPage);
+  const offset = currentPage * perPage;
+  const currentPageProdutos = produtos.slice(offset, offset + perPage);
+  const prevButtonClass =
+    currentPage === 0 ? "prevButton disabled" : "prevButton";
+  const nextButtonClass =
+    currentPage === pageCount - 1 ? "nextButton disabled" : "nextButton";
+  const customButtonStyle = {
+    padding: "10px 15px",
+    background: "purple", // Cor de fundo
+    color: "#fff", // Cor do texto
+    borderRadius: "5px", // Borda arredondada
+    margin: "0 5px", // Espaçamento entre os botões
+    cursor: "pointer",
+    border: "none", // Remove a borda
+    outline: "none", // Remove a borda de foco
+  };
+
+  // Função para lidar com a mudança de página
+  const handlePageChange = ({ selected }) => {
+    setCurrentPage(selected);
+  };
+
   return (
     <div className="main">
       <header className="main-header">
@@ -158,8 +185,8 @@ const Sale = () => {
       </div>
 
       <div className="container-clothes">
-        {produtos.map((produto, index) => (
-          <div className="clothes" key={index} style={{ width: '20%' }}>
+        {currentPageProdutos.map((produto, index) => (
+          <div className="clothes" key={index} style={{ width: "20%" }}>
             <Link to="/product">
               <img src={produto.url_image} alt={produto.nome_prodpromo} />
             </Link>
@@ -169,6 +196,24 @@ const Sale = () => {
             <h6 className="text-card">R$ {produto.preço}</h6>
           </div>
         ))}
+        <div className="pagination-container">
+          <ReactPaginate
+            previousLabel={<button style={customButtonStyle}>Anterior</button>}
+            nextLabel={<button style={customButtonStyle}>Próximo</button>}
+            breakLabel={"..."}
+            pageCount={pageCount}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            onPageChange={handlePageChange}
+            containerClassName={"pagination"}
+            subContainerClassName={"pages pagination"}
+            activeClassName={"active"}
+            previousClassName={prevButtonClass}
+            nextClassName={nextButtonClass}
+            pageClassName={"page-count"} // Usando pageClassName para estilizar o número da página
+            pageLinkClassName={"page-link"}
+          />
+        </div>
       </div>
 
       <footer>

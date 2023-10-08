@@ -4,3 +4,16 @@
   object-fit: cover;
   border-radius: 10px;
 }
+.pagination-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 70px; /* Ajuste o valor de margem conforme necessário */
+  margin-left: 40px;
+}
+.page-count {
+  display: inline-block; /* Exibe o elemento como um bloco em linha */
+  font-weight: bold; /* Define o peso da fonte como negrito */
+  color: #fff; /* Cor do texto */
+  padding: 5px 10px; /* Espaçamento interno */
+  border-radius: 50%;
+}
