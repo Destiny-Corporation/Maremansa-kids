@@ -36,13 +36,18 @@ const Sale = () => {
     fetchProdutos();
   }, []);
 
-  const pageCount = Math.ceil(produtos.length / itemsPerPage);
+  const filteredProdutos = produtos.filter((produto) =>
+    produto.nome_prodpromo.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const pageCount = Math.ceil(filteredProdutos.length / itemsPerPage);
   const offset = currentPage * itemsPerPage;
-  const currentPageProdutos = produtos.slice(offset, offset + itemsPerPage);
+  const currentPageProdutos = filteredProdutos.slice(offset, offset + itemsPerPage);
   const prevButtonClass =
     currentPage === 0 ? "prevButton disabled" : "prevButton";
   const nextButtonClass =
     currentPage === pageCount - 1 ? "nextButton disabled" : "nextButton";
+
   const customButtonStyle = {
     padding: "10px 15px",
     background: "purple",
@@ -54,14 +59,11 @@ const Sale = () => {
     outline: "none",
   };
 
+
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected);
   };
-
-  const filteredProdutos = produtos.filter((produto) =>
-    produto.nome_prodpromo.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
+ 
   return (
     <div className="main">
       <header className="main-header">
