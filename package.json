@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "phosphor-react": "^1.4.1"
+    "phosphor-react": "^1.4.1",
+    "react-paginate": "^8.2.0"
   }
 }
