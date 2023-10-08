@@ -15,32 +15,29 @@ const Home = () => {
           <img src="src/assets/logo.png" alt="Logo" />
         </div>
         <div className="icons">
-          <a href="#">
             <Link to="/login">
               <i
                 className="bx bx-user bt-header"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
-          </a>
-          <a href="#">
+      
             <Link to="/wishlist">
               <i
                 className="bx bx-heart bt-header"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
-          </a>
-          <a href="#">
+
             <Link to="/cart">
               <i
                 className="bx bx-cart bt-header"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
-          </a>
         </div>
       </header>
+
 
       <div className="search-container">
         <input
@@ -52,6 +49,7 @@ const Home = () => {
           <i className="bx bx-search"></i>
         </button>
       </div>
+
 
       <div className="carousel-container">
         <div id="carouselExampleIndicators" className="carousel slide">
