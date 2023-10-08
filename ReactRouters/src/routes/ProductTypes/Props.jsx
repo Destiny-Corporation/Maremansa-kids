@@ -18,7 +18,7 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const storage = getStorage(app);
 export const firestore = getFirestore(app);
-const perPage = 12; // Número de produtos por página
+const itemsPerPage = 12; // Número de produtos por página
 
 const Props = () => {
   const [produtos, setProdutos] = useState([]);
@@ -36,34 +36,32 @@ const Props = () => {
     fetchProdutos();
   }, []);
 
-  // Cálculos para a paginação
-  const pageCount = Math.ceil(produtos.length / perPage);
-  const offset = currentPage * perPage;
-  const currentPageProdutos = produtos.slice(offset, offset + perPage);
+  const filteredProdutos = produtos.filter((produto) =>
+    produto.nome_prop.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const pageCount = Math.ceil(filteredProdutos.length / itemsPerPage);
+  const offset = currentPage * itemsPerPage;
+  const currentPageProdutos = filteredProdutos.slice(offset, offset + itemsPerPage);
   const prevButtonClass =
     currentPage === 0 ? "prevButton disabled" : "prevButton";
   const nextButtonClass =
     currentPage === pageCount - 1 ? "nextButton disabled" : "nextButton";
+
   const customButtonStyle = {
     padding: "10px 15px",
-    background: "purple", // Cor de fundo
-    color: "#fff", // Cor do texto
-    borderRadius: "5px", // Borda arredondada
-    margin: "0 5px", // Espaçamento entre os botões
+    background: "purple",
+    color: "#fff",
+    borderRadius: "5px",
+    margin: "0 5px",
     cursor: "pointer",
-    border: "none", // Remove a borda
-    outline: "none", // Remove a borda de foco
+    border: "none",
+    outline: "none",
   };
 
-  // Função para lidar com a mudança de página
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected);
   };
-
-  // Filtrar os produtos com base no termo de pesquisa
-  const filteredProdutos = produtos.filter((produto) =>
-    produto.nome_prop.toLowerCase().includes(searchTerm.toLowerCase())
-  );
 
   return (
     <div className="main">
@@ -119,7 +117,7 @@ const Props = () => {
         </div>
 
         <div className="container-clothes">
-          {filteredProdutos.map((produto, index) => (
+          {currentPageProdutos.map((produto, index) => (
             <div className="clothes" key={index} style={{ width: "20%" }}>
               <Link to="/product">
                 <img src={produto.url_image} alt={produto.nome_prop} />
@@ -152,7 +150,7 @@ const Props = () => {
       </div>
 
       <footer>
-      <section className="footer-section">
+        <section className="footer-section">
           <div className="footer-section-div">
             <img src="/assets/whale.png" />
           </div>
