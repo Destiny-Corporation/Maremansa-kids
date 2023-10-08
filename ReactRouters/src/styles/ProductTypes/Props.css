@@ -22,11 +22,31 @@
   opacity: 1;
 }
 
+.filter {
+  position: absolute; 
+  right: 0; 
+  background-color: transparent; 
+  border: none !important; 
+}
+
+.button-image {
+  width: 25px;
+  height: auto;
+  margin-right: 90px;
+  border: none !important;
+  margin-top: 20px;
+}
+
+.filter :hover {
+  border: none !important;
+}
+
 .title-section {
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative; 
 }
 
 .general-title {

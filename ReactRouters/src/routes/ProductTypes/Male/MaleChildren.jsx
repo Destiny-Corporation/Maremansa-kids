@@ -123,6 +123,8 @@ const MaleChildren = () => {
   
         <div className="title-section">
         <h1 className="general-title">MASCULINO | INFANTIL</h1>
+        <button class="filter">
+            <img src="/assets/filter.png" alt="filtro" className="button-image"/></button>
         <hr className="hr-sections"></hr>
         </div>
         
