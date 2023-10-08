@@ -24,7 +24,7 @@ const Sale = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
   const [itemsPerPage, setItemsPerPage] = useState(10);
-
+ 
   useEffect(() => {
     const fetchProdutos = async () => {
       const produtosCollection = collection(firestore, "ProdPomo");
