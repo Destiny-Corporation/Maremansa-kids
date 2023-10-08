@@ -17,3 +17,26 @@
   padding: 5px 10px; /* Espaçamento interno */
   border-radius: 50%;
 }
+
+.items-per-page {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: black;
+}
+
+.items-per-page label {
+  margin-right: 10px;
+  color: black;
+}
+
+.items-per-page select {
+  color: black;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  font-size: 16px;
+  outline: none;
+}
