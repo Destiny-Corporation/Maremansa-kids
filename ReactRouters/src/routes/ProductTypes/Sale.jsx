@@ -18,12 +18,12 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const storage = getStorage(app);
 export const firestore = getFirestore(app);
-const itemsPerPage = 12; // Número de produtos por página
 
 const Sale = () => {
   const [produtos, setProdutos] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
+  const [itemsPerPage, setItemsPerPage] = useState(10);
 
   useEffect(() => {
     const fetchProdutos = async () => {
@@ -42,7 +42,10 @@ const Sale = () => {
 
   const pageCount = Math.ceil(filteredProdutos.length / itemsPerPage);
   const offset = currentPage * itemsPerPage;
-  const currentPageProdutos = filteredProdutos.slice(offset, offset + itemsPerPage);
+  const currentPageProdutos = filteredProdutos.slice(
+    offset,
+    offset + itemsPerPage
+  );
   const prevButtonClass =
     currentPage === 0 ? "prevButton disabled" : "prevButton";
   const nextButtonClass =
@@ -59,11 +62,10 @@ const Sale = () => {
     outline: "none",
   };
 
-
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected);
   };
- 
+
   return (
     <div className="main">
       <header className="main-header">
@@ -94,7 +96,6 @@ const Sale = () => {
           </Link>
         </div>
       </header>
-
       <div className="search-container-geral">
         <input
           type="text"
@@ -110,20 +111,28 @@ const Sale = () => {
           <button onClick={() => setSearchTerm("")}>Limpar pesquisa</button>
         )}
       </div>
-
       <div className="carousel-container">
         <div id="carouselExampleIndicators" className="carousel slide">
           {/* ... (código do carrossel) */}
         </div>
       </div>
-
       <div className="title-section">
         <h1 className="general-title">PROMOÇÕES</h1>
         <button class="filter">
         <img src="/assets/filter.png" alt="filtro" className="button-image"/></button>
         <hr className="hr-sections"></hr>
       </div>
-
+      <div className="items-per-page">
+        <label>Itens por página:</label>
+        <select
+          value={itemsPerPage}
+          onChange={(e) => setItemsPerPage(Number(e.target.value))}
+        >
+          <option value={5}>5</option>
+          <option value={10}>10</option>
+          <option value={15}>15</option>
+        </select>
+      </div>
       <div className="container-clothes">
         {currentPageProdutos.map((produto, index) => (
           <div className="clothes" key={index} style={{ width: "20%" }}>
@@ -155,7 +164,6 @@ const Sale = () => {
           pageLinkClassName={"page-link"}
         />
       </div>
-
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">

@@ -18,12 +18,12 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const storage = getStorage(app);
 export const firestore = getFirestore(app);
-const itemsPerPage = 12; // Número de produtos por página
 
 const Props = () => {
   const [produtos, setProdutos] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
+  const [itemsPerPage, setItemsPerPage] = useState(10);
 
   useEffect(() => {
     const fetchProdutos = async () => {
@@ -42,7 +42,10 @@ const Props = () => {
 
   const pageCount = Math.ceil(filteredProdutos.length / itemsPerPage);
   const offset = currentPage * itemsPerPage;
-  const currentPageProdutos = filteredProdutos.slice(offset, offset + itemsPerPage);
+  const currentPageProdutos = filteredProdutos.slice(
+    offset,
+    offset + itemsPerPage
+  );
   const prevButtonClass =
     currentPage === 0 ? "prevButton disabled" : "prevButton";
   const nextButtonClass =
@@ -116,6 +119,18 @@ const Props = () => {
           <button class="filter">
             <img src="/assets/filter.png" alt="filtro" className="button-image"/></button>
           <hr className="hr-sections"></hr>
+        </div>
+
+        <div className="items-per-page">
+          <label>Itens por página:</label>
+          <select
+            value={itemsPerPage}
+            onChange={(e) => setItemsPerPage(Number(e.target.value))}
+          >
+            <option value={5}>5</option>
+            <option value={10}>10</option>
+            <option value={15}>15</option>
+          </select>
         </div>
 
         <div className="container-clothes">
