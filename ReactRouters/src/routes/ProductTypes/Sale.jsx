@@ -52,8 +52,8 @@ const handleFilterChange = (e) => {
      return produto.nome_prodpromo.toLowerCase().includes(searchTerm.toLowerCase());
     }
     else {
-      return produto.nome_prodpromo.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      produto.region === filterParam;
+      return produto.region.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      produto.nome_prodpromo === filterParam;
     }
  });
 
@@ -178,7 +178,8 @@ const handleFilterChange = (e) => {
     <option key={index} value={nome}>
       {nome}
     </option>
-  ))}      
+  ))}  
+      
     </select>
  
      <div className="price-filter">
