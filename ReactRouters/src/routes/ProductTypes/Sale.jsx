@@ -24,6 +24,10 @@ const Sale = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
   const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [isFilterActive, setIsFilterActive] = useState(false);
+  const [maxPrice, setMaxPrice] = useState(null);
+  const nomesProdutos = ["Conjunto", "Maiô", "Óculos", "Sunga", "Vestidinho", "Colete"];
+
  
   useEffect(() => {
     const fetchProdutos = async () => {
@@ -36,9 +40,37 @@ const Sale = () => {
     fetchProdutos();
   }, []);
 
-  const filteredProdutos = produtos.filter((produto) =>
-    produto.nome_prodpromo.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const [filterParam, setFilterParam] = useState("All");
+
+const handleFilterChange = (e) => {
+  setFilterParam(e.target.value);
+};
+
+
+  const filteredProdutos = produtos.filter((produto) => {
+    if (filterParam === "All"){
+     return produto.nome_prodpromo.toLowerCase().includes(searchTerm.toLowerCase());
+    }
+    else {
+      return produto.nome_prodpromo.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      produto.region === filterParam;
+    }
+ });
+
+ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
+  if (isFilterActive && maxPrice !== null) {
+    // Verifica se o preço está no formato correto (por exemplo, "R$ 50,00")
+    if (produto.preço && typeof produto.preço === "string") {
+      const precoNumerico = parseFloat(
+        produto.preço.replace("R$ ", "").replace(",", ".")
+      );
+      return precoNumerico <= maxPrice;
+    }
+    // Se o preço não estiver no formato esperado, não filtra por preço
+    return true;
+  }
+  return true;
+});
 
   const pageCount = Math.ceil(filteredProdutos.length / itemsPerPage);
   const offset = currentPage * itemsPerPage;
@@ -64,6 +96,10 @@ const Sale = () => {
 
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected);
+  };
+  const handleFilterButtonClick = () => {
+    setIsFilterActive(!isFilterActive);
+    setMaxPrice("");
   };
 
   return (
@@ -118,10 +154,49 @@ const Sale = () => {
       </div>
       <div className="title-section">
         <h1 className="general-title">PROMOÇÕES</h1>
-        <button class="filter">
-        <img src="/assets/filter.png" alt="filtro" className="button-image"/></button>
+        <button class="filter" onClick={handleFilterButtonClick}>
+            <img
+              src="/assets/filter.png"
+              alt="filtro"
+              className="button-image"
+            />
+          </button>
         <hr className="hr-sections"></hr>
       </div>
+
+      {isFilterActive && (
+      <div className="filter-container">
+      <label>Filtrar por: </label>
+      <select
+      value={filterParam}
+      onChange={handleFilterChange}
+      className="custom-select"
+      aria-label="Filter the products"
+    >
+      <option value="All">Produtos</option>
+  {nomesProdutos.map((nome, index) => (
+    <option key={index} value={nome}>
+      {nome}
+    </option>
+  ))}      
+    </select>
+ 
+     <div className="price-filter">
+     <label>Preço até: </label>
+      <select
+       value={maxPrice}
+       onChange={(e) => setMaxPrice(parseFloat(e.target.value))}
+      >
+      <option value="">Selecione o preço</option>
+      <option value="50">Até 50.00</option>
+      <option value="100">Até 100.00</option>
+      <option value="200">Até 200.00</option>
+      {/* Adicione mais opções conforme necessário */}
+    </select>
+      </div>
+    
+  </div>
+)}
 
       <div className="items-per-page">
         <label>Itens por página:</label>

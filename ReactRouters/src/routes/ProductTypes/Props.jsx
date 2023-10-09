@@ -37,6 +37,7 @@ const Props = () => {
 
     fetchProdutos();
   }, []);
+  
 
   const filteredProdutos = produtos.filter((produto) =>
     produto.nome_prop.toLowerCase().includes(searchTerm.toLowerCase())
@@ -149,7 +150,7 @@ const Props = () => {
 
         {isFilterActive && (
           <div className="price-filter">
-            <label>Preço até:</label>
+            <label>Preço até: </label>
             <select
               value={maxPrice}
               onChange={(e) => setMaxPrice(parseFloat(e.target.value))}
@@ -162,6 +163,8 @@ const Props = () => {
             </select>
           </div>
         )}
+        
+        
 
         <div className="items-per-page">
           <label>Itens por página:</label>
