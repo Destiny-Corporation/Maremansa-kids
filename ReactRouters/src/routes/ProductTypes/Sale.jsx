@@ -108,7 +108,7 @@ const Sale = () => {
           <i className="bx bx-search"></i>
         </button>
         {searchTerm && (
-          <button onClick={() => setSearchTerm("")}>Limpar pesquisa</button>
+          <button className="button-search-bar" onClick={() => setSearchTerm("")}>Limpar</button>
         )}
       </div>
       <div className="carousel-container">
@@ -122,6 +122,7 @@ const Sale = () => {
         <img src="/assets/filter.png" alt="filtro" className="button-image"/></button>
         <hr className="hr-sections"></hr>
       </div>
+
       <div className="items-per-page">
         <label>Itens por página:</label>
         <select
@@ -133,6 +134,7 @@ const Sale = () => {
           <option value={15}>15</option>
         </select>
       </div>
+
       <div className="container-clothes">
         {currentPageProdutos.map((produto, index) => (
           <div className="clothes" key={index} style={{ width: "20%" }}>
@@ -146,24 +148,25 @@ const Sale = () => {
           </div>
         ))}
       </div>
+
       <div className="pagination-container">
-        <ReactPaginate
-          previousLabel={<button style={customButtonStyle}>Anterior</button>}
-          nextLabel={<button style={customButtonStyle}>Próximo</button>}
-          breakLabel={"..."}
-          pageCount={pageCount}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={5}
-          onPageChange={handlePageChange}
-          containerClassName={"pagination"}
-          subContainerClassName={"pages pagination"}
-          activeClassName={"active"}
-          previousClassName={prevButtonClass}
-          nextClassName={nextButtonClass}
-          pageClassName={"page-count"} // Usando pageClassName para estilizar o número da página
-          pageLinkClassName={"page-link"}
-        />
-      </div>
+      <ReactPaginate
+        previousLabel={<button className="custom-button">ANTERIOR</button>}
+        nextLabel={<button className="custom-button">PRÓXIMO</button>}
+        breakLabel={"..."}
+        pageCount={pageCount}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={5}
+        onPageChange={handlePageChange}
+        containerClassName={"pagination"}
+        subContainerClassName={"pages pagination"}
+        activeClassName={"active"}
+        previousClassName={prevButtonClass}
+        nextClassName={nextButtonClass}
+        pageClassName={"page-count"}
+        pageLinkClassName={"page-link"}
+      /> </div>
+
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">

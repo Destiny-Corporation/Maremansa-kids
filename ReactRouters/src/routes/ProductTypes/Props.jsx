@@ -188,24 +188,24 @@ const Props = () => {
             </div>
           ))}
         </div>
+
         <div className="pagination-container">
-          <ReactPaginate
-            previousLabel={<button style={customButtonStyle}>Anterior</button>}
-            nextLabel={<button style={customButtonStyle}>Próximo</button>}
-            breakLabel={"..."}
-            pageCount={pageCount}
-            marginPagesDisplayed={2}
-            pageRangeDisplayed={5}
-            onPageChange={handlePageChange}
-            containerClassName={"pagination"}
-            subContainerClassName={"pages pagination"}
-            activeClassName={"active"}
-            previousClassName={prevButtonClass}
-            nextClassName={nextButtonClass}
-            pageClassName={"page-count"} // Usando pageClassName para estilizar o número da página
-            pageLinkClassName={"page-link"}
-          />
-        </div>
+      <ReactPaginate
+        previousLabel={<button className="custom-button">Anterior</button>}
+        nextLabel={<button className="custom-button">Próximo</button>}
+        breakLabel={"..."}
+        pageCount={pageCount}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={5}
+        onPageChange={handlePageChange}
+        containerClassName={"pagination"}
+        subContainerClassName={"pages pagination"}
+        activeClassName={"active"}
+        previousClassName={prevButtonClass}
+        nextClassName={nextButtonClass}
+        pageClassName={"page-count"}
+        pageLinkClassName={"page-link"}
+      /> </div>
       </div>
 
       <footer>
