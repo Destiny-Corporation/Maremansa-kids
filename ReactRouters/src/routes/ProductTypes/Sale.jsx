@@ -47,17 +47,16 @@ const handleFilterChange = (e) => {
 };
 
 
-  const filteredProdutos = produtos.filter((produto) => {
-    if (filterParam === "All"){
-     return produto.nome_prodpromo.toLowerCase().includes(searchTerm.toLowerCase());
-    }
-    else {
-      return produto.region.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      produto.nome_prodpromo === filterParam;
-    }
- });
+const filteredProdutos = produtos.filter((produto) => {
+  // Verifica se o produto corresponde à categoria selecionada ou se a categoria é "All".
+  if (filterParam === "All" || produto.nome_prodpromo.toLowerCase().includes(filterParam.toLowerCase())) {
+    // Verifica se o produto corresponde ao termo de pesquisa.
+    return produto.nome_prodpromo.toLowerCase().includes(searchTerm.toLowerCase());
+  }
+  return false; // Produto não corresponde à categoria selecionada.
+});
 
- const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
+const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
   if (isFilterActive && maxPrice !== null) {
     // Verifica se o preço está no formato correto (por exemplo, "R$ 50,00")
     if (produto.preço && typeof produto.preço === "string") {
@@ -66,8 +65,6 @@ const handleFilterChange = (e) => {
       );
       return precoNumerico <= maxPrice;
     }
-    // Se o preço não estiver no formato esperado, não filtra por preço
-    return true;
   }
   return true;
 });
