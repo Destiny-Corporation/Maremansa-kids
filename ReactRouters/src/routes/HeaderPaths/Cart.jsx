@@ -3,17 +3,24 @@ import "../../styles/HeaderPaths/Cart.css";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
+  let isLoggedIn = false
+
+if (localStorage.getItem("user") !== null) {
+    localStorage.setItem("loggedIn", "true");
+    isLoggedIn = true
+};
+
   return (
     <div className="main">
     <header className="main-header">
-        <div className="search-container">
-          <input type="text" className="search-bar" placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"/>
-            <button className="search-button" type="submit">
+        <div className="search-container-header">
+          <input type="text" className="search-bar-header" placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"/>
+            <button className="search-button-header" type="submit">
               <i className="bx bx-search"></i>
             </button>
         </div>
         <div className="logo">
-        <Link to="/"> <img src="src/assets/logo.png" alt="Logo" /> </Link>
+        <Link to="/"> <img src="/assets/logo.png" alt="Logo" className="header-logo-center"/> </Link>
         </div>
         <div className="icons">
             <Link to="/requests">
@@ -43,21 +50,34 @@ const Cart = () => {
           <h6>| Carrinho (0)</h6>
         </div>
       </div>
-
+      {isLoggedIn ? (
       <div className="empty-cart">
-        <img src="src/assets/empty-cart.png" alt="Carrinho Vazio" />
+        <img src="/assets/empty-cart.png" alt="Carrinho Vazio" />
         <div className="effect">
         <div className="button">
-          <img src="src/assets/shopping-button.png" alt="Botão de Compras" />
+          <img src="/assets/shopping-button.png" alt="Botão de Compras" />
         </div>
         </div>
       </div>
+      ) : (
+        // usuário não está logado:
+        <div className="login-message">
+          <div className="empty-cart">
+        <img src="/assets/empty-cart-login.png" alt="Carrinho Vazio" />
+        <div className="effect">
+        <div className="button">
+          <Link to="/login"> <img src="/assets/login.png" alt="Botão de Compras" /></Link>
+        </div>
+        </div>
+      </div>
+        </div>
+      )}
 
 
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
-            <img src="src/assets/whale.png" />
+            <img src="/assets/whale.png" />
           </div>
 
           <div className="footer-section-div">
@@ -94,6 +114,9 @@ const Cart = () => {
           </div>
         </section>
       </footer>
+      <div className="last-text">
+        <p className="text-sub-footer">maremansa</p>
+      </div>
     </div>
   );
 };

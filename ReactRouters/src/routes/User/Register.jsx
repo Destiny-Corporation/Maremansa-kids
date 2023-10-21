@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "../../styles/User/Register.css";
 import { Route } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link} from 'react-router-dom'; 
 import { initializeApp } from 'firebase/app';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { getDatabase, ref, set } from 'firebase/database';
@@ -18,51 +18,72 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app); // Variável `auth` declarada aqui
+const auth = getAuth(app); 
 const database = getDatabase(app);
 const analytics = getAnalytics(app);
 
 const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [registrationError, setRegistrationError] = useState('');
+  const [confirmPasswordError, setConfirmPasswordError] = useState('');
+ 
   const handleRegister = async () => {
     try {
-      // Crie uma conta de usuário no Firebase Authentication
+      if (password !== confirmPassword) {
+        setConfirmPasswordError('*As senhas não coincidem!');
+        setPasswordError('');
+        setEmailError('');
+        return;
+      }
+
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
 
-      // Após o registro, você pode salvar informações adicionais no Firebase Realtime Database
       const user = userCredential.user;
       await set(ref(database, `users/${user.uid}`), {
         email: user.email,
-        // Outros dados do usuário, se necessário
       });
 
-      alert('Registro bem-sucedido!');
+      window.location.href = '/login';
     } catch (error) {
       console.error(error);
-      alert('Erro durante o registro');
+      if (error.code === 'auth/invalid-email') {
+        setEmailError('*E-mail inválido!');
+        setConfirmPasswordError('');
+        setPasswordError('');
+      } else if (error.code === 'auth/weak-password') {
+        setPasswordError('*Senha fraca, tente uma senha mais forte!');
+        setEmailError('');
+      } else if (error.code === 'auth/email-already-in-use') {
+        setEmailError('*Esse e-mail já está em uso!');
+        setConfirmPasswordError('');
+        setPasswordError('');
+      } else {
+        setRegistrationError('*Houve algum erro durante o registro!');
+        setEmailError('');
+        setConfirmPasswordError('');
+        setPasswordError('');
+      }
     }
   };
-  
 
   return (
     <>
       <header className="main-header">
         <div className="logo">
-        <Link to="/"> <img src="src/assets/logo.png" alt="Logo" /> </Link>
+        <Link to="/"> <img src="/assets/logo.png" alt="Logo" /> </Link>
         </div>
         <div className="icons">
           <a href="#">
             <Link to="/login">
-              <i
-                className="bx bx-user bt-header"
-                style={{ color: "#ffffff" }}
-              ></i>
+              <i className="bx bx-user bt-header" style={{ color: "#ffffff" }}></i>
             </Link>
           </a>
           <a href="#">
@@ -87,39 +108,49 @@ const Register = () => {
       <div className="wrapper">
         <form action="">
           <img
-            src="src/assets/logo2.png"
+            src="/assets/logo2.png"
             alt="Logo de Login"
             className="login-image"
           />
           <h1>Cadastre-se</h1>
           <div className="input-box">
-            <input
-              type="text"
-              placeholder="EMAIL"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <i className="bx bx-user"></i>
-          </div>
+  <input
+    type="text"
+    placeholder="EMAIL"
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
+  />
+  <i className="bx bx-user"></i>
+</div>
+{emailError && <div className="error">{emailError}</div>} { }
 
-          <div className="input-box">
-            <input
-              type="password"
-              placeholder="SENHA"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <i className="bx bx-lock-alt"></i>
-          </div>
+<div className="input-box">
+  <input
+    type="password"
+    placeholder="SENHA"
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+  />
+  <i className="bx bx-lock-alt"></i>
+</div>
+{passwordError && <div className="error">{passwordError}</div>} { }
 
-          <div className="input-box">
-            <input type="password" placeholder="CONFIRME SUA SENHA" required />
-            <i className="bx bx-lock-alt"></i>
-          </div>
+<div className="input-box">
+  <input
+    type="password"
+    placeholder="CONFIRMAR SENHA"
+    value={confirmPassword}
+    onChange={(e) => setConfirmPassword(e.target.value)}
+  />
+  <i className="bx bx-lock-alt"></i>
+</div>
+{confirmPasswordError && <div className="error">{confirmPasswordError}</div>} { }
 
-          <button id="btnn" type="button" onClick={handleRegister} className="btn">
-            CRIAR CONTA
-          </button>
+<button id="btnn" type="button" onClick={handleRegister} className="btn">
+  CRIAR CONTA
+</button>
+
+{registrationError && <div className="error">{registrationError}</div>} { }
 
           <div className="register-link">
             <p>
@@ -130,40 +161,44 @@ const Register = () => {
       </div>
 
       <footer>
-        <div className="footer-content">
-          <div className="footer-left">
-            <img
-              src="src/assets/board.png"
-              alt="Sobre Nós"
-              className="icon-image"
-            />
-            <a className="footer-link" href="#">
-              SOBRE NÓS
-            </a>
+        <section className="footer-section">
+          <div className="footer-section-div">
+            <img src="/assets/whale.png" />
           </div>
-          <div className="footer-right">
-            <div className="contacts">
-              <p className="p-contacts">CONTATOS</p>
-              <div className="social-icons">
-                <a href="#"></a>
-                <i
-                  className="bx bxl-gmail bt-social"
-                  style={{ color: "#ffffff" }}
-                ></i>
-                <a href="#"></a>
-                <i
-                  className="bx bxl-instagram bt-social"
-                  style={{ color: "#ffffff" }}
-                ></i>
-                <a href="#"></a>
-                <i
-                  className="bx bxl-pinterest-alt bt-social"
-                  style={{ color: "#ffffff" }}
-                ></i>
-              </div>
-            </div>
+
+          <div className="footer-section-div">
+            <h3>SOBRE NÓS</h3>
+            <li>
+                <Link to="/company">A EMPRESA</Link>
+            </li>
+            <li>
+                <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
+            </li>
+            <li>
+                <Link to="/partners">NOSSOS PARCEIROS</Link>
+            </li>
           </div>
-        </div>
+
+          <div className="footer-section-div">
+            <h3>SUPORTE</h3>
+            <li>
+                <Link to="/services">ATENDIMENTO</Link>
+            </li>
+            <li>
+                <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
+            </li>
+            <li>
+                <Link to="/sitemap">MAPA DO SITE</Link>
+            </li>
+          </div>
+
+          <div className="footer-section-div">
+            <h3>CONTATOS</h3>
+              <i className="fa fa-whatsapp"></i>
+              <i className="fa fa-google"></i>
+              <i className="fa fa-instagram"></i>
+          </div>
+        </section>
       </footer>
 
       <div className="sub-footer">

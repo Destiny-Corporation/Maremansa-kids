@@ -1,50 +1,49 @@
 import React from "react";
 import "../styles/Home.css";
-import Login from "./User/Login";
-import Wishlist from "./HeaderPaths/Wishlist";
-import Cart from "./HeaderPaths/Cart";
-import PhysicalStore from "./About/PhysicalStore";
-import Company from "./About/Company";
 import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <div className="main">
+    <div className='main'>
       <header className="main-header">
         <div className="logo">
-          <img src="src/assets/logo.png" alt="Logo" />
+          <img src="/assets/logo.png" alt="Logo" />
         </div>
         <div className="icons">
+          <a href="#">
             <Link to="/login">
               <i
                 className="bx bx-user bt-header"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
-      
+          </a>
+          <a href="#">
             <Link to="/wishlist">
               <i
                 className="bx bx-heart bt-header"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
-
+          </a>
+          <a href="#">
             <Link to="/cart">
               <i
                 className="bx bx-cart bt-header"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
+          </a>
         </div>
       </header>
 
 
-      <div className="search-container">
+    <div className ='space'>
+      <div className="search-container-geral">
         <input
           type="text"
           className="search-bar"
-          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
-        />
+          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?" />
         <button className="search-button" type="submit">
           <i className="bx bx-search"></i>
         </button>
@@ -79,26 +78,23 @@ const Home = () => {
           <div className="carousel-inner">
             <div className="carousel-item active">
               <img
-                src="src/assets/banner.png"
+                src="/assets/banner-sale.png"
                 className="d-block w-100"
-                alt="..."
-              />
+                alt="..." />
             </div>
 
             <div className="carousel-item">
               <img
-                src="src/assets/banner.png"
+                src="/assets/banner-sale-2.png"
                 className="d-block w-100"
-                alt="..."
-              />
+                alt="..." />
             </div>
 
             <div className="carousel-item">
               <img
-                src="src/assets/banner.png"
+                src="/assets/banner.png"
                 className="d-block w-100"
-                alt="..."
-              />
+                alt="..." />
             </div>
           </div>
 
@@ -106,8 +102,7 @@ const Home = () => {
             className="carousel-control-prev"
             type="button"
             data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="prev"
-          >
+            data-bs-slide="prev">
             <span
               className="carousel-control-prev-icon"
               aria-hidden="true"
@@ -132,7 +127,7 @@ const Home = () => {
       <div className="container-menu-buttons">
         <div className="button-menu">
           <Link to="/sale">
-            <img src="src/assets/sale.png" alt="" />
+            <img src="/assets/sale.png" alt="" />
           </Link>
           <Link to="/sale">
             <h6>PROMOÇÕES</h6>
@@ -141,7 +136,7 @@ const Home = () => {
 
         <div className="button-menu">
           <Link to="/props">
-            <img src="src/assets/accessories.png" alt="" />
+            <img src="/assets/accessories.png" alt="" />
           </Link>
           <Link to="/props">
             <h6>ACESSÓRIOS</h6>
@@ -150,7 +145,7 @@ const Home = () => {
 
         <div className="button-menu">
           <Link to="female">
-            <img src="src/assets/female.png" alt="" />
+            <img src="/assets/female.png" alt="" />
           </Link>
           <Link to="female">
             <h6>FEMININO</h6>
@@ -159,7 +154,7 @@ const Home = () => {
 
         <div className="button-menu">
           <Link to="male">
-            <img src="src/assets/male.png" alt="" />
+            <img src="/assets/male.png" alt="" />
           </Link>
           <Link to="male">
             <h6>MASCULINO</h6>
@@ -169,98 +164,79 @@ const Home = () => {
 
       <hr size="1" />
 
-      <div className="container-clothes">
-        <i className="bx bx-chevron-left" style={{ color: "#ffffff" }}></i>
-        <div className="clothes">
+      <div className="container-clothes-main">
+        <i className="bx bx-chevron-left" style={{ color: "#48A3A9"}}></i>
+        <div className="clothes-main">
           <Link to="/product">
-            <img src="src/assets/model-1.png" alt="" />
+            <img src="/assets/model-1.png" alt="" />
           </Link>
           <Link to="/product">
             <h6 className="text-card">CONJUNTO MARINHEIRO</h6>
           </Link>
-          <h8 className="text-card">POR R$ 37,90</h8>
+          <h6 className="text-card">POR R$ 37,90</h6>
         </div>
 
-        <div className="clothes">
-          <img src="src/assets/model-2.png" alt="" />
+        <div className="clothes-main">
+          <img src="/assets/model-2.png" alt="" />
           <h6 className="text-card">MAIÔ CANDY</h6>
-          <h8 className="text-card">POR R$ 49,90</h8>
+          <h6 className="text-card">POR R$ 49,90</h6>
         </div>
 
-        <div className="clothes">
-          <img src="src/assets/model-3.png" alt="" />
+        <div className="clothes-main">
+          <img src="/assets/model-3.png" alt="" />
           <h6 className="text-card">CONJUNTO SEREIA</h6>
-          <h8 className="text-card">POR R$ 47,90</h8>
+          <h6 className="text-card">POR R$ 47,90</h6>
         </div>
 
-        <div className="clothes">
-          <img src="src/assets/model-4.png" alt="" />
+        <div className="clothes-main">
+          <img src="/assets/model-4.png" alt="" />
           <h6 className="text-card">CONJUNTO PIRATA</h6>
-          <h8 className="text-card">POR R$ 47,90</h8>
+          <h6 className="text-card">POR R$ 47,90</h6>
         </div>
-        <i className="bx bx-chevron-right" style={{ color: "#ffffff" }}></i>
+        <i className="bx bx-chevron-right" style={{ color: "#48A3A9" }}></i>
+      </div>
       </div>
 
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
-            <img src="src/assets/whale.png" />
+            <img src="/assets/whale.png" />
           </div>
 
           <div className="footer-section-div">
             <h3>SOBRE NÓS</h3>
             <li>
-              <a>
-                <Link to="/company">A EMPRESA</Link>
-              </a>
+              <Link to="/company">A EMPRESA</Link>
             </li>
             <li>
-              <a>
-                <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
-              </a>
+              <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
             </li>
             <li>
-              <a>
-                <Link to="/partners">NOSSOS PARCEIROS</Link>
-              </a>
+              <Link to="/partners">NOSSOS PARCEIROS</Link>
             </li>
           </div>
 
           <div className="footer-section-div">
             <h3>SUPORTE</h3>
             <li>
-              <a>
-                <Link to="/services">ATENDIMENTO</Link>
-              </a>
+              <Link to="/services">ATENDIMENTO</Link>
             </li>
             <li>
-              <a>
-                <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
-              </a>
-            </li>
-            <li>
-              <a>
-                <Link to="/sitemap">MAPA DO SITE</Link>
-              </a>
-            </li>
-          </div>
+              <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
+          </li>
+          <li>
+            <Link to="/sitemap">MAPA DO SITE</Link>
+          </li>
+        </div>
 
-          <div className="footer-section-div">
-            <h3>CONTATOS</h3>
-            <a href="#">
-              <i className="fa fa-whatsapp"></i>
-            </a>
-            <a href="#">
-              <i className="fa fa-google"></i>
-            </a>
-            <a href="#">
-              <i className="fa fa-instagram"></i>
-            </a>
-          </div>
-        </section>
-      </footer>
-
-      <div className="last-text">
+        <div className="footer-section-div">
+          <h3>CONTATOS</h3>
+          <i className="fa fa-whatsapp"></i>
+          <i className="fa fa-google"></i>
+          <i className="fa fa-instagram"></i>
+        </div>
+      </section>
+    </footer><div className="last-text">
         <p className="text-sub-footer">maremansa</p>
       </div>
     </div>

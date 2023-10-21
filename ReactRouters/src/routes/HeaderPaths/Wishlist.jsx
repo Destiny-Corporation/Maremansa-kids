@@ -3,17 +3,25 @@ import "../../styles/HeaderPaths/Wishlist.css";
 import { Link } from "react-router-dom";
 
 const Wishlist = () => {
+
+let isLoggedIn = false
+
+if (localStorage.getItem("user") !== null) {
+    localStorage.setItem("loggedIn", "true");
+    isLoggedIn = true
+};
+
   return (
     <div className="main">
     <header className="main-header">
-        <div className="search-container">
-            <input type="text" className="search-bar" placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"/>
-                <button className="search-button" type="submit">
+        <div className="search-container-header">
+            <input type="text" className="search-bar-header" placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"/>
+                <button className="search-button-header" type="submit">
                   <i className="bx bx-search"></i>
                 </button>
         </div>
         <div className="logo">
-        <Link to="/"> <img src="src/assets/logo.png" alt="Logo" /> </Link>
+        <Link to="/"> <img src="/assets/logo.png" alt="Logo" className="header-logo-center"/> </Link>
         </div>
         <div className="icons">
             <Link to="/requests">
@@ -43,20 +51,41 @@ const Wishlist = () => {
           <h6>| Lista de Desejos (0)</h6>
         </div>
       </div>
-
-      <div className="empty-wishlist">
-        <img src="src/assets/empty-wishlist.png" />
-        <div className="effect">
-         <div className="button">
-            <img src="src/assets/shopping-button.png" alt="Ir às Compras" />
-         </div>
+      {isLoggedIn ? (
+        <div className="wishlist-content">
+          <div className="empty-wishlist">
+            <img src="/assets/empty-wishlist.png" alt="Lista de Desejos Vazia" />
+            <div className="effect">
+              <div className="button">
+                <img
+                  src="/assets/shopping-button.png"
+                  alt="Ir às Compras"
+                />
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-
+      ) : (
+        <div className="login-message">
+          <div className="wishlist-content">
+          <div className="empty-wishlist">
+          <Link to="/login"><img src="/assets/empty-wishlist-login.png" alt="Lista de Desejos Vazia" /></Link>
+            <div className="effect">
+              <div className="button">
+                <img
+                  src="/assets/login.png"
+                  alt="Ir às Compras"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      )}
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
-            <img src="src/assets/whale.png" />
+            <img src="/assets/whale.png" />
           </div>
 
           <div className="footer-section-div">
@@ -93,6 +122,9 @@ const Wishlist = () => {
           </div>
         </section>
       </footer>
+      <div className="last-text">
+        <p className="text-sub-footer">maremansa</p>
+      </div>
     </div>
   );
 };
