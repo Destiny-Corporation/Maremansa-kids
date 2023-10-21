@@ -37,7 +37,6 @@ const Props = () => {
 
     fetchProdutos();
   }, []);
-  
 
   const filteredProdutos = produtos.filter((produto) =>
     produto.nome_prop.toLowerCase().includes(searchTerm.toLowerCase())
@@ -117,6 +116,28 @@ const Props = () => {
             ></i>
           </Link>
         </div>
+        <div className="cart">
+          <h2 className="cart-title">Your Cart</h2>
+          <div className="cart-content">
+            <div className="cart-box">
+              <img src="/assets/model-1.png" alt="" className="cart-img" />
+              <div className="detail-box">
+                <div className="card-product-title">Conjunto Mocinha</div>
+                <div className="cart-price">$50</div>
+                <input type="number" className="cart-quantity" />
+              </div>
+              <i class="bx bxs-trash-alt cart-remove"></i>
+            </div>
+          </div>
+          <div className="total">
+            <div className="total-title">Total</div>
+            <div className="total-price">$0</div>
+          </div>
+          <button type="button" className="btn-buy">
+            Buy Now
+          </button>
+          <i class="bx bx-x" id="close-cart"></i>
+        </div>
       </header>
 
       <div className="space">
@@ -163,8 +184,6 @@ const Props = () => {
             </select>
           </div>
         )}
-        
-        
 
         <div className="items-per-page">
           <label>Itens por página:</label>
@@ -187,28 +206,32 @@ const Props = () => {
               <Link to="/product">
                 <h6 className="text-card">{produto.nome_prop}</h6>
               </Link>
-              <h6 className="text-card">R$ {produto.preço}</h6>
+              <div className="des">
+                <h6 className="price">R$ {produto.preço}</h6>
+                <i class="bx bx-shopping-bag"></i>
+              </div>
             </div>
           ))}
         </div>
 
         <div className="pagination-container">
-      <ReactPaginate
-        previousLabel={<button className="custom-button">Anterior</button>}
-        nextLabel={<button className="custom-button">Próximo</button>}
-        breakLabel={"..."}
-        pageCount={pageCount}
-        marginPagesDisplayed={2}
-        pageRangeDisplayed={5}
-        onPageChange={handlePageChange}
-        containerClassName={"pagination"}
-        subContainerClassName={"pages pagination"}
-        activeClassName={"active"}
-        previousClassName={prevButtonClass}
-        nextClassName={nextButtonClass}
-        pageClassName={"page-count"}
-        pageLinkClassName={"page-link"}
-      /> </div>
+          <ReactPaginate
+            previousLabel={<button className="custom-button">Anterior</button>}
+            nextLabel={<button className="custom-button">Próximo</button>}
+            breakLabel={"..."}
+            pageCount={pageCount}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            onPageChange={handlePageChange}
+            containerClassName={"pagination"}
+            subContainerClassName={"pages pagination"}
+            activeClassName={"active"}
+            previousClassName={prevButtonClass}
+            nextClassName={nextButtonClass}
+            pageClassName={"page-count"}
+            pageLinkClassName={"page-link"}
+          />{" "}
+        </div>
       </div>
 
       <footer>
