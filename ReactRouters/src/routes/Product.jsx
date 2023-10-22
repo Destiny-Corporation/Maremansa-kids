@@ -122,7 +122,7 @@ function Product() {
               </div>
               
       <button className="buttons-cart"><span>Comprar agora</span></button>
-      <button className="buttons-cart" onClick={addToCart}><i className='bx bx-cart bt-header'></i><span>Adicionar ao carrinho</span></button>      
+      <button className="buttons-cart"><i className='bx bx-cart bt-header'></i><span>Adicionar ao carrinho</span></button>      
 
 
       <div className="cep-text">
@@ -187,7 +187,6 @@ function Product() {
       <div className="last-text">
         <p className="text-sub-footer">maremansa</p>
       </div>
-
       </footer>
     </div> 
   );
