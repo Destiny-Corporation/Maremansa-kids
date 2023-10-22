@@ -44,15 +44,15 @@ const Cart = () => {
           <div className="imagens">
 
             <div className="image">
-              <img src="img/image-2.png" />
+              <img src="/assets/model-1.png" />
             </div>
 
             <div className="image">
-              <img src="img/image-3.png" />
+              <img src="/assets/model-1.png" />
             </div>
 
             <div className="image">
-              <img src="img/image-4.png" />
+              <img src="assets/model-1.png" />
             </div>
 
             </div>
@@ -60,7 +60,7 @@ const Cart = () => {
         <div className="left-side">
           <div className="items">
             <div className="select-image">
-              <img src="img/principal.png" />
+              <img src="/assets/model-1.png"/>
             </div>
 
             </div>
@@ -79,10 +79,10 @@ const Cart = () => {
 
             <p>Selecione a cor do produto:</p>
             <div className="color-buttons">
-                <button className="color-button" style= {{ background-color: "red"; padding: "20px"; cursor: "pointer"; border-radius: "10px" }} onclick="selectColor('vermelho')"></button>
-                <button className="color-button" style= {{ background-color: "blue"; padding: "20px"; cursor: "pointer"; border-radius: "10px" }} onclick="selectColor('azul')"></button>
-                <button className="color-button" style= {{ background-color: "green"; padding: "20px"; cursor: "pointer"; border-radius: "10px" }} onclick="selectColor('verde')"></button>
-                <button className="color-button" style= {{ background-color: "yellow"; padding: "20px"; cursor: "pointer"; border-radius: "10px" }} onclick="selectColor('amarelo')"></button>
+                <button className="color-button" style= {{ backgroundColor: "red", padding: "20px", cursor: "pointer", borderRadius: "10px" }} onclick ={() => selectColor('vermelho')}></button>
+                <button className="color-button" style= {{ backgroundColor: "blue", padding: "20px", cursor: "pointer", borderRadius: "10px" }} onclick={() => selectColor('azul')}></button>
+                <button className="color-button" style= {{ backgroundColor: "green", padding: "20px", cursor: "pointer", borderRadius: "10px" }} onclick={() => selectColor('verde')}></button>
+                <button className="color-button" style= {{ backgroundColor: "yellow", padding: "20px", cursor: "pointer", borderRadius: "10px" }} onClick={() => selectColor('amarelo')}></button>
 
             <div id="selected-color">Cor selecionada: Nenhuma</div>
             <p>Tamanhos:</p>
@@ -116,52 +116,12 @@ const Cart = () => {
               <div id="resultado"></div>
             </div>
           </div>
-    </section>
-
-      <footer>
-        <section className="footer-section">
-          <div className="footer-section-div">
-            <img src="/assets/whale.png" />
-          </div>
-
-          <div className="footer-section-div">
-            <h3>SOBRE NÓS</h3>
-            <li>
-                <Link to="/company">A EMPRESA</Link>
-            </li>
-            <li>
-                <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
-            </li>
-            <li>
-                <Link to="/partners">NOSSOS PARCEIROS</Link>
-            </li>
-          </div>
-
-          <div className="footer-section-div">
-            <h3>SUPORTE</h3>
-            <li>
-                <Link to="/services">ATENDIMENTO</Link>
-            </li>
-            <li>
-                <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
-            </li>
-            <li>
-                <Link to="/sitemap">MAPA DO SITE</Link>
-            </li>
-          </div>
-
-          <div className="footer-section-div">
-            <h3>CONTATOS</h3>
-              <i className="fa fa-whatsapp"></i>
-              <i className="fa fa-google"></i>
-              <i className="fa fa-instagram"></i>
-          </div>
-        </section>
-      </footer>
-      <div className="last-text">
-        <p className="text-sub-footer">maremansa</p>
+        </div>
       </div>
-    </div>
+      </div>
+    </section>
+  
+    </div> 
   );
 };
 
