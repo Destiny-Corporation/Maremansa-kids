@@ -97,13 +97,13 @@
   color: #ffffff;
 }
 
-.main-products{
-  gap: 1rem; 
-  justify-content: space-around;
-  padding: 18px;
+.main-products {
+  gap: 0.2rem; 
+  justify-content: flex-start;
+  padding: 10px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, auto));
-  align-items: flex-start; 
+  align-items: flex-start;
 }
 
 .container{
@@ -122,7 +122,8 @@
   max-width: 400px;
 }
 
-.image img{
+.imagens img{
+  margin-bottom: 10px;
   width: 100%;
 }
 
@@ -162,64 +163,106 @@
 }
 
 .price{
-  font-size: 14px;
+  font-family:  "Stylish", sans-serif;
+  font-size: 20px;
   font-weight: 700;
+  margin-right: 10px;
 }
 
 .off{
-  font-size: 12px;
-  color: #ccc;
+  font-family:  "Stylish", sans-serif;
+  text-decoration: line-through;
+  font-size: 16px;
+  color: #3dafb37a;
+}
+
+.text-prod {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.title-prod {
+  font-size: 26px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .color-buttons {
   display: flex;
-  justify-content: space-around;
   font-size: 10px;
 }
 
 .color-button {
-  border: 1px solid #48a3a9;
+  margin-right: 10px;
+  border: 2px solid #48a3a9;
   padding: 15px 15px;
   cursor: pointer;
   transition: background-color 0.3s;
-  border-radius: 10px;
 }
 
 #selected-color {
-    margin-top: 5px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 12px;
+}
+
+.hr-prod {
+  width: 100%;
+  height: 2px;
+  background-color: #50b2b9;
+  border: none;
+  margin: 0 auto;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  opacity: 1;
 }
 
 .options{
+  margin-top: 10px;
   display: flex;
 }
 
 .amount{
+  font-family: "Stylish", sans-serif;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   gap: 2px;
   border: 1px solid #48a3a9;
   width: fit-content;
+  height: 30px;
   padding: 1px 1px;
-  border-radius: 10px;
 }
 
 .amount span{
-  font-weight: 700;
-  font-size: 12px;
+  font-family: "Stylish", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
 }
 
 .size-options {
   display: flex;
-  justify-content: space-around;
 }
 
 .size-option {
   border: 1px solid #48a3a9;
-  padding: 10px 10px;
+  padding: 10px;
   cursor: pointer;
   transition: background-color 0.3s;
-  border-radius: 10px;
+  border-radius: 5px;
+  height: 30px;
+  width: 28px;
+  font-size: 14px;
+  font-family: "Stylish", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  margin-right: 10px;
 }
+
 
 .selected {
    border: 1px solid #000;
@@ -229,50 +272,88 @@
   cursor: pointer;
   display: flex;
   align-items: center;
-  border: 1px solid #fff;
+  border: 1px solid rgb(245, 252, 252);
   color: #48a3a9;
-  background-color: #fff;
+  background-color: rgb(245, 252, 252);
   width: fit-content;
+  height: 20px;
 }
 
-.buttons-cart{
+.buttons-cart {
   display: inline-block;
   text-decoration: none;
-  color: #fff;
-  background-color: #48a3a9 ;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: rgb(245, 252, 252);
+  background-color: #48a3a9;
+  border-radius: 8px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center; 
+  width: 300px;
+  gap: 5px;
+  font-size: 10px;
   padding: 10px 20px;
-  border-radius: 10px;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.buttons-cart:hover {
+  background-color: #247479;
+  transform: scale(1.05);
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.3);
+  border: none;
+}
+
+.buttons-cart i {
+  font-size: 20px; 
+  margin-right: 5px; 
+}
+
+.buttons-cart span {
+  flex: 1; 
+  text-align: center; 
+}
+
+.cep-text {
+  margin-top: 15px;
+}
+
+.cep-text p {
+  color:#48a3a9;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.cep {
   display: flex;
   align-items: center;
-  width: fit-content;
-  gap: 5px;
-  font-size: 12px;
-  font-weight: 700;
 }
 
-.cep input{
-  color:#48a3a9;
-  border: 1px solid #48a3a9;
-  padding: 10px 10px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  border-radius: 10px;
-}
-
-.cep button{
-  color:#48a3a9;
-  border: 1px solid #48a3a9;
-  padding: 10px 20px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  border-radius: 10px;
-}
-
-.cep bx bx-truck bt-header{
-  font-size: 12px;
+.cep input {
   color: #48a3a9;
+  border: 2px solid #48a3a9;
+  background-color: rgb(245, 252, 252);
+  padding: 10px;
+  border-radius: 10px;
+  height: 40px;
+  margin-right: 10px;
 }
 
+.cep button {
+  height: 40px;
+  background-color: none;
+  font-size: 14px;
+  font-family: "Stylish", sans-serif;
+  color: #48a3a9;
+  border: 2px solid #48a3a9;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 10px;
+}
 
 footer {
     position: static;

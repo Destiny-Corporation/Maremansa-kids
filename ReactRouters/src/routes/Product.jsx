@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/Product.css";
 import { Link } from "react-router-dom";
 
-const Cart = () => {
+function Product() {
+  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedSize, setSelectedSize] = useState("");
+  const [selectedQuantity, setSelectedQuantity] = useState(1);
+
+  const handleAddToCart = () => {
+    const data = {
+      color: selectedColor,
+      size: selectedSize,
+      quantity: selectedQuantity,
+    };
+  }
+
   return (
     <div className="main">
     <header className="main-header">
@@ -75,20 +87,14 @@ const Cart = () => {
   <div className="container">
     <div className="right-side">
       <div className="content">
-
-        <div className="mare">
-          <p>MareMansa Kids</p> 
-        </div>
         
-    <h4>Conjunto Pirata</h4>
-        <hr size = "1" /> 
-        <br></br><p>Conjunto Pirata é um produto 100% elastano, produzido e distribuido por Maremansa Kids</p>
-              <div className="prices">
-                <span className="price">R$ 199,90</span>
-                <span className="off">R$ 149,90</span>
-              </div>
+    <h4 className="title-prod">Conjunto Pirata</h4>
+        <hr className= "hr-prod" size = "1" /> 
+             
+                <span className="off">R$ 199,90</span>
+                <span className="price">R$ 149,90</span>
 
-          <br></br><p>Selecione a cor do produto:</p>
+          <br></br><p className="text-prod">Selecione a cor do produto:</p>
               <div className="color-buttons">
                 <button className="color-button" style= {{ backgroundColor: "red", padding: "18px", cursor: "pointer", borderRadius: "10px" }} onclick ={() => selectColor('vermelho')}></button>
                 <button className="color-button" style= {{ backgroundColor: "blue", padding: "18px", cursor: "pointer", borderRadius: "10px" }} onclick={() => selectColor('azul')}></button>
@@ -96,8 +102,8 @@ const Cart = () => {
                 <button className="color-button" style= {{ backgroundColor: "yellow", padding: "18px", cursor: "pointer", borderRadius: "10px" }} onClick={() => selectColor('amarelo')}></button>
           </div>
 
-          <div id="selected-color">Cor selecionada: Nenhuma</div>
-            <p>Tamanhos:</p>
+          <div id="selected-color">Cor selecionada:</div>
+            <p className="text-prod">Tamanhos:</p>
               <div class="size-options">
                 <div className="size-option" onclick="getSize('6', this)">06</div>
                 <div className="size-option" onclick="getSize('8', this)">08</div>
@@ -105,27 +111,31 @@ const Cart = () => {
                 <div className="size-option" onclick="getSize('12', this)">12</div>
                 <div className="size-option" onclick="getSize('14', this)">14</div>
                 <div className="size-option" onclick="getSize('16', this)">16</div>
-              </div>       
-              
-              <div className="options">     
-                <div className="amount">
-                  <button onclick="subtrair()">-</button>
-                    <span id="valor">0</span>
-                  <button onclick="adicionar()">+</button>
-                </div>
               </div> 
-              
-              <button className="buttons-cart">Comprar agora</button>
-              <button className="buttons-cart"><i className='bx bx-cart bt-header'></i>Adicionar ao carrinho</button>              
- 
-              <div class="cep">
-                <p>Consulte o CEP</p>
-                  <label for="cep"></label>
-                    <input type="text" id="cep"></input>
-                      <button onclick="buscarCEP()">OK</button>
 
-              <div id="resultado"></div>
+              <div className="options">
+                <div className="amount">
+                  <button onClick={() => handleQuantityChange(selectedQuantity - 1)}>-</button>
+                  <span id="valor">{selectedQuantity}</span>
+                  <button onClick={() => handleQuantityChange(selectedQuantity + 1)}>+</button>
+                </div>
               </div>
+              
+      <button className="buttons-cart"><span>Comprar agora</span></button>
+      <button className="buttons-cart" onClick={addToCart}><i className='bx bx-cart bt-header'></i><span>Adicionar ao carrinho</span></button>      
+
+
+      <div className="cep-text">
+  <i className='bx bxs-truck' style={{ color: '#48a3a9', marginRight: '5px' }}></i>
+  <p style={{ display: 'inline', verticalAlign: 'middle' }}>Consulte o frete</p>
+</div>
+
+      <div className="cep">
+        <input type="text" id="cep" />
+        <button onclick="buscarCEP()">OK</button>
+      </div>
+      <div id="resultado"></div>
+
 
       </div>
     </div>
@@ -133,8 +143,6 @@ const Cart = () => {
   </div>
 
  </section>
-
-
 
     <footer>
         <section className="footer-section">
@@ -185,4 +193,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default Product;
