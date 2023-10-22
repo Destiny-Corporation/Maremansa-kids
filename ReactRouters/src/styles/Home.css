@@ -396,6 +396,7 @@ hr {
   text-align: center;
   z-index: 999;
   height: 30px;
+  padding-top: 10px;
 }
 
 .text-sub-footer {

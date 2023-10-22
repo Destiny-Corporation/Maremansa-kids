@@ -36,91 +36,151 @@ const Cart = () => {
           </a>
         </div>
       </header>
+
+      <div className="search-container-geral">
+        <input type="text" className="search-bar" placeholder="O QUE VOCÊ ESTÁ BUSCANDO?" />
+        <button className="search-button" type="submit">
+          <i className="bx bx-search"></i>
+        </button>
+      </div>
       
 
-    <section className="products-main">
-      <div className="container">
-        <div className= "products-left">
-          <div className="imagens">
+ <section className="main-products">
 
-            <div className="image">
-              <img src="/assets/model-1.png" />
-            </div>
+  <div className="container">
+    <div className="products-left">
+      <div className="imagens">
+      <img src="/assets/image-2.png" />
 
-            <div className="image">
-              <img src="/assets/model-1.png" />
-            </div>
+      <img src="/assets/image-3.png" />
 
-            <div className="image">
-              <img src="assets/model-1.png" />
-            </div>
+      <img src="/assets/image-4.png" />
+      
+      </div>
+    </div>    
+  </div>
 
-            </div>
-        </div>
-        <div className="left-side">
-          <div className="items">
-            <div className="select-image">
-              <img src="/assets/model-1.png"/>
-            </div>
+  <div className="container">
+    <div className="left-side">
+      <div className="items">
 
-            </div>
+        <div className="select-image">
+        <img src="/assets/principal.png" />
         </div>
 
-        <div className="right-side">
-          <div className="content">
-            <h6>MareMansa Kids</h6>
-              <h1>Conjunto Pirata</h1>
-            <hr size = "1" /> 
-               <p>Conjunto Pirata é um produto 100% elastano, produzido e distribuido por Maremansa Kids</p>
-                 <div className="prices">
-                   <span className="price">R$ 199,90</span>
-                   <span className="off">R$ 149,90</span>
-                 </div>
+      </div>
+    </div>
+  </div>
 
-            <p>Selecione a cor do produto:</p>
-            <div className="color-buttons">
-                <button className="color-button" style= {{ backgroundColor: "red", padding: "20px", cursor: "pointer", borderRadius: "10px" }} onclick ={() => selectColor('vermelho')}></button>
-                <button className="color-button" style= {{ backgroundColor: "blue", padding: "20px", cursor: "pointer", borderRadius: "10px" }} onclick={() => selectColor('azul')}></button>
-                <button className="color-button" style= {{ backgroundColor: "green", padding: "20px", cursor: "pointer", borderRadius: "10px" }} onclick={() => selectColor('verde')}></button>
-                <button className="color-button" style= {{ backgroundColor: "yellow", padding: "20px", cursor: "pointer", borderRadius: "10px" }} onClick={() => selectColor('amarelo')}></button>
+  <div className="container">
+    <div className="right-side">
+      <div className="content">
 
-            <div id="selected-color">Cor selecionada: Nenhuma</div>
+        <div className="mare">
+          <p>MareMansa Kids</p> 
+        </div>
+        
+    <h4>Conjunto Pirata</h4>
+        <hr size = "1" /> 
+        <br></br><p>Conjunto Pirata é um produto 100% elastano, produzido e distribuido por Maremansa Kids</p>
+              <div className="prices">
+                <span className="price">R$ 199,90</span>
+                <span className="off">R$ 149,90</span>
+              </div>
+
+          <br></br><p>Selecione a cor do produto:</p>
+              <div className="color-buttons">
+                <button className="color-button" style= {{ backgroundColor: "red", padding: "18px", cursor: "pointer", borderRadius: "10px" }} onclick ={() => selectColor('vermelho')}></button>
+                <button className="color-button" style= {{ backgroundColor: "blue", padding: "18px", cursor: "pointer", borderRadius: "10px" }} onclick={() => selectColor('azul')}></button>
+                <button className="color-button" style= {{ backgroundColor: "green", padding: "18px", cursor: "pointer", borderRadius: "10px" }} onclick={() => selectColor('verde')}></button>
+                <button className="color-button" style= {{ backgroundColor: "yellow", padding: "18px", cursor: "pointer", borderRadius: "10px" }} onClick={() => selectColor('amarelo')}></button>
+          </div>
+
+          <div id="selected-color">Cor selecionada: Nenhuma</div>
             <p>Tamanhos:</p>
               <div class="size-options">
-                <div className="size-option" onclick="getSize('6', this)">6</div>
-                <div className="size-option" onclick="getSize('8', this)">8</div>
+                <div className="size-option" onclick="getSize('6', this)">06</div>
+                <div className="size-option" onclick="getSize('8', this)">08</div>
                 <div className="size-option" onclick="getSize('10', this)">10</div>
                 <div className="size-option" onclick="getSize('12', this)">12</div>
                 <div className="size-option" onclick="getSize('14', this)">14</div>
                 <div className="size-option" onclick="getSize('16', this)">16</div>
-              </div>
-
-             
-            <div className="options">     
-              <div className="amount">
-                <button onclick="subtrair()">-</button>
-                <span id="valor">0</span>
-                <button onclick="adicionar()">+</button>
-              </div>
-              </div>
-            
-              <a href="" className="button">Comprar agora</a>
-              <a href="" className="button"><i class='bx bx-cart bt-header'></i>Adicionar ao carrinho</a>
-
-            <div class="cep">
-              <p>Consulte o CEP</p>
-              <label for="cep"></label>
-              <input type="text" id="cep"></input>
-              <button onclick="buscarCEP()">OK</button>
+              </div>       
+              
+              <div className="options">     
+                <div className="amount">
+                  <button onclick="subtrair()">-</button>
+                    <span id="valor">0</span>
+                  <button onclick="adicionar()">+</button>
+                </div>
+              </div> 
+              
+              <button className="buttons-cart">Comprar agora</button>
+              <button className="buttons-cart"><i className='bx bx-cart bt-header'></i>Adicionar ao carrinho</button>              
+ 
+              <div class="cep">
+                <p>Consulte o CEP</p>
+                  <label for="cep"></label>
+                    <input type="text" id="cep"></input>
+                      <button onclick="buscarCEP()">OK</button>
 
               <div id="resultado"></div>
-            </div>
+              </div>
+
+      </div>
+    </div>
+ 
+  </div>
+
+ </section>
+
+
+
+    <footer>
+        <section className="footer-section">
+          <div className="footer-section-div">
+            <img src="/assets/whale.png" />
           </div>
-        </div>
+
+          <div className="footer-section-div">
+            <h3>SOBRE NÓS</h3>
+            <li>
+                <Link to="/company">A EMPRESA</Link>
+            </li>
+            <li>
+                <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
+            </li>
+            <li>
+                <Link to="/partners">NOSSOS PARCEIROS</Link>
+            </li>
+          </div>
+
+          <div className="footer-section-div">
+            <h3>SUPORTE</h3>
+            <li>
+                <Link to="/services">ATENDIMENTO</Link>
+            </li>
+            <li>
+                <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
+            </li>
+            <li>
+                <Link to="/sitemap">MAPA DO SITE</Link>
+            </li>
+          </div>
+
+          <div className="footer-section-div">
+            <h3>CONTATOS</h3>
+              <Link to="#"><i className="fa fa-whatsapp"></i></Link>
+              <Link to="#"><i className="fa fa-google"></i></Link>
+              <Link to="#"><i className="fa fa-instagram"></i></Link>
+          </div>
+          </section>
+
+      <div className="last-text">
+        <p className="text-sub-footer">maremansa</p>
       </div>
-      </div>
-    </section>
-  
+
+      </footer>
     </div> 
   );
 };

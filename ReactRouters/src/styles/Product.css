@@ -35,7 +35,7 @@
   max-width: 100%;
 }
 
-.search-container {
+.search-container-geral {
   width: 98%;
   height: 40px;
   margin: 12px auto;
@@ -97,20 +97,33 @@
   color: #ffffff;
 }
 
+.main-products{
+  gap: 1rem; 
+  justify-content: space-around;
+  padding: 18px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+  align-items: flex-start; 
+}
+
 .container{
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: calc(100vh - 85px);
-  gap: 100px;
-  padding: 10px;
+ text-align: left;
 }
 
 .products-left{
   display: flex;
   flex-direction: column;
-  gap: 100px;
-  padding-left: 10px;
+}
+
+.imagens{
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  max-width: 400px;
+}
+
+.image img{
+  width: 100%;
 }
 
 .left-side{
@@ -123,19 +136,8 @@
 }
 
 .select-image img{
-  width: 200%;
+  width: 100%;
   border-radius: 10px;
-}
-
-.imagens{
-  display: flex;
-  justify-content: space-evenly;
-  flex-direction: column;
-  max-width: 400px;
-}
-
-.image img{
-  width: 200%;
 }
 
 .right-side{
@@ -143,23 +145,24 @@
   color: #48a3a9;
   display: flex;
   flex-direction: column;
-  padding-left: 250px;
 }
 
 .content{
   max-width: 400px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+}
+
+.mare{
+  font-size: 10px;
 }
 
 .prices{
   display: flex;
-  flex-direction: column; 
 }
 
 .price{
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
 }
 
@@ -171,34 +174,32 @@
 .color-buttons {
   display: flex;
   justify-content: space-around;
-  margin-top: 10px;
-  font-size: 14px;
+  font-size: 10px;
 }
 
 .color-button {
   border: 1px solid #48a3a9;
-  padding: 10px 20px;
+  padding: 15px 15px;
   cursor: pointer;
   transition: background-color 0.3s;
   border-radius: 10px;
 }
 
 #selected-color {
-    margin-top: 12px;
+    margin-top: 5px;
 }
 
 .options{
   display: flex;
-  gap: 20px
 }
 
 .amount{
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 2px;
   border: 1px solid #48a3a9;
   width: fit-content;
-  padding: 10px 20px;
+  padding: 1px 1px;
   border-radius: 10px;
 }
 
@@ -210,12 +211,11 @@
 .size-options {
   display: flex;
   justify-content: space-around;
-  margin-top: 10px;
 }
 
 .size-option {
   border: 1px solid #48a3a9;
-  padding: 10px 20px;
+  padding: 10px 10px;
   cursor: pointer;
   transition: background-color 0.3s;
   border-radius: 10px;
@@ -235,12 +235,12 @@
   width: fit-content;
 }
 
-.button{
+.buttons-cart{
   display: inline-block;
   text-decoration: none;
   color: #fff;
   background-color: #48a3a9 ;
-  padding: 10px 35px;
+  padding: 10px 20px;
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -253,7 +253,7 @@
 .cep input{
   color:#48a3a9;
   border: 1px solid #48a3a9;
-  padding: 10px 20px;
+  padding: 10px 10px;
   cursor: pointer;
   transition: background-color 0.3s;
   border-radius: 10px;
