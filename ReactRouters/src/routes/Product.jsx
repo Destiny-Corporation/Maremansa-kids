@@ -13,6 +13,52 @@ function Product() {
       size: selectedSize,
       quantity: selectedQuantity,
     };
+
+    function getSize(size, element) {
+      const sizeOptions = document.querySelectorAll('.size-option');
+      sizeOptions.forEach(option => {
+        option.classList.remove('selected');
+      });
+      element.classList.add('selected');
+    }
+    
+    var valorAtual = 1;
+    var valorElement = document.getElementById('valor');
+    
+    function adicionar() {
+      valorAtual++;
+      valorElement.textContent = valorAtual;
+    }
+    
+    function subtrair() {
+      if (valorAtual > 1) {
+        valorAtual--;
+        valorElement.textContent = valorAtual;
+      }
+    }
+    
+    function selectColor(color) {
+      document.getElementById('selected-color').innerHTML = 'Cor selecionada: ' + color;
+    }
+    
+    function buscarCEP() {
+      var cep = document.getElementById('cep').value;
+      $.ajax({
+        url: 'https://viacep.com.br/ws/' + cep + '/json/',
+        type: 'GET',
+        success: function(response) {
+          if (!response.erro) {
+            document.getElementById('resultado').innerHTML = '<strong>Rua:</strong> ' + response.logradouro + '<br>' +
+              '<strong>Bairro:</strong> ' + response.bairro + '<br>' +
+              '<strong>Cidade:</strong> ' + response.localidade + '<br>' +
+              '<strong>Estado:</strong> ' + response.uf;
+          } else {
+            document.getElementById('resultado').innerHTML = 'CEP não encontrado';
+          }
+        }
+      });
+    }
+
   }
 
   return (
