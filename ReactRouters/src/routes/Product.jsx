@@ -105,12 +105,12 @@ function Product() {
           <div id="selected-color">Cor selecionada:</div>
             <p className="text-prod">Tamanhos:</p>
               <div class="size-options">
-                <div className="size-option" onclick="getSize('6', this)">06</div>
-                <div className="size-option" onclick="getSize('8', this)">08</div>
-                <div className="size-option" onclick="getSize('10', this)">10</div>
-                <div className="size-option" onclick="getSize('12', this)">12</div>
-                <div className="size-option" onclick="getSize('14', this)">14</div>
-                <div className="size-option" onclick="getSize('16', this)">16</div>
+                <div className="size-option" onClick="getSize('6', this)">06</div>
+                <div className="size-option" onClick="getSize('8', this)">08</div>
+                <div className="size-option" onClick="getSize('10', this)">10</div>
+                <div className="size-option" onClick="getSize('12', this)">12</div>
+                <div className="size-option" onClick="getSize('14', this)">14</div>
+                <div className="size-option" onClick="getSize('16', this)">16</div>
               </div> 
 
               <div className="options">
