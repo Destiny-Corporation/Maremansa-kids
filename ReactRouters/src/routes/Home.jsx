@@ -257,7 +257,13 @@ const Home = () => {
               <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
           </li>
           <li>
+              <Link to="/checkout">check</Link>
+          </li>
+          <li>
             <Link to="/sitemap">MAPA DO SITE</Link>
+          </li>
+          <li>
+            <Link to="/confirmation">confirmation</Link>
           </li>
         </div>
 
