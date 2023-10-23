@@ -1,6 +1,122 @@
-h1 {
-    color: white;
-    font-family: "Montserrat", sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 10px;
-}
+/* Estilização da seção do produto */
+.product-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  /* Estilização das imagens do produto */
+  .product-images {
+    display: flex;
+    align-items: flex-start;
+    flex: 1;
+  }
+  
+  .main-image {
+    flex: 2;
+  }
+  
+  .main-image img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .thumbnail-images {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .thumbnail-images div {
+    margin-bottom: 20px;
+  }
+  
+  .thumbnail-images img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .product-details {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .product-details h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .product-details h3 {
+    font-size: 18px;
+    margin-top: 20px;
+  }
+  
+  /* Estilização dos botões de seleção de cor e tamanho */
+  .color-buttons, .size-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .color-buttons button, .size-buttons button {
+    background-color: #fff;
+    border: 1px solid #000;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-right: 10px;
+    border-radius: 10px;
+  }
+  
+  /* Estilização do botão "Adicionar ao Carrinho" */
+  .product-details button {
+    background-color: #48a3a9;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    font-size: 16px;
+  }
+  
+  .product-details button:hover {
+    background-color: #247479;
+  }
+  
+  /* Estilização dos itens no carrinho e detalhes de envio */
+  .cart-details, .shipping-details {
+    margin-top: 20px;
+  }
+  
+  .cart-details ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .cart-details li {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .shipping-details input {
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    font-size: 16px;
+  }
+  
+  .shipping-details button {
+    background-color: #48a3a9;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    font-size: 16px;
+  }
+  
+  .shipping-details button:hover {
+    background-color: #247479;
+  }
+  
