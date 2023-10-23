@@ -5,6 +5,83 @@
   border-radius: 15px;
 }
 
+
+.filter-content {
+  margin-left: 70%;
+  margin-bottom: 35%;
+}
+
+.filter-title {
+  font-family: 'Stylish', sans-serif;
+  text-align: center;
+  font-size: 32px;
+  letter-spacing: 2px;
+  color: #48a3a9;
+  font-weight: 600;
+}
+
+/* Estilo para rótulos */
+.filter-content label {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+/* Estilo para seletores */
+.filter-content select {
+  padding: 5px;
+  border: 1px solid #48a3a9;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+}
+
+.filter-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #48a3a9a1; 
+  z-index: 999; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.close-button {
+  font-family: 'Stylish', sans-serif;
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #48a3a9;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+/* Estilize o botão "X" quando o mouse passar por cima dele */
+.close-button:hover {
+  color: #237379; /* Altere a cor para vermelho quando o mouse passar por cima */
+}
+
+
+.filter-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 70%;
+  background-color: rgb(255, 255, 255); /* Cor de fundo transparente (ajuste a transparência conforme necessário) */
+  z-index: -1; /* Um valor menor que o .filter-container para ficar por baixo */
+}
+
+
+
 .pagination {
   --bs-pagination-color: #48a3a9;
   --bs-pagination-bg: var(--bs-body-bg);

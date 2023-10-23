@@ -27,7 +27,6 @@ const Sale = () => {
   const [isFilterActive, setIsFilterActive] = useState(false);
   const [maxPrice, setMaxPrice] = useState(null);
   const nomesProdutos = ["Conjunto", "Maiô", "Óculos", "Sunga", "Vestidinho", "Colete"];
-
  
   useEffect(() => {
     const fetchProdutos = async () => {
@@ -144,11 +143,6 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
           <button className="button-search-bar" onClick={() => setSearchTerm("")}>Limpar</button>
         )}
       </div>
-      <div className="carousel-container">
-        <div id="carouselExampleIndicators" className="carousel slide">
-          {/* ... (código do carrossel) */}
-        </div>
-      </div>
       <div className="title-section">
         <h1 className="general-title">PROMOÇÕES</h1>
         <button class="filter" onClick={handleFilterButtonClick}>
@@ -162,39 +156,53 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
       </div>
 
       {isFilterActive && (
-      <div className="filter-container">
-      <label>Filtrar por: </label>
-      <select
-      value={filterParam}
-      onChange={handleFilterChange}
-      className="custom-select"
-      aria-label="Filter the products"
-    >
-      <option value="All">Produtos</option>
-  {nomesProdutos.map((nome, index) => (
-    <option key={index} value={nome}>
-      {nome}
-    </option>
-  ))}  
-      
-    </select>
- 
-     <div className="price-filter">
-     <label>Preço até: </label>
-      <select
-       value={maxPrice}
-       onChange={(e) => setMaxPrice(parseFloat(e.target.value))}
-      >
-      <option value="">Selecione o preço</option>
-      <option value="50">Até 50.00</option>
-      <option value="100">Até 100.00</option>
-      <option value="200">Até 200.00</option>
-      {/* Adicione mais opções conforme necessário */}
-    </select>
-      </div>
-    
+  <div className="filter-container">
+    <div className="filter-content">
+      <p className="filter-title">FILTRAR</p>
+      <hr className="filter-hr" />
+
+      <ul className="filter-list">
+        <li>
+          <label>Filtrar por:</label>
+          <select
+            value={filterParam}
+            onChange={handleFilterChange}
+            className="custom-select"
+            aria-label="Filter the products"
+          >
+            <option value="All">Produtos</option>
+            {nomesProdutos.map((nome, index) => (
+              <option key={index} value={nome}>
+                {nome}
+              </option>
+            ))}
+          </select>
+        </li>
+
+        <li>
+          <button className="close-button" onClick={handleFilterButtonClick}>
+            X
+          </button>
+        </li>
+
+        <li className="price-filter">
+          <label>Preço até:</label>
+          <select
+            value={maxPrice}
+            onChange={(e) => setMaxPrice(parseFloat(e.target.value))}
+          >
+            <option value="">Selecione o preço</option>
+            <option value="50">Até 50.00</option>
+            <option value="100">Até 100.00</option>
+            <option value="200">Até 200.00</option>
+            {/* Adicione mais opções conforme necessário */}
+          </select>
+        </li>
+      </ul>
+    </div>
   </div>
 )}
+
 
       <div className="items-per-page">
         <label>Itens por página:</label>

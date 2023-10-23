@@ -37,7 +37,6 @@
     height: auto;
   }
   
-  /* Estilização dos detalhes do produto */
   .product-details {
     flex: 1;
     padding: 20px;
