@@ -137,29 +137,7 @@ const Partners = () => {
       <div className="history">
         <div className="maremansa">
           <h6 className="general-title-h6">Nossos Valiosos Parceiros: Juntos, Criando Experiências Inesquecíveis.</h6><br></br>
-            <p className="about-text">Na MareMansa Kids, acreditamos que o sucesso é construído em parceria. Estamos orgulhosos de contar com uma rede de parceiros incríveis que desempenham um papel fundamental em nossa jornada para proporcionar a você, nosso cliente querido, experiências de compras excepcionais.</p><br></br>
-            
-            <h6 className="general-title-h6">1 | Fornecedores de Qualidade:</h6>
-            <p className="about-text">• Trabalhamos lado a lado com fornecedores cuidadosamente selecionados que compartilham nossa paixão pela qualidade. Eles fornecem os melhores materiais e produtos, garantindo que cada item em nossa loja atenda aos mais altos padrões.</p><br></br>
-            
-            <h6 className="general-title-h6">2 | Transportadoras Confiáveis:</h6>
-            <p className="about-text">• Nossos parceiros de transporte desempenham um papel crucial em garantir que seus pedidos cheguem até você com segurança e no prazo. Eles compartilham nosso compromisso com entregas rápidas e confiáveis.</p><br></br>
-
-            <h6 className="general-title-h6">3 | Especialistas em Tecnologia:</h6>
-            <p className="about-text">• Trabalhamos com especialistas em tecnologia que nos ajudam a manter nossa loja online eficiente, segura e fácil de usar. Eles nos permitem oferecer uma experiência de compra perfeita.</p><br></br>
-
-            <h6 className="general-title-h6">4 | Colaborações Criativas:</h6>
-            <p className="about-text">Colaboramos com designers, artistas e criativos talentosos para trazer coleções exclusivas e edições limitadas que refletem nossa visão de estilo e inovação.</p><br></br>
-
-            <h6 className="general-title-h6">5 | Feedback dos Clientes:</h6>
-            <p className="about-text">• Nossos clientes são nossos parceiros mais valiosos. Valorizamos seu feedback e suas opiniões, que nos orientam na melhoria contínua de nossos produtos e serviços.</p><br></br>
-
-            <p className="about-text">Juntos, nossos parceiros desempenham um papel vital em tornar a MareMansa Kids o destino de escolha para compras online. Cada parceria é construída com base em confiança, integridade e um compromisso com a satisfação do cliente.</p><br></br>
-            
-            <p className="about-text">Agradecemos a todos os nossos parceiros por sua dedicação e contribuição para o nosso sucesso contínuo. Juntos, continuaremos a criar experiências de compras inesquecíveis para você, nosso cliente valioso. Obrigado por fazer parte dessa jornada conosco.</p><br></br>
-            
-            <p className="about-text">Se você estiver interessado em colaborar conosco ou tiver alguma sugestão de parceria, entre em contato conosco em [Endereço de E-mail de Contato]. Estamos sempre abertos a novas oportunidades e ideias inovadoras.</p><br></br>
-
+            <p className="partners-text">Na MareMansa Kids, acreditamos que o sucesso é construído em parceria. Estamos orgulhosos de contar com uma rede de parceiros incríveis que desempenham um papel fundamental em nossa jornada para proporcionar a você, nosso cliente querido, experiências de compras excepcionais.</p><br></br>
         </div>
       </div>
 

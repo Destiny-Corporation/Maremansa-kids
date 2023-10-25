@@ -144,18 +144,14 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
         )}
       </div>
       <div className="title-section">
-        <h1 className="general-title">PROMOÇÕES</h1>
-        <button class="filter" onClick={handleFilterButtonClick}>
-            <img
-              src="/assets/filter.png"
-              alt="filtro"
-              className="button-image"
-            />
-          </button>
-        <hr className="hr-sections"></hr>
-      </div>
+  <h1 className="general-title">PROMOÇÕES</h1>
+  <button className="filter" onClick={handleFilterButtonClick}>
+    <img src="/assets/filter.png" alt="filtro" className="button-image" />
+  </button>
+  <hr className="hr-sections" />
+</div>
 
-      {isFilterActive && (
+{isFilterActive && (
   <div className="filter-container">
     <div className="filter-content">
       <p className="filter-title">FILTRAR</p>
@@ -163,45 +159,28 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
 
       <ul className="filter-list">
         <li>
-          <label>Filtrar por:</label>
-          <select
-            value={filterParam}
-            onChange={handleFilterChange}
-            className="custom-select"
-            aria-label="Filter the products"
-          >
-            <option value="All">Produtos</option>
-            {nomesProdutos.map((nome, index) => (
-              <option key={index} value={nome}>
-                {nome}
-              </option>
-            ))}
-          </select>
+          <label className='filter-label'>CATEGORIAS:</label>
         </li>
-
+        {nomesProdutos.map((nome, index) => (
+          <li className='filter-item' key={index}>
+            <button
+              className="filter-option"
+              onClick={() => handleFilterChange({ target: { value: nome } })}
+            >
+              {nome}
+            </button>
+          </li>
+        ))}
         <li>
           <button className="close-button" onClick={handleFilterButtonClick}>
             X
           </button>
         </li>
-
-        <li className="price-filter">
-          <label>Preço até:</label>
-          <select
-            value={maxPrice}
-            onChange={(e) => setMaxPrice(parseFloat(e.target.value))}
-          >
-            <option value="">Selecione o preço</option>
-            <option value="50">Até 50.00</option>
-            <option value="100">Até 100.00</option>
-            <option value="200">Até 200.00</option>
-            {/* Adicione mais opções conforme necessário */}
-          </select>
-        </li>
       </ul>
     </div>
   </div>
 )}
+
 
 
       <div className="items-per-page">
@@ -223,9 +202,9 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
               <img src={produto.url_image} alt={produto.nome_prodpromo} />
             </Link>
             <Link to="/product">
-              <h6 className="text-card">{produto.nome_prodpromo}</h6>
+              <h6 className="text-card-clothes">{produto.nome_prodpromo}</h6>
             </Link>
-            <h6 className="text-card">R$ {produto.preço}</h6>
+            <h6 className="text-card-clothes">R$ {produto.preço}</h6>
           </div>
         ))}
       </div>
