@@ -2,9 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
-
-
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from './routes/Checkout/store.js'; // Importe sua loja configurada
+
 
 import Home from "./routes/Home";
 import Company from "./routes/About/Company.jsx";
@@ -30,7 +31,12 @@ import FemJuvenile from './routes/ProductTypes/Female/FemJuvenile.jsx';
 import MaleBaby from './routes/ProductTypes/Male/MaleBaby.jsx';
 import MaleChildren from './routes/ProductTypes/Male/MaleChildren.jsx';
 import MaleJuvenile from './routes/ProductTypes/Male/MaleJuvenile.jsx';
-import ErrorPage from "./routes/ErrorPage";
+import ErrorPage from './routes/ErrorPage';
+import Checkout from './routes/Checkout/Checkout.jsx';
+//import Confirmation from './routes/Checkout/Confirmation.jsx';
+//import Payment from './routes/Checkout/Payment.jsx';
+//import Shipping from './routes/Checkout/Shipping.jsx';
+import Confirmation from './routes/Checkout/Confirmation.jsx';
 
 
 const router = createBrowserRouter([
@@ -131,6 +137,16 @@ const router = createBrowserRouter([
     element: <Requests />,
   },
   {
+    path: "/checkout",
+    element: <Checkout />,
+  },
+  {
+    path: "/confirmation",
+    element: <Confirmation />,
+  },
+
+
+  {
     path: "*",
     element: <ErrorPage />,  
   }
@@ -154,8 +170,11 @@ const router = createBrowserRouter([
   },
 ]);*/
 
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );
