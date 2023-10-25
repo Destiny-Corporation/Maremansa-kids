@@ -4,8 +4,7 @@ import App from "./App.jsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
-import store from './routes/Checkout/store.js'; // Importe sua loja configurada
-
+import store from "./routes/Checkout/store.js"; // Importe sua loja configurada
 
 import Home from "./routes/Home";
 import Company from "./routes/About/Company.jsx";
@@ -25,19 +24,18 @@ import Sitemap from "./routes/Support/Sitemap.jsx";
 import Product from "./routes/Product.jsx";
 import Protected from "./routes/Protected.jsx";
 import Requests from "./routes/HeaderPaths/Requests.jsx";
-import FemBaby from './routes/ProductTypes/Female/FemBaby.jsx';
-import FemChildren from './routes/ProductTypes/Female/FemChildren.jsx';
-import FemJuvenile from './routes/ProductTypes/Female/FemJuvenile.jsx';
-import MaleBaby from './routes/ProductTypes/Male/MaleBaby.jsx';
-import MaleChildren from './routes/ProductTypes/Male/MaleChildren.jsx';
-import MaleJuvenile from './routes/ProductTypes/Male/MaleJuvenile.jsx';
-import ErrorPage from './routes/ErrorPage';
-import Checkout from './routes/Checkout/Checkout.jsx';
+import FemBaby from "./routes/ProductTypes/Female/FemBaby.jsx";
+import FemChildren from "./routes/ProductTypes/Female/FemChildren.jsx";
+import FemJuvenile from "./routes/ProductTypes/Female/FemJuvenile.jsx";
+import MaleBaby from "./routes/ProductTypes/Male/MaleBaby.jsx";
+import MaleChildren from "./routes/ProductTypes/Male/MaleChildren.jsx";
+import MaleJuvenile from "./routes/ProductTypes/Male/MaleJuvenile.jsx";
+import ErrorPage from "./routes/ErrorPage";
+import Checkout from "./routes/Checkout/Checkout.jsx";
 //import Confirmation from './routes/Checkout/Confirmation.jsx';
 //import Payment from './routes/Checkout/Payment.jsx';
 //import Shipping from './routes/Checkout/Shipping.jsx';
-import Confirmation from './routes/Checkout/Confirmation.jsx';
-
+import Confirmation from "./routes/Checkout/Confirmation.jsx";
 
 const router = createBrowserRouter([
   {
@@ -45,7 +43,7 @@ const router = createBrowserRouter([
     element: <Exchanges />,
   },
   {
-    path: "/product",
+    path: "/product:productName",
     element: <Product />,
   },
   {
@@ -144,8 +142,6 @@ const router = createBrowserRouter([
     path: "/confirmation",
     element: <Confirmation />,
   },
-
-
 ]);
 
 /*const router = createBrowserRouter([
@@ -165,7 +161,6 @@ const router = createBrowserRouter([
     ],
   },
 ]);*/
-
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

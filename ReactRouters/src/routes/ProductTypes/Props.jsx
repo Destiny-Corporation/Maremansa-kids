@@ -239,11 +239,11 @@ const Props = () => {
           </div>
 
           <Link to="/checkout">
-          <button type="button" className="btn-buy">
-            Buy Now
-          </button>
+            <button type="button" className="btn-buy">
+              Buy Now
+            </button>
           </Link>
-          
+
           <Link to="/cart">
             <button type="button" className="btn-buy">
               Ver meu carrinho
@@ -324,7 +324,7 @@ const Props = () => {
                   alt={produto.nome_prop}
                 />
               </Link>
-              <Link to="/product">
+              <Link to={`/product/${produto.nome_prop}`}>
                 <h6 className="nome_prod">{produto.nome_prop}</h6>
               </Link>
               <div className="des">

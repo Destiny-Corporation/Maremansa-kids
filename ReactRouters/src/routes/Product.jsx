@@ -1,6 +1,23 @@
 import "../styles/Product.css";
-import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { initializeApp } from "firebase/app";
+import { getStorage } from "firebase/storage";
+import { getFirestore, collection, doc, getDocs } from "firebase/firestore";
+import ReactPaginate from "react-paginate";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDTKUI6nV-DZjIsUo1BMkjIUWOQbT9gU3Q",
+  authDomain: "auth-amanda.firebaseapp.com",
+  projectId: "auth-amanda",
+  storageBucket: "auth-amanda.appspot.com",
+  messagingSenderId: "376069750475",
+  appId: "1:376069750475:web:bfb216cfd8928a23e8a54e",
+};
+
+export const app = initializeApp(firebaseConfig);
+export const storage = getStorage(app);
+export const firestore = getFirestore(app);
 
 const Cart = () => {
   const [selectedColor, setSelectedColor] = useState("");
@@ -8,6 +25,30 @@ const Cart = () => {
   const [cart, setCart] = useState([]);
   const [zipcode, setZipcode] = useState("");
   const [shippingCost, setShippingCost] = useState(0);
+  const [productData, setProductData] = useState(null);
+  const { productName } = useParams();
+
+  useEffect(() => {
+    const fetchProductData = async () => {
+      try {
+        const productRef = doc(firestore, "Props", productName); // Substitua "products" pelo nome da sua coleção
+        const productSnapshot = await getDoc(productRef);
+        if (productSnapshot.exists()) {
+          setProductData(productSnapshot.data());
+        } else {
+          // Produto não encontrado
+        }
+      } catch (error) {
+        console.error("Erro ao buscar dados do produto:", error);
+      }
+    };
+
+    fetchProductData();
+  }, [productName]);
+
+  if (!productData) {
+    return <div>Carregando...</div>;
+  }
 
   const handleColorChange = (color) => {
     setSelectedColor(color);
@@ -25,7 +66,9 @@ const Cart = () => {
       };
       setCart([...cart, newItem]);
     } else {
-      alert("Por favor, selecione cor e tamanho antes de adicionar ao carrinho.");
+      alert(
+        "Por favor, selecione cor e tamanho antes de adicionar ao carrinho."
+      );
     }
   };
 
