@@ -42,84 +42,6 @@ const PhysicalStore = () => {
         </button>
       </div>
 
-      <div className="carousel-container">
-        <div id="carouselExampleIndicators" className="carousel slide">
-          <div className="carousel-indicators">
-            <button
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide-to="0"
-              className="active btc"
-              aria-current="true"
-              aria-label="Slide 1"
-            ></button>
-            <button
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide-to="1"
-              aria-label="Slide 2"
-            ></button>
-            <button
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide-to="2"
-              aria-label="Slide 3"
-            ></button>
-          </div>
-
-          <div className="carousel-inner">
-            <div className="carousel-item active">
-              <img
-                src="/assets/banner.png"
-                className="d-block w-100"
-                alt="..."
-              />
-            </div>
-
-            <div className="carousel-item">
-              <img
-                src="/assets/banner-sale.png"
-                className="d-block w-100"
-                alt="..."
-              />
-            </div>
-
-            <div className="carousel-item">
-              <img
-                src="/assets/banner-sale-2.png"
-                className="d-block w-100"
-                alt="..."
-              />
-            </div>
-          </div>
-
-          <button
-            className="carousel-control-prev"
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="prev"
-          >
-            <span
-              className="carousel-control-prev-icon"
-              aria-hidden="true"
-            ></span>
-            <span className="visually-hidden">Previous</span>
-          </button>
-          <button
-            className="carousel-control-next"
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="next"
-          >
-            <span
-              className="carousel-control-next-icon"
-              aria-hidden="true"
-            ></span>
-            <span className="visually-hidden">Next</span>
-          </button>
-        </div>
-      </div>
-
       <div className="title-section">
       <h1 className="general-title">MAREMANSA | LOJA FÍSICA</h1>
       <hr className="hr-sections"></hr>
@@ -136,16 +58,10 @@ const PhysicalStore = () => {
 
       <div className="history">
         <div className="maremansa">
-          <h3 className="general-subtitle-h3">Visite Nossa Loja Física e Conheça o Encanto em Pessoa!</h3><br></br>
-          <p> Estamos entusiasmados em convidar você a uma experiência única de compra em nossa loja física, onde a magia ganha vida e a qualidade ganha forma. Em [Nome da Loja Online], entendemos o valor do contato direto e da oportunidade de conhecer nossos clientes pessoalmente.</p><br></br>
+          <h3 className="general-subtitle-h3">Visite Nossa Loja Física e conheça de pertinho o nosso trabalho!</h3><br></br>
+          <p className='local-p'> Estamos entusiasmados em convidar você a uma experiência única de compra em nossa loja física, onde a magia ganha vida e a qualidade ganha forma. Na MaremansaKids, entendemos o valor do contato direto e da oportunidade de conhecer nossos clientes pessoalmente.</p><br></br>
         
-          <h3 className="general-subtitle-h3">Localização:</h3><br></br>
-          <p className="about-text"> 📍 Endereço: R. Francisco Glicério, 290 - Maraponga</p>
-          <p className="about-text"> ⏰ Horário de Funcionamento: 09:00 às 18:00 </p>
-          <p className="about-text"> 📞 Telefone: +55 (85) 98174-0078</p><br></br>
-
-          <p className="about-text">Nossa loja física é uma extensão do nosso compromisso com produtos de alta qualidade, atendimento excepcional e um ambiente que reflete nossa paixão pelo que fazemos.</p>
-
+          <div className="local"><img className='local-image' src="/assets/local.png"/></div>
         </div>
       </div>
 

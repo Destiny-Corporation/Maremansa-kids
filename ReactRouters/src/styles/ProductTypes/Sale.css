@@ -2,13 +2,50 @@
   width: 200px;
   height: 200px;
   object-fit: cover;
-  border-radius: 15px;
+  border-radius: 18px;
+  border: #48a3a9;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
+.text-card-clothes {
+  font-size: 12px;
+  margin-left: 10%;
+  margin-right: 10%;
+  color: #48a3a9;
+  letter-spacing: 2px;
+  margin-top: 4px;
+}
 
 .filter-content {
-  margin-left: 70%;
-  margin-bottom: 35%;
+  margin-left: 75%;
+  margin-bottom: 16%;
+}
+
+.filter-option {
+  border-radius: 12px;
+  margin-bottom: -2px;
+  width: 160px;
+  font-size: 10px;
+  letter-spacing: 3px;
+  margin-left: -10px;
+}
+
+.filter-option:hover {
+  color: #237379; 
+}
+
+.filter-hr {
+  width: 100%;
+}
+
+.filter-label {
+  margin-top: 15px;
+  font-family: 'Stylish', sans-serif;
+  text-align: left;
+  font-size: 22px;
+  letter-spacing: 2px;
+  color: #48a3a9;
 }
 
 .filter-title {
@@ -20,13 +57,11 @@
   font-weight: 600;
 }
 
-/* Estilo para rótulos */
 .filter-content label {
   font-weight: bold;
   margin-right: 10px;
 }
 
-/* Estilo para seletores */
 .filter-content select {
   padding: 5px;
   border: 1px solid #48a3a9;
@@ -63,11 +98,9 @@
   transition: color 0.3s;
 }
 
-/* Estilize o botão "X" quando o mouse passar por cima dele */
 .close-button:hover {
-  color: #237379; /* Altere a cor para vermelho quando o mouse passar por cima */
+  color: #237379; 
 }
-
 
 .filter-container::before {
   content: "";
@@ -75,9 +108,9 @@
   top: 0;
   right: 0;
   bottom: 0;
-  left: 70%;
-  background-color: rgb(255, 255, 255); /* Cor de fundo transparente (ajuste a transparência conforme necessário) */
-  z-index: -1; /* Um valor menor que o .filter-container para ficar por baixo */
+  left: 75%;
+  background-color: rgb(255, 255, 255); 
+  z-index: -1; 
 }
 
 
@@ -171,7 +204,7 @@ button {
   text-transform: uppercase;
   letter-spacing: 2px;
   margin-right: 15px;
-  margin-left: 40px;
+  margin-left: 120px;
   font-size: 14px;
   color: #48a3a9;
 }
@@ -195,6 +228,7 @@ button {
   background-position: right center;
   background-size: 14px 14px;
 }
+
 
 .items-per-page select option {
   font-size: 14px; 
