@@ -12,6 +12,17 @@
     box-shadow: inset 0 0 5px rgba(1, 75, 94, 0.5);
 }
 
+.map {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .image-map {
+    margin-bottom: 20px;
+    width: 60%;
+    height: auto;
+  }
+
 .site-map ul {
     list-style: none;
 }

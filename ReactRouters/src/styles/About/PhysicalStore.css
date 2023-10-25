@@ -158,10 +158,11 @@ footer {
   text-transform: uppercase;
   letter-spacing: 10px;
   display: inline-block;
-  font-size: 30px; 
-  font-weight: bold; 
+  font-size: 28px; 
+  margin-left: 10%;
+  margin-right: 10%;
   margin-top: 8px;
-  text-align: center;
+  text-align: left;
 }
 
 .local-p {
