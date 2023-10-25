@@ -130,6 +130,10 @@ const router = createBrowserRouter([
     path: "/requests",
     element: <Requests />,
   },
+  {
+    path: "*",
+    element: <ErrorPage />,  
+  }
 ]);
 
 /*const router = createBrowserRouter([

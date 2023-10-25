@@ -283,18 +283,53 @@ const Props = () => {
         </div>
 
         {isFilterActive && (
-          <div className="price-filter">
-            <label>Preço até: </label>
-            <select
-              value={maxPrice}
-              onChange={(e) => setMaxPrice(parseFloat(e.target.value))}
-            >
-              <option value="">Selecione o preço</option>
-              <option value="50">Até 50.00</option>
-              <option value="100">Até 100.00</option>
-              <option value="200">Até 200.00</option>
-              {/* Adicione mais opções conforme necessário */}
-            </select>
+          <div className="filter-container">
+            <div className="filter-content">
+              <p className="filter-title">FILTRAR</p>
+              <hr className="filter-hr" />
+
+              <ul className="filter-list">
+                <li>
+                  <label>Filtrar por:</label>
+                  <select
+                    value={filterParam}
+                    onChange={handleFilterChange}
+                    className="custom-select"
+                    aria-label="Filter the products"
+                  >
+                    <option value="All">Produtos</option>
+                    {nomesProdutos.map((nome, index) => (
+                      <option key={index} value={nome}>
+                        {nome}
+                      </option>
+                    ))}
+                  </select>
+                </li>
+
+                <li>
+                  <button
+                    className="close-button"
+                    onClick={handleFilterButtonClick}
+                  >
+                    X
+                  </button>
+                </li>
+
+                {/*<li className="price-filter">
+          <label>Preço até:</label>
+          <select
+            value={maxPrice}
+            onChange={(e) => setMaxPrice(parseFloat(e.target.value))}
+          >
+            <option value="">Selecione o preço</option>
+            <option value="50">Até 50.00</option>
+            <option value="100">Até 100.00</option>
+            <option value="200">Até 200.00</option>
+            Adicione mais opções conforme necessário 
+          </select>
+            </li>*/}
+              </ul>
+            </div>
           </div>
         )}
 
