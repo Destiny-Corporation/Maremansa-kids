@@ -108,6 +108,30 @@
   padding: 1%;
 }
 
+.about-text {
+  color: #48A3A9;
+  letter-spacing: 2px;
+  font-size: 16px;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.about-text-services {
+  color: #48A3A9;
+  letter-spacing: 2px;
+  font-size: 16px;
+  margin-left: 10%;
+}
+
+
+.about-text-services-2 {
+  color: #48A3A9;
+  letter-spacing: 2px;
+  font-size: 16px;
+  margin-left: 10%;
+  margin-top: 20px;
+}
+
 
 .about{
     display: flex;
