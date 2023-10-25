@@ -239,10 +239,11 @@ const Props = () => {
           </div>
 
           <Link to="/checkout">
-          <Link to="/checkout">
           <button type="button" className="btn-buy">
             Buy Now
           </button>
+          </Link>
+          
           <Link to="/cart">
             <button type="button" className="btn-buy">
               Ver meu carrinho
