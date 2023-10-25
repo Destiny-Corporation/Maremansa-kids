@@ -26,6 +26,7 @@ const Props = () => {
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [isFilterActive, setIsFilterActive] = useState(false);
   const [maxPrice, setMaxPrice] = useState(null);
+  const nomesProdutos = ["Conjunto", "Boia", "Óculos", "Relógia", "Sandália", "Colete"];
   const [total, setTotal] = useState(0);
   const [cartItems, setCartItems] = useState(() => {
     const savedCartItems = localStorage.getItem("cartItems");
@@ -36,6 +37,7 @@ const Props = () => {
   const handleCartIconClick = () => {
     setCartVisible(!cartVisible);
   };
+
 
   useEffect(() => {
     // Recupera os itens do carrinho do localStorage ao carregar a página
@@ -96,9 +98,20 @@ const Props = () => {
     fetchProdutos();
   }, []);
 
-  const filteredProdutos = produtos.filter((produto) =>
-    produto.nome_prop.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const [filterParam, setFilterParam] = useState("All");
+
+  const handleFilterChange = (e) => {
+    setFilterParam(e.target.value);
+  };
+  
+  const filteredProdutos = produtos.filter((produto) => {
+    // Verifica se o produto corresponde à categoria selecionada ou se a categoria é "All".
+    if (filterParam === "All" || produto.nome_prop.toLowerCase().includes(filterParam.toLowerCase())) {
+      // Verifica se o produto corresponde ao termo de pesquisa.
+      return produto.nome_prop.toLowerCase().includes(searchTerm.toLowerCase());
+    }
+    return false; // Produto não corresponde à categoria selecionada.
+  });
 
   const pageCount = Math.ceil(filteredProdutos.length / itemsPerPage);
   const offset = currentPage * itemsPerPage;
@@ -294,27 +307,27 @@ const Props = () => {
 
       <ul className="filter-list">
         <li>
-          <label>Filtrar por:</label>
-          <select
-            value={filterParam}
-            onChange={handleFilterChange}
-            className="custom-select"
-            aria-label="Filter the products"
-          >
-            <option value="All">Produtos</option>
-            {nomesProdutos.map((nome, index) => (
-              <option key={index} value={nome}>
-                {nome}
-              </option>
-            ))}
-          </select>
+          <label className='filter-label'>CATEGORIAS:</label>
         </li>
-
-        <li>
-          <button className="close-button" onClick={handleFilterButtonClick}>
-            X
-          </button>
-        </li>
+        {nomesProdutos.map((nome, index) => (
+          <li className='filter-item' key={index}>
+            <button
+              className="filter-option"
+              onClick={() => handleFilterChange({ target: { value: nome } })}
+            >
+              {nome}
+            </button>
+          </li>
+         ))}
+         <li>
+           <button className="close-button" onClick={handleFilterButtonClick}>
+             X
+           </button>
+         </li>
+       </ul>
+     </div>
+   </div>
+ )}
 
         {/*<li className="price-filter">
           <label>Preço até:</label>
@@ -329,12 +342,7 @@ const Props = () => {
             Adicione mais opções conforme necessário 
           </select>
             </li>*/}
-      </ul>
-    </div>
-  </div>
-)}
-
-
+            
         <div className="items-per-page">
           <label>Itens por página:</label>
           <select

@@ -45,7 +45,6 @@ const handleFilterChange = (e) => {
   setFilterParam(e.target.value);
 };
 
-
 const filteredProdutos = produtos.filter((produto) => {
   // Verifica se o produto corresponde à categoria selecionada ou se a categoria é "All".
   if (filterParam === "All" || produto.nome_prodpromo.toLowerCase().includes(filterParam.toLowerCase())) {
