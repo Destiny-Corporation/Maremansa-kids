@@ -26,7 +26,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchProdutos = async () => {
-      const produtosCollection = collection(firestore, "Props");
+      const produtosCollection = collection(firestore, "Prodfemme");
       const produtosSnapshot = await getDocs(produtosCollection);
       const produtosData = produtosSnapshot.docs.map((doc) => doc.data());
       setProdutos(produtosData);
@@ -218,12 +218,12 @@ const Home = () => {
         {produtos.slice(startIndex, endIndex).map((produto, index) => (
   <div className="clothes" key={index} style={{ width: "20%" }}>
     <Link to="/product">
-      <img src={produto.url_image} alt={produto.nome_prop} />
+      <img src={produto.url_image} alt={produto.nome_prodfemme} />
     </Link>
     <Link to="/product">
-      <h6 className="text-card">{produto.nome_prop}</h6>
+      <h6 className="text-card">{produto.nome_prodfemme}</h6>
     </Link>
-    <h6 className="text-card">R$ {produto.preço}</h6>
+    <h6 className="text-card">R$ {produto.preço_atacado}</h6>
   </div>
 ))}
 </div>
