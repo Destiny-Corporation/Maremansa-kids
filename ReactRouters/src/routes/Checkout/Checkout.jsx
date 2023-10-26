@@ -7,6 +7,8 @@ import { shades } from "./theme";
 import Payment from "./Payment";
 import Shipping from "./Shipping";
 import { loadStripe } from "@stripe/stripe-js";
+import { Link } from 'react-router-dom';
+
 
 const stripePromise = loadStripe(
   "pk_test_51LgU7yConHioZHhlAcZdfDAnV9643a7N1CMpxlKtzI1AUWLsRyrord79GYzZQ6m8RzVnVQaHsgbvN1qSpiDegoPi006QkO0Mlc"
@@ -59,90 +61,174 @@ const Checkout = () => {
   }
 
   return (
-    <Box width="80%" m="100px auto">
-      <Stepper activeStep={activeStep} sx={{ m: "20px 0" }}>
-        <Step>
-          <StepLabel>Billing</StepLabel>
-        </Step>
-        <Step>
-          <StepLabel>Payment</StepLabel>
-        </Step>
-      </Stepper>
-      <Box>
-        <Formik
-          onSubmit={handleFormSubmit}
-          initialValues={initialValues}
-          validationSchema={checkoutSchema[activeStep]}
-        >
-          {({
-            values,
-            errors,
-            touched,
-            handleBlur,
-            handleChange,
-            handleSubmit,
-            setFieldValue,
-          }) => (
-            <form onSubmit={handleSubmit}>
-              {isFirstStep && (
-                <Shipping
-                  values={values}
-                  errors={errors}
-                  touched={touched}
-                  handleBlur={handleBlur}
-                  handleChange={handleChange}
-                  setFieldValue={setFieldValue}
-                />
-              )}
-              {isSecondStep && (
-                <Payment
-                  values={values}
-                  errors={errors}
-                  touched={touched}
-                  handleBlur={handleBlur}
-                  handleChange={handleChange}
-                  setFieldValue={setFieldValue}
-                />
-              )}
-              <Box display="flex" justifyContent="space-between" gap="50px">
-                {!isFirstStep && (
+    <div className="main">
+      <header className="main-header">
+        <div className="search-container-header">
+          <input
+            type="text"
+            className="search-bar-header"
+            placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
+          />
+          <button className="search-button-header" type="submit">
+            <i className="bx bx-search"></i>
+          </button>
+        </div>
+        <div className="logo">
+          <Link to="/">
+            <img
+              src="/assets/logo.png"
+              alt="Logo"
+              className="header-logo-center"
+            />
+          </Link>
+        </div>
+        <div className="icons">
+          <Link to="/requests">
+            <i className="bx bx-user bt-header" style={{ color: "#ffffff" }}></i>
+          </Link>
+          <Link to="/wishlist">
+            <i
+              className="bx bx-heart bt-header"
+              style={{ color: "#ffffff" }}
+            ></i>
+          </Link>
+          <Link to="/cart">
+            <i className="bx bx-cart bt-header" style={{ color: "#ffffff" }}></i>
+          </Link>
+        </div>
+      </header>
+
+      <Box width="80%" m="100px auto">
+        <Stepper activeStep={activeStep} sx={{ m: "20px 0" }}>
+          <Step>
+            <StepLabel>Billing</StepLabel>
+          </Step>
+          <Step>
+            <StepLabel>Payment</StepLabel>
+          </Step>
+        </Stepper>
+        <Box>
+          <Formik
+            onSubmit={handleFormSubmit}
+            initialValues={initialValues}
+            validationSchema={checkoutSchema[activeStep]}
+          >
+            {({
+              values,
+              errors,
+              touched,
+              handleBlur,
+              handleChange,
+              handleSubmit,
+              setFieldValue,
+            }) => (
+              <form onSubmit={handleSubmit}>
+                {isFirstStep && (
+                  <Shipping
+                    values={values}
+                    errors={errors}
+                    touched={touched}
+                    handleBlur={handleBlur}
+                    handleChange={handleChange}
+                    setFieldValue={setFieldValue}
+                  />
+                )}
+                {isSecondStep && (
+                  <Payment
+                    values={values}
+                    errors={errors}
+                    touched={touched}
+                    handleBlur={handleBlur}
+                    handleChange={handleChange}
+                    setFieldValue={setFieldValue}
+                  />
+                )}
+                <Box display="flex" justifyContent="space-between" gap="50px">
+                  {!isFirstStep && (
+                    <Button
+                      fullWidth
+                      color="primary"
+                      variant="contained"
+                      sx={{
+                        backgroundColor: shades.primary[200],
+                        boxShadow: "none",
+                        color: "white",
+                        borderRadius: 0,
+                        padding: "15px 40px",
+                      }}
+                      onClick={() => setActiveStep(activeStep - 1)}
+                    >
+                      Back
+                    </Button>
+                  )}
                   <Button
                     fullWidth
+                    type="submit"
                     color="primary"
                     variant="contained"
                     sx={{
-                      backgroundColor: shades.primary[200],
+                      backgroundColor: shades.primary[400],
                       boxShadow: "none",
                       color: "white",
                       borderRadius: 0,
                       padding: "15px 40px",
                     }}
-                    onClick={() => setActiveStep(activeStep - 1)}
                   >
-                    Back
+                    {!isSecondStep ? "Next" : "Place Order"}
                   </Button>
-                )}
-                <Button
-                  fullWidth
-                  type="submit"
-                  color="primary"
-                  variant="contained"
-                  sx={{
-                    backgroundColor: shades.primary[400],
-                    boxShadow: "none",
-                    color: "white",
-                    borderRadius: 0,
-                    padding: "15px 40px",
-                  }}
-                >
-                  {!isSecondStep ? "Next" : "Place Order"}
-                </Button>
-              </Box>
-            </form>
-          )}
-        </Formik>
+                </Box>
+              </form>
+            )}
+          </Formik>
+        </Box>
       </Box>
-    </Box>
+
+     
+      {/* Footer aqui */}
+      <footer>
+        <section className="footer-section">
+          <div className="footer-section-div">
+            <img src="/assets/whale.png" />
+          </div>
+
+          <div className="footer-section-div">
+            <h3>SOBRE NÓS</h3>
+            <li>
+              <Link to="/company">A EMPRESA</Link>
+            </li>
+            <li>
+              <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
+            </li>
+            <li>
+              <Link to="/partners">NOSSOS PARCEIROS</Link>
+            </li>
+          </div>
+
+          <div className="footer-section-div">
+            <h3>SUPORTE</h3>
+            <li>
+              <Link to="/services">ATENDIMENTO</Link>
+            </li>
+            <li>
+              <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
+            </li>
+            <li>
+              <Link to="/sitemap">MAPA DO SITE</Link>
+            </li>
+          </div>
+
+          <div className="footer-section-div">
+            <h3>CONTATOS</h3>
+            <i className="fa fa-whatsapp"></i>
+            <i className="fa fa-google"></i>
+            <i className="fa fa-instagram"></i>
+          </div>
+        </section>
+      </footer>
+      <div className="last-text">
+        <p className="text-sub-footer">maremansa</p>
+      </div>
+    </div>
   );
 };
 
@@ -222,5 +308,6 @@ const checkoutSchema = [
     phoneNumber: yup.string().required("required"),
   }),
 ];
+
 
 export default Checkout;
