@@ -1,8 +1,102 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import "../../../styles/ProductTypes/Male/MaleBaby.css";
 import { Link } from "react-router-dom";
+import { initializeApp } from "firebase/app";
+import { getStorage } from "firebase/storage";
+import { getFirestore, collection, doc, getDocs } from "firebase/firestore";
+import ReactPaginate from "react-paginate";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDTKUI6nV-DZjIsUo1BMkjIUWOQbT9gU3Q",
+  authDomain: "auth-amanda.firebaseapp.com",
+  projectId: "auth-amanda",
+  storageBucket: "auth-amanda.appspot.com",
+  messagingSenderId: "376069750475",
+  appId: "1:376069750475:web:bfb216cfd8928a23e8a54e",
+};
+
+export const app = initializeApp(firebaseConfig);
+export const storage = getStorage(app);
+export const firestore = getFirestore(app);
 
 const MaleBaby = () => {
+  const [produtos, setProdutos] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [isFilterActive, setIsFilterActive] = useState(false);
+  const [maxPrice, setMaxPrice] = useState(null);
+  const nomesProdutos = ["Conjunto", "Maiô", "Óculos", "Sunga", "Vestidinho", "Colete"];
+ 
+  useEffect(() => {
+    const fetchProdutos = async () => {
+      const produtosCollection = collection(firestore, "ProdPomo");
+      const produtosSnapshot = await getDocs(produtosCollection);
+      const produtosData = produtosSnapshot.docs.map((doc) => doc.data());
+      setProdutos(produtosData);
+    };
+
+    fetchProdutos();
+  }, []);
+
+  const [filterParam, setFilterParam] = useState("All");
+
+const handleFilterChange = (e) => {
+  setFilterParam(e.target.value);
+};
+
+
+const filteredProdutos = produtos.filter((produto) => {
+  // Verifica se o produto corresponde à categoria selecionada ou se a categoria é "All".
+  if (filterParam === "All" || produto.nome_prodpromo.toLowerCase().includes(filterParam.toLowerCase())) {
+    // Verifica se o produto corresponde ao termo de pesquisa.
+    return produto.nome_prodpromo.toLowerCase().includes(searchTerm.toLowerCase());
+  }
+  return false; // Produto não corresponde à categoria selecionada.
+});
+
+const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
+  if (isFilterActive && maxPrice !== null) {
+    // Verifica se o preço está no formato correto (por exemplo, "R$ 50,00")
+    if (produto.preço && typeof produto.preço === "string") {
+      const precoNumerico = parseFloat(
+        produto.preço.replace("R$ ", "").replace(",", ".")
+      );
+      return precoNumerico <= maxPrice;
+    }
+  }
+  return true;
+});
+
+  const pageCount = Math.ceil(filteredProdutos.length / itemsPerPage);
+  const offset = currentPage * itemsPerPage;
+  const currentPageProdutos = filteredProdutos.slice(
+    offset,
+    offset + itemsPerPage
+  );
+  const prevButtonClass =
+    currentPage === 0 ? "prevButton disabled" : "prevButton";
+  const nextButtonClass =
+    currentPage === pageCount - 1 ? "nextButton disabled" : "nextButton";
+
+  const customButtonStyle = {
+    padding: "10px 15px",
+    background: "purple",
+    color: "#fff",
+    borderRadius: "5px",
+    margin: "0 5px",
+    cursor: "pointer",
+    border: "none",
+    outline: "none",
+  };
+
+  const handlePageChange = ({ selected }) => {
+    setCurrentPage(selected);
+  };
+  const handleFilterButtonClick = () => {
+    setIsFilterActive(!isFilterActive);
+    setMaxPrice("");
+  };
     return (
         <div className='main'>
       <header className="main-header">
@@ -42,267 +136,92 @@ const MaleBaby = () => {
             <i className="bx bx-search"></i>
           </button>
         </div>
-  
-        <div className="carousel-container">
-          <div id="carouselExampleIndicators" className="carousel slide">
-            <div className="carousel-indicators">
-              <button
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide-to="0"
-                className="active btc"
-                aria-current="true"
-                aria-label="Slide 1"
-              ></button>
-              <button
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide-to="1"
-                aria-label="Slide 2"
-              ></button>
-              <button
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide-to="2"
-                aria-label="Slide 3"
-              ></button>
-            </div>
-  
-            <div className="carousel-inner">
-              <div className="carousel-item active">
-                <img
-                  src="/assets/banner.png"
-                  className="d-block w-100"
-                  alt="..."
-                />
-              </div>
-  
-              <div className="carousel-item">
-                <img
-                  src="/assets/banner-sale.png"
-                  className="d-block w-100"
-                  alt="..."
-                />
-              </div>
-  
-              <div className="carousel-item">
-                <img
-                  src="/assets/banner-sale-2.png"
-                  className="d-block w-100"
-                  alt="..."
-                />
-              </div>
-            </div>
-  
-            <button
-              className="carousel-control-prev"
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide="prev"
-            >
-              <span
-                className="carousel-control-prev-icon"
-                aria-hidden="true"
-              ></span>
-              <span className="visually-hidden">Previous</span>
-            </button>
-            <button
-              className="carousel-control-next"
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide="next"
-            >
-              <span
-                className="carousel-control-next-icon"
-                aria-hidden="true"
-              ></span>
-              <span className="visually-hidden">Next</span>
-            </button>
-          </div>
-        </div>
-  
+
         <div className="title-section">
         <h1 className="general-title">MASCULINO | BABYS</h1>
-        <hr className="hr-sections"></hr>
-        </div>
+        <button className="filter" onClick={handleFilterButtonClick}>
+    <img src="/assets/filter.png" alt="filtro" className="button-image" />
+  </button>
+  <hr className="hr-sections" />
+</div>
+
+{isFilterActive && (
+  <div className="filter-container">
+    <div className="filter-content">
+      <p className="filter-title">FILTRAR</p>
+      <hr className="filter-hr" />
+
+      <ul className="filter-list">
+        <li>
+          <label className='filter-label'>CATEGORIAS:</label>
+        </li>
+        {nomesProdutos.map((nome, index) => (
+          <li className='filter-item' key={index}>
+            <button
+              className="filter-option"
+              onClick={() => handleFilterChange({ target: { value: nome } })}
+            >
+              {nome}
+            </button>
+          </li>
+        ))}
+        <li>
+          <button className="close-button" onClick={handleFilterButtonClick}>
+            X
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+)}
+
+
+
+      <div className="items-per-page">
+        <label>Itens por página:</label>
+        <select
+          value={itemsPerPage}
+          onChange={(e) => setItemsPerPage(Number(e.target.value))}
+        >
+          <option value={5}>5</option>
+          <option value={10}>10</option>
+          <option value={15}>15</option>
+        </select>
+      </div>
         
         <div className="container-clothes">
-          <div className="clothes">
-            <Link to="/product">
-              <img src="/assets/model-1.png" alt="" />
-              <h6 className="text-card">PRODUTO 1</h6>
-            </Link>
-            <h8 className="text-card">R$ 59,90</h8>
-          </div>
-  
-          <div className="clothes">
-            <Link to="/product">
-              <img src="/assets/model-2.png" alt="" />
-              <h6 className="text-card">PRODUTO 2</h6>
-            </Link>
-            <h8 className="text-card">R$ 59,90</h8>
-          </div>
-  
-          <div className="clothes">
-            <Link to="/product">
-              <img src="/assets/model-3.png" alt="" />
-              <h6 className="text-card">PRODUTO 3</h6>
-            </Link>
-            <h8 className="text-card">R$ 59,90</h8>
-          </div>
-  
-          <div className="clothes">
-            <Link to="/product">
-              <img src="/assets/model-4.png" alt="" />
-              <h6 className="text-card">PRODUTO 4</h6>
-            </Link>
-            <h8 className="text-card">R$ 59,90</h8>
-          </div>
-        </div>
-  
-        <div className="container-clothes">
-        <div className="clothes">
-            <Link to="/product">
-              <img src="/assets/model-1.png" alt="" />
-              <h6 className="text-card">PRODUTO 5</h6>
-            </Link>
-            <h8 className="text-card">R$ 59,90</h8>
-          </div>
-  
-          <div className="clothes">
-            <Link to="/product">
-              <img src="/assets/model-2.png" alt="" />
-              <h6 className="text-card">PRODUTO 6</h6>
-            </Link>
-            <h8 className="text-card">R$ 59,90</h8>
-          </div>
-  
-          <div className="clothes">
-            <Link to="/product">
-              <img src="/assets/model-3.png" alt="" />
-              <h6 className="text-card">PRODUTO 7</h6>
-            </Link>
-            <h8 className="text-card">R$ 59,90</h8>
-          </div>
-  
-          <div className="clothes">
-            <Link to="/product">
-              <img src="/assets/model-4.png" alt="" />
-              <h6 className="text-card">PRODUTO 8</h6>
-            </Link>
-            <h8 className="text-card">R$ 59,90</h8>
-          </div>
-        </div>
-  
-        <div className="container-clothes">
-          <div className="clothes">
-            <Link to="/product">
-              <img src="/assets/model-1.png" alt="" />
-            </Link>
-            <Link to="/product">
-              <h6 className="text-card">PRDOUTO 9</h6>
-            </Link>
-            <h8 className="text-card">R$ 37,90</h8>
-          </div>
-  
-          <div className="clothes">
-            <Link to="/product">
-              <img src="/assets/model-2.png" alt="" />
-              <h6 className="text-card">PRODUTO 10</h6>
-            </Link>
-            <h8 className="text-card">R$ 59,90</h8>
-          </div>
-  
-          <div className="clothes">
-            <Link to="/product">
-              <img src="/assets/model-3.png" alt="" />
-              <h6 className="text-card">PRODUTO 11</h6>
-            </Link>
-            <h8 className="text-card">R$ 59,90</h8>
-          </div>
-  
-          <div className="clothes">
-            <Link to="/product">
-              <img src="/assets/model-4.png" alt="" />
-              <h6 className="text-card">PRODUTO 12</h6>
-            </Link>
-            <h8 className="text-card">R$ 59,90</h8>
-          </div>
-        </div>
-  
-        <div className="container-clothes">
-          <div className="clothes">
-            <Link to="/product">
-              <img src="/assets/model-1.png" alt="" />
-            </Link>
-            <Link to="/product">
-              <h6 className="text-card">PRODUTO 13</h6>
-            </Link>
-            <h8 className="text-card">R$ 37,90</h8>
-          </div>
-  
-          <div className="clothes">
-            <Link to="/product">
-              <img src="/assets/model-2.png" alt="" />
-              <h6 className="text-card">PRODUTO 14</h6>
-            </Link>
-            <h8 className="text-card">R$ 59,90</h8>
-          </div>
-  
-          <div className="clothes">
-            <Link to="/product">
-              <img src="/assets/model-3.png" alt="" />
-              <h6 className="text-card">PRODUTO 15</h6>
-            </Link>
-            <h8 className="text-card">R$ 59,90</h8>
-          </div>
-  
-          <div className="clothes">
-            <Link to="/product">
-              <img src="/assets/model-4.png" alt="" />
-              <h6 className="text-card">PRODUTO 16</h6>
-            </Link>
-            <h8 className="text-card">R$ 59,90</h8>
-          </div>
-        </div>
-  
-        <div className="container-clothes">
-          <div className="clothes">
-            <Link to="/product">
-              <img src="/assets/model-1.png" alt="" />
-            </Link>
-            <Link to="/product">
-              <h6 className="text-card">PRODUTO 17</h6>
-            </Link>
-            <h8 className="text-card">R$ 37,90</h8>
-          </div>
-  
-          <div className="clothes">
-            <Link to="/product">
-              <img src="/assets/model-2.png" alt="" />
-              <h6 className="text-card">PRODUTO 18</h6>
-            </Link>
-            <h8 className="text-card">R$ 59,90</h8>
-          </div>
-  
-          <div className="clothes">
-            <Link to="/product">
-              <img src="/assets/model-3.png" alt="" />
-              <h6 className="text-card">PRODUTO 19</h6>
-            </Link>
-            <h8 className="text-card">R$ 59,90</h8>
-          </div>
-  
-          <div className="clothes">
-            <Link to="/product">
-              <img src="/assets/model-4.png" alt="" />
-              <h6 className="text-card">PRODUTO 20</h6>
-            </Link>
-            <h8 className="text-card">R$ 59,90</h8>
-          </div>
+          {currentPageProdutos.map((produto, index) => (
+            <div className="clothes" key={index} style={{ width: "20%" }}>
+              <Link to="/product">
+                <img src={produto.url_image} alt={produto.nome_prop} />
+              </Link>
+              <Link to="/product">
+                <h6 className="text-card-clothes">{produto.nome_prop}</h6>
+              </Link>
+              <h6 className="text-card-clothes">R$ {produto.preço}</h6>
+            </div>
+          ))}
         </div>
   </div>
         
+  <div className="pagination-container">
+      <ReactPaginate
+        previousLabel={<button className="custom-button">ANTERIOR</button>}
+        nextLabel={<button className="custom-button">PRÓXIMO</button>}
+        breakLabel={"..."}
+        pageCount={pageCount}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={5}
+        onPageChange={handlePageChange}
+        containerClassName={"pagination"}
+        subContainerClassName={"pages pagination"}
+        activeClassName={"active"}
+        previousClassName={prevButtonClass}
+        nextClassName={nextButtonClass}
+        pageClassName={"page-count"}
+        pageLinkClassName={"page-link"}
+      /> </div>
+
         <footer>
           <section className="footer-section">
             <div className="footer-section-div">

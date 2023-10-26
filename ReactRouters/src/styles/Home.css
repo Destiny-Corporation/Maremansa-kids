@@ -105,6 +105,12 @@ body {
   font-size: 14px;
 }
 
+.button-search-bar {
+  padding: 10px;
+  background-color: transparent;
+  color:#48A3A9;
+  font-size: 10px;
+}
 
 .search-container:hover {
   background-color: #bdd6d6;
@@ -136,6 +142,16 @@ body {
   font-size: 11px;
   letter-spacing: 2px;
 }
+
+.bx-search {
+  font-size: 14px;
+}
+
+.bx-search ::before {
+  font-size: 14px;
+}
+
+
 
 .carousel-container {
   width: 98%;

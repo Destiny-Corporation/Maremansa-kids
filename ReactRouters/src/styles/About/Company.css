@@ -105,6 +105,11 @@
   font-size: 30px; 
   font-weight: bold; 
   margin-top: 8px;
+  margin-left: 10%;
+}
+
+.company-image {
+  align-items: center;
 }
 
 .general-subtitle-h3 {

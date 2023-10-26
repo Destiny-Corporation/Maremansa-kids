@@ -1,8 +1,50 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/Home.css";
 import { Link } from "react-router-dom";
+import { initializeApp } from "firebase/app";
+import { getStorage } from "firebase/storage";
+import { getFirestore, collection, doc, getDocs } from "firebase/firestore";
+import ReactPaginate from "react-paginate";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDTKUI6nV-DZjIsUo1BMkjIUWOQbT9gU3Q",
+  authDomain: "auth-amanda.firebaseapp.com",
+  projectId: "auth-amanda",
+  storageBucket: "auth-amanda.appspot.com",
+  messagingSenderId: "376069750475",
+  appId: "1:376069750475:web:bfb216cfd8928a23e8a54e",
+};
+
+export const app = initializeApp(firebaseConfig);
+export const storage = getStorage(app);
+export const firestore = getFirestore(app);
+
 
 const Home = () => {
+  const [produtos, setProdutos] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+
+  useEffect(() => {
+    const fetchProdutos = async () => {
+      const produtosCollection = collection(firestore, "Props");
+      const produtosSnapshot = await getDocs(produtosCollection);
+      const produtosData = produtosSnapshot.docs.map((doc) => doc.data());
+      setProdutos(produtosData);
+    };
+
+    fetchProdutos();
+  }, []);
+
+  const productsPerPage = 4;
+  const pageCount = Math.ceil(produtos.length / productsPerPage);
+
+  const handlePageChange = ({ selected }) => {
+    setCurrentPage(selected);
+  };
+
+  const startIndex = currentPage * productsPerPage;
+  const endIndex = startIndex + productsPerPage;
+  const displayedProducts = produtos.slice(startIndex, endIndex);
   return (
     <div className='main'>
       <header className="main-header">
@@ -165,35 +207,33 @@ const Home = () => {
       <hr size="1" />
 
       <div className="container-clothes-main">
-        <i className="bx bx-chevron-left" style={{ color: "#48A3A9"}}></i>
-        <div className="clothes-main">
-          <Link to="/product">
-            <img src="/assets/model-1.png" alt="" />
-          </Link>
-          <Link to="/product">
-            <h6 className="text-card">CONJUNTO MARINHEIRO</h6>
-          </Link>
-          <h6 className="text-card">POR R$ 37,90</h6>
-        </div>
+      <i
+          className="bx bx-chevron-left"
+          style={{ color: "#48A3A9", cursor: "pointer" }}
+          onClick={() => setCurrentPage(currentPage - 1)}
+          disabled={currentPage === 0}
+        ></i>
 
-        <div className="clothes-main">
-          <img src="/assets/model-2.png" alt="" />
-          <h6 className="text-card">MAIÔ CANDY</h6>
-          <h6 className="text-card">POR R$ 49,90</h6>
-        </div>
+        <div className="container-clothes">
+        {produtos.slice(startIndex, endIndex).map((produto, index) => (
+  <div className="clothes" key={index} style={{ width: "20%" }}>
+    <Link to="/product">
+      <img src={produto.url_image} alt={produto.nome_prop} />
+    </Link>
+    <Link to="/product">
+      <h6 className="text-card">{produto.nome_prop}</h6>
+    </Link>
+    <h6 className="text-card">R$ {produto.preço}</h6>
+  </div>
+))}
+</div>
 
-        <div className="clothes-main">
-          <img src="/assets/model-3.png" alt="" />
-          <h6 className="text-card">CONJUNTO SEREIA</h6>
-          <h6 className="text-card">POR R$ 47,90</h6>
-        </div>
-
-        <div className="clothes-main">
-          <img src="/assets/model-4.png" alt="" />
-          <h6 className="text-card">CONJUNTO PIRATA</h6>
-          <h6 className="text-card">POR R$ 47,90</h6>
-        </div>
-        <i className="bx bx-chevron-right" style={{ color: "#48A3A9" }}></i>
+        <i
+          className="bx bx-chevron-right"
+          style={{ color: "#48A3A9", cursor: "pointer" }}
+          onClick={() => setCurrentPage(currentPage + 1)}
+          disabled={currentPage === pageCount - 1}
+        ></i>
       </div>
       </div>
 

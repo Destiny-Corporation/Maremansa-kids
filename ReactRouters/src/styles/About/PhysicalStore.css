@@ -7,8 +7,18 @@
   justify-content: center;
 }
 
+.local {
+  display: flex;
+  justify-content: center;
+}
+
+.local-image {
+  width: 80%;
+  height: auto;
+}
+
 .company img{
-    width: 80%;
+    width: 90%;
     height: auto;
 }
 
@@ -141,6 +151,25 @@ footer {
     background-color: #48A3A9;
     color: #fff;
     text-align: center;
+}
+
+.general-subtitle-h3 {
+  color: #48A3A9;
+  text-transform: uppercase;
+  letter-spacing: 10px;
+  display: inline-block;
+  font-size: 28px; 
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 8px;
+  text-align: left;
+}
+
+.local-p {
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 8px;
+  letter-spacing: 1px;
 }
 
 .footer-section {

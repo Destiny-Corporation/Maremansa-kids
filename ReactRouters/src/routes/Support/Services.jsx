@@ -42,84 +42,6 @@ const Services = () => {
         </button>
       </div>
 
-      <div className="carousel-container">
-        <div id="carouselExampleIndicators" className="carousel slide">
-          <div className="carousel-indicators">
-            <button
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide-to="0"
-              className="active btc"
-              aria-current="true"
-              aria-label="Slide 1"
-            ></button>
-            <button
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide-to="1"
-              aria-label="Slide 2"
-            ></button>
-            <button
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide-to="2"
-              aria-label="Slide 3"
-            ></button>
-          </div>
-
-          <div className="carousel-inner">
-            <div className="carousel-item active">
-              <img
-                src="/assets/banner.png"
-                className="d-block w-100"
-                alt="..."
-              />
-            </div>
-
-            <div className="carousel-item">
-              <img
-                src="/assets/banner-sale.png"
-                className="d-block w-100"
-                alt="..."
-              />
-            </div>
-
-            <div className="carousel-item">
-              <img
-                src="/assets/banner-sale-2.png"
-                className="d-block w-100"
-                alt="..."
-              />
-            </div>
-          </div>
-
-          <button
-            className="carousel-control-prev"
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="prev"
-          >
-            <span
-              className="carousel-control-prev-icon"
-              aria-hidden="true"
-            ></span>
-            <span className="visually-hidden">Previous</span>
-          </button>
-          <button
-            className="carousel-control-next"
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="next"
-          >
-            <span
-              className="carousel-control-next-icon"
-              aria-hidden="true"
-            ></span>
-            <span className="visually-hidden">Next</span>
-          </button>
-        </div>
-      </div>
-
       <div className="title-section">
       <h1 className="general-title">MAREMANSA | ATENDIMENTO</h1>
       <hr className="hr-sections"></hr>
@@ -137,22 +59,14 @@ const Services = () => {
       <div className="history">
         <div className="maremansa">
           <h3 className="general-title-h3">Querido Cliente,</h3><br></br>
-          <p className="about-text"> Estamos sempre aqui para atendê-lo da melhor maneira possível e tornar sua experiência de compra 
+          <p className="about-text-services"> Estamos sempre aqui para atendê-lo da melhor maneira possível e tornar sua experiência de compra 
             conosco incrível. Se você tiver alguma dúvida, precisar de assistência ou quiser simplesmente bater um 
             papo sobre nossos produtos, estamos à disposição!</p><br></br>
-        
-          <p className="about-text"> INSTAGRAM: Nosso perfil no Instagram é um lugar onde você pode encontrar as últimas novidades, 
-            inspirações de moda e muito mais. Além disso, você pode nos enviar uma mensagem direta (DM) a qualquer 
-            momento. Siga-nos em <Link to="https://instagram.com/maremansakids?igshid=MzRlODBiNWFlZA==">@MaremansaKids</Link> e fique por dentro de tudo o que está acontecendo.</p><br></br>
+            <div className="local"><img className='local-image' src="/assets/services.png"/></div>
+          
+          <p className="about-text-services-2"> Agradecemos por escolher a Maremansa Kids e aguardamos ansiosamente o seu contato!</p>
 
-          <p className="about-text">  WHATSAPP: Para uma comunicação mais direta e instantânea, estamos disponíveis no WhatsApp. Basta 
-            adicionar nosso número, [inserir o número de telefone aqui], à sua lista de contatos e enviar uma mensagem. Estamos prontos para responder às suas perguntas e auxiliá-lo com suas necessidades. </p><br></br>
-
-          <p className="about-text"> Queremos tornar sua jornada de compras conosco o mais simples e agradável possível. Não hesite em nos contatar a qualquer momento. Sua satisfação é nossa prioridade. </p><br></br>
-
-          <p className="about-text"> Agradecemos por escolher a Maremansa Kids e aguardamos ansiosamente o seu contato!</p><br></br>
-
-          <p className="about-text"> Atenciosamente, <br></br>
+          <p className="about-text-services"> Atenciosamente, <br></br>
            A Equipe Maremansa Kids.</p>
         </div>
       </div>

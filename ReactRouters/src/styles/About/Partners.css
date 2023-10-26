@@ -66,9 +66,12 @@
   text-transform: uppercase;
   letter-spacing: 5px;
   display: inline-block;
-  font-size: 20px; 
+  font-size: 24px; 
   font-weight: bold; 
   margin-top: 8px;
+  margin-left: 10%;
+  margin-right: 10%;
+  text-align: left;
 }
 
 .search-container:hover {
@@ -128,6 +131,12 @@
   padding: 1%;
 }
 
+.partners-text{
+  margin-top: 8px;
+  margin-left: 10%;
+  margin-right: 10%;
+  letter-spacing: 1px;
+}
 
 .about{
     display: flex;

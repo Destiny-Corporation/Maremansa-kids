@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../styles/Product.css";
 import { Link } from "react-router-dom";
+import React, { useState } from "react";
 
 function Product() {
   const [selectedColor, setSelectedColor] = useState("");

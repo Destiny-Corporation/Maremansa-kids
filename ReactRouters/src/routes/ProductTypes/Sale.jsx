@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../../styles/ProductTypes/Sale.css";
 import { Link } from "react-router-dom";
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 import { getFirestore, collection, doc, getDocs } from "firebase/firestore";
-import { useState, useEffect } from "react";
+import ReactPaginate from "react-paginate";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDTKUI6nV-DZjIsUo1BMkjIUWOQbT9gU3Q",
@@ -21,7 +21,13 @@ export const firestore = getFirestore(app);
 
 const Sale = () => {
   const [produtos, setProdutos] = useState([]);
-
+  const [currentPage, setCurrentPage] = useState(0);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [isFilterActive, setIsFilterActive] = useState(false);
+  const [maxPrice, setMaxPrice] = useState(null);
+  const nomesProdutos = ["Conjunto", "Maiô", "Óculos", "Sunga", "Vestidinho", "Colete"];
+ 
   useEffect(() => {
     const fetchProdutos = async () => {
       const produtosCollection = collection(firestore, "ProdPomo");
@@ -32,6 +38,65 @@ const Sale = () => {
 
     fetchProdutos();
   }, []);
+
+  const [filterParam, setFilterParam] = useState("All");
+
+const handleFilterChange = (e) => {
+  setFilterParam(e.target.value);
+};
+
+const filteredProdutos = produtos.filter((produto) => {
+  // Verifica se o produto corresponde à categoria selecionada ou se a categoria é "All".
+  if (filterParam === "All" || produto.nome_prodpromo.toLowerCase().includes(filterParam.toLowerCase())) {
+    // Verifica se o produto corresponde ao termo de pesquisa.
+    return produto.nome_prodpromo.toLowerCase().includes(searchTerm.toLowerCase());
+  }
+  return false; // Produto não corresponde à categoria selecionada.
+});
+
+const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
+  if (isFilterActive && maxPrice !== null) {
+    // Verifica se o preço está no formato correto (por exemplo, "R$ 50,00")
+    if (produto.preço && typeof produto.preço === "string") {
+      const precoNumerico = parseFloat(
+        produto.preço.replace("R$ ", "").replace(",", ".")
+      );
+      return precoNumerico <= maxPrice;
+    }
+  }
+  return true;
+});
+
+  const pageCount = Math.ceil(filteredProdutos.length / itemsPerPage);
+  const offset = currentPage * itemsPerPage;
+  const currentPageProdutos = filteredProdutos.slice(
+    offset,
+    offset + itemsPerPage
+  );
+  const prevButtonClass =
+    currentPage === 0 ? "prevButton disabled" : "prevButton";
+  const nextButtonClass =
+    currentPage === pageCount - 1 ? "nextButton disabled" : "nextButton";
+
+  const customButtonStyle = {
+    padding: "10px 15px",
+    background: "purple",
+    color: "#fff",
+    borderRadius: "5px",
+    margin: "0 5px",
+    cursor: "pointer",
+    border: "none",
+    outline: "none",
+  };
+
+  const handlePageChange = ({ selected }) => {
+    setCurrentPage(selected);
+  };
+  const handleFilterButtonClick = () => {
+    setIsFilterActive(!isFilterActive);
+    setMaxPrice("");
+  };
+
   return (
     <div className="main">
       <header className="main-header">
@@ -62,114 +127,104 @@ const Sale = () => {
           </Link>
         </div>
       </header>
-
       <div className="search-container-geral">
         <input
           type="text"
           className="search-bar"
           placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
         <button className="search-button" type="submit">
           <i className="bx bx-search"></i>
         </button>
+        {searchTerm && (
+          <button className="button-search-bar" onClick={() => setSearchTerm("")}>Limpar</button>
+        )}
       </div>
-
-      <div className="carousel-container">
-        <div id="carouselExampleIndicators" className="carousel slide">
-          <div className="carousel-indicators">
-            <button
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide-to="0"
-              className="active btc"
-              aria-current="true"
-              aria-label="Slide 1"
-            ></button>
-            <button
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide-to="1"
-              aria-label="Slide 2"
-            ></button>
-            <button
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide-to="2"
-              aria-label="Slide 3"
-            ></button>
-          </div>
-
-          <div className="carousel-inner">
-            <div className="carousel-item active">
-              <img
-                src="/assets/banner.png"
-                className="d-block w-100"
-                alt="..."
-              />
-            </div>
-
-            <div className="carousel-item">
-              <img
-                src="/assets/banner-sale.png"
-                className="d-block w-100"
-                alt="..."
-              />
-            </div>
-
-            <div className="carousel-item">
-              <img
-                src="/assets/banner-sale-2.png"
-                className="d-block w-100"
-                alt="..."
-              />
-            </div>
-          </div>
-
-          <button
-            className="carousel-control-prev"
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="prev"
-          >
-            <span
-              className="carousel-control-prev-icon"
-              aria-hidden="true"
-            ></span>
-            <span className="visually-hidden">Previous</span>
-          </button>
-          <button
-            className="carousel-control-next"
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="next"
-          >
-            <span
-              className="carousel-control-next-icon"
-              aria-hidden="true"
-            ></span>
-            <span className="visually-hidden">Next</span>
-          </button>
-        </div>
-      </div>
-
       <div className="title-section">
-        <h1 className="general-title">PROMOÇÕES</h1>
-        <hr className="hr-sections"></hr>
+  <h1 className="general-title">PROMOÇÕES</h1>
+  <button className="filter" onClick={handleFilterButtonClick}>
+    <img src="/assets/filter.png" alt="filtro" className="button-image" />
+  </button>
+  <hr className="hr-sections" />
+</div>
+
+{isFilterActive && (
+  <div className="filter-container">
+    <div className="filter-content">
+      <p className="filter-title">FILTRAR</p>
+      <hr className="filter-hr" />
+
+      <ul className="filter-list">
+        <li>
+          <label className='filter-label'>CATEGORIAS:</label>
+        </li>
+        {nomesProdutos.map((nome, index) => (
+          <li className='filter-item' key={index}>
+            <button
+              className="filter-option"
+              onClick={() => handleFilterChange({ target: { value: nome } })}
+            >
+              {nome}
+            </button>
+          </li>
+        ))}
+        <li>
+          <button className="close-button" onClick={handleFilterButtonClick}>
+            X
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+)}
+
+
+
+      <div className="items-per-page">
+        <label>Itens por página:</label>
+        <select
+          value={itemsPerPage}
+          onChange={(e) => setItemsPerPage(Number(e.target.value))}
+        >
+          <option value={5}>5</option>
+          <option value={10}>10</option>
+          <option value={15}>15</option>
+        </select>
       </div>
 
       <div className="container-clothes">
-        {produtos.map((produto, index) => (
-          <div className="clothes" key={index} style={{ width: '20%' }}>
+        {currentPageProdutos.map((produto, index) => (
+          <div className="clothes" key={index} style={{ width: "20%" }}>
             <Link to="/product">
               <img src={produto.url_image} alt={produto.nome_prodpromo} />
             </Link>
             <Link to="/product">
-              <h6 className="text-card">{produto.nome_prodpromo}</h6>
+              <h6 className="text-card-clothes">{produto.nome_prodpromo}</h6>
             </Link>
-            <h6 className="text-card">R$ {produto.preço}</h6>
+            <h6 className="text-card-clothes">R$ {produto.preço}</h6>
           </div>
         ))}
       </div>
+
+      <div className="pagination-container">
+      <ReactPaginate
+        previousLabel={<button className="custom-button">ANTERIOR</button>}
+        nextLabel={<button className="custom-button">PRÓXIMO</button>}
+        breakLabel={"..."}
+        pageCount={pageCount}
+        marginPagesDisplayed={2}
+        pageRangeDisplayed={5}
+        onPageChange={handlePageChange}
+        containerClassName={"pagination"}
+        subContainerClassName={"pages pagination"}
+        activeClassName={"active"}
+        previousClassName={prevButtonClass}
+        nextClassName={nextButtonClass}
+        pageClassName={"page-count"}
+        pageLinkClassName={"page-link"}
+      /> </div>
 
       <footer>
         <section className="footer-section">
@@ -219,222 +274,3 @@ const Sale = () => {
 };
 
 export default Sale;
-
-/*const Props = () => {
-  return (
-    <div className="main">
-    <header className="main-header">
-        <div className="logo">
-        <Link to="/"> <img src="src/assets/logo.png" alt="Logo" /> </Link>
-        </div>
-        <div className="icons">
-            <Link to="/login">
-              <i
-                className="bx bx-user bt-header"
-                style={{ color: "#ffffff" }}
-              ></i>
-            </Link>
-            <Link to="/wishlist">
-              <i
-                className="bx bx-heart bt-header"
-                style={{ color: "#ffffff" }}
-              ></i>
-            </Link>
-            <Link to="/cart">
-              <i
-                className="bx bx-cart bt-header"
-                style={{ color: "#ffffff" }}
-              ></i>
-            </Link>
-        </div>
-      </header>
-
-      <div className="search-container">
-        <input
-          type="text"
-          className="search-bar"
-          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
-        />
-        <button className="search-button" type="submit">
-          <i className="bx bx-search"></i>
-        </button>
-      </div>
-
-      <div className="title-section">
-      <h1 className="general-title">PROMOÇÕES</h1>
-      <hr className="hr-sections"></hr>
-      </div>
-      
-      <div className="product-grid">
-        <div className="product">
-            <img src="src/assets/modelo_1.png" alt="" />
-            <div className="product-name">Produto 1</div>
-            <div className="product-price">R$19.99</div>
-        </div>
-
-        <div className="product">
-            <img src="src/assets/modelo_1.png" alt="" />
-            <div className="product-name">Produto 2</div>
-            <div className="product-price">R$24.99</div>
-        </div>
-
-        <div className="product">
-        <img src="src/assets/modelo_1.png" alt="" />
-            <div className="product-name">Produto 3</div>
-            <div className="product-price">R$24.99</div>
-        </div>
-
-        <div className="product">
-        <img src="src/assets/modelo_1.png" alt="" />
-            <div className="product-name">Produto 4</div>
-            <div className="product-price">R$24.99</div>
-        </div>
-
-        <div className="product">
-        <img src="src/assets/modelo_1.png" alt="" />
-            <div className="product-name">Produto 5</div>
-            <div className="product-price">R$24.99</div>
-        </div>
-
-        <div className="product">
-        <img src="src/assets/modelo_1.png" alt="" />
-            <div className="product-name">Produto 6</div>
-            <div className="product-price">R$24.99</div>
-        </div>
-
-        <div className="product">
-        <img src="src/assets/modelo_1.png" alt="" />
-            <div className="product-name">Produto 7</div>
-            <div className="product-price">R$24.99</div>
-        </div>
-
-        <div className="product">
-        <img src="src/assets/modelo_1.png" alt="" />
-            <div className="product-name">Produto 8</div>
-            <div className="product-price">R$24.99</div>
-        </div>
-
-        <div className="product">
-        <img src="src/assets/modelo_1.png" alt="" />
-            <div className="product-name">Produto 9</div>
-            <div className="product-price">R$24.99</div>
-        </div>
-
-        <div className="product">
-        <img src="src/assets/modelo_1.png" alt="" />
-            <div className="product-name">Produto 10</div>
-            <div className="product-price">R$24.99</div>
-        </div>
-
-        <div className="product">
-        <img src="src/assets/modelo_1.png" alt="" />
-            <div className="product-name">Produto 11</div>
-            <div className="product-price">R$24.99</div>
-        </div>
-
-        <div className="product">
-        <img src="src/assets/modelo_1.png" alt="" />
-            <div className="product-name">Produto 12</div>
-            <div className="product-price">R$24.99</div>
-        </div>
-
-        <div className="product">
-        <img src="src/assets/modelo_1.png" alt="" />
-            <div className="product-name">Produto 13</div>
-            <div className="product-price">R$24.99</div>
-        </div>
-
-        <div className="product">
-        <img src="src/assets/modelo_1.png" alt="" />
-            <div className="product-name">Produto 14</div>
-            <div className="product-price">R$24.99</div>
-        </div>
-
-        <div className="product">
-        <img src="src/assets/modelo_1.png" alt="" />
-            <div className="product-name">Produto 15</div>
-            <div className="product-price">R$24.99</div>
-        </div>
-
-        <div className="product">
-        <img src="src/assets/modelo_1.png" alt="" />
-            <div className="product-name">Produto 16</div>
-            <div className="product-price">R$24.99</div>
-        </div>
-
-        <div className="product">
-        <img src="src/assets/modelo_1.png" alt="" />
-            <div className="product-name">Produto 17</div>
-            <div className="product-price">R$24.99</div>
-        </div>
-
-        <div className="product">
-        <img src="src/assets/modelo_1.png" alt="" />
-            <div className="product-name">Produto 18</div>
-            <div className="product-price">R$24.99</div>
-        </div>
-
-        <div className="product">
-        <img src="src/assets/modelo_1.png" alt="" />
-            <div className="product-name">Produto 19</div>
-            <div className="product-price">R$24.99</div>
-        </div>
-
-        <div className="product">
-        <img src="src/assets/modelo_1.png" alt="" />
-            <div className="product-name">Produto 20</div>
-            <div className="product-price">R$24.99</div>
-        </div>
-    </div>
-
-      
-      <footer>
-        <section className="footer-section">
-          <div className="footer-section-div">
-            <img src="src/assets/whale.png" />
-          </div>
-
-          <div className="footer-section-div">
-            <h3>SOBRE NÓS</h3>
-            <li>
-                <Link to="/company">A EMPRESA</Link>
-            </li>
-            <li>
-                <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
-            </li>
-            <li>
-                <Link to="/partners">NOSSOS PARCEIROS</Link>
-            </li>
-          </div>
-
-          <div className="footer-section-div">
-            <h3>SUPORTE</h3>
-            <li>
-                <Link to="/services">ATENDIMENTO</Link>
-            </li>
-            <li>
-                <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
-            </li>
-            <li>
-                <Link to="/sitemap">MAPA DO SITE</Link>
-            </li>
-          </div>
-
-          <div className="footer-section-div">
-            <h3>CONTATOS</h3>
-              <i className="fa fa-whatsapp"></i>
-              <i className="fa fa-google"></i>
-              <i className="fa fa-instagram"></i>
-          </div>
-        </section>
-      </footer>
-
-      <div className="last-text">
-        <p className="text-sub-footer">maremansa</p>
-      </div>
-    </div>
-    </div>
-  );
-};
-
-export default Props;*/
