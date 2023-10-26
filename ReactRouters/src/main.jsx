@@ -142,6 +142,11 @@ const router = createBrowserRouter([
     path: "/confirmation",
     element: <Confirmation />,
   },
+
+  {
+    path: "*",
+    element: <ErrorPage />,
+  },
 ]);
 
 /*const router = createBrowserRouter([
