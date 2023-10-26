@@ -52,26 +52,33 @@ const Home = () => {
           <img src="/assets/logo.png" alt="Logo" />
         </div>
         <div className="icons">
-          <Link to="/requests">
-            <i
-              className="bx bx-user bt-header"
-              style={{ color: "#ffffff" }}
-            ></i>
-          </Link>
-          <Link to="/wishlist">
-            <i
-              className="bx bx-heart bt-header"
-              style={{ color: "#ffffff" }}
-            ></i>
-          </Link>
-          <Link to="/cart">
-            <i
-              className="bx bx-cart bt-header"
-              style={{ color: "#ffffff" }}
-            ></i>
-          </Link>
+          <a href="#">
+            <Link to="/login">
+              <i
+                className="bx bx-user bt-header"
+                style={{ color: "#ffffff" }}
+              ></i>
+            </Link>
+          </a>
+          <a href="#">
+            <Link to="/wishlist">
+              <i
+                className="bx bx-heart bt-header"
+                style={{ color: "#ffffff" }}
+              ></i>
+            </Link>
+          </a>
+          <a href="#">
+            <Link to="/cart">
+              <i
+                className="bx bx-cart bt-header"
+                style={{ color: "#ffffff" }}
+              ></i>
+            </Link>
+          </a>
         </div>
       </header>
+
 
     <div className ='space'>
       <div className="search-container-geral">
@@ -83,6 +90,7 @@ const Home = () => {
           <i className="bx bx-search"></i>
         </button>
       </div>
+
 
       <div className="carousel-container">
         <div id="carouselExampleIndicators" className="carousel slide">
@@ -268,9 +276,10 @@ const Home = () => {
           <i className="fa fa-instagram"></i>
         </div>
       </section>
-    </footer><div className="last-text">
+    <div className="last-text">
         <p className="text-sub-footer">maremansa</p>
       </div>
+      </footer>
     </div>
   );
 };
