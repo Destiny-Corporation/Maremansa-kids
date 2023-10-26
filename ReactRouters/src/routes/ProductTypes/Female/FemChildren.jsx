@@ -30,7 +30,7 @@ const FemChildren = () => {
  
   useEffect(() => {
     const fetchProdutos = async () => {
-      const produtosCollection = collection(firestore, "ProdPomo");
+      const produtosCollection = collection(firestore, "Prodfemme");
       const produtosSnapshot = await getDocs(produtosCollection);
       const produtosData = produtosSnapshot.docs.map((doc) => doc.data());
       setProdutos(produtosData);
@@ -47,20 +47,18 @@ const handleFilterChange = (e) => {
 
 
 const filteredProdutos = produtos.filter((produto) => {
-  // Verifica se o produto corresponde à categoria selecionada ou se a categoria é "All".
-  if (filterParam === "All" || produto.nome_prodpromo.toLowerCase().includes(filterParam.toLowerCase())) {
-    // Verifica se o produto corresponde ao termo de pesquisa.
-    return produto.nome_prodpromo.toLowerCase().includes(searchTerm.toLowerCase());
+  if (produto.nome_prodfemme && (filterParam === "All" || produto.nome_prodfemme.toLowerCase().includes(filterParam.toLowerCase()))) {
+    return produto.nome_prodfemme.toLowerCase().includes(searchTerm.toLowerCase());
   }
-  return false; // Produto não corresponde à categoria selecionada.
+  return false;
 });
 
 const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
   if (isFilterActive && maxPrice !== null) {
     // Verifica se o preço está no formato correto (por exemplo, "R$ 50,00")
-    if (produto.preço && typeof produto.preço === "string") {
+    if (produto.preço_atacado && typeof produto.preço_atacado === "string") {
       const precoNumerico = parseFloat(
-        produto.preço.replace("R$ ", "").replace(",", ".")
+        produto.preço_atacado.replace("R$ ", "").replace(",", ".")
       );
       return precoNumerico <= maxPrice;
     }
@@ -193,12 +191,12 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
           {currentPageProdutos.map((produto, index) => (
             <div className="clothes" key={index} style={{ width: "20%" }}>
               <Link to="/product">
-                <img src={produto.url_image} alt={produto.nome_prop} />
+                <img src={produto.url_image} alt={produto.nome_prodfemme} />
               </Link>
               <Link to="/product">
-                <h6 className="text-card-clothes">{produto.nome_prop}</h6>
+                <h6 className="text-card-clothes">{produto.nome_prodfemme}</h6>
               </Link>
-              <h6 className="text-card-clothes">R$ {produto.preço}</h6>
+              <h6 className="text-card-clothes">R$ {produto.preço_atacado}</h6>
             </div>
           ))}
         </div>
