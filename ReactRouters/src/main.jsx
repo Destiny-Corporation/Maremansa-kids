@@ -42,10 +42,7 @@ const router = createBrowserRouter([
     path: "/exchanges",
     element: <Exchanges />,
   },
-  {
-    path: "/product:productName",
-    element: <Product />,
-  },
+
   {
     path: "/partners",
     element: <Partners />,
@@ -133,6 +130,10 @@ const router = createBrowserRouter([
   {
     path: "/requests",
     element: <Requests />,
+  },
+  {
+    path: "/product/:collectionName/:productName",
+    element: <Product />,
   },
   {
     path: "/checkout",

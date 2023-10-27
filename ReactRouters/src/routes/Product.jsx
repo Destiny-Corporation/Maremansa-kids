@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
-import { getFirestore, collection, doc, getDocs } from "firebase/firestore";
+import { getFirestore, collection, doc, getDoc } from "firebase/firestore";
 import ReactPaginate from "react-paginate";
 
 const firebaseConfig = {
@@ -26,12 +26,13 @@ const Cart = () => {
   const [zipcode, setZipcode] = useState("");
   const [shippingCost, setShippingCost] = useState(0);
   const [productData, setProductData] = useState(null);
-  const { productName } = useParams();
+  const { collectionName, productName } = useParams();
 
   useEffect(() => {
     const fetchProductData = async () => {
       try {
-        const productRef = doc(firestore, "Props", productName); // Substitua "products" pelo nome da sua coleção
+        console.log(productName);
+        const productRef = doc(firestore, collectionName, productName); // Substitua "products" pelo nome da sua coleção
         const productSnapshot = await getDoc(productRef);
         if (productSnapshot.exists()) {
           setProductData(productSnapshot.data());
@@ -44,7 +45,7 @@ const Cart = () => {
     };
 
     fetchProductData();
-  }, [productName]);
+  }, [collectionName, productName]);
 
   if (!productData) {
     return <div>Carregando...</div>;
