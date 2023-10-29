@@ -189,10 +189,10 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
           {currentPageProdutos.map((produto, index) => (
             <div className="clothes" key={index} style={{ width: "20%" }}>
               <Link to="/product">
-                <img src={produto.url_image} alt={produto.nome_propmale} />
+                <img src={produto.url_image} alt={produto.nome_prodmale} />
               </Link>
               <Link to="/product">
-                <h6 className="text-card-clothes">{produto.nome_propmale}</h6>
+                <h6 className="text-card-clothes">{produto.nome_prodmale}</h6>
               </Link>
               <h6 className="text-card-clothes">R$ {produto.preço_atacado}</h6>
             </div>
