@@ -177,15 +177,6 @@ const Home = () => {
         </div>
 
         <div className="button-menu">
-          <Link to="/props">
-            <img src="/assets/accessories.png" alt="" />
-          </Link>
-          <Link to="/props">
-            <h6>ACESSÓRIOS</h6>
-          </Link>
-        </div>
-
-        <div className="button-menu">
           <Link to="female">
             <img src="/assets/female.png" alt="" />
           </Link>
@@ -200,6 +191,15 @@ const Home = () => {
           </Link>
           <Link to="male">
             <h6>MASCULINO</h6>
+          </Link>
+        </div>
+
+        <div className="button-menu">
+          <Link to="/props">
+            <img src="/assets/accessories.png" alt="" />
+          </Link>
+          <Link to="/props">
+            <h6>ACESSÓRIOS</h6>
           </Link>
         </div>
       </div>

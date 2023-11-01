@@ -125,28 +125,11 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
         </div>
       </header>
 
-      <div className="search-container">
-        <input
-          type="text"
-          className="search-bar"
-          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
-        />
-        <button className="search-button" type="submit">
-          <i className="bx bx-search"></i>
-        </button>
-      </div>
-
       <div className="title-section">
       <h1 className="general-title">MASCULINO</h1>
-      <button class="filter" onClick={handleFilterButtonClick}>
-            <img
-              src="/assets/filter.png"
-              alt="filtro"
-              className="button-image"
-            />
-          </button>
-        <hr className="hr-sections"></hr>
-      </div>
+
+      <hr size="1" />
+
 
 
         <div className="container-clothes-section">
@@ -207,6 +190,7 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
       </footer>
       <div className="last-text">
         <p className="text-sub-footer">maremansa</p>
+        </div>
       </div>
     </div>
   );
