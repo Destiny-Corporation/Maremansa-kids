@@ -1,29 +1,35 @@
 import React, { useState } from "react";
 import "../styles/Product.css";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { initializeApp } from "firebase/app";
+import { getStorage } from "firebase/storage";
+import { getFirestore, collection, doc, getDoc } from "firebase/firestore";
+import ReactPaginate from "react-paginate";
 
-function Product() {
-    const [selectedImage, setSelectedImage] = useState("/assets/principal.png");
-  
-    const handleQuantityChange = (newQuantity) => {
-      if (newQuantity >= 1) {
-        setSelectedQuantity(newQuantity);
-      }
-    };
+const firebaseConfig = {
+  apiKey: "AIzaSyDTKUI6nV-DZjIsUo1BMkjIUWOQbT9gU3Q",
+  authDomain: "auth-amanda.firebaseapp.com",
+  projectId: "auth-amanda",
+  storageBucket: "auth-amanda.appspot.com",
+  messagingSenderId: "376069750475",
+  appId: "1:376069750475:web:bfb216cfd8928a23e8a54e",
+};
 
-    const [selectedColor, setSelectedColor] = useState("");
-    const [showSelectedColor, setShowSelectedColor] = useState(false);
-  
-    const selectColor = (color) => {
-      setSelectedColor(color);
-      setShowSelectedColor(true);
-    };
+export const app = initializeApp(firebaseConfig);
+export const storage = getStorage(app);
+export const firestore = getFirestore(app);
 
-    const [selectedSize, setSelectedSize] = useState(""); 
-    const handleSizeSelect = (size) => {
-      setSelectedSize(size);
-    };
-    
+const Cart = () => {
+  const [productLoading, setProductLoading] = useState(true);
+  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedSize, setSelectedSize] = useState("");
+  const [cart, setCart] = useState([]);
+  const [zipcode, setZipcode] = useState("");
+  const [shippingCost, setShippingCost] = useState(0);
+  const [productData, setProductData] = useState(null);
+  const { collectionName, productName } = useParams();
+  const [productRef, setProductRef] = useState(null);
   const [selectedQuantity, setSelectedQuantity] = useState(1);
   const [total, setTotal] = useState(0);
   const [cartItems, setCartItems] = useState(() => {
@@ -36,11 +42,64 @@ function Product() {
     setCartVisible(!cartVisible);
   };
 
+  useEffect(() => {
+    const fetchProductData = async () => {
+      try {
+        console.log(productName);
+        const productData = doc(firestore, collectionName, productName); // Substitua "products" pelo nome da sua coleção
+        const productSnapshot = await getDoc(productData);
+        if (productSnapshot.exists()) {
+          setProductData(productSnapshot.data());
+        } else {
+          // Handle the case when the product is not found
+        }
+        setProductLoading(false);
+      } catch (error) {
+        console.error("Erro ao buscar dados do produto:", error);
+        // Handle the error state appropriately
+        setProductLoading(false);
+      }
+    };
+
+    fetchProductData();
+  }, [collectionName, productName]);
+
+  if (productLoading) {
+    return <div>Carregando...</div>;
+  }
+
   const handleAddToCart1 = () => {
     const data = {
       color: selectedColor,
       size: selectedSize,
       quantity: selectedQuantity,
+    };
+
+    const handleColorChange = (color) => {
+      setSelectedColor(color);
+    };
+
+    const handleSizeChange = (size) => {
+      setSelectedSize(size);
+    };
+
+    const addToCart = () => {
+      if (selectedColor && selectedSize) {
+        const newItem = {
+          color: selectedColor,
+          size: selectedSize,
+        };
+        setCart([...cart, newItem]);
+      } else {
+        alert(
+          "Por favor, selecione cor e tamanho antes de adicionar ao carrinho."
+        );
+      }
+    };
+
+    const calculateShippingCost = () => {
+      // Implemente a lógica real para calcular o custo de envio com base no CEP
+      // e atualize o estado de "shippingCost" com o valor calculado.
     };
 
     useEffect(() => {
@@ -152,24 +211,54 @@ function Product() {
           </Link>
         </div>
         <div className="icons">
-          <a href="#">
-            <Link to="/login">
-              <i
-                className="bx bx-user bt-header"
-                style={{ color: "#ffffff" }}
-              ></i>
-            </Link>
-          </a>
-          <a href="#">
-            <Link to="/wishlist">
-              <i
-                className="bx bx-heart bt-header"
-                style={{ color: "#ffffff" }}
-              ></i>
-            </Link>
-          </a>
+          <Link to="/login">
+            <i
+              className="bx bx-user bt-header"
+              style={{ color: "#ffffff" }}
+            ></i>
+          </Link>
+
+          <Link to="/wishlist">
+            <i
+              className="bx bx-heart bt-header"
+              style={{ color: "#ffffff" }}
+            ></i>
+          </Link>
+
           <i className="bx bx-cart bt-header" style={{ color: "#ffffff" }}></i>
         </div>
+      </header>
+
+      <div className="search-container-geral">
+        <input
+          type="text"
+          className="search-bar"
+          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
+        />
+        <button className="search-button" type="submit">
+          <i className="bx bx-search"></i>
+        </button>
+      </div>
+
+      <section className="main-products">
+        <div className="container">
+          <div className="products-left">
+            <div className="imagens">
+              <img className='small-images'
+                src="/assets/principal.png"
+                onClick={() => handleImageClick("/assets/principal.png")}
+              />
+
+              <img className="small-images"
+                src="/assets/image-2.png"
+                onClick={() => handleImageClick("/assets/image-2.png")}
+              />
+
+              <img className="small-images"
+                src="/assets/image-3.png"
+                onClick={() => handleImageClick("/assets/image-3.png")}
+              />
+            </div>
       </header>
 
       <div className="search-container-geral">
@@ -209,7 +298,7 @@ function Product() {
           <div className="left-side">
             <div className="items">
               <div className="select-image">
-                <img className='selected-image' src={selectedImage} />
+                <img src={productData ? productData.url_image : ""} />
               </div>
             </div>
           </div>
@@ -218,11 +307,13 @@ function Product() {
         <div className="container">
           <div className="right-side">
             <div className="content">
-              <h4 className="title-prod">Conjunto Pirata</h4>
+              <h4 className="title-prod">{productName}</h4>
               <hr className="hr-prod" size="1" />
 
               <span className="off">R$ 199,90</span>
-              <span className="price">R$ 149,90</span>
+              <span className="price">
+                R$ {productData ? productData.preço : ""}
+              </span>
 
               <br></br>
               <p className="text-prod">Selecione a cor do produto:</p>
@@ -396,18 +487,43 @@ function Product() {
               <Link to="/sitemap">MAPA DO SITE</Link>
             </li>
           </div>
+          <div className="footer-section-div">
+            <h3>SOBRE NÓS</h3>
+            <li>
+              <Link to="/company">A EMPRESA</Link>
+            </li>
+            <li>
+              <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
+            </li>
+            <li>
+              <Link to="/partners">NOSSOS PARCEIROS</Link>
+            </li>
+          </div>
+
+          <div className="footer-section-div">
+            <h3>SUPORTE</h3>
+            <li>
+              <Link to="/services">ATENDIMENTO</Link>
+            </li>
+            <li>
+              <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
+            </li>
+            <li>
+              <Link to="/sitemap">MAPA DO SITE</Link>
+            </li>
+          </div>
 
           <div className="footer-section-div">
             <h3>CONTATOS</h3>
-            <Link to="#">
+            <a href="https://whatsapp.com">
               <i className="fa fa-whatsapp"></i>
-            </Link>
-            <Link to="#">
+            </a>
+            <a href="https://google.com">
               <i className="fa fa-google"></i>
-            </Link>
-            <Link to="#">
+            </a>
+            <a href="https://instagram.com">
               <i className="fa fa-instagram"></i>
-            </Link>
+            </a>
           </div>
         </section>
         </footer>
@@ -417,6 +533,5 @@ function Product() {
         </div>
     </div>
   );
-}
-
-export default Product;
+};
+export default Cart;

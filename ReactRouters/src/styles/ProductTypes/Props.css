@@ -153,6 +153,8 @@
   background: whitesmoke;
   box-shadow: -2px 0 4px hsl(0 4% 15% / 10%);
   transition: 0.3s;
+  max-height: 100px;
+  overflow-y: scroll;
 }
 
 .cart.active {
@@ -205,10 +207,6 @@
   font-size: 1rem;
 }
 
-.cart-content {
-  max-height: 700px; /* Defina a altura máxima do carrinho de compras */
-  overflow-y: scroll; /* Adicione a rolagem vertical quando o conteúdo ultrapassar a altura máxima */
-}
 .cart-item-details {
   display: grid;
   row-gap: 0.5rem;

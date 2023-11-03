@@ -3,14 +3,14 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
-import store from './routes/Checkout/store.js'; // Importe sua loja configurada
-
+import store from "./routes/Checkout/store.js"; // Importe sua loja configurada
 
 import Home from "./routes/Home";
 import Company from "./routes/About/Company.jsx";
 import Login from "./routes/User/Login.jsx";
 import Register from "./routes/User/Register.jsx";
 import Cart from "./routes/HeaderPaths/Cart.jsx";
+import Cart2 from "./routes/HeaderPaths/Cart2.jsx";
 import Wishlist from "./routes/HeaderPaths/Wishlist.jsx";
 import Female from "./routes/ProductTypes/Female.jsx";
 import Male from "./routes/ProductTypes/Male.jsx";
@@ -78,10 +78,7 @@ const router = createBrowserRouter([
     path: "/exchanges",
     element: <Exchanges />,
   },
-  {
-    path: "/product",
-    element: <Product />,
-  },
+
   {
     path: "/partners",
     element: <Partners />,
@@ -109,6 +106,10 @@ const router = createBrowserRouter([
   {
     path: "/cart",
     element: <Cart />,
+  },
+  {
+    path: "/cart2",
+    element: <Cart2 />,
   },
   {
     path: "/wishlist",
@@ -171,6 +172,10 @@ const router = createBrowserRouter([
     element: <Requests />,
   },
   {
+    path: "/product/:collectionName/:productName",
+    element: <Product />,
+  },
+  {
     path: "/checkout",
     element: <Checkout />,
   },
@@ -179,11 +184,10 @@ const router = createBrowserRouter([
     element: <Confirmation />,
   },
 
-
   {
     path: "*",
-    element: <ErrorPage />,  
-  }
+    element: <ErrorPage />,
+  },
 ]);
 
 /*const router = createBrowserRouter([
@@ -203,7 +207,6 @@ const router = createBrowserRouter([
     ],
   },
 ]);*/
-
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

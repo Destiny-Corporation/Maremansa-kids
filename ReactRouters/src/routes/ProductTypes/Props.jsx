@@ -26,7 +26,14 @@ const Props = () => {
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [isFilterActive, setIsFilterActive] = useState(false);
   const [maxPrice, setMaxPrice] = useState(null);
-  const nomesProdutos = ["Conjunto", "Boia", "Óculos", "Relógia", "Sandália", "Colete"];
+  const nomesProdutos = [
+    "Conjunto",
+    "Boia",
+    "Óculos",
+    "Relógia",
+    "Sandália",
+    "Colete",
+  ];
   const [total, setTotal] = useState(0);
   const [cartItems, setCartItems] = useState(() => {
     const savedCartItems = localStorage.getItem("cartItems");
@@ -37,7 +44,6 @@ const Props = () => {
   const handleCartIconClick = () => {
     setCartVisible(!cartVisible);
   };
-
 
   useEffect(() => {
     // Recupera os itens do carrinho do localStorage ao carregar a página
@@ -103,10 +109,13 @@ const Props = () => {
   const handleFilterChange = (e) => {
     setFilterParam(e.target.value);
   };
-  
+
   const filteredProdutos = produtos.filter((produto) => {
     // Verifica se o produto corresponde à categoria selecionada ou se a categoria é "All".
-    if (filterParam === "All" || produto.nome_prop.toLowerCase().includes(filterParam.toLowerCase())) {
+    if (
+      filterParam === "All" ||
+      produto.nome_prop.toLowerCase().includes(filterParam.toLowerCase())
+    ) {
       // Verifica se o produto corresponde ao termo de pesquisa.
       return produto.nome_prop.toLowerCase().includes(searchTerm.toLowerCase());
     }
@@ -252,12 +261,12 @@ const Props = () => {
           </div>
 
           <Link to="/checkout">
-          <button type="button" className="btn-buy">
-            Buy Now
-          </button>
+            <button type="button" className="btn-buy">
+              Buy Now
+            </button>
           </Link>
-          
-          <Link to="/cart">
+
+          <Link to="/cart2">
             <button type="button" className="btn-buy">
               Ver meu carrinho
             </button>
@@ -296,38 +305,43 @@ const Props = () => {
               className="button-image"
             />
           </button>
-        <hr className="hr-sections"></hr>
-      </div>
+          <hr className="hr-sections"></hr>
+        </div>
 
-      {isFilterActive && (
-  <div className="filter-container">
-    <div className="filter-content">
-      <p className="filter-title">FILTRAR</p>
-      <hr className="filter-hr" />
+        {isFilterActive && (
+          <div className="filter-container">
+            <div className="filter-content">
+              <p className="filter-title">FILTRAR</p>
+              <hr className="filter-hr" />
 
-      <ul className="filter-list">
-        <li>
-          <label className='filter-label'>CATEGORIAS:</label>
-        </li>
-        {nomesProdutos.map((nome, index) => (
-          <li className='filter-item' key={index}>
-            <button
-              className="filter-option"
-              onClick={() => handleFilterChange({ target: { value: nome } })}
-            >
-              {nome}
-            </button>
-          </li>
-         ))}
-         <li>
-           <button className="close-button" onClick={handleFilterButtonClick}>
-             X
-           </button>
-         </li>
-       </ul>
-     </div>
-   </div>
- )}
+              <ul className="filter-list">
+                <li>
+                  <label className="filter-label">CATEGORIAS:</label>
+                </li>
+                {nomesProdutos.map((nome, index) => (
+                  <li className="filter-item" key={index}>
+                    <button
+                      className="filter-option"
+                      onClick={() =>
+                        handleFilterChange({ target: { value: nome } })
+                      }
+                    >
+                      {nome}
+                    </button>
+                  </li>
+                ))}
+                <li>
+                  <button
+                    className="close-button"
+                    onClick={handleFilterButtonClick}
+                  >
+                    X
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        )}
 
         {/*<li className="price-filter">
           <label>Preço até:</label>
@@ -342,7 +356,7 @@ const Props = () => {
             Adicione mais opções conforme necessário 
           </select>
             </li>*/}
-            
+
         <div className="items-per-page">
           <label>Itens por página:</label>
           <select
@@ -365,7 +379,7 @@ const Props = () => {
                   alt={produto.nome_prop}
                 />
               </Link>
-              <Link to="/product">
+              <Link to={`/product/${"Props"}/${produto.nome_prop}`}>
                 <h6 className="nome_prod">{produto.nome_prop}</h6>
               </Link>
               <div className="des">
