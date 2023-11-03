@@ -226,12 +226,12 @@ const MaleBaby = () => {
           {currentPageProdutos.map((produto, index) => (
             <div className="clothes" key={index} style={{ width: "20%" }}>
               <Link to="/product">
-                <img src={produto.url_image} alt={produto.nome_prop} />
+                <img src={produto.url_image} alt={produto.nome_prodmale} />
               </Link>
               <Link to="/product">
-                <h6 className="text-card-clothes">{produto.nome_prop}</h6>
+                <h6 className="text-card-clothes">{produto.nome_prodmale}</h6>
               </Link>
-              <h6 className="text-card-clothes">R$ {produto.preço}</h6>
+              <h6 className="text-card-clothes">R$ {produto.preço_atacado}</h6>
             </div>
           ))}
         </div>

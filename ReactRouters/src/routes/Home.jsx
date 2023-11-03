@@ -25,7 +25,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchProdutos = async () => {
-      const produtosCollection = collection(firestore, "Props");
+      const produtosCollection = collection(firestore, "Prodfemme");
       const produtosSnapshot = await getDocs(produtosCollection);
       const produtosData = produtosSnapshot.docs.map((doc) => doc.data());
       setProdutos(produtosData);
@@ -274,8 +274,17 @@ const Home = () => {
         </section>
       </footer>
       <div className="last-text">
+        <div className="footer-section-div">
+          <h3>CONTATOS</h3>
+          <i className="fa fa-whatsapp"></i>
+          <i className="fa fa-google"></i>
+          <i className="fa fa-instagram"></i>
+        </div>
+      </section>
+    <div className="last-text">
         <p className="text-sub-footer">maremansa</p>
       </div>
+      </footer>
     </div>
   );
 };

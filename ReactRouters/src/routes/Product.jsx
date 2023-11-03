@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import "../styles/Product.css";
 import { Link, useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
@@ -254,6 +255,29 @@ const Cart = () => {
 
               <img src="/assets/image-4.png" />
             </div>
+      </header>
+
+      <div className="search-container-geral">
+        <input
+          type="text"
+          className="search-bar"
+          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
+        />
+        <button className="search-button" type="submit">
+          <i className="bx bx-search"></i>
+        </button>
+      </div>
+
+      <section className="main-products">
+        <div className="container">
+          <div className="products-left">
+            <div className="imagens">
+              <img src="/assets/image-2.png" />
+
+              <img src="/assets/image-3.png" />
+
+              <img src="/assets/image-4.png" />
+            </div>
           </div>
         </div>
 
@@ -433,6 +457,31 @@ const Cart = () => {
               <Link to="/sitemap">MAPA DO SITE</Link>
             </li>
           </div>
+          <div className="footer-section-div">
+            <h3>SOBRE NÓS</h3>
+            <li>
+              <Link to="/company">A EMPRESA</Link>
+            </li>
+            <li>
+              <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
+            </li>
+            <li>
+              <Link to="/partners">NOSSOS PARCEIROS</Link>
+            </li>
+          </div>
+
+          <div className="footer-section-div">
+            <h3>SUPORTE</h3>
+            <li>
+              <Link to="/services">ATENDIMENTO</Link>
+            </li>
+            <li>
+              <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
+            </li>
+            <li>
+              <Link to="/sitemap">MAPA DO SITE</Link>
+            </li>
+          </div>
 
           <div className="footer-section-div">
             <h3>CONTATOS</h3>
@@ -451,6 +500,7 @@ const Cart = () => {
         <div className="last-text">
           <p className="text-sub-footer">maremansa</p>
         </div>
+      </footer>
       </footer>
     </div>
   );

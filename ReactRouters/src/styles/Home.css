@@ -89,11 +89,7 @@ body {
   }
 }
 
-.space {
-  margin: 50px;
-}
-
-.search-container-geral {
+.search-container {
   width: 98%;
   height: 40px;
   margin: 12px auto;
@@ -209,6 +205,8 @@ body {
   cursor: pointer;
   transition: 0.3s;
 }
+
+
 
 @media (max-width: 768px) {
   .container-menu-buttons {
@@ -414,6 +412,7 @@ hr {
   text-align: center;
   z-index: 999;
   height: 30px;
+  padding-top: 10px;
 }
 
 .text-sub-footer {

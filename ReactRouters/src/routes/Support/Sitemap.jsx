@@ -63,32 +63,37 @@ const Sitemap = () => {
       de verão dos seus pequenos. Não deixe de conferir as opções incríveis que temos para você!</p></div>
 
       <div className="map"><img className='image-map' src="/assets/homeabout.jpeg"/></div>
-      <div className="map"><img className='image-map' src="/assets/saleabout.jpeg"/></div>
-      <div className="map"><img className='image-map' src="/assets/props.jpeg"/></div>
-      <div className="map"><img className='image-map' src="/assets/fem.jpeg"/></div>
-      <div className="map"><img className='image-map' src="/assets/maleabout.jpeg"/></div>
-    <div className="site-map">
+      <div className="site-map">
         <ul>     
-            <li><Link to="/">Home</Link></li>
+            <li><Link to="/">Home</Link></li> </ul></div>
+      <div className="map"><img className='image-map' src="/assets/saleabout.jpeg"/></div>
+      <div className="site-map">
+        <ul>     
+            <li><Link to="/sale">Promoções</Link></li> </ul></div>
+      <div className="map"><img className='image-map' src="/assets/props.jpeg"/></div>
+      <div className="site-map">
+        <ul>     
+            <li><Link to="/props">Acessórios</Link></li> </ul></div>
+      <div className="map"><img className='image-map' src="/assets/fem.jpeg"/></div>
+      <div className="site-map">
+      <ul>     
             <li><Link to="/female">Feminino</Link>
                 <ul>
                     <li className="sub-list"><Link to="/">Baby</Link></li>
                     <li className="sub-list"><Link to="/">Infantil</Link></li>
                     <li className="sub-list"><Link to="/">Juvenil</Link></li>
                 </ul>
-            </li>
-            <li><Link to="/male">Masculino</Link>
+            </li> </ul> </div>
+      <div className="map"><img className='image-map' src="/assets/maleabout.jpeg"/></div>
+      <div className="site-map">
+        <ul>  
+      <li><Link to="/male">Masculino</Link>
                 <ul>
                     <li className="sub-list"><Link to="/">Baby</Link></li>
                     <li className="sub-list"><Link to="/">Infantil</Link></li>
                     <li className="sub-list"><Link to="/">Juvenil</Link></li>
                 </ul>
-            </li>
-            <li><Link to="/sale">Promoções</Link></li>
-            <li><Link to="/props">Acessórios</Link></li>
-        </ul>
-    </div>
-
+            </li> </ul> </div>
 
       <footer style={{position: "static" }}>
         <section className="footer-section">
