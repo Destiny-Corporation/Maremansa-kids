@@ -89,21 +89,31 @@
   display: flex;
   align-items: center;
   font-size: 16px;
-  color: black;
+  color: #48a3a9;
 }
 
 .items-per-page label {
   margin-right: 10px;
-  color: black;
+  color: #48a3a9;
+}
+
+.nome_prod {
+  color: #48a3a9;
+  margin-left: 36px;
+  text-align: left;
+  font-size: 14px;
+  text-transform: uppercase;
+  margin-top: 10px;
+  letter-spacing: 2px;
 }
 
 .items-per-page select {
-  color: black;
+  color: #48a3a9;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  background-color: #fff;
-  font-size: 16px;
+  background-color: transparent;
+  font-size: 10px;
   outline: none;
 }
 .des {
@@ -112,16 +122,25 @@
 }
 .price {
   font-weight: 500;
+  color: #48a3a9;
+  margin-left: 36px;
+  font-size: 10px;
 }
 
 .bx-shopping-bag {
-  margin-left: 90px;
+  margin-left: 80px;
   bottom: 0;
   right: 0;
-  background: darkslategrey;
-  color: whitesmoke;
+  background: transparent;
+  color: #48a3a9;
   padding: 10px;
   cursor: pointer;
+  font-size: 20px;
+  margin-top: -10px;
+}
+
+.bx-shopping-bag:hover {
+  color: #2a777c;
 }
 .cart {
   position: fixed;

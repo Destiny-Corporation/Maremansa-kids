@@ -276,10 +276,10 @@ const Home = () => {
           <i className="fa fa-instagram"></i>
         </div>
       </section>
+      </footer>
     <div className="last-text">
         <p className="text-sub-footer">maremansa</p>
       </div>
-      </footer>
     </div>
   );
 };

@@ -120,6 +120,7 @@
   justify-content: space-evenly;
   flex-direction: column;
   max-width: 400px;
+  margin-right: -40px;
 }
 
 .imagens img{
@@ -177,7 +178,7 @@
 }
 
 .text-prod {
-  font-size: 14px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 2px;
 }
@@ -185,7 +186,8 @@
 .title-prod {
   font-size: 26px;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
+  font-weight: 600;
 }
 
 .color-buttons {
@@ -196,17 +198,23 @@
 .color-button {
   margin-right: 10px;
   border: 2px solid #48a3a9;
+  border-radius: 10px;
   padding: 15px 15px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
+.color-button:hover {
+  border: 3px solid #247479;
+}
+
 #selected-color {
-    margin-top: 15px;
-    margin-bottom: 5px;
+    margin-top: 4px;
+    margin-bottom: 10px;
     text-transform: uppercase;
     letter-spacing: 2px;
-    font-size: 12px;
+    font-size: 9px;
+    font-weight: 700;
 }
 
 .hr-prod {
@@ -263,20 +271,56 @@
   margin-right: 10px;
 }
 
+.selected-image {
+  width: auto;
+  height: 500px;
+}
+
+.small-images {
+  width: auto;
+  height: 150px;
+  border-radius: 10px;
+}
+
+.small-images:hover {
+  border: 3px solid #48a3a9;
+  border-radius: 10px;
+}
+
+.products-left {
+  margin-left: 0px;
+}
+
+.selected-color-button {
+  border-color: #d811df;
+}
+
+
+.left-side {
+  margin-left: 0px;
+}
+
 
 .selected {
-   border: 1px solid #000;
+   border: 1px solid #247479;
+}
+
+.size-option:hover {
+  color: #247479;
+  border: 2px solid #247479;
 }
 
 .amount button{
   cursor: pointer;
   display: flex;
   align-items: center;
-  border: 1px solid rgb(245, 252, 252);
+  border: none;
   color: #48a3a9;
-  background-color: rgb(245, 252, 252);
+  background-color: transparent;
   width: fit-content;
   height: 20px;
+  font-size: 16px;
+  font-family: 'Stylish', sans-serif;
 }
 
 .buttons-cart {
@@ -292,6 +336,7 @@
   align-items: center; 
   width: 300px;
   gap: 5px;
+  margin-left: 0px;
   font-size: 10px;
   padding: 10px 20px;
   transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
@@ -339,20 +384,29 @@
   padding: 10px;
   border-radius: 10px;
   height: 40px;
-  margin-right: 10px;
+  margin-right: 1px;
+}
+
+.cep::placeholder{
+  color:#48a3a99d;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 10px;
 }
 
 .cep button {
-  height: 40px;
+  height: 35px;
+  width: 38px;
   background-color: none;
   font-size: 14px;
   font-family: "Stylish", sans-serif;
-  color: #48a3a9;
+  color: #ffffff;
   border: 2px solid #48a3a9;
-  padding: 10px;
+  padding: 6px;
   cursor: pointer;
   transition: background-color 0.3s;
   border-radius: 10px;
+
 }
 
 footer {

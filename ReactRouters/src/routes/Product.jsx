@@ -3,8 +3,27 @@ import "../styles/Product.css";
 import { Link } from "react-router-dom";
 
 function Product() {
-  const [selectedColor, setSelectedColor] = useState("");
-  const [selectedSize, setSelectedSize] = useState("");
+    const [selectedImage, setSelectedImage] = useState("/assets/principal.png");
+  
+    const handleQuantityChange = (newQuantity) => {
+      if (newQuantity >= 1) {
+        setSelectedQuantity(newQuantity);
+      }
+    };
+
+    const [selectedColor, setSelectedColor] = useState("");
+    const [showSelectedColor, setShowSelectedColor] = useState(false);
+  
+    const selectColor = (color) => {
+      setSelectedColor(color);
+      setShowSelectedColor(true);
+    };
+
+    const [selectedSize, setSelectedSize] = useState(""); 
+    const handleSizeSelect = (size) => {
+      setSelectedSize(size);
+    };
+    
   const [selectedQuantity, setSelectedQuantity] = useState(1);
   const [total, setTotal] = useState(0);
   const [cartItems, setCartItems] = useState(() => {
@@ -23,6 +42,7 @@ function Product() {
       size: selectedSize,
       quantity: selectedQuantity,
     };
+
     useEffect(() => {
       // Recupera os itens do carrinho do localStorage ao carregar a página
       const savedCartItems = localStorage.getItem("cartItems");
@@ -71,13 +91,13 @@ function Product() {
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
     }, [cartItems]);
 
-    function getSize(size, element) {
+    {/*function getSize(size, element) {
       const sizeOptions = document.querySelectorAll(".size-option");
       sizeOptions.forEach((option) => {
         option.classList.remove("selected");
       });
       element.classList.add("selected");
-    }
+    }*/}
 
     var valorAtual = 1;
     var valorElement = document.getElementById("valor");
@@ -93,12 +113,7 @@ function Product() {
         valorElement.textContent = valorAtual;
       }
     }
-
-    function selectColor(color) {
-      document.getElementById("selected-color").innerHTML =
-        "Cor selecionada: " + color;
-    }
-
+    
     function buscarCEP() {
       var cep = document.getElementById("cep").value;
       $.ajax({
@@ -172,11 +187,20 @@ function Product() {
         <div className="container">
           <div className="products-left">
             <div className="imagens">
-              <img src="/assets/image-2.png" />
+              <img className='small-images'
+                src="/assets/principal.png"
+                onClick={() => handleImageClick("/assets/principal.png")}
+              />
 
-              <img src="/assets/image-3.png" />
+              <img className="small-images"
+                src="/assets/image-2.png"
+                onClick={() => handleImageClick("/assets/image-2.png")}
+              />
 
-              <img src="/assets/image-4.png" />
+              <img className="small-images"
+                src="/assets/image-3.png"
+                onClick={() => handleImageClick("/assets/image-3.png")}
+              />
             </div>
           </div>
         </div>
@@ -185,7 +209,7 @@ function Product() {
           <div className="left-side">
             <div className="items">
               <div className="select-image">
-                <img src="/assets/principal.png" />
+                <img className='selected-image' src={selectedImage} />
               </div>
             </div>
           </div>
@@ -203,87 +227,116 @@ function Product() {
               <br></br>
               <p className="text-prod">Selecione a cor do produto:</p>
               <div className="color-buttons">
-                <button
-                  className="color-button"
-                  style={{
-                    backgroundColor: "red",
-                    padding: "18px",
-                    cursor: "pointer",
-                    borderRadius: "10px",
-                  }}
-                  onclick={() => selectColor("vermelho")}
-                ></button>
-                <button
-                  className="color-button"
-                  style={{
-                    backgroundColor: "blue",
-                    padding: "18px",
-                    cursor: "pointer",
-                    borderRadius: "10px",
-                  }}
-                  onclick={() => selectColor("azul")}
-                ></button>
-                <button
-                  className="color-button"
-                  style={{
-                    backgroundColor: "green",
-                    padding: "18px",
-                    cursor: "pointer",
-                    borderRadius: "10px",
-                  }}
-                  onclick={() => selectColor("verde")}
-                ></button>
-                <button
-                  className="color-button"
-                  style={{
-                    backgroundColor: "yellow",
-                    padding: "18px",
-                    cursor: "pointer",
-                    borderRadius: "10px",
-                  }}
-                  onClick={() => selectColor("amarelo")}
-                ></button>
+  <button
+    className="color-button"
+    style={{
+      backgroundColor: "pink",
+      padding: "18px",
+      cursor: "pointer",
+      borderRadius: "10px",
+    }}
+    onClick={() => selectColor("rosa")}
+  ></button>
+  <button
+    className="color-button"
+    style={{
+      backgroundColor: "#7d6cdb",
+      padding: "18px",
+      cursor: "pointer",
+      borderRadius: "10px",
+    }}
+    onClick={() => selectColor("roxo")}
+  ></button>
+  <button
+    className="color-button"
+    style={{
+      backgroundColor: "#42e0a3",
+      padding: "18px",
+      cursor: "pointer",
+      borderRadius: "10px",
+    }}
+    onClick={() => selectColor("verde")}
+  ></button>
+  <button
+    className="color-button"
+    style={{
+      backgroundColor: "yellow",
+      padding: "18px",
+      cursor: "pointer",
+      borderRadius: "10px",
+    }}
+    onClick={() => selectColor("amarelo")}
+  ></button>
               </div>
 
-              <div id="selected-color">Cor selecionada:</div>
-              <p className="text-prod">Tamanhos:</p>
-              <div class="size-options">
-                <div className="size-option" onClick="getSize('6', this)">
-                  06
-                </div>
-                <div className="size-option" onClick="getSize('8', this)">
-                  08
-                </div>
-                <div className="size-option" onClick="getSize('10', this)">
-                  10
-                </div>
-                <div className="size-option" onClick="getSize('12', this)">
-                  12
-                </div>
-                <div className="size-option" onClick="getSize('14', this)">
-                  14
-                </div>
-                <div className="size-option" onClick="getSize('16', this)">
-                  16
-                </div>
-              </div>
+              <div id="selected-color" style={{ color: selectedColor }}>
+  Cor selecionada: {selectedColor}
+</div>
 
-              <div className="options">
-                <div className="amount">
-                  <button
-                    onClick={() => handleQuantityChange(selectedQuantity - 1)}
-                  >
-                    -
-                  </button>
-                  <span id="valor">{selectedQuantity}</span>
-                  <button
-                    onClick={() => handleQuantityChange(selectedQuantity + 1)}
-                  >
-                    +
-                  </button>
-                </div>
-              </div>
+  {/*{showSelectedColor && (
+  <button className="selected-color-button">{selectColor}</button>
+  )} */}
 
+
+<p className="text-prod">Tamanhos:</p>
+      <div className="size-options">
+        <div
+          className={`size-option ${selectedSize === "06" ? "selected" : ""}`}
+          onClick={() => handleSizeSelect("06")}
+        >
+          06
+        </div>
+        <div
+          className={`size-option ${selectedSize === "08" ? "selected" : ""}`}
+          onClick={() => handleSizeSelect("08")}
+        >
+          08
+        </div>
+        <div
+          className={`size-option ${selectedSize === "10" ? "selected" : ""}`}
+          onClick={() => handleSizeSelect("10")}
+        >
+          10
+        </div>
+        <div
+          className={`size-option ${selectedSize === "12" ? "selected" : ""}`}
+          onClick={() => handleSizeSelect("12")}
+        >
+          12
+        </div>
+        <div
+          className={`size-option ${selectedSize === "14" ? "selected" : ""}`}
+          onClick={() => handleSizeSelect("14")}
+        >
+          14
+        </div>
+        <div
+          className={`size-option ${selectedSize === "16" ? "selected" : ""}`}
+          onClick={() => handleSizeSelect("16")}
+        >
+          16
+        </div>
+      </div>
+
+      {/*<div id="selected-size">Tamanho selecionado: {selectedSize}</div>*/}
+
+      <div className="options">
+        <div className="amount">
+          <button
+            onClick={() => handleQuantityChange(selectedQuantity - 1)}
+          >
+            -
+          </button>
+          <span id="valor">{selectedQuantity}</span>
+          <button
+            onClick={() => handleQuantityChange(selectedQuantity + 1)}
+          >
+            +
+          </button>
+        </div>
+      </div>
+
+      {/*<div id="selected-quantity">Quantidade selecionada: {selectedQuantity}</div>*/}
               <button className="buttons-cart">
                 <span>Comprar agora</span>
               </button>
@@ -303,7 +356,7 @@ function Product() {
               </div>
 
               <div className="cep">
-                <input type="text" id="cep" />
+                <input className='cep' type="text" placeholder="DIGITE SEU CEP" id="cep" />
                 <button onclick="buscarCEP()">OK</button>
               </div>
               <div id="resultado"></div>
@@ -357,11 +410,11 @@ function Product() {
             </Link>
           </div>
         </section>
+        </footer>
 
         <div className="last-text">
           <p className="text-sub-footer">maremansa</p>
         </div>
-      </footer>
     </div>
   );
 }
