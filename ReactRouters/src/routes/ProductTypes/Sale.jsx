@@ -26,8 +26,15 @@ const Sale = () => {
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [isFilterActive, setIsFilterActive] = useState(false);
   const [maxPrice, setMaxPrice] = useState(null);
-  const nomesProdutos = ["Conjunto", "Maiô", "Óculos", "Sunga", "Vestidinho", "Colete"];
- 
+  const nomesProdutos = [
+    "Conjunto",
+    "Maiô",
+    "Óculos",
+    "Sunga",
+    "Vestidinho",
+    "Colete",
+  ];
+
   useEffect(() => {
     const fetchProdutos = async () => {
       const produtosCollection = collection(firestore, "ProdPomo");
@@ -41,31 +48,36 @@ const Sale = () => {
 
   const [filterParam, setFilterParam] = useState("All");
 
-const handleFilterChange = (e) => {
-  setFilterParam(e.target.value);
-};
+  const handleFilterChange = (e) => {
+    setFilterParam(e.target.value);
+  };
 
-const filteredProdutos = produtos.filter((produto) => {
-  // Verifica se o produto corresponde à categoria selecionada ou se a categoria é "All".
-  if (filterParam === "All" || produto.nome_prodpromo.toLowerCase().includes(filterParam.toLowerCase())) {
-    // Verifica se o produto corresponde ao termo de pesquisa.
-    return produto.nome_prodpromo.toLowerCase().includes(searchTerm.toLowerCase());
-  }
-  return false; // Produto não corresponde à categoria selecionada.
-});
-
-const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
-  if (isFilterActive && maxPrice !== null) {
-    // Verifica se o preço está no formato correto (por exemplo, "R$ 50,00")
-    if (produto.preço && typeof produto.preço === "string") {
-      const precoNumerico = parseFloat(
-        produto.preço.replace("R$ ", "").replace(",", ".")
-      );
-      return precoNumerico <= maxPrice;
+  const filteredProdutos = produtos.filter((produto) => {
+    // Verifica se o produto corresponde à categoria selecionada ou se a categoria é "All".
+    if (
+      filterParam === "All" ||
+      produto.nome_prodpromo.toLowerCase().includes(filterParam.toLowerCase())
+    ) {
+      // Verifica se o produto corresponde ao termo de pesquisa.
+      return produto.nome_prodpromo
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
     }
-  }
-  return true;
-});
+    return false; // Produto não corresponde à categoria selecionada.
+  });
+
+  const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
+    if (isFilterActive && maxPrice !== null) {
+      // Verifica se o preço está no formato correto (por exemplo, "R$ 50,00")
+      if (produto.preço && typeof produto.preço === "string") {
+        const precoNumerico = parseFloat(
+          produto.preço.replace("R$ ", "").replace(",", ".")
+        );
+        return precoNumerico <= maxPrice;
+      }
+    }
+    return true;
+  });
 
   const pageCount = Math.ceil(filteredProdutos.length / itemsPerPage);
   const offset = currentPage * itemsPerPage;
@@ -139,48 +151,56 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
           <i className="bx bx-search"></i>
         </button>
         {searchTerm && (
-          <button className="button-search-bar" onClick={() => setSearchTerm("")}>Limpar</button>
+          <button
+            className="button-search-bar"
+            onClick={() => setSearchTerm("")}
+          >
+            Limpar
+          </button>
         )}
       </div>
       <div className="title-section">
-  <h1 className="general-title">PROMOÇÕES</h1>
-  <button className="filter" onClick={handleFilterButtonClick}>
-    <img src="/assets/filter.png" alt="filtro" className="button-image" />
-  </button>
-  <hr className="hr-sections" />
-</div>
+        <h1 className="general-title">PROMOÇÕES</h1>
+        <button className="filter" onClick={handleFilterButtonClick}>
+          <img src="/assets/filter.png" alt="filtro" className="button-image" />
+        </button>
+        <hr className="hr-sections" />
+      </div>
 
-{isFilterActive && (
-  <div className="filter-container">
-    <div className="filter-content">
-      <p className="filter-title">FILTRAR</p>
-      <hr className="filter-hr" />
+      {isFilterActive && (
+        <div className="filter-container">
+          <div className="filter-content">
+            <p className="filter-title">FILTRAR</p>
+            <hr className="filter-hr" />
 
-      <ul className="filter-list">
-        <li>
-          <label className='filter-label'>CATEGORIAS:</label>
-        </li>
-        {nomesProdutos.map((nome, index) => (
-          <li className='filter-item' key={index}>
-            <button
-              className="filter-option"
-              onClick={() => handleFilterChange({ target: { value: nome } })}
-            >
-              {nome}
-            </button>
-          </li>
-        ))}
-        <li>
-          <button className="close-button" onClick={handleFilterButtonClick}>
-            X
-          </button>
-        </li>
-      </ul>
-    </div>
-  </div>
-)}
-
-
+            <ul className="filter-list">
+              <li>
+                <label className="filter-label">CATEGORIAS:</label>
+              </li>
+              {nomesProdutos.map((nome, index) => (
+                <li className="filter-item" key={index}>
+                  <button
+                    className="filter-option"
+                    onClick={() =>
+                      handleFilterChange({ target: { value: nome } })
+                    }
+                  >
+                    {nome}
+                  </button>
+                </li>
+              ))}
+              <li>
+                <button
+                  className="close-button"
+                  onClick={handleFilterButtonClick}
+                >
+                  X
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      )}
 
       <div className="items-per-page">
         <label>Itens por página:</label>
@@ -197,10 +217,10 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
       <div className="container-clothes">
         {currentPageProdutos.map((produto, index) => (
           <div className="clothes" key={index} style={{ width: "20%" }}>
-            <Link to="/product">
+            <Link to={`/product/${"Prodpomo"}/${produto.nome_prop}`}>
               <img src={produto.url_image} alt={produto.nome_prodpromo} />
             </Link>
-            <Link to="/product">
+            <Link to={`/product/${"Prodpomo"}/${produto.nome_prop}`}>
               <h6 className="text-card-clothes">{produto.nome_prodpromo}</h6>
             </Link>
             <h6 className="text-card-clothes">R$ {produto.preço}</h6>
@@ -209,22 +229,23 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
       </div>
 
       <div className="pagination-container">
-      <ReactPaginate
-        previousLabel={<button className="custom-button">ANTERIOR</button>}
-        nextLabel={<button className="custom-button">PRÓXIMO</button>}
-        breakLabel={"..."}
-        pageCount={pageCount}
-        marginPagesDisplayed={2}
-        pageRangeDisplayed={5}
-        onPageChange={handlePageChange}
-        containerClassName={"pagination"}
-        subContainerClassName={"pages pagination"}
-        activeClassName={"active"}
-        previousClassName={prevButtonClass}
-        nextClassName={nextButtonClass}
-        pageClassName={"page-count"}
-        pageLinkClassName={"page-link"}
-      /> </div>
+        <ReactPaginate
+          previousLabel={<button className="custom-button">ANTERIOR</button>}
+          nextLabel={<button className="custom-button">PRÓXIMO</button>}
+          breakLabel={"..."}
+          pageCount={pageCount}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={handlePageChange}
+          containerClassName={"pagination"}
+          subContainerClassName={"pages pagination"}
+          activeClassName={"active"}
+          previousClassName={prevButtonClass}
+          nextClassName={nextButtonClass}
+          pageClassName={"page-count"}
+          pageLinkClassName={"page-link"}
+        />{" "}
+      </div>
 
       <footer>
         <section className="footer-section">

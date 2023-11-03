@@ -266,7 +266,7 @@ const Props = () => {
             </button>
           </Link>
 
-          <Link to="/cart">
+          <Link to="/cart2">
             <button type="button" className="btn-buy">
               Ver meu carrinho
             </button>

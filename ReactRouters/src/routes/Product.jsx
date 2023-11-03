@@ -20,6 +20,7 @@ export const storage = getStorage(app);
 export const firestore = getFirestore(app);
 
 const Cart = () => {
+  const [productLoading, setProductLoading] = useState(true);
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
   const [cart, setCart] = useState([]);
@@ -27,6 +28,7 @@ const Cart = () => {
   const [shippingCost, setShippingCost] = useState(0);
   const [productData, setProductData] = useState(null);
   const { collectionName, productName } = useParams();
+  const [productRef, setProductRef] = useState(null);
   const [selectedQuantity, setSelectedQuantity] = useState(1);
   const [total, setTotal] = useState(0);
   const [cartItems, setCartItems] = useState(() => {
@@ -39,35 +41,38 @@ const Cart = () => {
     setCartVisible(!cartVisible);
   };
 
+  useEffect(() => {
+    const fetchProductData = async () => {
+      try {
+        console.log(productName);
+        const productData = doc(firestore, collectionName, productName); // Substitua "products" pelo nome da sua coleção
+        const productSnapshot = await getDoc(productData);
+        if (productSnapshot.exists()) {
+          setProductData(productSnapshot.data());
+        } else {
+          // Handle the case when the product is not found
+        }
+        setProductLoading(false);
+      } catch (error) {
+        console.error("Erro ao buscar dados do produto:", error);
+        // Handle the error state appropriately
+        setProductLoading(false);
+      }
+    };
+
+    fetchProductData();
+  }, [collectionName, productName]);
+
+  if (productLoading) {
+    return <div>Carregando...</div>;
+  }
+
   const handleAddToCart1 = () => {
     const data = {
       color: selectedColor,
       size: selectedSize,
       quantity: selectedQuantity,
     };
-
-    useEffect(() => {
-      const fetchProductData = async () => {
-        try {
-          console.log(productName);
-          const productRef = doc(firestore, collectionName, productName); // Substitua "products" pelo nome da sua coleção
-          const productSnapshot = await getDoc(productRef);
-          if (productSnapshot.exists()) {
-            setProductData(productSnapshot.data());
-          } else {
-            // Produto não encontrado
-          }
-        } catch (error) {
-          console.error("Erro ao buscar dados do produto:", error);
-        }
-      };
-
-      fetchProductData();
-    }, [collectionName, productName]);
-
-    if (!productData) {
-      return <div>Carregando...</div>;
-    }
 
     const handleColorChange = (color) => {
       setSelectedColor(color);
@@ -243,11 +248,11 @@ const Cart = () => {
         <div className="container">
           <div className="products-left">
             <div className="imagens">
-              <img src="/assets/model-1.png" />
+              <img src="/assets/image-2.png" />
 
-              <img src="/assets/model-2.png" />
+              <img src="/assets/image-3.png" />
 
-              <img src="/assets/model-3.png" />
+              <img src="/assets/image-4.png" />
             </div>
           </div>
         </div>
@@ -256,7 +261,7 @@ const Cart = () => {
           <div className="left-side">
             <div className="items">
               <div className="select-image">
-                <img src="/assets/model-4.png" />
+                <img src={productData ? productData.url_image : ""} />
               </div>
             </div>
           </div>
@@ -265,11 +270,13 @@ const Cart = () => {
         <div className="container">
           <div className="right-side">
             <div className="content">
-              <h4 className="title-prod">Conjunto Pirata</h4>
+              <h4 className="title-prod">{productName}</h4>
               <hr className="hr-prod" size="1" />
 
               <span className="off">R$ 199,90</span>
-              <span className="price">R$ 149,90</span>
+              <span className="price">
+                R$ {productData ? productData.preço : ""}
+              </span>
 
               <br></br>
               <p className="text-prod">Selecione a cor do produto:</p>
