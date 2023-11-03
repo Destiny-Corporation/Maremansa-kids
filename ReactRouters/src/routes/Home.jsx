@@ -280,11 +280,10 @@ const Home = () => {
           <i className="fa fa-google"></i>
           <i className="fa fa-instagram"></i>
         </div>
-      </section>
-    <div className="last-text">
+      </div>
+      <div className="last-text">
         <p className="text-sub-footer">maremansa</p>
       </div>
-      </footer>
     </div>
   );
 };
