@@ -5,6 +5,8 @@ import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 import { getFirestore, collection, doc, getDocs } from "firebase/firestore";
 import ReactPaginate from "react-paginate";
+import { useNavigate } from "react-router-dom";
+import { debounce } from "debounce";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDTKUI6nV-DZjIsUo1BMkjIUWOQbT9gU3Q",
@@ -23,7 +25,26 @@ export const firestore = getFirestore(app);
 const Home = () => {
   const [produtos, setProdutos] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
+  const [searchValue, setSearchValue] = useState("");
+  const navigate = useNavigate();
 
+  const debouncedSearchFunction = debounce(async () => {
+    // Navegue para a rota apropriada com base no valor da pesquisa
+    if (searchValue === "sunga") {
+      await navigate("/male");
+    } else if (searchValue === "biquini") {
+      await navigate("/female");
+    } else if (["boia", "óculos", "baldinho", "chapeu"].includes(searchValue)) {
+      await navigate("/props");
+    }
+  }, 500);
+
+  useEffect(() => {
+    // Chame a função debouncedSearchFunction() de forma assíncrona
+    debouncedSearchFunction();
+  }, [searchValue]);
+
+  
   useEffect(() => {
     const fetchProdutos = async () => {
       const produtosCollection = collection(firestore, "Prodfemme");
@@ -60,7 +81,10 @@ const Home = () => {
         <input
           type="text"
           className="search-bar"
-          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?" />
+          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
+          onChange={(e) => {
+            setSearchValue(e.target.value);
+          }} />
         <button className="search-button" type="submit">
           <i className="bx bx-search"></i>
         </button>
