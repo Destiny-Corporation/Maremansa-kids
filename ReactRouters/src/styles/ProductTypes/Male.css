@@ -161,6 +161,47 @@
   justify-content: center;
 }
 
+.container-clothes-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  align-items: center;
+  margin-top: 3rem;
+  
+}
+
+.container-clothes-section img:hover{
+  transform: scale(0.9) translateY(-5px);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.container-clothes-section .clothes-section img::before{
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  border-radius: 35px;
+  filter: blur(25px);
+  opacity: 0.5;
+  z-index: 1;
+}
+
+.container-clothes-section .clothes-section:hover::before{
+  opacity: 0;
+  transition: 0.3s;
+}
+
+.clothes-section img{
+  width: 300px;
+  height: auto;
+}
+
+.clothes-section{
+  color: #48A3A9;
+}
 
 footer {
     position: static;

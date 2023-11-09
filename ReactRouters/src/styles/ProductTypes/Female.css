@@ -179,6 +179,11 @@
 
 }
 
+.container-clothes-section img:hover::before{
+  opacity: 0;
+  transition: 0.3 s;
+}
+
 .clothes-section img{
     width: 300px;
     height: auto;
