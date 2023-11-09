@@ -259,38 +259,6 @@ const Cart = () => {
                 onClick={() => handleImageClick("/assets/image-3.png")}
               />
             </div>
-      </header>
-
-      <div className="search-container-geral">
-        <input
-          type="text"
-          className="search-bar"
-          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
-        />
-        <button className="search-button" type="submit">
-          <i className="bx bx-search"></i>
-        </button>
-      </div>
-
-      <section className="main-products">
-        <div className="container">
-          <div className="products-left">
-            <div className="imagens">
-              <img className='small-images'
-                src="/assets/principal.png"
-                onClick={() => handleImageClick("/assets/principal.png")}
-              />
-
-              <img className="small-images"
-                src="/assets/image-2.png"
-                onClick={() => handleImageClick("/assets/image-2.png")}
-              />
-
-              <img className="small-images"
-                src="/assets/image-3.png"
-                onClick={() => handleImageClick("/assets/image-3.png")}
-              />
-            </div>
           </div>
         </div>
 
