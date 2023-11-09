@@ -20,52 +20,63 @@ export const storage = getStorage(app);
 export const firestore = getFirestore(app);
 
 const Sale = () => {
-  const [produtos, setProdutos] = useState([]);
+  const [produtosPomo, setProdutosPomo] = useState([]);
+  const [produtosMale, setProdutosMale] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [isFilterActive, setIsFilterActive] = useState(false);
   const [maxPrice, setMaxPrice] = useState(null);
   const nomesProdutos = ["Conjunto", "Maiô", "Óculos", "Sunga", "Vestidinho", "Colete"];
- 
+
   useEffect(() => {
-    const fetchProdutos = async () => {
-      const produtosCollection = collection(firestore, "ProdPomo");
-      const produtosSnapshot = await getDocs(produtosCollection);
-      const produtosData = produtosSnapshot.docs.map((doc) => doc.data());
-      setProdutos(produtosData);
+    const fetchProdutosPomo = async () => {
+      const produtosCollectionPomo = collection(firestore, "ProdPomo");
+      const produtosSnapshotPomo = await getDocs(produtosCollectionPomo);
+
+      const produtosDataPomo = produtosSnapshotPomo.docs.map((doc) => doc.data());
+
+      setProdutosPomo(produtosDataPomo);
     };
 
-    fetchProdutos();
+    const fetchProdutosMale = async () => {
+      const produtosCollectionMale = collection(firestore, "ProdMale");
+      const produtosSnapshotMale = await getDocs(produtosCollectionMale);
+
+      const produtosDataMale = produtosSnapshotMale.docs.map((doc) => doc.data());
+
+      setProdutosMale(produtosDataMale);
+    };
+
+    fetchProdutosPomo();
+    fetchProdutosMale();
   }, []);
 
   const [filterParam, setFilterParam] = useState("All");
 
-const handleFilterChange = (e) => {
-  setFilterParam(e.target.value);
-};
+  const handleFilterChange = (e) => {
+    setFilterParam(e.target.value);
+  };
 
-const filteredProdutos = produtos.filter((produto) => {
-  // Verifica se o produto corresponde à categoria selecionada ou se a categoria é "All".
-  if (filterParam === "All" || produto.nome_prodpromo.toLowerCase().includes(filterParam.toLowerCase())) {
-    // Verifica se o produto corresponde ao termo de pesquisa.
-    return produto.nome_prodpromo.toLowerCase().includes(searchTerm.toLowerCase());
-  }
-  return false; // Produto não corresponde à categoria selecionada.
+const filteredProdutos = produtosPomo.concat(produtosMale).filter((produto) => {
+  // Check if the product matches the search term
+  return produto.nome_prodpromo?.toLowerCase().includes(searchTerm?.toLowerCase()) || produto.nome_prodmale?.toLowerCase().includes(searchTerm?.toLowerCase());
 });
 
-const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
-  if (isFilterActive && maxPrice !== null) {
-    // Verifica se o preço está no formato correto (por exemplo, "R$ 50,00")
-    if (produto.preço && typeof produto.preço === "string") {
-      const precoNumerico = parseFloat(
-        produto.preço.replace("R$ ", "").replace(",", ".")
-      );
-      return precoNumerico <= maxPrice;
+
+
+  const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
+    if (isFilterActive && maxPrice !== null) {
+      // Verifica se o preço está no formato correto (por exemplo, "R$ 50,00")
+      if (produto.preço && typeof produto.preço === "string") {
+        const precoNumerico = parseFloat(
+          produto.preço.replace("R$ ", "").replace(",", ".")
+        );
+        return precoNumerico <= maxPrice;
+      }
     }
-  }
-  return true;
-});
+    return true;
+  });
 
   const pageCount = Math.ceil(filteredProdutos.length / itemsPerPage);
   const offset = currentPage * itemsPerPage;

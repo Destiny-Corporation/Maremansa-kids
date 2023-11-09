@@ -16,6 +16,7 @@
     "@mui/material": "^5.14.14",
     "@reduxjs/toolkit": "^1.9.7",
     "@stripe/stripe-js": "^2.1.9",
+    "debounce": "^1.2.1",
     "dotenv": "^16.3.1",
     "firebase": "^10.4.0",
     "formik": "^2.4.5",
