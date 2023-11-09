@@ -8,6 +8,7 @@ import { getFirestore, collection, doc, getDocs } from "firebase/firestore";
 const Cart2 = () => {
   const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
 
+  let isLoggedIn = false
   if (localStorage.getItem("user") !== null) {
     localStorage.setItem("loggedIn", "true");
     isLoggedIn = true;
