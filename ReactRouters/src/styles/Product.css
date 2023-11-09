@@ -10,6 +10,7 @@
   list-style: none;
 }
 
+
 .main-container {
   height: 100vh;
 }
@@ -22,6 +23,7 @@
 .main-header {
   background-color: rgb(72, 163, 169);
   width: 100%;
+  height: 60px;
   padding: 5px 20px;
   display: flex;
   justify-content: space-between;
@@ -30,7 +32,7 @@
 }
 
 .logo img {
-  max-width: 100%;
+  max-width: 80%;
 }
 
 .search-container-geral {
@@ -104,8 +106,23 @@
   align-items: flex-start;
 }
 
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Ajuste conforme necessário para cobrir a altura da tela inteira */
+  background-color: #fff; /* Cor de fundo desejada */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999; /* Certifique-se de que a tela de carregamento esteja acima de outros elementos */
+}
+
+
 .container {
   text-align: left;
+  margin-left: 85%;
 }
 
 .products-left {
@@ -161,11 +178,12 @@
   display: flex;
 }
 
-.price {
+.price-pd {
   font-family: "Stylish", sans-serif;
   font-size: 20px;
   font-weight: 700;
   margin-right: 10px;
+  margin-left: 0;
 }
 
 .off {

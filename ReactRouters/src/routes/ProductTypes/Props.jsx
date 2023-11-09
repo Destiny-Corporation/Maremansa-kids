@@ -20,6 +20,18 @@ export const storage = getStorage(app);
 export const firestore = getFirestore(app);
 
 const Props = () => {
+  const [isItemAdded, setIsItemAdded] = useState(false);
+  const [showNotification, setShowNotification] = useState(false); 
+
+  const showAddedToCartNotification = () => {
+    setShowNotification(true);
+
+    // Esconda a notificação após alguns segundos
+    setTimeout(() => {
+      setShowNotification(false);
+    }, 5000); // Oculta a notificação após 5 segundos (ou você pode definir outro valor)
+  };
+ 
   const [produtos, setProdutos] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
@@ -67,6 +79,16 @@ const Props = () => {
       // Se o item não está no carrinho, adicione-o com quantidade 1
       setCartItems([...cartItems, { ...produto, quantidade: 1 }]);
     }
+
+
+      // ... Lógica para adicionar o item ao carrinho
+    
+      // Após adicionar o item, exiba a mensagem e defina um temporizador para ocultá-la
+      setIsItemAdded(true);
+      setTimeout(() => {
+        setIsItemAdded(false);
+      }, 5000); // Oculta a mensagem após 5 segundos (ou você pode definir outro valor)
+    
   };
 
   const handleRemoveFromCart = (index) => {
@@ -208,14 +230,14 @@ const Props = () => {
           ></i>
         </div>
         <div className={`cart ${cartVisible ? "active" : ""}`}>
-          <h2 className="cart-title">Your Cart</h2>
-          <div className="cart-content">
+          <h2 className="cart-title-1">MEU CARRINHO</h2>
+          <div className="cart-content-1">
             {cartItems.map((produto, index) => (
               <div className="cart-item" key={index}>
                 <img
                   src={produto.url_image}
                   alt={produto.nome_prop}
-                  className="cart-item-image"
+                  className="cart-item-image-1"
                   style={{
                     width: "100px",
                     height: "100px",
@@ -225,11 +247,11 @@ const Props = () => {
                 />
 
                 <div className="cart-item-details">
-                  <div className="cart-item-name">{produto.nome_prop}</div>
-                  <div className="cart-item-price">R$ {produto.preço}</div>
+                  <div className="cart-item-name-1">{produto.nome_prop}</div>
+                  <div className="cart-item-price-1">R$ {produto.preço}</div>
                   <input
                     type="number"
-                    className="cart-quantity"
+                    className="cart-quantity-1"
                     value={produto.quantidade} // Atualiza o valor do input com a quantidade do item no carrinho
                     onChange={(e) => {
                       // Atualiza a quantidade do item no carrinho quando o input é alterado
@@ -248,7 +270,7 @@ const Props = () => {
                   />
                 </div>
                 <i
-                  className="bx bxs-trash-alt cart-remove cart-item-remove"
+                  className="bx bxs-trash-alt cart-remove cart-item-remove-1"
                   onClick={() => handleRemoveFromCart(index)}
                 ></i>
               </div>
@@ -262,13 +284,13 @@ const Props = () => {
 
           <Link to="/checkout">
             <button type="button" className="btn-buy">
-              Buy Now
+              COMPRAR AGORA
             </button>
           </Link>
 
           <Link to="/cart2">
             <button type="button" className="btn-buy">
-              Ver meu carrinho
+              VER MEU CARRINHO
             </button>
           </Link>
           <i
@@ -386,12 +408,25 @@ const Props = () => {
                 <h6 className="price">R$ {produto.preço}</h6>
                 <i
                   className="bx bx-shopping-bag add-cart"
-                  onClick={() => handleAddToCart(produto)}
+                  onClick={() => {
+                    handleAddToCart(produto);
+                    showAddedToCartNotification(); 
+                  }}
                 ></i>
               </div>
             </div>
           ))}
         </div>
+
+        {showNotification && (
+  <div className="notification">
+    <p>Item adicionado ao carrinho!</p>
+    <Link to="/cart2" className="go-to-cart-button">
+      Ir para o Carrinho
+    </Link>
+  </div>
+)}
+  
 
         <div className="pagination-container">
           <ReactPaginate

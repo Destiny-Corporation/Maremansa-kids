@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+
 import "../styles/Product.css";
 import { Link, useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
@@ -65,7 +65,7 @@ const Cart = () => {
   }, [collectionName, productName]);
 
   if (productLoading) {
-    return <div>Carregando...</div>;
+    return <div className="loading-container">Carregando...</div>;
   }
 
   const handleAddToCart1 = () => {
@@ -279,7 +279,7 @@ const Cart = () => {
               <hr className="hr-prod" size="1" />
 
               <span className="off">R$ 199,90</span>
-              <span className="price">
+              <span className="price-pd">
                 R$ {productData ? productData.preço : ""}
               </span>
 

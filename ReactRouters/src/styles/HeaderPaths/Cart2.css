@@ -1,6 +1,7 @@
 .main-header {
     background-color: rgb(72, 163, 169);
     width: 100%;
+    height: 60px;
     padding: 5px 20px;
     display: flex;
     justify-content: space-between;
@@ -9,7 +10,7 @@
   }
   
   .logo img {
-    max-width: 100%;
+    max-width: 90%;
   }
   
   
@@ -97,3 +98,59 @@
     transition: 0.3s;
     max-width: 100%;
   }
+
+/* Estilo para o contêiner de informações do item do carrinho */
+.cart-item-info {
+  display: flex;
+  align-items: left;
+  text-align: left;
+  padding: 10px;
+  border: 3px solid #48a3a9;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  margin-left: 50px;
+  color: #48a3a9;
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 12px;
+}
+
+/* Estilo para a imagem do produto no item do carrinho */
+.cart-item-image {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  padding: 10px;
+}
+
+/* Estilo para o nome do produto no item do carrinho */
+.cart-item-name {
+  font-size: 13px;
+  color: #48a3a9;
+  letter-spacing: 2px;
+  margin-bottom: -20px;
+  margin-top: 5px;
+}
+
+.delivery-indicator{
+  color: #48a3a9
+}
+/* Estilo para o preço do produto no item do carrinho */
+.cart-item-price {
+  font-size: 16px;
+  margin-top: 15px;
+  color: #48a3a9;
+  letter-spacing: 2px;
+  font-size: 12px;
+}
+
+.hr-prod2 {
+  width: 80%;
+  height: 2px;
+  background-color: #50b2b9;
+  border: none;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  opacity: 1;
+}
