@@ -66,6 +66,47 @@
   justify-content: center;
 }
 
+.container-roupas{
+  position: relative;
+  display: flex;
+  gap: 70px;
+}
+
+.container-roupas .roupa{
+position: relative;
+top: 10px;
+width: 300px;
+height: 300px;
+background: #fff;
+border-radius: 25px;
+background-size: cover;
+transition: .5s;
+cursor: pointer;
+}
+
+.container-roupas .roupa:hover {
+scale: 0.8;
+transition: .5s;
+}
+
+.container-roupas .roupa::before{
+content: '';
+position: absolute;
+width: 100%;
+height: 100%;
+background: inherit;
+border-radius: 25px;
+background-size: cover;
+filter: blur(25px);
+opacity: 0.5;
+z-index: 1;
+transition: .2s;
+}
+
+.container-roupas .roupa:hover::before{
+opacity: 0;
+transition: .2s;
+}
 
 footer {
     position: static;

@@ -132,18 +132,18 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
 
 
 
-        <div className="container-clothes-section">
-            <div className="clothes-section">
-              <Link to="/male/male-baby"><img src="/assets/male-baby.png" /></Link>
+        <div className="container-roupas">
+            <div className="roupa" style="background-image:url('/assets/male-baby.png');">
+              <Link to="/male/male-baby"></Link>
             </div>
 
 
-           <div className="clothes-section">
-            <Link to="/male/male-children"><img src="/assets/male-children.png" /></Link>
+           <div className="roupa" style="background-image:url('/assets/male-children.png');">
+            <Link to="/male/male-children"></Link>
           </div>
 
-          <div className="clothes-section">
-            <Link to="/male/male-juvenile"><img src="/assets/male-juvenile.png" /></Link>
+          <div className="roupa" style="background-image:url('/assets/male-juvenile.png');">
+            <Link to="/male/male-juvenile"></Link>
           </div>
         </div>
 
