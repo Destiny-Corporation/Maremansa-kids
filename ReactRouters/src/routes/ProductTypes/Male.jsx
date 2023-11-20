@@ -133,16 +133,16 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
 
 
         <div className="container-roupas">
-            <div className="roupa" style="background-image:url('/assets/male-baby.png');">
+            <div className="roupa" style={{ backgroundImage: "url('/assets/male-baby.png')" }}>
               <Link to="/male/male-baby"></Link>
             </div>
+  
 
-
-           <div className="roupa" style="background-image:url('/assets/male-children.png');">
+           <div className="roupa" style={{ backgroundImage: "url('/assets/male-children.png')" }}>
             <Link to="/male/male-children"></Link>
           </div>
 
-          <div className="roupa" style="background-image:url('/assets/male-juvenile.png');">
+          <div className="roupa" style={{ backgroundImage: "url('/assets/male-juvenile.png')" }}>
             <Link to="/male/male-juvenile"></Link>
           </div>
         </div>

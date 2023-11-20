@@ -69,14 +69,14 @@
 .container-roupas{
   position: relative;
   display: flex;
-  gap: 70px;
+  gap: 60px;
 }
 
 .container-roupas .roupa{
 position: relative;
-top: 10px;
-width: 300px;
-height: 300px;
+top: 20px;
+width: 350px;
+height: 350px;
 background: #fff;
 border-radius: 25px;
 background-size: cover;
@@ -86,18 +86,18 @@ cursor: pointer;
 
 .container-roupas .roupa:hover {
 scale: 0.8;
-transition: .5s;
+transition: .2s;
 }
 
 .container-roupas .roupa::before{
 content: '';
 position: absolute;
-width: 100%;
-height: 100%;
+width: 350px;
+height: 350px;
 background: inherit;
 border-radius: 25px;
 background-size: cover;
-filter: blur(25px);
+filter: blur(10px);
 opacity: 0.5;
 z-index: 1;
 transition: .2s;
