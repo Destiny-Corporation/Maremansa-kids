@@ -187,7 +187,9 @@
   filter: blur(25px);
   opacity: 0.5;
   z-index: 1;
+  color:rgb(72, 163, 169);
 }
+
 
 .container-clothes-section .clothes-section:hover::before{
   opacity: 0;
