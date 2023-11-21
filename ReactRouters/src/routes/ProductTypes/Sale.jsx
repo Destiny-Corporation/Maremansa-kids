@@ -118,6 +118,23 @@ const Sale = () => {
             <img src="/assets/logo.png" alt="Logo" />{" "}
           </Link>
         </div>
+
+        <div className="search-container-geral">
+        <input
+          type="text"
+          className="search-bar"
+          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <button className="search-button" type="submit">
+          <i className="bx bx-search"></i>
+        </button>
+        {searchTerm && (
+          <button className="button-search-bar" onClick={() => setSearchTerm("")}>Limpar</button>
+        )}
+      </div>
+
         <div className="icons">
           <Link to="/login">
             <i
@@ -139,26 +156,7 @@ const Sale = () => {
           </Link>
         </div>
       </header>
-      <div className="search-container-geral">
-        <input
-          type="text"
-          className="search-bar"
-          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <button className="search-button" type="submit">
-          <i className="bx bx-search"></i>
-        </button>
-        {searchTerm && (
-          <button
-            className="button-search-bar"
-            onClick={() => setSearchTerm("")}
-          >
-            Limpar
-          </button>
-        )}
-      </div>
+
       <div className="title-section">
         <h1 className="general-title">PROMOÇÕES</h1>
         <button className="filter" onClick={handleFilterButtonClick}>
