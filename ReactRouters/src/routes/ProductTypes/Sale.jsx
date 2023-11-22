@@ -20,8 +20,7 @@ export const storage = getStorage(app);
 export const firestore = getFirestore(app);
 
 const Sale = () => {
-  const [produtosPomo, setProdutosPomo] = useState([]);
-  const [produtosMale, setProdutosMale] = useState([]);
+  const [produtos, setProdutos] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
   const [itemsPerPage, setItemsPerPage] = useState(10);
@@ -37,26 +36,14 @@ const Sale = () => {
   ];
 
   useEffect(() => {
-    const fetchProdutosPomo = async () => {
-      const produtosCollectionPomo = collection(firestore, "ProdPomo");
-      const produtosSnapshotPomo = await getDocs(produtosCollectionPomo);
-
-      const produtosDataPomo = produtosSnapshotPomo.docs.map((doc) => doc.data());
-
-      setProdutosPomo(produtosDataPomo);
+    const fetchProdutos = async () => {
+      const produtosCollection = collection(firestore, "ProdPomo");
+      const produtosSnapshot = await getDocs(produtosCollection);
+      const produtosData = produtosSnapshot.docs.map((doc) => doc.data());
+      setProdutos(produtosData);
     };
 
-    const fetchProdutosMale = async () => {
-      const produtosCollectionMale = collection(firestore, "ProdMale");
-      const produtosSnapshotMale = await getDocs(produtosCollectionMale);
-
-      const produtosDataMale = produtosSnapshotMale.docs.map((doc) => doc.data());
-
-      setProdutosMale(produtosDataMale);
-    };
-
-    fetchProdutosPomo();
-    fetchProdutosMale();
+    fetchProdutos();
   }, []);
 
   const [filterParam, setFilterParam] = useState("All");
