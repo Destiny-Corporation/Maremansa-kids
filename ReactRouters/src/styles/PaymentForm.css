@@ -121,5 +121,11 @@
   background-color: #2980b9;
 }
 
+.cartao-imagem {
+  width: 15%;  /* Ajuste o valor conforme necessário */
+  height: auto;
+  margin-bottom: 20px;
+}
+
 
   

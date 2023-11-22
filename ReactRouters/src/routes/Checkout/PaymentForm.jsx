@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import "../../styles/PaymentForm.css";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCreditCard, faMoneyCheckAlt, faBarcode, faQrcode } from '@fortawesome/free-solid-svg-icons';
 
 const PaymentForm = () => {
   const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
@@ -50,13 +48,14 @@ const PaymentForm = () => {
     }
   };
 
+  
   const determinarImagemCartao = (numeroCartao) => {
     // Lógica para determinar a imagem com base nos primeiros dígitos
     // Substitua a lógica abaixo pelo método real de determinação da imagem do cartão
     if (numeroCartao.startsWith("4")) {
       setImagemCartao("/assets/cartaovisa.jpg");
     } else if (numeroCartao.startsWith("5")) {
-      setImagemCartao("mastercard.png");
+      setImagemCartao("/assets/cartaomastecard.png");
     } else {
       setImagemCartao(""); // Caso não haja correspondência, pode definir uma imagem padrão
     }
@@ -64,10 +63,10 @@ const PaymentForm = () => {
 
   const renderOpcoesPagamento = () => {
     const opcoes = [
-      { valor: "cartao-de-credito", titulo: "Cartão de Crédito", icon: faCreditCard },
-      { valor: "debito", titulo: "Débito", icon: faCreditCard },
-      { valor: "pix", titulo: "PIX", icon: faQrcode },
-      { valor: "boleto", titulo: "Boleto", icon: faBarcode },
+      { valor: "cartao-de-credito", titulo: "Cartão de Crédito", imagem: "/assets/cartao1.png" },
+      { valor: "debito", titulo: "Débito", imagem: "/assets/cartao1.png" },
+      { valor: "pix", titulo: "PIX", imagem: "/assets/pix.png" },
+      { valor: "boleto", titulo: "Boleto", imagem: "/assets/boleto.png" },
     ];
   
     return opcoes.map((opcao) => (
@@ -81,8 +80,8 @@ const PaymentForm = () => {
             checked={formaPagamento === opcao.valor}
             onChange={() => handleFormaPagamentoChange(opcao.valor)}
           />
-          {opcao.icon ? (
-            <FontAwesomeIcon icon={opcao.icon} className="opcao-icon" />
+          {opcao.imagem ? (
+            <img src={opcao.imagem} alt={opcao.titulo} className="opcao-imagem" />
           ) : (
             opcao.titulo
           )}

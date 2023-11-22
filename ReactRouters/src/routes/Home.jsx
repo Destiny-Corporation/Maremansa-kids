@@ -8,6 +8,7 @@ import ReactPaginate from "react-paginate";
 import { useNavigate } from "react-router-dom";
 import debounce from 'debounce';
 
+
 const firebaseConfig = {
   apiKey: "AIzaSyDTKUI6nV-DZjIsUo1BMkjIUWOQbT9gU3Q",
   authDomain: "auth-amanda.firebaseapp.com",
@@ -283,5 +284,4 @@ const Home = () => {
     </div>
   );
 };
-
 export default Home;
