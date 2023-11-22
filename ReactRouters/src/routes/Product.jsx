@@ -42,6 +42,12 @@ const Cart = () => {
     setCartVisible(!cartVisible);
   };
 
+  const LoadingContainer = () => (
+    <div className="loading-container">
+      <img src="/assets/espera.gif" alt="Carregando..." />
+    </div>
+  );
+
   useEffect(() => {
     const fetchProductData = async () => {
       try {
@@ -64,9 +70,11 @@ const Cart = () => {
     fetchProductData();
   }, [collectionName, productName]);
 
+  
   if (productLoading) {
-    return <div className="loading-container">Carregando...</div>;
+    return <LoadingContainer />;
   }
+  
 
   const handleAddToCart1 = () => {
     const data = {
@@ -396,13 +404,15 @@ const Cart = () => {
       </div>
 
       {/*<div id="selected-quantity">Quantidade selecionada: {selectedQuantity}</div>*/}
-              <button className="buttons-cart">
-                <span>Comprar agora</span>
-              </button>
-              <button className="buttons-cart">
-                <i className="bx bx-cart bt-header"></i>
-                <span>Adicionar ao carrinho</span>
-              </button>
+      <Link to="/payment" className="buttons-cart">
+        <span>Comprar agora</span>
+      </Link>
+
+
+              <button className="buttons-cart" onClick={handleAddToCart1}>
+        <i className="bx bx-cart bt-header"></i>
+        <span>Adicionar ao carrinho</span>
+      </button>
 
               <div className="cep-text">
                 <i
