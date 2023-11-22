@@ -144,6 +144,14 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
 
       <div className="title-section">
         <h1 className="general-title">FEMININO</h1>
+        <button class="filter" onClick={handleFilterButtonClick}>
+            <img
+              src="/assets/filter.png"
+              alt="filtro"
+              className="button-image"
+            />
+          </button>
+        <hr className="hr-sections"></hr>
 
       <div className="container-clothes-section">
         <div className="clothes-section">

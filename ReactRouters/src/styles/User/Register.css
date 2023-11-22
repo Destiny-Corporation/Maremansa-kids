@@ -27,6 +27,7 @@ body {
 .main-header {
   background-color: rgb(72, 163, 169);
   width: 100%;
+  height: 60px;
   padding: 5px 20px;
   display: flex;
   justify-content: space-between;

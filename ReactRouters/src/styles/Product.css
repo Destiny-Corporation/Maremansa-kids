@@ -1,16 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Stylish&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
-
-
+@import url("https://fonts.googleapis.com/css2?family=Stylish&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Montserrat", sans-serif;
-    text-decoration: none;
-    list-style: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+  text-decoration: none;
+  list-style: none;
 }
+
 
 .main-container {
   height: 100vh;
@@ -24,6 +23,7 @@
 .main-header {
   background-color: rgb(72, 163, 169);
   width: 100%;
+  height: 60px;
   padding: 5px 20px;
   display: flex;
   justify-content: space-between;
@@ -32,7 +32,7 @@
 }
 
 .logo img {
-  max-width: 100%;
+  max-width: 80%;
 }
 
 .search-container-geral {
@@ -98,7 +98,7 @@
 }
 
 .main-products {
-  gap: 0.2rem; 
+  gap: 0.2rem;
   justify-content: flex-start;
   padding: 10px;
   display: grid;
@@ -106,78 +106,95 @@
   align-items: flex-start;
 }
 
-.container{
- text-align: left;
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Ajuste conforme necessário para cobrir a altura da tela inteira */
+  background-color: #fff; /* Cor de fundo desejada */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999; /* Certifique-se de que a tela de carregamento esteja acima de outros elementos */
 }
 
-.products-left{
+
+.container {
+  text-align: left;
+  margin-left: 85%;
+}
+
+.products-left {
   display: flex;
   flex-direction: column;
 }
 
-.imagens{
+.imagens {
   display: flex;
   justify-content: space-evenly;
   flex-direction: column;
   max-width: 400px;
+  margin-right: -40px;
 }
 
-.imagens img{
+.imagens img {
   margin-bottom: 10px;
   width: 100%;
 }
 
-.left-side{
-  display:flex;
+.left-side {
+  display: flex;
   flex-direction: column;
 }
 
-.select-image{
+.select-image {
   max-width: 400px;
 }
 
-.select-image img{
+.select-image img {
   width: 100%;
   border-radius: 10px;
 }
 
-.right-side{
+.right-side {
   width: 100%;
   color: #48a3a9;
   display: flex;
   flex-direction: column;
 }
 
-.content{
+.content {
   max-width: 400px;
   display: flex;
   flex-direction: column;
 }
 
-.mare{
+.mare {
   font-size: 10px;
 }
 
-.prices{
+.prices {
   display: flex;
 }
 
-.price{
-  font-family:  "Stylish", sans-serif;
+.price-pd {
+  font-family: "Stylish", sans-serif;
   font-size: 20px;
   font-weight: 700;
   margin-right: 10px;
+  margin-left: 0;
 }
 
-.off{
-  font-family:  "Stylish", sans-serif;
+.off {
+  font-family: "Stylish", sans-serif;
   text-decoration: line-through;
   font-size: 16px;
   color: #3dafb37a;
 }
 
 .text-prod {
-  font-size: 14px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 2px;
 }
@@ -185,7 +202,8 @@
 .title-prod {
   font-size: 26px;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
+  font-weight: 600;
 }
 
 .color-buttons {
@@ -196,17 +214,23 @@
 .color-button {
   margin-right: 10px;
   border: 2px solid #48a3a9;
+  border-radius: 10px;
   padding: 15px 15px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
+.color-button:hover {
+  border: 3px solid #247479;
+}
+
 #selected-color {
-    margin-top: 15px;
-    margin-bottom: 5px;
+    margin-top: 4px;
+    margin-bottom: 10px;
     text-transform: uppercase;
     letter-spacing: 2px;
-    font-size: 12px;
+    font-size: 9px;
+    font-weight: 700;
 }
 
 .hr-prod {
@@ -220,12 +244,12 @@
   opacity: 1;
 }
 
-.options{
+.options {
   margin-top: 10px;
   display: flex;
 }
 
-.amount{
+.amount {
   font-family: "Stylish", sans-serif;
   border-radius: 8px;
   display: flex;
@@ -237,7 +261,7 @@
   padding: 1px 1px;
 }
 
-.amount span{
+.amount span {
   font-family: "Stylish", sans-serif;
   font-weight: 600;
   font-size: 14px;
@@ -259,24 +283,60 @@
   font-family: "Stylish", sans-serif;
   display: flex;
   align-items: center;
-  justify-content: center; 
+  justify-content: center;
   margin-right: 10px;
+}
+
+.selected-image {
+  width: auto;
+  height: 500px;
+}
+
+.small-images {
+  width: auto;
+  height: 150px;
+  border-radius: 10px;
+}
+
+.small-images:hover {
+  border: 3px solid #48a3a9;
+  border-radius: 10px;
+}
+
+.products-left {
+  margin-left: 0px;
+}
+
+.selected-color-button {
+  border-color: #d811df;
+}
+
+
+.left-side {
+  margin-left: 0px;
 }
 
 
 .selected {
-   border: 1px solid #000;
+   border: 1px solid #247479;
 }
 
-.amount button{
+.size-option:hover {
+  color: #247479;
+  border: 2px solid #247479;
+}
+
+.amount button {
   cursor: pointer;
   display: flex;
   align-items: center;
-  border: 1px solid rgb(245, 252, 252);
+  border: none;
   color: #48a3a9;
-  background-color: rgb(245, 252, 252);
+  background-color: transparent;
   width: fit-content;
   height: 20px;
+  font-size: 16px;
+  font-family: 'Stylish', sans-serif;
 }
 
 .buttons-cart {
@@ -289,9 +349,10 @@
   border-radius: 8px;
   margin-top: 10px;
   display: flex;
-  align-items: center; 
+  align-items: center;
   width: 300px;
   gap: 5px;
+  margin-left: 0px;
   font-size: 10px;
   padding: 10px 20px;
   transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
@@ -306,13 +367,13 @@
 }
 
 .buttons-cart i {
-  font-size: 20px; 
-  margin-right: 5px; 
+  font-size: 20px;
+  margin-right: 5px;
 }
 
 .buttons-cart span {
-  flex: 1; 
-  text-align: center; 
+  flex: 1;
+  text-align: center;
 }
 
 .cep-text {
@@ -320,7 +381,7 @@
 }
 
 .cep-text p {
-  color:#48a3a9;
+  color: #48a3a9;
   text-transform: uppercase;
   letter-spacing: 2px;
   margin-bottom: 5px;
@@ -339,70 +400,79 @@
   padding: 10px;
   border-radius: 10px;
   height: 40px;
-  margin-right: 10px;
+  margin-right: 1px;
+}
+
+.cep::placeholder{
+  color:#48a3a99d;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 10px;
 }
 
 .cep button {
-  height: 40px;
+  height: 35px;
+  width: 38px;
   background-color: none;
   font-size: 14px;
   font-family: "Stylish", sans-serif;
-  color: #48a3a9;
+  color: #ffffff;
   border: 2px solid #48a3a9;
-  padding: 10px;
+  padding: 6px;
   cursor: pointer;
   transition: background-color 0.3s;
   border-radius: 10px;
+
 }
 
 footer {
-    position: static;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    margin-top: 30px;
-    background-color: #48A3A9;
-    color: #fff;
-    text-align: center;
+  position: static;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  margin-top: 30px;
+  background-color: #48a3a9;
+  color: #fff;
+  text-align: center;
 }
 
 .footer-section {
-    gap: 1rem; 
-    justify-content: space-around;
-    background-color: #48A3A9;
-    padding: 18px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, auto));
-    align-items: flex-start; 
+  gap: 1rem;
+  justify-content: space-around;
+  background-color: #48a3a9;
+  padding: 18px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+  align-items: flex-start;
 }
 
 .footer-section .footer-section-div {
-    text-align: left;
+  text-align: left;
 }
 
 .container-fluid {
-    background-color: #48A3A9;
-    padding-bottom: 3rem; 
+  background-color: #48a3a9;
+  padding-bottom: 3rem;
 }
 
 section {
-    padding-top: 7rem;
+  padding-top: 7rem;
 }
 
 section h1 {
-    align-items: center;
-    text-align: center;
-    font-size: 2rem;
-    letter-spacing: 2px;
+  align-items: center;
+  text-align: center;
+  font-size: 2rem;
+  letter-spacing: 2px;
 }
 
 .footer-section-div img {
-    width: 100px; 
+  width: 100px;
 }
 
 .footer-section-div h3 {
   color: #fff;
-  font-size: 18px; 
+  font-size: 18px;
   margin-bottom: 0.5rem;
   letter-spacing: 2px;
 }
@@ -416,7 +486,7 @@ section h1 {
 }
 
 .footer-section-div li a:hover {
-  color: #247479; 
+  color: #247479;
   text-decoration: underline;
 }
 
@@ -424,7 +494,7 @@ section h1 {
   font-size: 26px;
   margin-left: -10px;
   color: white;
-  background-color: #48A3A9;
+  background-color: #48a3a9;
   padding: 12px;
   border-radius: 5px;
   transition: background-color 0.3s ease;
@@ -436,11 +506,11 @@ section h1 {
 }
 
 .last-text {
-  text-align: center; 
+  text-align: center;
   background-color: #247479;
   color: #fff;
-  padding: 0.5rem 0; 
-  position: static; 
+  padding: 0.5rem 0;
+  position: static;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -449,7 +519,7 @@ section h1 {
 }
 
 .text-sub-footer {
-  font-family: 'Stylish', sans-serif;
+  font-family: "Stylish", sans-serif;
   font-size: 20px;
   margin-top: -5px;
   letter-spacing: 1px;

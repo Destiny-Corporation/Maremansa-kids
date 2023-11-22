@@ -74,15 +74,30 @@ const Home = () => {
   return (
     <div className='main'>
       <header className="main-header">
-        <div className="logo">
+        <div className="logo-home">
           <img src="/assets/logo.png" alt="Logo" />
         </div>
-        <div className="icons">
+      </header>
+
+
+    <div className ='space'>
+      <div className='align'>
+      <div className="search-container-1">
+        <input
+          type="text"
+          className="search-bar"
+          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?" />
+        <button className="search-button" type="submit">
+          <i className="bx bx-search"></i>
+        </button>
+        </div>
+        <p className="home-t">Bem vindo!<br></br>Entre ou cadastre-se</p>
+        <div className="icons-home">
           <a href="#">
             <Link to="/login">
               <i
                 className="bx bx-user bt-header"
-                style={{ color: "#ffffff" }}
+                style={{ color: "#48A3A9" }}
               ></i>
             </Link>
           </a>
@@ -90,7 +105,7 @@ const Home = () => {
             <Link to="/wishlist">
               <i
                 className="bx bx-heart bt-header"
-                style={{ color: "#ffffff" }}
+                style={{ color: "#48A3A9" }}
               ></i>
             </Link>
           </a>
@@ -98,7 +113,7 @@ const Home = () => {
             <Link to="/cart">
               <i
                 className="bx bx-cart bt-header"
-                style={{ color: "#ffffff" }}
+                style={{ color: " #48A3A9" }}
               ></i>
             </Link>
           </a>
@@ -205,15 +220,6 @@ const Home = () => {
         </div>
 
         <div className="button-menu">
-          <Link to="/props">
-            <img src="/assets/accessories.png" alt="" />
-          </Link>
-          <Link to="/props">
-            <h6>ACESSÓRIOS</h6>
-          </Link>
-        </div>
-
-        <div className="button-menu">
           <Link to="female">
             <img src="/assets/female.png" alt="" />
           </Link>
@@ -228,6 +234,15 @@ const Home = () => {
           </Link>
           <Link to="male">
             <h6>MASCULINO</h6>
+          </Link>
+        </div>
+
+        <div className="button-menu">
+          <Link to="/props">
+            <img src="/assets/accessories.png" alt="" />
+          </Link>
+          <Link to="/props">
+            <h6>ACESSÓRIOS</h6>
           </Link>
         </div>
       </div>
@@ -304,10 +319,10 @@ const Home = () => {
           <i className="fa fa-instagram"></i>
         </div>
       </section>
+      </footer>
     <div className="last-text">
         <p className="text-sub-footer">maremansa</p>
       </div>
-      </footer>
     </div>
   );
 };

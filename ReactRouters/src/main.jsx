@@ -1,17 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
-import store from './routes/Checkout/store.js'; // Importe sua loja configurada
-
+import store from "./routes/Checkout/store.js"; // Importe sua loja configurada
 
 import Home from "./routes/Home";
 import Company from "./routes/About/Company.jsx";
 import Login from "./routes/User/Login.jsx";
 import Register from "./routes/User/Register.jsx";
 import Cart from "./routes/HeaderPaths/Cart.jsx";
+import Cart2 from "./routes/HeaderPaths/Cart2.jsx";
 import Wishlist from "./routes/HeaderPaths/Wishlist.jsx";
 import Female from "./routes/ProductTypes/Female.jsx";
 import Male from "./routes/ProductTypes/Male.jsx";
@@ -33,21 +32,53 @@ import MaleChildren from './routes/ProductTypes/Male/MaleChildren.jsx';
 import MaleJuvenile from './routes/ProductTypes/Male/MaleJuvenile.jsx';
 import ErrorPage from './routes/ErrorPage';
 import Checkout from './routes/Checkout/Checkout.jsx';
+import LoadingScreen from './routes/LoadingScreen';
 //import Confirmation from './routes/Checkout/Confirmation.jsx';
 //import Payment from './routes/Checkout/Payment.jsx';
 //import Shipping from './routes/Checkout/Shipping.jsx';
 import Confirmation from './routes/Checkout/Confirmation.jsx';
 
+const App = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const startLoading = () => {
+    setIsLoading(true);
+    // Realize ações de carregamento, como carregar dados assincronamente.
+  };
+
+  const stopLoading = () => {
+    setIsLoading(false);
+    // A carga foi concluída, pare de exibir a tela de carregamento.
+  };
+
+  return (
+    <RouterProvider router={router}>
+      {isLoading && <LoadingScreen />}
+      <Switch>
+        <Route
+          path="/home"
+          render={(props) => <Home {...props} startLoading={startLoading} stopLoading={stopLoading} />}
+        />
+         <Route
+          path="/props"
+          render={(props) => <Props {...props} startLoading={startLoading} stopLoading={stopLoading} />}
+        />
+      </Switch>
+    </RouterProvider>
+  );
+};
+
 
 const router = createBrowserRouter([
+  {
+    path: "/loading",
+    element: <LoadingScreen />,
+  },
   {
     path: "/exchanges",
     element: <Exchanges />,
   },
-  {
-    path: "/product",
-    element: <Product />,
-  },
+
   {
     path: "/partners",
     element: <Partners />,
@@ -75,6 +106,10 @@ const router = createBrowserRouter([
   {
     path: "/cart",
     element: <Cart />,
+  },
+  {
+    path: "/cart2",
+    element: <Cart2 />,
   },
   {
     path: "/wishlist",
@@ -137,6 +172,10 @@ const router = createBrowserRouter([
     element: <Requests />,
   },
   {
+    path: "/product/:collectionName/:productName",
+    element: <Product />,
+  },
+  {
     path: "/checkout",
     element: <Checkout />,
   },
@@ -145,11 +184,10 @@ const router = createBrowserRouter([
     element: <Confirmation />,
   },
 
-
   {
     path: "*",
-    element: <ErrorPage />,  
-  }
+    element: <ErrorPage />,
+  },
 ]);
 
 /*const router = createBrowserRouter([
@@ -169,7 +207,6 @@ const router = createBrowserRouter([
     ],
   },
 ]);*/
-
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
