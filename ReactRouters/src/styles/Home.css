@@ -39,9 +39,71 @@ body {
   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
+.header-items {
+  display: flex; /* Adiciona um display flex para os itens serem exibidos em linha */
+  align-items: center; /* Centraliza verticalmente os itens na div pai */
+}
+
+.items-home li a{
+  color: #fff;
+  font-size: 11px;
+  font-weight: 300;
+  transition: color 0.35s ease;
+  letter-spacing: 2px;
+}
+
+.items-home li a:hover {
+  color: #247479;
+  text-decoration: underline;
+}
+
+.items-home a {
+  font-size: 26px;
+  margin-left: -10px;
+  color: white;
+  background-color: #48a3a9;
+  padding: 12px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+a:hover {
+  color: #247479;
+  cursor: pointer;
+}
+
+a {
+    font-weight: 500;
+    color: #fff;
+    text-decoration: inherit;
+    margin-left: 10px;
+}
+
+.header-item1,
+.header-item2 {
+  display: flex; /* Adiciona um display flex para os itens internos serem exibidos em linha */
+  align-items: center; /* Centraliza verticalmente os itens internos na div pai */
+  margin-right: 20px; /* Adiciona um espaçamento entre as duas divs */
+}
+
+.header-item1 span,
+.header-item2 span {
+  font-size: 13px;
+  color: #fff;
+  margin-left: 5px; /* Adiciona um espaçamento à esquerda do texto */
+}
+
+.header-item1 img,
+.header-item2 img {
+  width: 30px;
+  height: 30px;
+}
+
 .logo-home img {
   max-width: 80%;
 }
+
+
 
 .icons-home {
   display: flex;
@@ -94,6 +156,8 @@ body {
   display: flex;
   align-items: left;
 }
+
+
 
 .search-container-1 {
   width: 70%;
