@@ -46,7 +46,7 @@ body {
 
 .items-home li a{
   color: #fff;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 300;
   transition: color 0.35s ease;
   letter-spacing: 2px;
@@ -58,7 +58,7 @@ body {
 }
 
 .items-home a {
-  font-size: 26px;
+  font-size: 16px;
   margin-left: -10px;
   color: white;
   background-color: #48a3a9;

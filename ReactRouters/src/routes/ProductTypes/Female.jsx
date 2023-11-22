@@ -157,6 +157,22 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
             <Link to="/female/female-juvenile"></Link>
           </div>
         </div>
+
+        <div className="female-sections">
+          <div className="female-sections1">
+            <img src="/assets/sections-title1.png" /> 
+          </div>
+
+          <div className="female-sections1">
+            <img src="/assets/sections-title2.png" /> 
+          </div>
+
+          <div className="female-sections1">
+            <img src="/assets/sections-title3.png" /> 
+          </div>
+        </div>
+
+
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
