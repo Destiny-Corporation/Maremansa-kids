@@ -5,11 +5,8 @@ import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 import { getFirestore, collection, doc, getDocs } from "firebase/firestore";
 import ReactPaginate from "react-paginate";
-// Importa a função para automatizar a barra de pesquisa
-import Search from "./Search";
 import { useNavigate } from "react-router-dom";
 import { debounce } from "debounce";
-
 
 const firebaseConfig = {
   apiKey: "AIzaSyDTKUI6nV-DZjIsUo1BMkjIUWOQbT9gU3Q",
@@ -19,19 +16,14 @@ const firebaseConfig = {
   messagingSenderId: "376069750475",
   appId: "1:376069750475:web:bfb216cfd8928a23e8a54e",
 };
-
 export const app = initializeApp(firebaseConfig);
 export const storage = getStorage(app);
 export const firestore = getFirestore(app);
-
-
 const Home = () => {
   const [produtos, setProdutos] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [searchValue, setSearchValue] = useState("");
- 
   const navigate = useNavigate();
-
 
   const debouncedSearchFunction = debounce(async () => {
     // Navegue para a rota apropriada com base no valor da pesquisa
@@ -49,6 +41,7 @@ const Home = () => {
     debouncedSearchFunction();
   }, [searchValue]);
 
+
   useEffect(() => {
     const fetchProdutos = async () => {
       const produtosCollection = collection(firestore, "Prodfemme");
@@ -56,21 +49,16 @@ const Home = () => {
       const produtosData = produtosSnapshot.docs.map((doc) => doc.data());
       setProdutos(produtosData);
     };
-
     fetchProdutos();
   }, []);
-
   const productsPerPage = 4;
   const pageCount = Math.ceil(produtos.length / productsPerPage);
-
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected);
   };
-
   const startIndex = currentPage * productsPerPage;
   const endIndex = startIndex + productsPerPage;
   const displayedProducts = produtos.slice(startIndex, endIndex);
-
   return (
     <div className='main'>
       <header className="main-header">
@@ -78,15 +66,16 @@ const Home = () => {
           <img src="/assets/logo.png" alt="Logo" />
         </div>
       </header>
-
-
     <div className ='space'>
       <div className='align'>
       <div className="search-container-1">
         <input
           type="text"
           className="search-bar"
-          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?" />
+          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?" 
+          onChange={(e) => {
+            setSearchValue(e.target.value);
+          }} />
         <button className="search-button" type="submit">
           <i className="bx bx-search"></i>
         </button>
@@ -118,23 +107,7 @@ const Home = () => {
             </Link>
           </a>
         </div>
-      </header>
-
-    <div className ='space'>
-      <div className="search-container-geral">
-      <input
-  type="text"
-  className="search-bar"
-  placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
-  onChange={(e) => {
-    setSearchValue(e.target.value);
-  }} />
-        <button className="search-button" type="submit">
-          <i className="bx bx-search"></i>
-        </button>
       </div>
-
-
       <div className="carousel-container">
         <div id="carouselExampleIndicators" className="carousel slide">
           <div className="carousel-indicators">
@@ -159,7 +132,6 @@ const Home = () => {
               aria-label="Slide 3"
             ></button>
           </div>
-
           <div className="carousel-inner">
             <div className="carousel-item active">
               <img
@@ -167,14 +139,12 @@ const Home = () => {
                 className="d-block w-100"
                 alt="..." />
             </div>
-
             <div className="carousel-item">
               <img
                 src="/assets/banner-sale-2.png"
                 className="d-block w-100"
                 alt="..." />
             </div>
-
             <div className="carousel-item">
               <img
                 src="/assets/banner.png"
@@ -182,7 +152,6 @@ const Home = () => {
                 alt="..." />
             </div>
           </div>
-
           <button
             className="carousel-control-prev"
             type="button"
@@ -208,7 +177,6 @@ const Home = () => {
           </button>
         </div>
       </div>
-
       <div className="container-menu-buttons">
         <div className="button-menu">
           <Link to="/sale">
@@ -218,7 +186,6 @@ const Home = () => {
             <h6>PROMOÇÕES</h6>
           </Link>
         </div>
-
         <div className="button-menu">
           <Link to="female">
             <img src="/assets/female.png" alt="" />
@@ -227,7 +194,6 @@ const Home = () => {
             <h6>FEMININO</h6>
           </Link>
         </div>
-
         <div className="button-menu">
           <Link to="male">
             <img src="/assets/male.png" alt="" />
@@ -236,7 +202,6 @@ const Home = () => {
             <h6>MASCULINO</h6>
           </Link>
         </div>
-
         <div className="button-menu">
           <Link to="/props">
             <img src="/assets/accessories.png" alt="" />
@@ -246,9 +211,7 @@ const Home = () => {
           </Link>
         </div>
       </div>
-
       <hr size="1" />
-
       <div className="container-clothes-main">
       <i
           className="bx bx-chevron-left"
@@ -256,7 +219,6 @@ const Home = () => {
           onClick={() => setCurrentPage(currentPage - 1)}
           disabled={currentPage === 0}
         ></i>
-
         <div className="container-clothes">
         {produtos.slice(startIndex, endIndex).map((produto, index) => (
   <div className="clothes" key={index} style={{ width: "20%" }}>
@@ -270,7 +232,6 @@ const Home = () => {
   </div>
 ))}
 </div>
-
         <i
           className="bx bx-chevron-right"
           style={{ color: "#48A3A9", cursor: "pointer" }}
@@ -279,13 +240,11 @@ const Home = () => {
         ></i>
       </div>
       </div>
-
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
             <img src="/assets/whale.png" />
           </div>
-
           <div className="footer-section-div">
             <h3>SOBRE NÓS</h3>
             <li>
@@ -298,7 +257,6 @@ const Home = () => {
               <Link to="/partners">NOSSOS PARCEIROS</Link>
             </li>
           </div>
-
           <div className="footer-section-div">
             <h3>SUPORTE</h3>
             <li>
@@ -311,7 +269,6 @@ const Home = () => {
             <Link to="/sitemap">MAPA DO SITE</Link>
           </li>
         </div>
-
         <div className="footer-section-div">
           <h3>CONTATOS</h3>
           <i className="fa fa-whatsapp"></i>
@@ -326,5 +283,4 @@ const Home = () => {
     </div>
   );
 };
-
 export default Home;
