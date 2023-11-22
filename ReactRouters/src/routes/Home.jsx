@@ -6,7 +6,7 @@ import { getStorage } from "firebase/storage";
 import { getFirestore, collection, doc, getDocs } from "firebase/firestore";
 import ReactPaginate from "react-paginate";
 import { useNavigate } from "react-router-dom";
-import { debounce } from "debounce";
+import debounce from 'debounce';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDTKUI6nV-DZjIsUo1BMkjIUWOQbT9gU3Q",
@@ -283,4 +283,5 @@ const Home = () => {
     </div>
   );
 };
+
 export default Home;
