@@ -131,17 +131,6 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
         </div>
       </header>
 
-      <div className="search-container">
-        <input
-          type="text"
-          className="search-bar"
-          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
-        />
-        <button className="search-button" type="submit">
-          <i className="bx bx-search"></i>
-        </button>
-      </div>
-
       <div className="title-section">
         <h1 className="general-title">FEMININO</h1>
         <button class="filter" onClick={handleFilterButtonClick}>
@@ -153,26 +142,21 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
           </button>
         <hr className="hr-sections"></hr>
 
-      <div className="container-clothes-section">
-        <div className="clothes-section">
-          <Link to="/female/fem-baby">
-            <img src="/assets/female-baby.png" />
-          </Link>
-        </div>
+        <div className="container-roupas">
+            <div className="roupa-fundo"></div>
+            <div className="roupa" style={{ backgroundImage: "url('/assets/male-baby.png')" }}>
+              <Link to="/male/male-baby"></Link>
+            </div>
+  
 
-        <div className="clothes-section">
-          <Link to="/female/fem-children">
-            <img src="/assets/female-children.png" />
-          </Link>
-        </div>
+           <div className="roupa" style={{ backgroundImage: "url('/assets/male-children.png')" }}>
+            <Link to="/male/male-children"></Link>
+          </div>
 
-        <div className="clothes-section">
-          <Link to="/female/fem-juvenile">
-            <img src="/assets/female-juvenile.png" />
-          </Link>
+          <div className="roupa" style={{ backgroundImage: "url('/assets/male-juvenile.png')" }}>
+            <Link to="/male/male-juvenile"></Link>
+          </div>
         </div>
-      </div>
-
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
