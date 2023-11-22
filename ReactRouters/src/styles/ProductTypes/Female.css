@@ -81,13 +81,15 @@ position: relative;
 top: 10px;
 width: 263px;
 height: 393px;
-
+margin-left: 68px;
 background: #fff;
 border-radius: 25px;
 background-size: cover;
 transition: .5s;
 cursor: pointer;
 }
+
+
 
 .container-female .roupa-female:hover {
 scale: 0.8;
@@ -99,7 +101,7 @@ content: '';
 position: absolute;
 width: 263px;
 height: 393px;
-margin-left: -130px;
+margin-left: -125px;
 background-color: #8DCAD5;
 border-radius: 25px;
 background-size: cover;
@@ -108,10 +110,26 @@ z-index: 999;
 transition: .2s;
 }
 
+
 .container-female .roupa-female:hover::before{
 opacity: 0;
 transition: .2s;
 }
+
+.female-sections{
+  position: relative;
+  display: flex;
+  gap: 70px;
+  margin-left: 425px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+
+.female-sections .female-sections1 img{
+  max-width: 70%;
+}
+
 
 footer {
     position: static;

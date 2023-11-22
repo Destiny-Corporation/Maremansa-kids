@@ -165,6 +165,21 @@ background-color: #f79494;
 z-index: 1;
 }*/
 
+.male-sections{
+  position: relative;
+  display: flex;
+  gap: 70px;
+  margin-left: 425px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+
+.male-sections .male-sections1 img{
+  max-width: 70%;
+}
+
+
 footer {
     position: static;
     bottom: 0;

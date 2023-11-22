@@ -141,7 +141,6 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
             <div className="roupa-male" style={{ backgroundImage: "url('/assets/male-baby.png')" }}>
               <Link to="/male/male-baby"></Link>
             </div>
-  
 
            <div className="roupa-male" style={{ backgroundImage: "url('/assets/male-children.png')" }}>
             <Link to="/male/male-children"></Link>
@@ -149,6 +148,20 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
 
           <div className="roupa-male" style={{ backgroundImage: "url('/assets/male-juvenile.png')" }}>
             <Link to="/male/male-juvenile"></Link>
+          </div>
+        </div>
+
+        <div className="male-sections">
+          <div className="male-sections1">
+            <img src="/assets/sections-title1.png" /> 
+          </div>
+
+          <div className="male-sections1">
+            <img src="/assets/sections-title2.png" /> 
+          </div>
+
+          <div className="male-sections1">
+            <img src="/assets/sections-title3.png" /> 
           </div>
         </div>
 
