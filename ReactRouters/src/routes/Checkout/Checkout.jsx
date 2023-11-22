@@ -48,7 +48,7 @@ const Checkout = () => {
         count,
       })),
     };
-
+  
     const response = await fetch("http://localhost:5173/order", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -58,6 +58,9 @@ const Checkout = () => {
     await stripe.redirectToCheckout({
       sessionId: session.id,
     });
+  
+    // Redirecionamento para /payment após o pagamento completo
+    window.location.href = "/payment";
   }
 
   return (
@@ -161,19 +164,29 @@ const Checkout = () => {
                       Back
                     </Button>
                   )}
-                  <Button
-                    fullWidth
-                    type="submit"
-                    color="primary"
-                    variant="contained"
-                    sx={{
-                      backgroundColor: shades.primary[400],
-                      boxShadow: "none",
-                      color: "white",
-                      borderRadius: 0,
-                      padding: "15px 40px",
-                    }}
-                  >
+                 <Button
+  fullWidth
+  type="submit"
+  color="primary"
+  variant="contained"
+  sx={{
+    backgroundColor: shades.primary[400],
+    boxShadow: "none",
+    color: "white",
+    borderRadius: 0,
+    padding: "15px 40px",
+  }}
+  onClick={() => {
+    if (!isSecondStep) {
+      setActiveStep(activeStep + 1);
+    } else {
+      makePayment(values);
+      // Redirecionar para /payment após o pagamento completo
+      window.location.href = "/payment";
+    }
+  }}
+>
+                  
                     {!isSecondStep ? "Next" : "Place Order"}
                   </Button>
                 </Box>

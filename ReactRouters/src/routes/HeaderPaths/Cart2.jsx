@@ -100,7 +100,12 @@ const Cart2 = () => {
     </div>
   ))}
 </div>
-
+ {/* Botão "Comprar Agora" */}
+ {cartItems.length > 0 && (
+        <Link to="/checkout">
+          <button className="comprar-agora-btn">Comprar Agora</button>
+        </Link>
+      )}
 
       <footer>
         <section className="footer-section">
