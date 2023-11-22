@@ -42,6 +42,12 @@ const Cart = () => {
     setCartVisible(!cartVisible);
   };
 
+  const LoadingContainer = () => (
+    <div className="loading-container">
+      <img src="/assets/espera.gif" alt="Carregando..." />
+    </div>
+  );
+
   useEffect(() => {
     const fetchProductData = async () => {
       try {
@@ -64,9 +70,11 @@ const Cart = () => {
     fetchProductData();
   }, [collectionName, productName]);
 
+  
   if (productLoading) {
-    return <div className="loading-container">Carregando...</div>;
+    return <LoadingContainer />;
   }
+  
 
   const handleAddToCart1 = () => {
     const data = {
