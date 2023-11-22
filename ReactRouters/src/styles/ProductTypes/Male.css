@@ -115,7 +115,7 @@
   justify-content: center;
 }
 
-.container-roupas{
+.containers-male{
   position: relative;
   display: flex;
   gap: 70px;
@@ -123,7 +123,7 @@
   margin-top: 10px;
 }
 
-.container-roupas .roupa{
+.containers-male .roupa-male{
 position: relative;
 top: 10px;
 width: 263px;
@@ -136,12 +136,12 @@ transition: .5s;
 cursor: pointer;
 }
 
-.container-roupas .roupa:hover {
+.containers-male .roupa-male:hover {
 scale: 0.8;
 transition: .5s;
 }
 
-.container-roupas .roupa::before{
+.containers-male .roupa-male::before{
 content: '';
 position: absolute;
 width: 263px;
@@ -155,7 +155,7 @@ z-index: 999;
 transition: .2s;
 }
 
-.container-roupas .roupa:hover::before{
+.containers-male .roupa-male:hover::before{
 opacity: 0;
 transition: .2s;
 }
