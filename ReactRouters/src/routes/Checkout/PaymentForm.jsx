@@ -65,7 +65,7 @@ const PaymentForm = () => {
       { valor: "cartao-de-credito", titulo: "Cartão de Crédito", imagem: "/assets/cartao1.png" },
       { valor: "debito", titulo: "Débito", imagem: "/assets/cartao1.png" },
       { valor: "pix", titulo: "PIX", imagem: "/assets/pix.png" },
-      { valor: "boleto", titulo: "Boleto", imagem: "/assetsboleto.png" },
+      { valor: "boleto", titulo: "Boleto", imagem: "/assets/boleto.png" },
     ];
   
     return opcoes.map((opcao) => (
