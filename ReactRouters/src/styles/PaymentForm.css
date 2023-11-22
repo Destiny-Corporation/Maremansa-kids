@@ -4,7 +4,7 @@
     max-width: 100%;
     margin: auto;
     padding: 30px;
-    border: 1px solid #3498db;
+    border: 1px solid #3CA2A2;
     border-radius: 8px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     background-color: #fff;
@@ -14,26 +14,32 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 20px;
   }
   
   .payment-title {
     margin: 0;
-    color: #3498db;
+    color: #3CA2A2;
   }
   
   .resumo-pedido {
     flex-grow: 1;
     margin-left: 20px;
     color: #555;
+    border: 1px solid #3CA2A2;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 20px;
   }
   
   .opcoes-pagamento {
     display: flex;
     flex-direction: column;
     margin-top: 20px;
-    border: 1px solid #3498db;
+    border: 1px solid #3CA2A2;
     border-radius: 8px;
     padding: 15px; /* Adicionado espaçamento interno */
+    margin-bottom: 20px;
   }
   
   .opcoes-pagamento label {
@@ -45,7 +51,7 @@
     border-bottom: 1px solid #ddd;
     padding: 10px 0;
   }
-  
+ 
   .opcao-titulo {
     font-weight: bold;
     margin-bottom: 5px;
@@ -70,44 +76,10 @@
     border-radius: 4px;
   }
   
-  #resumo-pedido {
-    border: 1px solid #3498db;
-    border-radius: 8px;
-    padding: 15px;
-    margin-top: 20px;
-  }
+ 
   
   .concluir-btn {
-    background-color: #3498db;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  .concluir-btn:hover {
-    background-color: #2980b9;
-  }
-
-  /* Adicione estas alterações ao seu CSS existente */
-
-.payment-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.opcoes-pagamento {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-}
-
-.concluir-btn {
-  background-color: #3498db;
+    background-color: #3CA2A2;
   color: #fff;
   padding: 10px 20px;
   border: none;
@@ -115,11 +87,11 @@
   cursor: pointer;
   font-size: 16px;
   margin-bottom: 20px;
-}
-
-.concluir-btn:hover {
-  background-color: #2980b9;
-}
+  }
+  
+  .concluir-btn:hover {
+    background-color: #3CA2A2;
+  }
 
 .cartao-imagem {
   width: 15%;  /* Ajuste o valor conforme necessário */
