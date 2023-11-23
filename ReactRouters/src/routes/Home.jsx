@@ -20,6 +20,8 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const storage = getStorage(app);
 export const firestore = getFirestore(app);
+
+
 const Home = () => {
   const [produtos, setProdutos] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
@@ -52,21 +54,38 @@ const Home = () => {
     };
     fetchProdutos();
   }, []);
+
+
   const productsPerPage = 4;
   const pageCount = Math.ceil(produtos.length / productsPerPage);
+
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected);
   };
+
   const startIndex = currentPage * productsPerPage;
   const endIndex = startIndex + productsPerPage;
   const displayedProducts = produtos.slice(startIndex, endIndex);
   return (
     <div className='main'>
-      <header className="main-header">
-        <div className="logo-home">
-          <img src="/assets/logo.png" alt="Logo" />
+    <header className="main-header">
+      <div className="logo-home">
+        <img src="/assets/logo.png" alt="Logo" />
+      </div>
+
+        <div className="header-items">
+          <div className="header-item1">
+            <img className="items-home" src="/assets/comente.png" alt="Comente" /> 
+            <li><Link to="#">ATENDIMENTO</Link></li>
+          </div>
+        
+          <div className="header-item2">
+            <img className="items-home" src="/assets/placeholder.png" alt="Localização" />
+            <li><Link to="#">LOCALIZAÇÃO</Link></li>
+          </div>
         </div>
-      </header>
+    </header>
+
     <div className ='space'>
       <div className='align'>
       <div className="search-container-1">
