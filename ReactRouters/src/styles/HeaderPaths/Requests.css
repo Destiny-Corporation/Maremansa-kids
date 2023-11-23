@@ -38,6 +38,11 @@
     max-width: 90%;
   }
 
+  .header-logo-center {
+    margin-top: 3px;
+    max-width: 90%;
+  }
+
 
 .icons {
   display: flex;
@@ -124,8 +129,8 @@
 }
 
   .search-container-header {
-    width: 35%;
-    height: 35px;
+    width: 28%;
+    height: 30px;
     margin: 12px auto;
     background-color: #dcebeb;
     display: flex;
@@ -166,6 +171,6 @@
   
   .search-bar-header::placeholder {
     color: #48a3a9;
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: 2px;
   }

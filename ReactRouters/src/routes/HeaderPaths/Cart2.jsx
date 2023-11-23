@@ -66,39 +66,40 @@ const Cart2 = () => {
         </div>
       </div>
       <div className="cart-content">
+
   {cartItems.map((produto, index) => (
-    <div className="cart-item" key={index}>
-      <div className="cart-item-info">
-        <div className="delivery-indicator">
-          Entrega {index + 1} de {cartItems.length}
-        </div>
-        <i
-            className="bx bxs-trash-alt cart-remove cart-item-remove-2"
-            onClick={() => handleRemoveFromCart(index)}
-          ></i>
-        <img
-          src={produto.url_image}
-          alt={produto.nome_prop}
-          className="cart-item-image"
-        />
-        <div className="cart-item-details">
-          <div className="cart-item-name">{produto.nome_prop}</div>
-          <div className="cart-item-price">R$ {produto.preço}</div>
-          <div className="cart-item-options">
-            <div>
-              <strong>Cor:</strong> {produto.cor}
-            </div>
-            <div>
-              <strong>Tamanho:</strong> {produto.tamanho}
-            </div>
-            <div>
-              <strong>Quantidade:</strong> {produto.quantidade}
-            </div>
+  <div className="cart-item" key={index}>
+    <div className="cart-item-info">
+      <div className="delivery-indicator">
+        Entrega {index + 1} de {cartItems.length}
+      </div>
+      <i
+        className="bx bxs-trash-alt cart-remove cart-item-remove-2"
+        onClick={() => handleRemoveFromCart(index)}
+      ></i>
+      <img
+        src={produto.url_image}
+        alt={produto.nome_prop}
+        className="cart-item-image"
+      />
+      <div className="cart-item-details">
+        <div className="cart-item-name">{produto.nome_prop}</div>
+        <div className="cart-item-price">R$ {produto.preço}</div>
+        <div className="cart-item-options">
+          <div>
+            <strong>Cor:</strong> {produto.cor}
+          </div>
+          <div>
+            <strong>Tamanho:</strong> {produto.tamanho}
+          </div>
+          <div>
+            <strong>Quantidade:</strong> {produto.quantidade}
           </div>
         </div>
       </div>
     </div>
-  ))}
+  </div>
+))}
 </div>
  {/* Botão "Comprar Agora" */}
  {cartItems.length > 0 && (

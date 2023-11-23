@@ -103,13 +103,12 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
   return (
     <div className="main">
       <header className="main-header">
-        <div className="logo">
+        <div className="logo-product">
           <Link to="/">
-            {" "}
-            <img src="/assets/logo.png" alt="Logo" />{" "}
+            <img src="/assets/logo.png" alt="Logo" />
           </Link>
         </div>
-        <div className="icons">
+        <div className="icons-about">
           <Link to="/requests">
             <i
               className="bx bx-user bt-header"
@@ -131,17 +130,6 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
         </div>
       </header>
 
-      <div className="search-container">
-        <input
-          type="text"
-          className="search-bar"
-          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
-        />
-        <button className="search-button" type="submit">
-          <i className="bx bx-search"></i>
-        </button>
-      </div>
-
       <div className="title-section">
         <h1 className="general-title">FEMININO</h1>
         <button class="filter" onClick={handleFilterButtonClick}>
@@ -153,25 +141,39 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
           </button>
         <hr className="hr-sections"></hr>
 
-      <div className="container-clothes-section">
-        <div className="clothes-section">
-          <Link to="/female/fem-baby">
-            <img src="/assets/female-baby.png" />
-          </Link>
-        </div>
+        <div className="container-female">
+  <div className="roupa-fundo-female"></div>
 
-        <div className="clothes-section">
-          <Link to="/female/fem-children">
-            <img src="/assets/female-children.png" />
-          </Link>
-        </div>
+<div>
+<Link to="/female/fem-baby">
+  <div className="roupa-female" style={{ backgroundImage: "url('/assets/female-baby.png')" }}>
+  </div>
+  <div><p className="roupa-title-1">BABY</p></div></Link></div>
 
-        <div className="clothes-section">
-          <Link to="/female/fem-juvenile">
-            <img src="/assets/female-juvenile.png" />
-          </Link>
-        </div>
-      </div>
+  <div>
+  <Link to="/female/fem-children"><div className="roupa-female" style={{ backgroundImage: "url('/assets/female-children.png')" }}>
+  </div><div><p className="roupa-title-1">INFANTIL</p></div></Link></div>
+
+  <div>
+  <Link to="/female/fem-juvenile"><div className="roupa-female" style={{ backgroundImage: "url('/assets/female-juvenile.png')" }}>
+  </div><div><p className="roupa-title-1">JUVENIL</p></div></Link></div>
+</div>
+
+
+        {/*<div className="female-sections">
+          <div className="female-sections1">
+            <img src="/assets/sections-title1.png" /> 
+          </div>
+
+          <div className="female-sections1">
+            <img src="/assets/sections-title2.png" /> 
+          </div>
+
+          <div className="female-sections1">
+            <img src="/assets/sections-title3.png" /> 
+          </div>
+  </div>*/}
+
 
       <footer>
         <section className="footer-section">

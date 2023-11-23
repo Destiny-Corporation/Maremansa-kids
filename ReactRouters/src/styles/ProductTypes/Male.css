@@ -105,52 +105,6 @@
   color: #ffffff;
 }
 
-.search-container {
-    width: 98%;
-    height: 40px;
-    margin: 12px auto;
-    background-color: #dcebeb;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px;
-    border: 0px solid #ffffff;
-    border-radius: 8px;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
-    transition: background-color 0.3s ease;
-    font-size: 14px;
-  }
-  
-  .search-container:hover {
-    background-color: #bdd6d6;
-  }
-  
-  .search-container input:focus,
-  .search-container button:focus {
-    outline: none;
-    border: 1px solid transparent;
-  }
-  
-  .search-bar {
-    flex-grow: 1;
-    padding: 8px;
-    border: none;
-    background: transparent;
-  }
-  
-  .search-button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-    color: #48a3a9;
-  }
-  
-  .search-bar::placeholder {
-    color: #48a3a9;
-    font-size: 11px;
-    letter-spacing: 2px;
-  }
 
 .title {
   color: #48A3A9;
@@ -161,19 +115,21 @@
   justify-content: center;
 }
 
-.container-roupas{
+.container-male{
   position: relative;
   display: flex;
-  gap: 70px;
+  gap: 0px;
   margin-right: 75px;
   margin-top: 10px;
 }
 
-.container-roupas .roupa{
+.container-male .roupa-male{
 position: relative;
 top: 10px;
-width: 337px;
-height: 483px;
+width: 263px;
+height: 393px;
+margin-right: -125;
+margin-left: 68px;
 background: #fff;
 border-radius: 25px;
 background-size: cover;
@@ -181,27 +137,34 @@ transition: .5s;
 cursor: pointer;
 }
 
-.container-roupas .roupa:hover {
+.roupa-title-2{
+  margin-top: 20px;
+  margin-left: 60px;
+  font-size: 32px;
+  letter-spacing: 2px;
+  color:#48A3A9;
+  font-family: "Stylish", sans-serif;
+}
+
+.container-male .roupa-male:hover {
 scale: 0.8;
 transition: .5s;
 }
 
-.container-roupas .roupa::before{
-content: '';
-position: absolute;
-width: 337px;
-height: 483px;
-margin-left: -168px;
-background-color: #8DCAD5;
-border-radius: 25px;
-background-size: cover;
+.container-male .roupa-male::before{
+  content: '';
+  position: absolute;
+  width: 263px;
+  height: 393px;
+  background-color: #8DCAD5;
+  border-radius: 25px;
+  background-size: cover;
+  opacity: 0.3;
+  z-index: 999;
+  transition: .2s;
+  }
 
-opacity: 0.3;
-z-index: 999;
-transition: .2s;
-}
-
-.container-roupas .roupa:hover::before{
+.container-male .roupa-male:hover::before{
 opacity: 0;
 transition: .2s;
 }
@@ -210,6 +173,21 @@ transition: .2s;
 background-color: #f79494;
 z-index: 1;
 }*/
+
+.male-sections{
+  position: relative;
+  display: flex;
+  gap: 0px;
+  margin-left: 425px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+
+.male-sections .male-sections1 img{
+  max-width: 70%;
+}
+
 
 footer {
     position: static;

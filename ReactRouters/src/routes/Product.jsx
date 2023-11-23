@@ -44,6 +44,12 @@ const Cart = () => {
 
   const LoadingContainer = () => (
     <div className="loading-container">
+      <img src="/assets/espera.gif" alt="Carregando..." style={{ width: '130px', height: '130px' }}/>
+    </div>
+  );
+
+  const LoadingContainer = () => (
+    <div className="loading-container">
       <img src="/assets/espera.gif" alt="Carregando..." />
     </div>
   );
@@ -71,9 +77,13 @@ const Cart = () => {
   }, [collectionName, productName]);
 
   
+
+  
   if (productLoading) {
     return <LoadingContainer />;
+    return <LoadingContainer />;
   }
+  
   
 
   const handleAddToCart1 = () => {
@@ -94,14 +104,16 @@ const Cart = () => {
     const addToCart = () => {
       if (selectedColor && selectedSize) {
         const newItem = {
-          color: selectedColor,
-          size: selectedSize,
+          nome_prop: productName,
+          cor: selectedColor,
+          tamanho: selectedSize,
+          quantidade: selectedQuantity,
+          preço: productData ? productData.preço : 0,
+          url_image: productData ? productData.url_image : "",
         };
         setCart([...cart, newItem]);
       } else {
-        alert(
-          "Por favor, selecione cor e tamanho antes de adicionar ao carrinho."
-        );
+        alert("Por favor, selecione cor e tamanho antes de adicionar ao carrinho.");
       }
     };
 
@@ -212,7 +224,7 @@ const Cart = () => {
   return (
     <div className="main">
       <header className="main-header">
-        <div className="logo">
+        <div className="logo-about">
           <Link to="/">
             {" "}
             <img src="/assets/logo.png" alt="Logo" />{" "}
@@ -236,17 +248,34 @@ const Cart = () => {
           <i className="bx bx-cart bt-header" style={{ color: "#ffffff" }}></i>
         </div>
       </header>
+      <div className="container-subheader-1">
+      <div className="container-menu-buttons-1">
+        <div className="button-menu-1">
+          <Link to="/sale">
+            <h6>PROMOÇÕES</h6>
+          </Link>
+        </div>
 
-      <div className="search-container-geral">
-        <input
-          type="text"
-          className="search-bar"
-          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
-        />
-        <button className="search-button" type="submit">
-          <i className="bx bx-search"></i>
-        </button>
+        <div className="button-menu-1">
+          <Link to="female">
+            <h6>FEMININO</h6>
+          </Link>
+        </div>
+
+        <div className="button-menu-1">
+          <Link to="male">
+            <h6>MASCULINO</h6>
+          </Link>
+        </div>
+
+        <div className="button-menu-1">
+          <Link to="/props">
+            <h6>ACESSÓRIOS</h6>
+          </Link>
+        </div>
       </div>
+      </div>
+     
 
       <section className="main-products">
         <div className="container">

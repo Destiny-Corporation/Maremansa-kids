@@ -83,30 +83,30 @@ const Home = () => {
         </div>
         <p className="home-t">Bem vindo!<br></br>Entre ou cadastre-se</p>
         <div className="icons-home">
-          <a href="#">
+
             <Link to="/login">
               <i
                 className="bx bx-user bt-header"
                 style={{ color: "#48A3A9" }}
               ></i>
             </Link>
-          </a>
-          <a href="#">
+
+
             <Link to="/wishlist">
               <i
                 className="bx bx-heart bt-header"
                 style={{ color: "#48A3A9" }}
               ></i>
             </Link>
-          </a>
-          <a href="#">
+
+
             <Link to="/cart">
               <i
                 className="bx bx-cart bt-header"
                 style={{ color: " #48A3A9" }}
               ></i>
             </Link>
-          </a>
+
         </div>
       </div>
       <div className="carousel-container">

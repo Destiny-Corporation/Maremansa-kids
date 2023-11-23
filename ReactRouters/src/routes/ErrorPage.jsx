@@ -6,10 +6,10 @@ const ErrorPage = () => {
     return (
      <div className='main'>
       <header className="main-header">
-        <div className="logo">
-          <img src="/assets/logo.png" alt="Logo" />
+        <div className="logo-about">
+        <Link to="/"><img src="/assets/logo.png" alt="Logo" /></Link>
         </div>
-        <div className="icons">
+        <div className="icons-about">
           <Link to="/requests">
             <i
               className="bx bx-user bt-header"
@@ -33,7 +33,7 @@ const ErrorPage = () => {
 
 
     <div className ='space'>
-      <div className="search-container-geral">
+      <div className="search-container-error">
         <input
           type="text"
           className="search-bar"

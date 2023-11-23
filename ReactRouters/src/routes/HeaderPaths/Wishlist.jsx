@@ -20,10 +20,10 @@ if (localStorage.getItem("user") !== null) {
                   <i className="bx bx-search"></i>
                 </button>
         </div>
-        <div className="logo">
+        <div className="header-logo-center">
         <Link to="/"> <img src="/assets/logo.png" alt="Logo" className="header-logo-center"/> </Link>
         </div>
-        <div className="icons">
+        <div className="icons-about">
             <Link to="/requests">
               <i
                 className="bx bx-user bt-header"

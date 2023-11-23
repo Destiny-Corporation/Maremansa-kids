@@ -124,7 +124,7 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
         </header>
   
         <div className='space'>
-        <div className="search-container-geral">
+        <div className="search-container-about">
           <input
             type="text"
             className="search-bar"
