@@ -22,6 +22,25 @@
   opacity: 1;
 }
 
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 98;
+}
+
+.overlay.active {
+  display: block;
+  background: #2a767ca4; 
+}
+
+
+/* Resto do seu CSS ... */
+
+
 .filter {
   position: absolute;
   right: 0;
@@ -35,6 +54,14 @@
   margin-right: 90px;
   border: none !important;
   margin-top: 10px;
+}
+
+.button-image-12 {
+  width: 25px;
+  height: auto;
+  margin-right: 90px;
+  border: none !important;
+  margin-top: 30px;
 }
 
 .filter :hover {
@@ -57,6 +84,16 @@
   font-size: 30px;
   font-weight: bold;
   margin-top: 18px;
+}
+
+.general-title-1 {
+  color: #48a3a9;
+  text-transform: uppercase;
+  letter-spacing: 14px;
+  display: inline-block;
+  font-size: 30px;
+  font-weight: bold;
+  margin-top: 38px;
 }
 
 .product img {
@@ -86,30 +123,62 @@
 
 .notification {
   position: fixed;
-  top: 10px;
-  right: 10px;
+  bottom: 20px;
+  left: 40%;
   background-color: #2a777c;
-  color: #fff; 
+  color: #fff;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 999; 
+  z-index: 999;
   font-family: "Stylish", sans-serif;
   font-size: 17px;
+  opacity: 0;
+  animation: fadeInOut 3s ease-in-out forwards;
+}
+
+.not {
+  font-family: "Stylish", sans-serif;
+  font-size: 20px;
+}
+
+.notification.active {
+  animation: goBack 2.7s ease-in-out forwards;
+}
+
+@keyframes fadeInOut {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes goBack {
+  0%, 100% {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 .go-to-cart-button {
   display: block;
   margin-top: 10px;
-  background-color: #fff; 
-  color: #48a3a9; 
+  background-color: #fff;
+  color: #48a3a9;
   text-align: center;
   padding: 5px 10px;
-  border-radius: 5px;
-  text-decoration: none; 
+  border-radius: 15px;
+  text-decoration: none;
   font-family: "Stylish", sans-serif;
   font-size: 17px;
 }
+
 
 
 
@@ -128,7 +197,7 @@
 
 .nome_prod {
   color: #48a3a9;
-  margin-left: 36px;
+  margin-left: 16px;
   text-align: left;
   font-size: 14px;
   text-transform: uppercase;
@@ -184,7 +253,7 @@
   width: 360px;
   min-height: 100vh;
   padding: 20px;
-  background: whitesmoke;
+  color: #48a3a9;
   box-shadow: -2px 0 4px hsl(0 4% 15% / 10%);
   transition: 0.3s;
   max-height: 100px;
@@ -193,6 +262,7 @@
 
 .cart.active {
   right: 0;
+  background-color: #fff;
 }
 
 .cart-title-1 {
@@ -201,6 +271,7 @@
   font-size: 25px;
   margin-top: 2rem;
   letter-spacing: 2px;
+  color: #48a3a9;
 }
 .cart-item {
   display: grid;
@@ -208,6 +279,7 @@
   align-items: center;
   gap: 1rem;
   margin-top: 1rem;
+  color: #48a3a9;
 }
 
 .cart-box {
@@ -216,26 +288,34 @@
   align-items: center;
   gap: 1rem;
   margin-top: 1rem;
+  color: #48a3a9;
 }
 .cart-item-img-1 {
   width: 100px;
   height: 100px;
   object-fit: contain;
   padding: 10px;
+  color: #48a3a9;
+  border-radius: 10px;
 }
 .detail-box {
   display: grid;
   row-gap: 0.5rem;
 }
 .cart-item-name-1 {
-  font-size: 14px;
+  color: #48a3a9;
+  font-size: 13px;
+  letter-spacing: 2px;
   text-transform: uppercase;
 }
 .cart-item-price-1 {
+  color: #48a3a9;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 12px;
+  margin-top: -8px;
 }
 .cart-quantity-1 {
+  color: #48a3a9;
   border: 2px solid #2a777c;
   border-radius: 10px;
   outline-color: whitesmoke;
@@ -247,19 +327,21 @@
 .cart-item-details {
   display: grid;
   row-gap: 0.5rem;
+  color: #48a3a9;
 }
 .cart-item-remove-1 {
-  font-size: 22px;
-  color: rgb(255, 255, 255);
+  font-size: 18px;
+  color: #48a3a9;
   cursor: pointer;
 }
 .total {
   display: flex;
   justify-content: flex-end;
   margin-top: 6px;
-  border-top: 1px solid rgb(255, 255, 255);
+  border-top: #48a3a9;
 }
 .total-title {
+  color: #48a3a9;
   font-family: "Stylish", sans-serif;
   margin-top: 6px;
   text-transform: uppercase;
@@ -267,17 +349,25 @@
   font-weight: 600;
 }
 .total-price {
+  color: #48a3a9;
   font-family: "Stylish", sans-serif;
   margin-left: 0.5rem;
   margin-top: 6px;
   font-size: 18px;
+  margin-right: 20px;
 }
 .btn-buy {
+  border-radius: 12px;
   display: flex;
-  margin: 1.5rem auto 0 auto;
-  padding: 12px 20px;
+  margin: 1px auto 0 auto;
+  padding: 12px 30px;
+}
+
+.btn-buy ::before {
+  background-color: #2a777c;
 }
 #close-cart {
+  color: #48a3a9;
   position: absolute;
   top: 1rem;
   right: 0.8rem;
@@ -286,5 +376,5 @@
   font-family: "Stylish", sans-serif;
 }
 #close-cart :hover{
-  color: aliceblue;
+  color: #2a777c;
 }
