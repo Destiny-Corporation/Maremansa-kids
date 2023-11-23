@@ -25,14 +25,14 @@ const Props = () => {
 
   const showAddedToCartNotification = () => {
     setShowNotification(true);
-
-    // Esconda a notificação após alguns segundos
     setTimeout(() => {
       setShowNotification(false);
-    }, 5000); // Oculta a notificação após 5 segundos (ou você pode definir outro valor)
+    }, 2000); 
   };
+  
  
   const [produtos, setProdutos] = useState([]);
+  const [overlayVisible, setOverlayVisible] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
   const [itemsPerPage, setItemsPerPage] = useState(10);
@@ -53,9 +53,19 @@ const Props = () => {
   });
   const [cartVisible, setCartVisible] = useState(false);
   const [isComponentReady, setIsComponentReady] = useState(false);
+
   const handleCartIconClick = () => {
     setCartVisible(!cartVisible);
+    setOverlayVisible(!cartVisible);
   };
+
+  const handleCloseCartClick = () => {
+    setCartVisible(false);
+    setOverlayVisible(false);
+  };
+  
+  
+  
 
   useEffect(() => {
     // Recupera os itens do carrinho do localStorage ao carregar a página
@@ -96,9 +106,6 @@ const Props = () => {
       (_, itemIndex) => itemIndex !== index
     );
     setCartItems(updatedCartItems);
-  };
-  const handleCloseCartClick = () => {
-    setCartVisible(false); // Esconde o carrinho quando o usuário clica no ícone de fechar
   };
 
   const calculateTotal = () => {
@@ -202,13 +209,16 @@ const Props = () => {
   return (
     <div className="main">
       <header className="main-header">
-        <div className="logo-product">
-          <Link to="/">
-            {" "}
-            <img src="/assets/logo.png" alt="Logo" />{" "}
-          </Link>
+        <div className="search-container-header">
+            <input type="text" className="search-bar-header" placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"/>
+                <button className="search-button-header" type="submit">
+                  <i className="bx bx-search"></i>
+                </button>
         </div>
-        <div className="icons-product">
+        <div className="header-logo-center">
+        <Link to="/"> <img src="/assets/logo.png" alt="Logo" className="header-logo-center"/> </Link>
+        </div>
+        <div className="icons-about">
           <Link to="/login">
             <i
               className="bx bx-user bt-header"
@@ -229,6 +239,8 @@ const Props = () => {
             onClick={handleCartIconClick}
           ></i>
         </div>
+
+        <div className={`overlay ${overlayVisible ? "active" : ""}`} onClick={handleCloseCartClick}></div>
         <div className={`cart ${cartVisible ? "active" : ""}`}>
           <h2 className="cart-title-1">MEU CARRINHO</h2>
           <div className="cart-content-1">
@@ -243,6 +255,7 @@ const Props = () => {
                     height: "100px",
                     objectFit: "contain",
                     padding: "10px",
+                    borderRadius: "60px",
                   }}
                 />
 
@@ -252,20 +265,19 @@ const Props = () => {
                   <input
                     type="number"
                     className="cart-quantity-1"
-                    value={produto.quantidade} // Atualiza o valor do input com a quantidade do item no carrinho
+                    value={produto.quantidade} 
                     onChange={(e) => {
-                      // Atualiza a quantidade do item no carrinho quando o input é alterado
                       const updatedCartItems = [...cartItems];
                       updatedCartItems[index].quantidade =
                         parseInt(e.target.value, 10) || 0;
                       setCartItems(updatedCartItems);
                     }}
                     style={{
-                      border: "1px solid black",
-                      outlineColor: "whitesmoke",
-                      width: "2.4rem",
+                      border: "1.2px solid #48a3a9",
+                      outlineColor: "#48a3a9",
+                      width: "2.6rem",
                       textAlign: "center",
-                      fontSize: "1rem",
+                      fontSize: "0.8rem",
                     }}
                   />
                 </div>
@@ -277,6 +289,7 @@ const Props = () => {
             ))}
           </div>
           <div className="cart-box"></div>
+          <hr></hr>
           <div className="total">
             <div className="total-title">Total</div>
             <div className="total-price">$ {total}</div>
@@ -301,30 +314,43 @@ const Props = () => {
         </div>
       </header>
 
-      <div className="space">
-        <div className="search-container-about">
-          <input
-            type="text"
-            className="search-bar"
-            placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <button className="search-button" type="submit">
-            <i className="bx bx-search"></i>
-          </button>
-          {searchTerm && (
-            <button onClick={() => setSearchTerm("")}>Limpar pesquisa</button>
-          )}
+      <div className="container-subheader-1">
+      <div className="container-menu-buttons-1">
+        <div className="button-menu-1">
+          <Link to="/sale">
+            <h6>PROMOÇÕES</h6>
+          </Link>
         </div>
 
+        <div className="button-menu-1">
+          <Link to="female">
+            <h6>FEMININO</h6>
+          </Link>
+        </div>
+
+        <div className="button-menu-1">
+          <Link to="male">
+            <h6>MASCULINO</h6>
+          </Link>
+        </div>
+
+        <div className="button-menu-1">
+          <Link to="/props">
+            <h6>ACESSÓRIOS</h6>
+          </Link>
+        </div>
+      </div>
+      </div>
+
+      <div className="space">
+
         <div className="title-section">
-          <h1 className="general-title">ACESSÓRIOS</h1>
+          <h1 className="general-title-1">ACESSÓRIOS</h1>
           <button className="filter" onClick={handleFilterButtonClick}>
             <img
               src="/assets/filter.png"
               alt="filtro"
-              className="button-image"
+              className="button-image-12"
             />
           </button>
           <hr className="hr-sections"></hr>
@@ -420,14 +446,14 @@ const Props = () => {
         </div>
 
         {showNotification && (
-  <div className="notification">
-    <p>Item adicionado ao carrinho!</p>
+  <div className={`notification ${isItemAdded ? "active" : ""}`}>
+    <p className="not">Item adicionado ao carrinho!</p>
     <Link to="/cart2" className="go-to-cart-button">
       Ir para o Carrinho
     </Link>
   </div>
 )}
-  
+
 
         <div className="pagination-container">
           <ReactPaginate
