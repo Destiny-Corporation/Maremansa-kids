@@ -202,13 +202,13 @@ const Props = () => {
   return (
     <div className="main">
       <header className="main-header">
-        <div className="logo">
+        <div className="logo-product">
           <Link to="/">
             {" "}
             <img src="/assets/logo.png" alt="Logo" />{" "}
           </Link>
         </div>
-        <div className="icons">
+        <div className="icons-product">
           <Link to="/login">
             <i
               className="bx bx-user bt-header"
@@ -302,7 +302,7 @@ const Props = () => {
       </header>
 
       <div className="space">
-        <div className="search-container-geral">
+        <div className="search-container-about">
           <input
             type="text"
             className="search-bar"
@@ -407,7 +407,8 @@ const Props = () => {
               <div className="des">
                 <h6 className="price">R$ {produto.preço}</h6>
                 <i
-                  className="bx bx-shopping-bag add-cart"
+            className="bx bx-cart bt-header pd"
+            style={{ color: "#48a3a9" }}
                   onClick={() => {
                     handleAddToCart(produto);
                     showAddedToCartNotification(); 

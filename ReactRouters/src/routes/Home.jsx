@@ -55,18 +55,15 @@ const Home = () => {
           <div className="header-items">
             <div className="header-item1">
               <img className="items-home" src="/assets/comente.png" alt="Comente" /> 
-              <li><Link to="#">Atendimentos</Link></li>
+              <li><Link to="#">ATENDIMENTO</Link></li>
             </div>
           
             <div className="header-item2">
               <img className="items-home" src="/assets/placeholder.png" alt="Localização" />
-              <li><Link to="#">Localização</Link></li>
+              <li><Link to="#">LOCALIZAÇÃO</Link></li>
             </div>
           </div>
       </header>
-
-
-
 
     <div className ='space'>
       <div className='align'>

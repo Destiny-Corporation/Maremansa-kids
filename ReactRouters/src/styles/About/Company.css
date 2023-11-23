@@ -31,13 +31,14 @@
   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
-.logo img {
-  max-width: 100%;
+.logo-about img {
+  margin-top: 10px;
+  max-width: 90%;
 }
 
-.search-container {
-  width: 98%;
-  height: 40px;
+.search-container-about {
+  width: 86%;
+  height: 34px;
   margin: 12px auto;
   background-color: #dcebeb;
   display: flex;
@@ -51,12 +52,12 @@
   font-size: 14px;
 }
 
-.search-container:hover {
+.search-container-about:hover {
   background-color: #bdd6d6;
 }
 
-.search-container input:focus,
-.search-container button:focus {
+.search-container-about input:focus,
+.search-container-about button:focus {
   outline: none;
   border: 1px solid transparent;
 }
@@ -82,19 +83,23 @@
   letter-spacing: 2px;
 }
 
-.icons {
+.icons-about {
   display: flex;
-  gap: 10px;
+  gap: 3px;
 }
 
-.icons a {
+.icons-about a {
   display: flex;
   align-items: center;
 }
 
-.icons i {
-  font-size: 28px;
+.icons-about i {
+  font-size: 24px;
   color: #ffffff;
+}
+
+.icons-about i :hover {
+  color: #247479;
 }
 
 .general-title-h3 {

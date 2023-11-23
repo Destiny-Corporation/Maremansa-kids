@@ -103,13 +103,12 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
   return (
     <div className="main">
       <header className="main-header">
-        <div className="logo">
+        <div className="logo-product">
           <Link to="/">
-            {" "}
-            <img src="/assets/logo.png" alt="Logo" />{" "}
+            <img src="/assets/logo.png" alt="Logo" />
           </Link>
         </div>
-        <div className="icons">
+        <div className="icons-about">
           <Link to="/requests">
             <i
               className="bx bx-user bt-header"
@@ -143,22 +142,25 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
         <hr className="hr-sections"></hr>
 
         <div className="container-female">
-            <div className="roupa-fundo-female"></div>
-            <div className="roupa-female" style={{ backgroundImage: "url('/assets/female-baby.png')" }}>
-              <Link to="/female/female-baby"></Link>
-            </div>
-  
+  <div className="roupa-fundo-female"></div>
 
-           <div className="roupa-female" style={{ backgroundImage: "url('/assets/female-children.png')" }}>
-            <Link to="/female/female-children"></Link>
-          </div>
+<div>
+<Link to="/female/fem-baby">
+  <div className="roupa-female" style={{ backgroundImage: "url('/assets/female-baby.png')" }}>
+  </div>
+  <div><p className="roupa-title-1">BABY</p></div></Link></div>
 
-          <div className="roupa-female" style={{ backgroundImage: "url('/assets/female-juvenile.png')" }}>
-            <Link to="/female/female-juvenile"></Link>
-          </div>
-        </div>
+  <div>
+  <Link to="/female/fem-children"><div className="roupa-female" style={{ backgroundImage: "url('/assets/female-children.png')" }}>
+  </div><div><p className="roupa-title-1">INFANTIL</p></div></Link></div>
 
-        <div className="female-sections">
+  <div>
+  <Link to="/female/fem-juvenile"><div className="roupa-female" style={{ backgroundImage: "url('/assets/female-juvenile.png')" }}>
+  </div><div><p className="roupa-title-1">JUVENIL</p></div></Link></div>
+</div>
+
+
+        {/*<div className="female-sections">
           <div className="female-sections1">
             <img src="/assets/sections-title1.png" /> 
           </div>
@@ -170,7 +172,7 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
           <div className="female-sections1">
             <img src="/assets/sections-title3.png" /> 
           </div>
-        </div>
+  </div>*/}
 
 
       <footer>

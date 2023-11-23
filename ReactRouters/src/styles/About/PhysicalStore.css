@@ -41,8 +41,8 @@
   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
-.logo img {
-  max-width: 100%;
+.logo-about img {
+  max-width: 80%;
 }
 
 .search-container {

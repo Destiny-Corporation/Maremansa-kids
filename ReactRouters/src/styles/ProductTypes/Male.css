@@ -115,19 +115,20 @@
   justify-content: center;
 }
 
-.containers-male{
+.container-male{
   position: relative;
   display: flex;
-  gap: 70px;
+  gap: 0px;
   margin-right: 75px;
   margin-top: 10px;
 }
 
-.containers-male .roupa-male{
+.container-male .roupa-male{
 position: relative;
 top: 10px;
 width: 263px;
 height: 393px;
+margin-right: -125;
 margin-left: 68px;
 background: #fff;
 border-radius: 25px;
@@ -136,26 +137,34 @@ transition: .5s;
 cursor: pointer;
 }
 
-.containers-male .roupa-male:hover {
+.roupa-title-2{
+  margin-top: 20px;
+  margin-left: 60px;
+  font-size: 32px;
+  letter-spacing: 2px;
+  color:#48A3A9;
+  font-family: "Stylish", sans-serif;
+}
+
+.container-male .roupa-male:hover {
 scale: 0.8;
 transition: .5s;
 }
 
-.containers-male .roupa-male::before{
-content: '';
-position: absolute;
-width: 263px;
-height: 393px;
+.container-male .roupa-male::before{
+  content: '';
+  position: absolute;
+  width: 263px;
+  height: 393px;
+  background-color: #8DCAD5;
+  border-radius: 25px;
+  background-size: cover;
+  opacity: 0.3;
+  z-index: 999;
+  transition: .2s;
+  }
 
-background-color: #8DCAD5;
-border-radius: 25px;
-background-size: cover;
-opacity: 0.3;
-z-index: 999;
-transition: .2s;
-}
-
-.containers-male .roupa-male:hover::before{
+.container-male .roupa-male:hover::before{
 opacity: 0;
 transition: .2s;
 }
@@ -168,7 +177,7 @@ z-index: 1;
 .male-sections{
   position: relative;
   display: flex;
-  gap: 70px;
+  gap: 0px;
   margin-left: 425px;
   margin-top: 20px;
   margin-bottom: 10px;

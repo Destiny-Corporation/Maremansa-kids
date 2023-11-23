@@ -123,13 +123,13 @@ const MaleBaby = () => {
   return (
     <div className="main">
       <header className="main-header">
-        <div className="logo">
+        <div className="logo-product">
           <Link to="/">
             {" "}
             <img src="/assets/logo.png" alt="Logo" />{" "}
           </Link>
         </div>
-        <div className="icons">
+        <div className="icons-about">
           <Link to="/requests">
             <i
               className="bx bx-user bt-header"
@@ -152,7 +152,7 @@ const MaleBaby = () => {
       </header>
 
       <div className="space">
-        <div className="search-container-geral">
+        <div className="search-container-about">
           <input
             type="text"
             className="search-bar"
