@@ -5,8 +5,6 @@ import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 import { getFirestore, collection, doc, getDocs } from "firebase/firestore";
 import ReactPaginate from "react-paginate";
-import { useNavigate } from "react-router-dom";
-import { debounce } from "debounce";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDTKUI6nV-DZjIsUo1BMkjIUWOQbT9gU3Q",
@@ -25,26 +23,7 @@ export const firestore = getFirestore(app);
 const Home = () => {
   const [produtos, setProdutos] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
-  const [searchValue, setSearchValue] = useState("");
-  const navigate = useNavigate();
 
-  const debouncedSearchFunction = debounce(async () => {
-    // Navegue para a rota apropriada com base no valor da pesquisa
-    if (searchValue === "sunga") {
-      await navigate("/male");
-    } else if (searchValue === "biquini") {
-      await navigate("/female");
-    } else if (["boia", "óculos", "baldinho", "chapeu"].includes(searchValue)) {
-      await navigate("/props");
-    }
-  }, 500);
-
-  useEffect(() => {
-    // Chame a função debouncedSearchFunction() de forma assíncrona
-    debouncedSearchFunction();
-  }, [searchValue]);
-
-  
   useEffect(() => {
     const fetchProdutos = async () => {
       const produtosCollection = collection(firestore, "Prodfemme");
@@ -72,7 +51,21 @@ const Home = () => {
         <div className="logo-home">
           <img src="/assets/logo.png" alt="Logo" />
         </div>
+
+          <div className="header-items">
+            <div className="header-item1">
+              <img className="items-home" src="/assets/comente.png" alt="Comente" /> 
+              <li><Link to="#">Atendimentos</Link></li>
+            </div>
+          
+            <div className="header-item2">
+              <img className="items-home" src="/assets/placeholder.png" alt="Localização" />
+              <li><Link to="#">Localização</Link></li>
+            </div>
+          </div>
       </header>
+
+
 
 
     <div className ='space'>
@@ -81,40 +74,37 @@ const Home = () => {
         <input
           type="text"
           className="search-bar"
-          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
-          onChange={(e) => {
-            setSearchValue(e.target.value);
-          }} />
+          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?" />
         <button className="search-button" type="submit">
           <i className="bx bx-search"></i>
         </button>
         </div>
         <p className="home-t">Bem vindo!<br></br>Entre ou cadastre-se</p>
         <div className="icons-home">
-          <a href="#">
+
             <Link to="/login">
               <i
                 className="bx bx-user bt-header"
                 style={{ color: "#48A3A9" }}
               ></i>
             </Link>
-          </a>
-          <a href="#">
+
+
             <Link to="/wishlist">
               <i
                 className="bx bx-heart bt-header"
                 style={{ color: "#48A3A9" }}
               ></i>
             </Link>
-          </a>
-          <a href="#">
+
+
             <Link to="/cart">
               <i
                 className="bx bx-cart bt-header"
                 style={{ color: " #48A3A9" }}
               ></i>
             </Link>
-          </a>
+
         </div>
       </div>
 

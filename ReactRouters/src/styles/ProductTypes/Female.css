@@ -43,52 +43,6 @@
   max-width: 80%;
 }
 
-.search-container {
-  width: 98%;
-  height: 40px;
-  margin: 12px auto;
-  background-color: #dcebeb;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px;
-  border: 0px solid #ffffff;
-  border-radius: 8px;
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
-  transition: background-color 0.3s ease;
-  font-size: 14px;
-}
-
-.search-container:hover {
-  background-color: #bdd6d6;
-}
-
-.search-container input:focus,
-.search-container button:focus {
-  outline: none;
-  border: 1px solid transparent;
-}
-
-.search-bar {
-  flex-grow: 1;
-  padding: 8px;
-  border: none;
-  background: transparent;
-}
-
-.search-button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 8px;
-  color: #48a3a9;
-}
-
-.search-bar::placeholder {
-  color: #48a3a9;
-  font-size: 11px;
-  letter-spacing: 2px;
-}
 
 .icons {
   display: flex;
@@ -105,53 +59,6 @@
   color: #ffffff;
 }
 
-.search-container {
-    width: 98%;
-    height: 40px;
-    margin: 12px auto;
-    background-color: #dcebeb;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px;
-    border: 0px solid #ffffff;
-    border-radius: 8px;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
-    transition: background-color 0.3s ease;
-    font-size: 14px;
-  }
-  
-  .search-container:hover {
-    background-color: #bdd6d6;
-  }
-  
-  .search-container input:focus,
-  .search-container button:focus {
-    outline: none;
-    border: 1px solid transparent;
-  }
-  
-  .search-bar {
-    flex-grow: 1;
-    padding: 8px;
-    border: none;
-    background: transparent;
-  }
-  
-  .search-button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-    color: #48a3a9;
-  }
-  
-  .search-bar::placeholder {
-    color: #48a3a9;
-    font-size: 11px;
-    letter-spacing: 2px;
-  }
-
 .title{
   color: #48A3A9;
   align-items: center;
@@ -161,37 +68,68 @@
   justify-content: center;
 }
 
-
-.container-clothes-section {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
-    align-items: center;
-    margin-top: 3rem;
-    
+.container-female{
+  position: relative;
+  display: flex;
+  gap: 70px;
+  margin-right: 75px;
+  margin-top: 10px;
 }
 
-.container-clothes-section img:hover{
-    transform: scale(0.9) translateY(-5px);
-    cursor: pointer;
-    transition: 0.3s;
-
+.container-female .roupa-female{
+position: relative;
+top: 10px;
+width: 263px;
+height: 393px;
+margin-left: 68px;
+background: #fff;
+border-radius: 25px;
+background-size: cover;
+transition: .5s;
+cursor: pointer;
 }
 
-.container-clothes-section img:hover::before{
-  opacity: 0;
-  transition: 0.3 s;
+
+
+.container-female .roupa-female:hover {
+scale: 0.8;
+transition: .5s;
 }
 
-.clothes-section img{
-    width: 300px;
-    height: auto;
+.container-female .roupa-female::before{
+content: '';
+position: absolute;
+width: 263px;
+height: 393px;
+margin-left: -125px;
+background-color: #8DCAD5;
+border-radius: 25px;
+background-size: cover;
+opacity: 0.3;
+z-index: 999;
+transition: .2s;
 }
 
-.clothes-section{
-    color: #48A3A9;
+
+.container-female .roupa-female:hover::before{
+opacity: 0;
+transition: .2s;
 }
+
+.female-sections{
+  position: relative;
+  display: flex;
+  gap: 70px;
+  margin-left: 425px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+
+.female-sections .female-sections1 img{
+  max-width: 70%;
+}
+
 
 footer {
     position: static;
