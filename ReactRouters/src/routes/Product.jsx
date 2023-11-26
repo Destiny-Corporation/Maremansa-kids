@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/Product.css";
 import { Link, useParams } from "react-router-dom";
-import React, { useState, useEffect } from "react";
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 import { getFirestore, collection, doc, getDoc } from "firebase/firestore";
@@ -255,33 +254,8 @@ const Cart = () => {
 
               <img src="/assets/image-4.png" />
             </div>
-      </header>
-
-      <div className="search-container-geral">
-        <input
-          type="text"
-          className="search-bar"
-          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
-        />
-        <button className="search-button" type="submit">
-          <i className="bx bx-search"></i>
-        </button>
-      </div>
-
-      <section className="main-products">
-        <div className="container">
-          <div className="products-left">
-            <div className="imagens">
-              <img src="/assets/image-2.png" />
-
-              <img src="/assets/image-3.png" />
-
-              <img src="/assets/image-4.png" />
-            </div>
           </div>
-        </div>
 
-        <div className="container">
           <div className="left-side">
             <div className="items">
               <div className="select-image">
@@ -289,9 +263,7 @@ const Cart = () => {
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="container">
           <div className="right-side">
             <div className="content">
               <h4 className="title-prod">{productName}</h4>
@@ -500,7 +472,6 @@ const Cart = () => {
         <div className="last-text">
           <p className="text-sub-footer">maremansa</p>
         </div>
-      </footer>
       </footer>
     </div>
   );

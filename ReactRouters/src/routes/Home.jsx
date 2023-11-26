@@ -274,14 +274,6 @@ const Home = () => {
         </section>
       </footer>
       <div className="last-text">
-        <div className="footer-section-div">
-          <h3>CONTATOS</h3>
-          <i className="fa fa-whatsapp"></i>
-          <i className="fa fa-google"></i>
-          <i className="fa fa-instagram"></i>
-        </div>
-      </div>
-      <div className="last-text">
         <p className="text-sub-footer">maremansa</p>
       </div>
     </div>

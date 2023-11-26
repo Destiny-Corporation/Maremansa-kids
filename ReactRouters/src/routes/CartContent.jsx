@@ -1,12 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import {
-  initializeApp,
-  getStorage,
-  getFirestore,
-  collection,
-  doc,
-  getDocs,
-} from "firebase/firestore";
+import { initializeApp } from "firebase/app";
+import { getFirestore, collection, doc, getDocs } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDTKUI6nV-DZjIsUo1BMkjIUWOQbT9gU3Q",
@@ -77,5 +72,9 @@ export const CartProvider = ({ children }) => {
 };
 
 export const useCart = () => {
-  return useContext(CartContext);
+  const context = useContext(CartContext);
+  if (!context) {
+    throw new Error("useCart must be used within a CartProvider");
+  }
+  return context;
 };

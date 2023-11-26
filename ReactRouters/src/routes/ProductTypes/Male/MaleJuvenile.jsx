@@ -3,7 +3,14 @@ import "../../../styles/ProductTypes/Male/MaleJuvenile.css";
 import { Link } from "react-router-dom";
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
-import { getFirestore, collection, doc, getDocs } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  doc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 import ReactPaginate from "react-paginate";
 
 const firebaseConfig = {
@@ -26,14 +33,26 @@ const MaleJuvenile = () => {
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [isFilterActive, setIsFilterActive] = useState(false);
   const [maxPrice, setMaxPrice] = useState(null);
-  const nomesProdutos = ["Conjunto", "Maiô", "Óculos", "Sunga", "Vestidinho", "Colete"];
- 
+  const nomesProdutos = [
+    "Conjunto",
+    "Maiô",
+    "Óculos",
+    "Sunga",
+    "Vestidinho",
+    "Colete",
+  ];
+
   useEffect(() => {
     const fetchProdutos = async () => {
       const produtosCollection = collection(firestore, "Prodmale");
-      const produtosSnapshot = await getDocs(produtosCollection);
+      const produtosQuery = query(
+        produtosCollection,
+        where("category_prodmale", "==", "Juvenil")
+      );
+      const produtosSnapshot = await getDocs(produtosQuery);
       const produtosData = produtosSnapshot.docs.map((doc) => doc.data());
       setProdutos(produtosData);
+      console.log(produtosData);
     };
 
     fetchProdutos();
@@ -41,30 +60,35 @@ const MaleJuvenile = () => {
 
   const [filterParam, setFilterParam] = useState("All");
 
-const handleFilterChange = (e) => {
-  setFilterParam(e.target.value);
-};
+  const handleFilterChange = (e) => {
+    setFilterParam(e.target.value);
+  };
 
-
-const filteredProdutos = produtos.filter((produto) => {
-  if (produto.nome_prodmale && (filterParam === "All" || produto.nome_prodmale.toLowerCase().includes(filterParam.toLowerCase()))) {
-    return produto.nome_prodmale.toLowerCase().includes(searchTerm.toLowerCase());
-  }
-  return false;
-});
-
-const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
-  if (isFilterActive && maxPrice !== null) {
-    // Verifica se o preço está no formato correto (por exemplo, "R$ 50,00")
-    if (produto.preço_atacado && typeof produto.preço_atacado === "string") {
-      const precoNumerico = parseFloat(
-        produto.preço_atacado.replace("R$ ", "").replace(",", ".")
-      );
-      return precoNumerico <= maxPrice;
+  const filteredProdutos = produtos.filter((produto) => {
+    if (
+      produto.nome_prodmale &&
+      (filterParam === "All" ||
+        produto.nome_prodmale.toLowerCase().includes(filterParam.toLowerCase()))
+    ) {
+      return produto.nome_prodmale
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
     }
-  }
-  return true;
-});
+    return false;
+  });
+
+  const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
+    if (isFilterActive && maxPrice !== null) {
+      // Verifica se o preço está no formato correto (por exemplo, "R$ 50,00")
+      if (produto.preço_atacado && typeof produto.preço_atacado === "string") {
+        const precoNumerico = parseFloat(
+          produto.preço_atacado.replace("R$ ", "").replace(",", ".")
+        );
+        return precoNumerico <= maxPrice;
+      }
+    }
+    return true;
+  });
 
   const pageCount = Math.ceil(filteredProdutos.length / itemsPerPage);
   const offset = currentPage * itemsPerPage;
@@ -95,35 +119,38 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
     setIsFilterActive(!isFilterActive);
     setMaxPrice("");
   };
-    return (
-        <div className='main'>
+  return (
+    <div className="main">
       <header className="main-header">
-          <div className="logo">
-          <Link to="/"> <img src="/assets/logo.png" alt="Logo" /> </Link>
-          </div>
-          <div className="icons">
-              <Link to="/requests">
-                <i
-                  className="bx bx-user bt-header"
-                  style={{ color: "#ffffff" }}
-                ></i>
-              </Link>
-              <Link to="/wishlist">
-                <i
-                  className="bx bx-heart bt-header"
-                  style={{ color: "#ffffff" }}
-                ></i>
-              </Link>
-              <Link to="/cart">
-                <i
-                  className="bx bx-cart bt-header"
-                  style={{ color: "#ffffff" }}
-                ></i>
-              </Link>
-          </div>
-        </header>
-  
-       <div className='space'>
+        <div className="logo">
+          <Link to="/">
+            {" "}
+            <img src="/assets/logo.png" alt="Logo" />{" "}
+          </Link>
+        </div>
+        <div className="icons">
+          <Link to="/requests">
+            <i
+              className="bx bx-user bt-header"
+              style={{ color: "#ffffff" }}
+            ></i>
+          </Link>
+          <Link to="/wishlist">
+            <i
+              className="bx bx-heart bt-header"
+              style={{ color: "#ffffff" }}
+            ></i>
+          </Link>
+          <Link to="/cart">
+            <i
+              className="bx bx-cart bt-header"
+              style={{ color: "#ffffff" }}
+            ></i>
+          </Link>
+        </div>
+      </header>
+
+      <div className="space">
         <div className="search-container-geral">
           <input
             type="text"
@@ -134,60 +161,68 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
             <i className="bx bx-search"></i>
           </button>
         </div>
-  
+
         <div className="title-section">
-        <h1 className="general-title">MASCULINO | JUVENIL</h1>
-        <button className="filter" onClick={handleFilterButtonClick}>
-    <img src="/assets/filter.png" alt="filtro" className="button-image" />
-  </button>
-  <hr className="hr-sections" />
-</div>
-
-{isFilterActive && (
-  <div className="filter-container">
-    <div className="filter-content">
-      <p className="filter-title">FILTRAR</p>
-      <hr className="filter-hr" />
-
-      <ul className="filter-list">
-        <li>
-          <label className='filter-label'>CATEGORIAS:</label>
-        </li>
-        {nomesProdutos.map((nome, index) => (
-          <li className='filter-item' key={index}>
-            <button
-              className="filter-option"
-              onClick={() => handleFilterChange({ target: { value: nome } })}
-            >
-              {nome}
-            </button>
-          </li>
-        ))}
-        <li>
-          <button className="close-button" onClick={handleFilterButtonClick}>
-            X
+          <h1 className="general-title">MASCULINO | JUVENIL</h1>
+          <button className="filter" onClick={handleFilterButtonClick}>
+            <img
+              src="/assets/filter.png"
+              alt="filtro"
+              className="button-image"
+            />
           </button>
-        </li>
-      </ul>
-    </div>
-  </div>
-)}
+          <hr className="hr-sections" />
+        </div>
 
+        {isFilterActive && (
+          <div className="filter-container">
+            <div className="filter-content">
+              <p className="filter-title">FILTRAR</p>
+              <hr className="filter-hr" />
 
-      <div className="items-per-page">
-        <label>Itens por página:</label>
-        <select
-          value={itemsPerPage}
-          onChange={(e) => setItemsPerPage(Number(e.target.value))}
-        >
-          <option value={5}>5</option>
-          <option value={10}>10</option>
-          <option value={15}>15</option>
-        </select>
-      </div>
-        
-      <div className="container-clothes">
-          {currentPageProdutos.map((produto, index) => (
+              <ul className="filter-list">
+                <li>
+                  <label className="filter-label">CATEGORIAS:</label>
+                </li>
+                {nomesProdutos.map((nome, index) => (
+                  <li className="filter-item" key={index}>
+                    <button
+                      className="filter-option"
+                      onClick={() =>
+                        handleFilterChange({ target: { value: nome } })
+                      }
+                    >
+                      {nome}
+                    </button>
+                  </li>
+                ))}
+                <li>
+                  <button
+                    className="close-button"
+                    onClick={handleFilterButtonClick}
+                  >
+                    X
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        )}
+
+        <div className="items-per-page">
+          <label>Itens por página:</label>
+          <select
+            value={itemsPerPage}
+            onChange={(e) => setItemsPerPage(Number(e.target.value))}
+          >
+            <option value={5}>5</option>
+            <option value={10}>10</option>
+            <option value={15}>15</option>
+          </select>
+        </div>
+
+        <div className="container-clothes">
+          {produtos.map((produto, index) => (
             <div className="clothes" key={index} style={{ width: "20%" }}>
               <Link to="/product">
                 <img src={produto.url_image} alt={produto.nome_prodmale} />
@@ -199,71 +234,72 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
             </div>
           ))}
         </div>
-  </div>
-
-        <div className="pagination-container">
-      <ReactPaginate
-        previousLabel={<button className="custom-button">ANTERIOR</button>}
-        nextLabel={<button className="custom-button">PRÓXIMO</button>}
-        breakLabel={"..."}
-        pageCount={pageCount}
-        marginPagesDisplayed={2}
-        pageRangeDisplayed={5}
-        onPageChange={handlePageChange}
-        containerClassName={"pagination"}
-        subContainerClassName={"pages pagination"}
-        activeClassName={"active"}
-        previousClassName={prevButtonClass}
-        nextClassName={nextButtonClass}
-        pageClassName={"page-count"}
-        pageLinkClassName={"page-link"}
-      /> </div>
-        
-        <footer>
-          <section className="footer-section">
-            <div className="footer-section-div">
-              <img src="/assets/whale.png" />
-            </div>
-  
-            <div className="footer-section-div">
-              <h3>SOBRE NÓS</h3>
-              <li>
-                  <Link to="/company">A EMPRESA</Link>
-              </li>
-              <li>
-                  <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
-              </li>
-              <li>
-                  <Link to="/partners">NOSSOS PARCEIROS</Link>
-              </li>
-            </div>
-  
-            <div className="footer-section-div">
-              <h3>SUPORTE</h3>
-              <li>
-                  <Link to="/services">ATENDIMENTO</Link>
-              </li>
-              <li>
-                  <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
-              </li>
-              <li>
-                  <Link to="/sitemap">MAPA DO SITE</Link>
-              </li>
-            </div>
-  
-            <div className="footer-section-div">
-              <h3>CONTATOS</h3>
-                <i className="fa fa-whatsapp"></i>
-                <i className="fa fa-google"></i>
-                <i className="fa fa-instagram"></i>
-            </div>
-          </section>
-        </footer>
-        <div className="last-text">
-          <p className="text-sub-footer">maremansa</p>
-        </div>
       </div>
-    );
-  };
+
+      <div className="pagination-container">
+        <ReactPaginate
+          previousLabel={<button className="custom-button">ANTERIOR</button>}
+          nextLabel={<button className="custom-button">PRÓXIMO</button>}
+          breakLabel={"..."}
+          pageCount={pageCount}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={handlePageChange}
+          containerClassName={"pagination"}
+          subContainerClassName={"pages pagination"}
+          activeClassName={"active"}
+          previousClassName={prevButtonClass}
+          nextClassName={nextButtonClass}
+          pageClassName={"page-count"}
+          pageLinkClassName={"page-link"}
+        />{" "}
+      </div>
+
+      <footer>
+        <section className="footer-section">
+          <div className="footer-section-div">
+            <img src="/assets/whale.png" />
+          </div>
+
+          <div className="footer-section-div">
+            <h3>SOBRE NÓS</h3>
+            <li>
+              <Link to="/company">A EMPRESA</Link>
+            </li>
+            <li>
+              <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
+            </li>
+            <li>
+              <Link to="/partners">NOSSOS PARCEIROS</Link>
+            </li>
+          </div>
+
+          <div className="footer-section-div">
+            <h3>SUPORTE</h3>
+            <li>
+              <Link to="/services">ATENDIMENTO</Link>
+            </li>
+            <li>
+              <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
+            </li>
+            <li>
+              <Link to="/sitemap">MAPA DO SITE</Link>
+            </li>
+          </div>
+
+          <div className="footer-section-div">
+            <h3>CONTATOS</h3>
+            <i className="fa fa-whatsapp"></i>
+            <i className="fa fa-google"></i>
+            <i className="fa fa-instagram"></i>
+          </div>
+        </section>
+      </footer>
+      <div className="last-text">
+        <p className="text-sub-footer">maremansa</p>
+      </div>
+    </div>
+  );
+};
 
 export default MaleJuvenile;
