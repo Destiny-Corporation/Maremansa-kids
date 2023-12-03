@@ -2,7 +2,7 @@
     color: #fff;
     align-items: center;
     text-align: center;
-    padding: 20px;
+    padding: 0px;
     background-color: #48A3A9;
     text-transform: uppercase;
     letter-spacing: 6px;
@@ -43,6 +43,8 @@
 
 .site-map ul li {
     margin-bottom: 10px;
+    margin-right: 30px;
+    margin-left: 0px;
 }
 
 .sub-list{
@@ -56,6 +58,8 @@
     text-decoration: none;
     color: #fff;
     margin: 0px;
+    font-size: 12px;
+    letter-spacing: 2px;
 }
 
 .sub-list {
@@ -65,6 +69,7 @@
 .site-map ul ul {
     display: none;
     margin-left: 0px;
+    
 }
 
 
