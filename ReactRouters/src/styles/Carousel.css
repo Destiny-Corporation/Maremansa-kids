@@ -1,0 +1,21 @@
+/* src/App.css */
+.carousel-container {
+    display: flex;
+    overflow: hidden;
+    width: 800px; /* Ajuste conforme necessário */
+    margin: auto;
+  }
+  
+  img {
+    width: 100%;
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  img.active {
+    transform: translateX(0);
+  }
+  
+  img:not(.active) {
+    transform: translateX(100%);
+  }
+  
