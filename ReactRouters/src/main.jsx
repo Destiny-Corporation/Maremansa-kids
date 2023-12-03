@@ -37,6 +37,7 @@ import LoadingScreen from './routes/LoadingScreen';
 //import Payment from './routes/Checkout/Payment.jsx';
 //import Shipping from './routes/Checkout/Shipping.jsx';
 import Confirmation from './routes/Checkout/Confirmation.jsx';
+import PaymentForm from "./routes/Checkout/PaymentForm.jsx";
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -182,6 +183,10 @@ const router = createBrowserRouter([
   {
     path: "/confirmation",
     element: <Confirmation />,
+  },
+  {
+    path: "/payment",
+    element: <PaymentForm />,
   },
 
   {
