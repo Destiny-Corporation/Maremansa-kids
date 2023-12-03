@@ -5,18 +5,17 @@ import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 import { getFirestore, collection, doc, getDocs } from "firebase/firestore";
 
-const Cart2 = () => {
-  const [cartItems, setCartItems] = useState(
-    JSON.parse(localStorage.getItem("cartItems")) || []
+const Wishlist2 = () => {
+  const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  const [favoriteItems, setFavoriteItems] = useState(
+    JSON.parse(localStorage.getItem("favoriteItems")) || []
   );
-
-  const handleRemoveFromCart = (index) => {
-    const updatedCartItems = [...cartItems];
-    updatedCartItems.splice(index, 1);
-    setCartItems(updatedCartItems);
-    localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+  const handleRemoveFromFavorites = (index) => {
+    const updatedFavoriteItems = [...favoriteItems];
+    updatedFavoriteItems.splice(index, 1);
+    setFavoriteItems(updatedFavoriteItems);
+    localStorage.setItem("favoriteItems", JSON.stringify(updatedFavoriteItems));
   };
-
 
   let isLoggedIn = false
   if (localStorage.getItem("user") !== null) {
@@ -72,20 +71,20 @@ const Cart2 = () => {
       <div className="container-subheader">
         <div className="container-cart">
           <i className="bx bx-cart bt-header"></i>
-          <h6>| Carrinho ({cartItems.length})</h6>
+          <h6>| Lista de Desejo ({favoriteItems.length})</h6>
         </div>
       </div>
+      
       <div className="cart-content">
-
-  {cartItems.map((produto, index) => (
+  {favoriteItems.map((produto, index) => (
   <div className="cart-item" key={index}>
     <div className="cart-item-info">
       <div className="delivery-indicator">
-        Entrega {index + 1} de {cartItems.length}
+      Favorito {index + 1} de {favoriteItems.length}
       </div>
       <i
         className="bx bxs-trash-alt cart-remove cart-item-remove-2"
-        onClick={() => handleRemoveFromCart(index)}
+        onClick={() => handleRemoveFromFavorites(index)}
       ></i>
       <img
         src={produto.url_image}
@@ -165,4 +164,4 @@ const Cart2 = () => {
   );
 };
 
-export default Cart2;
+export default Wishlist2;
