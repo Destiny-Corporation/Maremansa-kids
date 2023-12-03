@@ -22,6 +22,7 @@ export const firestore = getFirestore(app);
 const Props = () => {
   const [isItemAdded, setIsItemAdded] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
+  const [showNotification2, setShowNotification2] = useState(false);
 
   const showAddedToCartNotification = () => {
     setShowNotification(true);
@@ -29,6 +30,14 @@ const Props = () => {
       setShowNotification(false);
     }, 2000);
   };
+
+  const showAddedToFavoriteNotification = () => {
+    setShowNotification2(true);
+    setTimeout(() => {
+      setShowNotification2(false);
+    }, 2000);
+  };
+
 
   const [produtos, setProdutos] = useState([]);
   const [overlayVisible, setOverlayVisible] = useState(false);
@@ -52,6 +61,33 @@ const Props = () => {
   });
   const [cartVisible, setCartVisible] = useState(false);
   const [isComponentReady, setIsComponentReady] = useState(false);
+  const [favoriteItems, setFavoriteItems] = useState(() => {
+    const savedFavoriteItems = localStorage.getItem("favoriteItems");
+    return savedFavoriteItems ? JSON.parse(savedFavoriteItems) : [];
+  });
+  const handleAddToFavorites = (produto) => {
+    const existingItemIndex = favoriteItems.findIndex(
+      (item) => item.nome_prop === produto.nome_prop
+    );
+  
+    if (existingItemIndex === -1) {
+      // Se o item não está nos favoritos, adicione-o
+      setFavoriteItems([...favoriteItems, { ...produto }]);
+    }
+  
+    // ... Lógica para adicionar o item aos favoritos
+  
+    // Exiba a mensagem e defina um temporizador para ocultá-la
+    setIsItemAdded(true);
+    setTimeout(() => {
+      setIsItemAdded(false);
+    }, 5000);
+  }; 
+  
+  useEffect(() => {
+    localStorage.setItem("favoriteItems", JSON.stringify(favoriteItems));
+  }, [favoriteItems]);
+
 
   const handleCartIconClick = () => {
     setCartVisible(!cartVisible);
@@ -445,8 +481,16 @@ const Props = () => {
               <div className="des">
                 <h6 className="price">R$ {produto.preço}</h6>
                 <i
-                  className="bx bx-cart bt-header pd"
+                  className="bx bx-heart bt-header pd"
                   style={{ color: "#48a3a9" }}
+                  onClick={() => {
+                    handleAddToFavorites(produto);
+                    showAddedToFavoriteNotification();
+                  }}
+                ></i>
+                <i
+                  className="bx bx-cart bt-header pd"
+                  style={{ color: "#48a3a9", marginRight: "100px" }}
                   onClick={() => {
                     handleAddToCart(produto);
                     showAddedToCartNotification();
@@ -462,6 +506,15 @@ const Props = () => {
             <p className="not">Item adicionado ao carrinho!</p>
             <Link to="/cart2" className="go-to-cart-button">
               Ir para o Carrinho
+            </Link>
+          </div>
+        )}
+
+         {showNotification2 && (
+          <div className={`notification ${isItemAdded ? "active" : ""}`}>
+            <p className="not">Item adicionado a lista de desejo!</p>
+            <Link to="/wishlist2" className="go-to-cart-button">
+              Ir para a Lista de Desejo
             </Link>
           </div>
         )}
