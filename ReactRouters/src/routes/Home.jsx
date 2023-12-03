@@ -208,11 +208,12 @@ const Home = () => {
               ></i>
             </Link>
 
+          <Link>
             <i
               className="bx bx-cart bt-header"
               style={{ color: " #48A3A9" }}
               onClick={handleCartIconClick}
-            ></i>
+            ></i></Link>
             <div
               className={`overlay ${overlayVisible ? "active" : ""}`}
               onClick={handleCloseCartClick}
