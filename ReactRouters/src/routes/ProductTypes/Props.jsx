@@ -21,16 +21,15 @@ export const firestore = getFirestore(app);
 
 const Props = () => {
   const [isItemAdded, setIsItemAdded] = useState(false);
-  const [showNotification, setShowNotification] = useState(false); 
+  const [showNotification, setShowNotification] = useState(false);
 
   const showAddedToCartNotification = () => {
     setShowNotification(true);
     setTimeout(() => {
       setShowNotification(false);
-    }, 2000); 
+    }, 2000);
   };
-  
- 
+
   const [produtos, setProdutos] = useState([]);
   const [overlayVisible, setOverlayVisible] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
@@ -63,9 +62,6 @@ const Props = () => {
     setCartVisible(false);
     setOverlayVisible(false);
   };
-  
-  
-  
 
   useEffect(() => {
     // Recupera os itens do carrinho do localStorage ao carregar a página
@@ -90,15 +86,13 @@ const Props = () => {
       setCartItems([...cartItems, { ...produto, quantidade: 1 }]);
     }
 
+    // ... Lógica para adicionar o item ao carrinho
 
-      // ... Lógica para adicionar o item ao carrinho
-    
-      // Após adicionar o item, exiba a mensagem e defina um temporizador para ocultá-la
-      setIsItemAdded(true);
-      setTimeout(() => {
-        setIsItemAdded(false);
-      }, 5000); // Oculta a mensagem após 5 segundos (ou você pode definir outro valor)
-    
+    // Após adicionar o item, exiba a mensagem e defina um temporizador para ocultá-la
+    setIsItemAdded(true);
+    setTimeout(() => {
+      setIsItemAdded(false);
+    }, 5000); // Oculta a mensagem após 5 segundos (ou você pode definir outro valor)
   };
 
   const handleRemoveFromCart = (index) => {
@@ -210,13 +204,24 @@ const Props = () => {
     <div className="main">
       <header className="main-header">
         <div className="search-container-header">
-            <input type="text" className="search-bar-header" placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"/>
-                <button className="search-button-header" type="submit">
-                  <i className="bx bx-search"></i>
-                </button>
+          <input
+            type="text"
+            className="search-bar-header"
+            placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
+          />
+          <button className="search-button-header" type="submit">
+            <i className="bx bx-search"></i>
+          </button>
         </div>
         <div className="header-logo-center">
-        <Link to="/"> <img src="/assets/logo.png" alt="Logo" className="header-logo-center"/> </Link>
+          <Link to="/">
+            {" "}
+            <img
+              src="/assets/logo.png"
+              alt="Logo"
+              className="header-logo-center"
+            />{" "}
+          </Link>
         </div>
         <div className="icons-about">
           <Link to="/login">
@@ -240,7 +245,10 @@ const Props = () => {
           ></i>
         </div>
 
-        <div className={`overlay ${overlayVisible ? "active" : ""}`} onClick={handleCloseCartClick}></div>
+        <div
+          className={`overlay ${overlayVisible ? "active" : ""}`}
+          onClick={handleCloseCartClick}
+        ></div>
         <div className={`cart ${cartVisible ? "active" : ""}`}>
           <h2 className="cart-title-1">MEU CARRINHO</h2>
           <div className="cart-content-1">
@@ -260,12 +268,17 @@ const Props = () => {
                 />
 
                 <div className="cart-item-details">
-                  <div className="cart-item-name-1">{produto.nome_prop}</div>
+                  <div className="cart-item-name-1">
+                    {produto.nome_prodmale ||
+                      produto.nome_prop ||
+                      produto.nome_prodpromo ||
+                      produto.nome_prodfemme}
+                  </div>
                   <div className="cart-item-price-1">R$ {produto.preço}</div>
                   <input
                     type="number"
                     className="cart-quantity-1"
-                    value={produto.quantidade} 
+                    value={produto.quantidade}
                     onChange={(e) => {
                       const updatedCartItems = [...cartItems];
                       updatedCartItems[index].quantidade =
@@ -315,35 +328,34 @@ const Props = () => {
       </header>
 
       <div className="container-subheader-1">
-      <div className="container-menu-buttons-1">
-        <div className="button-menu-1">
-          <Link to="/sale">
-            <h6>PROMOÇÕES</h6>
-          </Link>
-        </div>
+        <div className="container-menu-buttons-1">
+          <div className="button-menu-1">
+            <Link to="/sale">
+              <h6>PROMOÇÕES</h6>
+            </Link>
+          </div>
 
-        <div className="button-menu-1">
-          <Link to="female">
-            <h6>FEMININO</h6>
-          </Link>
-        </div>
+          <div className="button-menu-1">
+            <Link to="female">
+              <h6>FEMININO</h6>
+            </Link>
+          </div>
 
-        <div className="button-menu-1">
-          <Link to="male">
-            <h6>MASCULINO</h6>
-          </Link>
-        </div>
+          <div className="button-menu-1">
+            <Link to="male">
+              <h6>MASCULINO</h6>
+            </Link>
+          </div>
 
-        <div className="button-menu-1">
-          <Link to="/props">
-            <h6>ACESSÓRIOS</h6>
-          </Link>
+          <div className="button-menu-1">
+            <Link to="/props">
+              <h6>ACESSÓRIOS</h6>
+            </Link>
+          </div>
         </div>
-      </div>
       </div>
 
       <div className="space">
-
         <div className="title-section">
           <h1 className="general-title-1">ACESSÓRIOS</h1>
           <button className="filter" onClick={handleFilterButtonClick}>
@@ -420,7 +432,7 @@ const Props = () => {
         <div className="container-clothes">
           {currentPageProdutos.map((produto, index) => (
             <div className="clothes" key={index} style={{ width: "20%" }}>
-              <Link to="/product">
+              <Link to={`/product/${"Props"}/${produto.nome_prop}`}>
                 <img
                   className="img_prod"
                   src={produto.url_image}
@@ -433,11 +445,11 @@ const Props = () => {
               <div className="des">
                 <h6 className="price">R$ {produto.preço}</h6>
                 <i
-            className="bx bx-cart bt-header pd"
-            style={{ color: "#48a3a9" }}
+                  className="bx bx-cart bt-header pd"
+                  style={{ color: "#48a3a9" }}
                   onClick={() => {
                     handleAddToCart(produto);
-                    showAddedToCartNotification(); 
+                    showAddedToCartNotification();
                   }}
                 ></i>
               </div>
@@ -446,14 +458,13 @@ const Props = () => {
         </div>
 
         {showNotification && (
-  <div className={`notification ${isItemAdded ? "active" : ""}`}>
-    <p className="not">Item adicionado ao carrinho!</p>
-    <Link to="/cart2" className="go-to-cart-button">
-      Ir para o Carrinho
-    </Link>
-  </div>
-)}
-
+          <div className={`notification ${isItemAdded ? "active" : ""}`}>
+            <p className="not">Item adicionado ao carrinho!</p>
+            <Link to="/cart2" className="go-to-cart-button">
+              Ir para o Carrinho
+            </Link>
+          </div>
+        )}
 
         <div className="pagination-container">
           <ReactPaginate
