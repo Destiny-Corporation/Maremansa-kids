@@ -55,9 +55,10 @@ if (localStorage.getItem("user") !== null) {
       <div className="empty-cart">
         <img src="/assets/empty-cart.png" alt="Carrinho Vazio" />
         <div className="effect">
+        <Link to="/">
         <div className="button">
           <img src="/assets/shopping-button.png" alt="Botão de Compras" />
-        </div>
+        </div></Link>
         </div>
       </div>
       ) : (
@@ -66,9 +67,9 @@ if (localStorage.getItem("user") !== null) {
           <div className="empty-cart">
         <img src="/assets/empty-cart-login.png" alt="Carrinho Vazio" />
         <div className="effect">
-        <div className="button">
-          <Link to="/login"> <img src="/assets/login.png" alt="Botão de Compras" /></Link>
-        </div>
+        <Link to="/login"><div className="button">
+          <img src="/assets/login.png" alt="Botão de Compras" />
+        </div></Link>
         </div>
       </div>
         </div>

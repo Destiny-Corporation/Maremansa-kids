@@ -26,6 +26,7 @@ body {
 .bt-header {
   font-size: 28px;
   padding: 2px;
+  margin-left: 0px;
 }
 
 .main-header {
@@ -217,6 +218,12 @@ a {
   font-size: 14px;
 }
 
+.info-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .home-t {
   color: #48a3a9;
   font-size: 8px;
@@ -224,6 +231,11 @@ a {
   text-transform: uppercase;
   margin-top: 25px;
   margin-right: 10px;
+}
+
+.home-t:hover {
+  color:#247479;
+  text-decoration: underline;
 }
 
 .carousel-container {
@@ -395,8 +407,8 @@ hr {
 }
 
 .clothes img{
-    width: 250px;
-    height: auto;
+    width: 200px;
+    height: 250px;
 }
 
 .container-clothes-main {
