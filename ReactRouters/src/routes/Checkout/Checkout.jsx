@@ -48,7 +48,7 @@ const Checkout = () => {
         count,
       })),
     };
-
+  
     const response = await fetch("http://localhost:5173/order", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -58,6 +58,9 @@ const Checkout = () => {
     await stripe.redirectToCheckout({
       sessionId: session.id,
     });
+  
+    // Redirecionamento para /payment após o pagamento completo
+    window.location.href = "/payment";
   }
 
   return (
@@ -98,21 +101,13 @@ const Checkout = () => {
         </div>
       </header>
 
-      <div className="container-subheader">
-        <div className="container-cart">
-          <i className='bx bx-cart bt-header'></i>
-          <h6>| Finalizando Compra</h6>
-        </div>
-      </div>
- 
-
       <Box width="80%" m="100px auto">
         <Stepper activeStep={activeStep} sx={{ m: "20px 0" }}>
           <Step>
-            <StepLabel>Informações</StepLabel>
+            <StepLabel>Billing</StepLabel>
           </Step>
           <Step>
-            <StepLabel>Pagamento</StepLabel>
+            <StepLabel>Payment</StepLabel>
           </Step>
         </Stepper>
         <Box>
@@ -169,20 +164,30 @@ const Checkout = () => {
                       Back
                     </Button>
                   )}
-                  <Button
-                    fullWidth
-                    type="submit"
-                    color="primary"
-                    variant="contained"
-                    sx={{
-                      backgroundColor: "#48A3A9",
-                      boxShadow: "none",
-                      color: "white",
-                      borderRadius: 0,
-                      padding: "15px 40px",
-                    }}
-                  >
-                    {!isSecondStep ? "Próximo" : "Place Order"}
+                 <Button
+  fullWidth
+  type="submit"
+  color="primary"
+  variant="contained"
+  sx={{
+    backgroundColor: shades.primary[400],
+    boxShadow: "none",
+    color: "white",
+    borderRadius: 0,
+    padding: "15px 40px",
+  }}
+  onClick={() => {
+    if (!isSecondStep) {
+      setActiveStep(activeStep + 1);
+    } else {
+      makePayment(values);
+      // Redirecionar para /payment após o pagamento completo
+      window.location.href = "/payment";
+    }
+  }}
+>
+                  
+                    {!isSecondStep ? "Next" : "Place Order"}
                   </Button>
                 </Box>
               </form>
@@ -269,51 +274,51 @@ const initialValues = {
 const checkoutSchema = [
   yup.object().shape({
     billingAddress: yup.object().shape({
-      firstName: yup.string().required("obrigatório"),
-      lastName: yup.string().required("obrigatório"),
-      country: yup.string().required("obrigatório"),
-      street1: yup.string().required("obrigatório"),
+      firstName: yup.string().required("required"),
+      lastName: yup.string().required("required"),
+      country: yup.string().required("required"),
+      street1: yup.string().required("required"),
       street2: yup.string(),
-      city: yup.string().required("obrigatório"),
-      state: yup.string().required("robrigatório"),
-      zipCode: yup.string().required("obrigatório"),
+      city: yup.string().required("required"),
+      state: yup.string().required("required"),
+      zipCode: yup.string().required("required"),
     }),
     shippingAddress: yup.object().shape({
       isSameAddress: yup.boolean(),
       firstName: yup.string().when("isSameAddress", {
         is: false,
-        then: yup.string().required("obrigatório"),
+        then: yup.string().required("required"),
       }),
       lastName: yup.string().when("isSameAddress", {
         is: false,
-        then: yup.string().required("obrigatório"),
+        then: yup.string().required("required"),
       }),
       country: yup.string().when("isSameAddress", {
         is: false,
-        then: yup.string().required("obrigatório"),
+        then: yup.string().required("required"),
       }),
       street1: yup.string().when("isSameAddress", {
         is: false,
-        then: yup.string().required("obrigatório"),
+        then: yup.string().required("required"),
       }),
       street2: yup.string(),
       city: yup.string().when("isSameAddress", {
         is: false,
-        then: yup.string().required("obrigatório"),
+        then: yup.string().required("required"),
       }),
       state: yup.string().when("isSameAddress", {
         is: false,
-        then: yup.string().required("obrigatório"),
+        then: yup.string().required("required"),
       }),
       zipCode: yup.string().when("isSameAddress", {
         is: false,
-        then: yup.string().required("obrigatório"),
+        then: yup.string().required("required"),
       }),
     }),
   }),
   yup.object().shape({
-    email: yup.string().required("obrigatório"),
-    phoneNumber: yup.string().required("obrigatório"),
+    email: yup.string().required("required"),
+    phoneNumber: yup.string().required("required"),
   }),
 ];
 

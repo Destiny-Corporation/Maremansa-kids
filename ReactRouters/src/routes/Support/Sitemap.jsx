@@ -79,9 +79,9 @@ const Sitemap = () => {
       <ul>     
             <li><Link to="/female">Feminino</Link>
                 <ul>
-                    <li className="sub-list"><Link to="/">Baby</Link></li>
-                    <li className="sub-list"><Link to="/">Infantil</Link></li>
-                    <li className="sub-list"><Link to="/">Juvenil</Link></li>
+                    <li className="sub-list"><Link to="/female/fem-baby">Baby</Link></li>
+                    <li className="sub-list"><Link to="/female/fem-children">Infantil</Link></li>
+                    <li className="sub-list"><Link to="/female/fem-juvenile">Juvenil</Link></li>
                 </ul>
             </li> </ul> </div>
       <div className="map"><img className='image-map' src="/assets/maleabout.jpeg"/></div>
@@ -89,9 +89,9 @@ const Sitemap = () => {
         <ul>  
       <li><Link to="/male">Masculino</Link>
                 <ul>
-                    <li className="sub-list"><Link to="/">Baby</Link></li>
-                    <li className="sub-list"><Link to="/">Infantil</Link></li>
-                    <li className="sub-list"><Link to="/">Juvenil</Link></li>
+                    <li className="sub-list"><Link to="/male/male-baby">Baby</Link></li>
+                    <li className="sub-list"><Link to="/male/male-children">Infantil</Link></li>
+                    <li className="sub-list"><Link to="/male/male-juvenile">Juvenil</Link></li>
                 </ul>
             </li> </ul> </div>
 

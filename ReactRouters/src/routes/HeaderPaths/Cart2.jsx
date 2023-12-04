@@ -6,7 +6,17 @@ import { getStorage } from "firebase/storage";
 import { getFirestore, collection, doc, getDocs } from "firebase/firestore";
 
 const Cart2 = () => {
-  const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  const [cartItems, setCartItems] = useState(
+    JSON.parse(localStorage.getItem("cartItems")) || []
+  );
+
+  const handleRemoveFromCart = (index) => {
+    const updatedCartItems = [...cartItems];
+    updatedCartItems.splice(index, 1);
+    setCartItems(updatedCartItems);
+    localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+  };
+
 
   let isLoggedIn = false
   if (localStorage.getItem("user") !== null) {
@@ -101,7 +111,12 @@ const Cart2 = () => {
   </div>
 ))}
 </div>
-
+ {/* Botão "Comprar Agora" */}
+ {cartItems.length > 0 && (
+        <Link to="/checkout">
+          <button className="comprar-agora-btn">Comprar Agora</button>
+        </Link>
+      )}
 
       <footer>
         <section className="footer-section">

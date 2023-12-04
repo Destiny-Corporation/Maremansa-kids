@@ -6,6 +6,9 @@ import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 import { getFirestore, collection, doc, getDocs } from "firebase/firestore";
 import ReactPaginate from "react-paginate";
+import { useNavigate } from "react-router-dom";
+import debounce from 'debounce';
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyDTKUI6nV-DZjIsUo1BMkjIUWOQbT9gU3Q",
@@ -15,7 +18,6 @@ const firebaseConfig = {
   messagingSenderId: "376069750475",
   appId: "1:376069750475:web:bfb216cfd8928a23e8a54e",
 };
-
 export const app = initializeApp(firebaseConfig);
 export const storage = getStorage(app);
 export const firestore = getFirestore(app);
@@ -33,6 +35,25 @@ const Home = () => {
   const [overlayVisible, setOverlayVisible] = useState(false);
   const [produtos, setProdutos] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
+  const [searchValue, setSearchValue] = useState("");
+  const navigate = useNavigate();
+
+  const debouncedSearchFunction = debounce(async () => {
+    // Navegue para a rota apropriada com base no valor da pesquisa
+    if (searchValue === "sunga") {
+      await navigate("/male");
+    } else if (searchValue === "biquini") {
+      await navigate("/female");
+    } else if (["boia", "óculos", "baldinho", "chapeu"].includes(searchValue)) {
+      await navigate("/props");
+    }
+  }, 500);
+
+  useEffect(() => {
+    // Chame a função debouncedSearchFunction() de forma assíncrona
+    debouncedSearchFunction();
+  }, [searchValue]);
+
   const [total, setTotal] = useState(0);
   const [cartItems, setCartItems] = useState(() => {
     const savedCartItems = localStorage.getItem("cartItems");
@@ -111,9 +132,9 @@ const Home = () => {
       const produtosData = produtosSnapshot.docs.map((doc) => doc.data());
       setProdutos(produtosData);
     };
-
     fetchProdutos();
   }, []);
+
 
   const productsPerPage = 4;
   const pageCount = Math.ceil(produtos.length / productsPerPage);
@@ -158,22 +179,23 @@ const Home = () => {
         </div>
       </header>
 
-      <div className="space">
-        <div className="align">
-          <div className="search-container-1">
-            <input
-              type="text"
-              className="search-bar"
-              placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
-            />
-            <button className="search-button" type="submit">
-              <i className="bx bx-search"></i>
-            </button>
-          </div>
-          <p className="home-t">
-            Bem vindo!<br></br>Entre ou cadastre-se
-          </p>
-          <div className="icons-home">
+    <div className ='space'>
+      <div className='align'>
+      <div className="search-container-1">
+        <input
+          type="text"
+          className="search-bar"
+          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?" 
+          onChange={(e) => {
+            setSearchValue(e.target.value);
+          }} />
+        <button className="search-button" type="submit">
+          <i className="bx bx-search"></i>
+        </button>
+        </div>
+        <p className="home-t">Bem vindo!<br></br>Entre ou cadastre-se</p>
+        <div className="icons-home">
+
             <Link to="/login">
               <i
                 className="bx bx-user bt-header"
@@ -188,11 +210,12 @@ const Home = () => {
               ></i>
             </Link>
 
+          <Link>
             <i
               className="bx bx-cart bt-header"
               style={{ color: " #48A3A9" }}
               onClick={handleCartIconClick}
-            ></i>
+            ></i></Link>
             <div
               className={`overlay ${overlayVisible ? "active" : ""}`}
               onClick={handleCloseCartClick}
@@ -368,13 +391,11 @@ const Home = () => {
           ></i>
         </div>
       </div>
-
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
             <img src="/assets/whale.png" />
           </div>
-
           <div className="footer-section-div">
             <h3>SOBRE NÓS</h3>
             <li>
@@ -387,7 +408,6 @@ const Home = () => {
               <Link to="/partners">NOSSOS PARCEIROS</Link>
             </li>
           </div>
-
           <div className="footer-section-div">
             <h3>SUPORTE</h3>
             <li>
@@ -415,5 +435,4 @@ const Home = () => {
     </div>
   );
 };
-
 export default Home;
