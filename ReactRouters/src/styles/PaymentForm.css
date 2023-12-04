@@ -1,66 +1,85 @@
-/* Adicione as seguintes alterações ao seu CSS */
+@import url("https://fonts.googleapis.com/css2?family=Stylish&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Stylish&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+  text-decoration: none;
+  list-style: none;
+}
 
 .payment-container {
-    max-width: 100%;
-    margin: auto;
-    padding: 30px;
-    border: 1px solid #3CA2A2;
-    border-radius: 8px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-  }
-  
-  .payment-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .payment-title {
-    margin: 0;
-    color: #3CA2A2;
-  }
-  
-  .resumo-pedido {
-    flex-grow: 1;
-    margin-left: 20px;
-    color: #555;
-    border: 1px solid #3CA2A2;
-    border-radius: 8px;
-    padding: 15px;
-    margin-top: 20px;
-  }
-  
-  .opcoes-pagamento {
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-    border: 1px solid #3CA2A2;
-    border-radius: 8px;
-    padding: 15px; /* Adicionado espaçamento interno */
-    margin-bottom: 20px;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 100%;
+  margin: auto;
+  margin-top: 20px;
+  padding: 30px;
+  border: 1px solid #3CA2A2;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.finalizando-pagamento {
+  flex: 1;
+  margin: 0 10px; /* Adicionado espaçamento à esquerda e direita */
+  display: flex;
+  padding: 20px;
+}
+
+.resumo-pedido {
+  flex: 1;
+  margin: 0 10px; /* Adicionado espaçamento à esquerda e direita */
+  color: #48A3A9;
+  border: 1px solid #3CA2A2;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 10px;
+  margin-top: 2px;
+}
+
+.resumo-pedido h2{
+    font-size: 32px;
+    text-align: center;
+    font-family: "Stylish", sans-serif;
+}
+
+.opcoes-pagamento {
+  flex: 1;
+  margin: 0 10px; /* Adicionado espaçamento à esquerda e direita */
+  display: flex;
+  flex-direction: column;
+  margin-top: 2px;
+  border: 1px solid #3CA2A2;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+
   
   .opcoes-pagamento label {
     margin-bottom: 10px;
-    color: #555;
+    color: #48A3A9;
   }
   
   .opcao-pagamento {
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #48A3A9;
     padding: 10px 0;
   }
  
   .opcao-titulo {
     font-weight: bold;
     margin-bottom: 5px;
-    color: #333;
+    color: #48A3A9;
   }
   
   .opcao-linha {
     height: 1px;
-    background-color: #ddd;
+    background-color: #48A3A9;
     margin-bottom: 5px;
   }
   
@@ -72,21 +91,23 @@
   input {
     padding: 8px;
     margin-bottom: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid #48A3A9;
     border-radius: 4px;
+
   }
   
  
   
   .concluir-btn {
     background-color: #3CA2A2;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-bottom: 20px;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 20px;
+    align-items: center;
   }
   
   .concluir-btn:hover {
