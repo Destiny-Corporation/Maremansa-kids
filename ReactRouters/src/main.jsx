@@ -38,6 +38,7 @@ import LoadingScreen from './routes/LoadingScreen';
 //import Shipping from './routes/Checkout/Shipping.jsx';
 import Confirmation from './routes/Checkout/Confirmation.jsx';
 import PaymentForm from "./routes/Checkout/PaymentForm.jsx";
+import Wishlist2 from "./routes/HeaderPaths/Wishlist2.jsx";
 
 
 const App = () => {
@@ -116,6 +117,10 @@ const router = createBrowserRouter([
   {
     path: "/wishlist",
     element: <Wishlist />,
+  },
+  {
+    path: "/wishlist2",
+    element: <Wishlist2 />,
   },
   {
     path: "/female",
