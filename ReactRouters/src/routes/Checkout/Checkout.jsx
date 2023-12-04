@@ -104,10 +104,10 @@ const Checkout = () => {
       <Box width="80%" m="100px auto">
         <Stepper activeStep={activeStep} sx={{ m: "20px 0" }}>
           <Step>
-            <StepLabel>Billing</StepLabel>
+            <StepLabel>Endereço</StepLabel>
           </Step>
           <Step>
-            <StepLabel>Payment</StepLabel>
+            <StepLabel>Pagamento</StepLabel>
           </Step>
         </Stepper>
         <Box>
@@ -170,7 +170,7 @@ const Checkout = () => {
   color="primary"
   variant="contained"
   sx={{
-    backgroundColor: shades.primary[400],
+    backgroundColor: '#48A3A9',
     boxShadow: "none",
     color: "white",
     borderRadius: 0,
@@ -187,7 +187,7 @@ const Checkout = () => {
   }}
 >
                   
-                    {!isSecondStep ? "Next" : "Place Order"}
+                    {!isSecondStep ? "Próximo" : "Place Order"}
                   </Button>
                 </Box>
               </form>
