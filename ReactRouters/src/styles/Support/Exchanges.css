@@ -138,7 +138,7 @@
 }
 
 footer {
-    position: static;
+    position: relative;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -226,7 +226,7 @@ section h1 {
   background-color: #247479;
   color: #fff;
   padding: 0.5rem 0; 
-  position: static; 
+  position: relative; 
   bottom: 0;
   left: 0;
   width: 100%;

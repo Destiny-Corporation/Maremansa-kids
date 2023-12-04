@@ -253,7 +253,7 @@ body {
 }
 
 footer {
-  position: static;
+  position: relative;
   margin: 0;
   bottom: 0;
   width: 100%;
@@ -292,7 +292,7 @@ footer {
 }
 
 .sub-footer {
-  position: static;
+  position: relative;
   margin-top: -12px;
   width: 100%;
   height: 40px;
@@ -300,6 +300,7 @@ footer {
   padding: 10px 0;
   text-align: center;
   box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+  z-index: 999;
 }
 
 .sub-footer p {
