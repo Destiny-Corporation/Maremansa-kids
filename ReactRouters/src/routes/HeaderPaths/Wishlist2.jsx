@@ -80,7 +80,7 @@ const Wishlist2 = () => {
   <div className="cart-item" key={index}>
     <div className="cart-item-info">
       <div className="delivery-indicator">
-      Favorito {index + 1} de {favoriteItems.length}
+      Desejo {index + 1} de {favoriteItems.length}
       </div>
       <i
         className="bx bxs-trash-alt cart-remove cart-item-remove-2"
