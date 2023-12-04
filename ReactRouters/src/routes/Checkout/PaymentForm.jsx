@@ -175,23 +175,66 @@ const PaymentForm = () => {
       case "debito":
         return (
           <div className="campos">
+            {imagemCartao && <img src={imagemCartao} alt="Cartão" className="cartao-imagem" />}
             <div className="campo">
-              <label>Número do cartão de débito</label>
-              <input
-                type="text"
-                placeholder="Número do cartão de débito"
-                value={dadosPagamento.numeroCartaoDebito}
-                onChange={(e) => handleDadosPagamentoChange("numeroCartaoDebito", e.target.value)}
-              />
+              <label htmlFor="numeroCartao">Número do cartão</label>
+              <div className={`input-container ${numeroCartaoErro ? 'erro' : ''}`}>
+                <input
+                  type="text"
+                  id="numeroCartao"
+                  placeholder="XXXX-XXXX-XXXX-XXXX"
+                  value={dadosPagamento.numeroCartao}
+                  onChange={(e) => handleDadosPagamentoChange("numeroCartao", e.target.value)}
+                />
+                {numeroCartaoErro && (
+                  <span className="erro-mensagem">Número do cartão inválido</span>
+                )}
+              </div>
             </div>
             <div className="campo">
-              <label>Titular do Cartão de Débito</label>
-              <input
-                type="text"
-                placeholder="Titular do Cartão de Débito"
-                value={dadosPagamento.titularCartaoDebito}
-                onChange={(e) => handleDadosPagamentoChange("titularCartaoDebito", e.target.value)}
-              />
+              <label htmlFor="titularCartao">Titular do Cartão</label>
+              <div className={`input-container ${titularCartaoErro ? 'erro' : ''}`}>
+                <input
+                  type="text"
+                  id="titularCartao"
+                  placeholder="ABC"
+                  value={dadosPagamento.titularCartao}
+                  onChange={(e) => handleDadosPagamentoChange("titularCartao", e.target.value)}
+                />
+                {titularCartaoErro && (
+                  <span className="erro-mensagem">Informe um titular do cartão válido</span>
+                )}
+              </div>
+            </div>
+            <div className="campo">
+              <label htmlFor="validade">Validade</label>
+              <div className={`input-container ${validadeErro ? 'erro' : ''}`}>
+                <input
+                  type="text"
+                  id="validade"
+                  placeholder="(MM/AA)"
+                  value={dadosPagamento.validade}
+                  onChange={(e) => handleDadosPagamentoChange("validade", e.target.value)}
+                />
+                {validadeErro && (
+                  <span className="erro-mensagem">Formato de validade inválido (MM/AA)</span>
+                )}
+              </div>
+            </div>
+            <div className="campo">
+              <label htmlFor="cvv">CVV</label>
+              <div className={`input-container ${cvvErro ? 'erro' : ''}`}>
+                <input
+                  type="text"
+                  id="cvv"
+                  placeholder="XXXX"
+                  value={dadosPagamento.cvv}
+                  onChange={(e) => handleDadosPagamentoChange("cvv", e.target.value)}
+                />
+                {cvvErro && (
+                  <span className="erro-mensagem">CVV deve ter 4 dígitos</span>
+                )}
+              </div>
             </div>
           </div>
         );
