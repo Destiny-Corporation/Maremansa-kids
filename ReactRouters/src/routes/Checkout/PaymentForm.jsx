@@ -310,7 +310,11 @@ const PaymentForm = () => {
              <ul>
     {cartItems.map((item, index) => (
       <li key={index}>
-        {item.quantidade}x {item.nome_prop} - R$ {item.preço}
+        {item.quantidade}x  {item.nome_prodmale ||
+                      item.nome_prop ||
+                      item.nome_prodpromo ||
+                      item.nome_prodfemme} - R$ {item.preço}
+      
       </li>
     ))}
   </ul>
