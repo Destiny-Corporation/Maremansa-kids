@@ -101,13 +101,20 @@ const Checkout = () => {
         </div>
       </header>
 
+      <div className="container-subheader">
+        <div className="container-wishlist">
+          <i className="bx bx-map bt-header"></i>
+          <h6>| Endereço</h6>
+        </div>
+      </div>
+
       <Box width="80%" m="100px auto">
         <Stepper activeStep={activeStep} sx={{ m: "20px 0" }}>
           <Step>
-            <StepLabel>Billing</StepLabel>
+            <StepLabel>Endereço</StepLabel>
           </Step>
           <Step>
-            <StepLabel>Payment</StepLabel>
+            <StepLabel>Pagamento</StepLabel>
           </Step>
         </Stepper>
         <Box>
@@ -161,7 +168,7 @@ const Checkout = () => {
                       }}
                       onClick={() => setActiveStep(activeStep - 1)}
                     >
-                      Back
+                      Voltar
                     </Button>
                   )}
                  <Button
@@ -170,7 +177,7 @@ const Checkout = () => {
   color="primary"
   variant="contained"
   sx={{
-    backgroundColor: shades.primary[400],
+    backgroundColor: '#48A3A9',
     boxShadow: "none",
     color: "white",
     borderRadius: 0,
@@ -187,7 +194,7 @@ const Checkout = () => {
   }}
 >
                   
-                    {!isSecondStep ? "Next" : "Place Order"}
+                    {!isSecondStep ? "Próximo" : "Próximo"}
                   </Button>
                 </Box>
               </form>
@@ -274,51 +281,51 @@ const initialValues = {
 const checkoutSchema = [
   yup.object().shape({
     billingAddress: yup.object().shape({
-      firstName: yup.string().required("required"),
-      lastName: yup.string().required("required"),
-      country: yup.string().required("required"),
-      street1: yup.string().required("required"),
+      firstName: yup.string().required("obrigatório"),
+      lastName: yup.string().required("obrigatório"),
+      country: yup.string().required("obrigatório"),
+      street1: yup.string().required("obrigatório"),
       street2: yup.string(),
-      city: yup.string().required("required"),
-      state: yup.string().required("required"),
-      zipCode: yup.string().required("required"),
+      city: yup.string().required("obrigatório"),
+      state: yup.string().required("obrigatório"),
+      zipCode: yup.string().required("obrigatório"),
     }),
     shippingAddress: yup.object().shape({
       isSameAddress: yup.boolean(),
       firstName: yup.string().when("isSameAddress", {
         is: false,
-        then: yup.string().required("required"),
+        then: yup.string().required("obrigatório"),
       }),
       lastName: yup.string().when("isSameAddress", {
         is: false,
-        then: yup.string().required("required"),
+        then: yup.string().required("obrigatório"),
       }),
       country: yup.string().when("isSameAddress", {
         is: false,
-        then: yup.string().required("required"),
+        then: yup.string().required("obrigatório"),
       }),
       street1: yup.string().when("isSameAddress", {
         is: false,
-        then: yup.string().required("required"),
+        then: yup.string().required("obrigatório"),
       }),
       street2: yup.string(),
       city: yup.string().when("isSameAddress", {
         is: false,
-        then: yup.string().required("required"),
+        then: yup.string().required("obrigatório"),
       }),
       state: yup.string().when("isSameAddress", {
         is: false,
-        then: yup.string().required("required"),
+        then: yup.string().required("obrigatório"),
       }),
       zipCode: yup.string().when("isSameAddress", {
         is: false,
-        then: yup.string().required("required"),
+        then: yup.string().required("obrigatório"),
       }),
     }),
   }),
   yup.object().shape({
-    email: yup.string().required("required"),
-    phoneNumber: yup.string().required("required"),
+    email: yup.string().required("obrigatório"),
+    phoneNumber: yup.string().required("obrigatório"),
   }),
 ];
 

@@ -287,14 +287,26 @@ const PaymentForm = () => {
       </div>
     </header>
 
-    <div className="payment-container">
-      <div className="payment-header">
-        <h1 className="payment-title">Finalizar Pagamento</h1>
-        <div id="resumo-pedido" className="resumo-pedido">
-          <h2>Resumo do Pedido</h2>
-          <p>Total: R$ $ {total} </p>
+    <div className="container-subheader">
+        <div className="container-wishlist">
+          <i className="bx bx-card bt-header"></i>
+          <h6>| Finalizando Pagamento</h6>
+        </div>
+      </div>
 
-          <p>Itens no Carrinho:
+  <div className="finalizando-pagamento">
+
+      <div id="opcoes-pagamento" className="opcoes-pagamento">
+        {renderOpcoesPagamento()}
+
+
+    </div>
+
+    <div id="resumo-pedido" className="resumo-pedido">
+          <h2 style={{ color: "#48A3A9" }}>Resumo do Pedido</h2>
+          <hr size="1" />
+
+          <p style={{ color: "#48A3A9" }}>Itens no Carrinho:
              <ul>
     {cartItems.map((item, index) => (
       <li key={index}>
@@ -304,22 +316,24 @@ const PaymentForm = () => {
   </ul>
           </p>
   
-          <p>Endereço de entrega: {resumoPedido.endereco}</p>
-        </div>
-      </div>
+          <p style={{ color: "#48A3A9" }}>Endereço de entrega: {resumoPedido.endereco}</p>
+          <hr size="1" />
+          <p style={{ color: "#48A3A9" }}>Total: R$ $ {total} </p>
 
-      <div id="opcoes-pagamento" className="opcoes-pagamento">
-        {renderOpcoesPagamento()}
-      </div>
+          <hr size="1" />
 
-      {formaPagamento && (
+          {formaPagamento && (
         <div>
           <button className="concluir-btn" onClick={concluirPagamento}>
-            Concluir Pagamento
+            Finalizar Pagamento
           </button>
         </div>
       )}
-    </div>
+</div>
+
+
+  </div>
+
      <footer>
         <section className="footer-section">
           <div className="footer-section-div">
