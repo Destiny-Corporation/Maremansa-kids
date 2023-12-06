@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import "../../styles/PaymentForm.css";
+
 
 const PaymentForm = () => {
   const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
   const [total, setTotal] = useState(0);
   const [formaPagamento, setFormaPagamento] = useState("");
+  const location = useLocation();
+  const billingStreet1 = location.state?.billingStreet1 || "Rua 123";
   const [resumoPedido, setResumoPedido] = useState({
     total: total, // Substitua por seu valor real
     itens: [cartItems], // Substitua por seus itens reais
-    endereco: "Rua das Carnaúbas, 123", // Substitua por seu endereço real
+    endereco: [billingStreet1], // Substitua por seu endereço real
   });
 
   const calculateTotal = () => {
@@ -250,7 +253,7 @@ const PaymentForm = () => {
   };
 
   return (
-    <div className="main">
+    <><div className="main">
     <header className="main-header">
       <div className="search-container-header">
         <input
@@ -333,55 +336,54 @@ const PaymentForm = () => {
           </button>
         </div>
       )}
-</div>
-
-
-  </div>
-
-     <footer>
-        <section className="footer-section">
-          <div className="footer-section-div">
-            <img src="/assets/whale.png" />
-          </div>
-
-          <div className="footer-section-div">
-            <h3>SOBRE NÓS</h3>
-            <li>
-              <Link to="/company">A EMPRESA</Link>
-            </li>
-            <li>
-              <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
-            </li>
-            <li>
-              <Link to="/partners">NOSSOS PARCEIROS</Link>
-            </li>
-          </div>
-
-          <div className="footer-section-div">
-            <h3>SUPORTE</h3>
-            <li>
-              <Link to="/services">ATENDIMENTO</Link>
-            </li>
-            <li>
-              <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
-            </li>
-            <li>
-              <Link to="/sitemap">MAPA DO SITE</Link>
-            </li>
-          </div>
-
-          <div className="footer-section-div">
-            <h3>CONTATOS</h3>
-            <i className="fa fa-whatsapp"></i>
-            <i className="fa fa-google"></i>
-            <i className="fa fa-instagram"></i>
-          </div>
-        </section>
-      </footer>
-      <div className="last-text">
-        <p className="text-sub-footer">maremansa</p>
-      </div>
     </div>
+    </div>
+    </div>
+
+<footer>
+  <section className="footer-section">
+    <div className="footer-section-div">
+      <img src="/assets/whale.png" />
+    </div>
+
+    <div className="footer-section-div">
+      <h3>SOBRE NÓS</h3>
+      <li>
+        <Link to="/company">A EMPRESA</Link>
+      </li>
+      <li>
+        <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
+      </li>
+      <li>
+        <Link to="/partners">NOSSOS PARCEIROS</Link>
+      </li>
+    </div>
+
+    <div className="footer-section-div">
+      <h3>SUPORTE</h3>
+      <li>
+        <Link to="/services">ATENDIMENTO</Link>
+      </li>
+      <li>
+        <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
+      </li>
+      <li>
+        <Link to="/sitemap">MAPA DO SITE</Link>
+      </li>
+    </div>
+
+    <div className="footer-section-div">
+      <h3>CONTATOS</h3>
+      <i className="fa fa-whatsapp"></i>
+      <i className="fa fa-google"></i>
+      <i className="fa fa-instagram"></i>
+    </div>
+  </section>
+</footer>
+<div className="last-text">
+  <p className="text-sub-footer">maremansa</p>
+</div>
+</>
   );
 };
 

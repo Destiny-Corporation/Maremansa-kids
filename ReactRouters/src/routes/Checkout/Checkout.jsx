@@ -1,13 +1,13 @@
 import { useSelector } from "react-redux";
 import { Box, Button, Stepper, Step, StepLabel } from "@mui/material";
-import { Formik } from "formik";
+import { Formik, Field } from 'formik';
 import { useState } from "react";
 import * as yup from "yup";
 import { shades } from "./theme";
 import Payment from "./Payment";
 import Shipping from "./Shipping";
 import { loadStripe } from "@stripe/stripe-js";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const stripePromise = loadStripe(
@@ -19,6 +19,8 @@ const Checkout = () => {
   const cart = useSelector((state) => state.cart.cart);
   const isFirstStep = activeStep === 0;
   const isSecondStep = activeStep === 1;
+  const navigation = useNavigate()
+  const [billingStreet1, setBillingStreet1] = useState("");
 
   const handleFormSubmit = async (values, actions) => {
     setActiveStep(activeStep + 1);
@@ -64,6 +66,7 @@ const Checkout = () => {
   }
 
   return (
+    <>
     <div className="main">
       <header className="main-header">
         <div className="search-container-header">
@@ -153,6 +156,7 @@ const Checkout = () => {
                     setFieldValue={setFieldValue}
                   />
                 )}
+                {/* Adicione o campo street1 aqui */}
                 <Box display="flex" justifyContent="space-between" gap="50px">
                   {!isFirstStep && (
                     <Button
@@ -187,9 +191,16 @@ const Checkout = () => {
     if (!isSecondStep) {
       setActiveStep(activeStep + 1);
     } else {
+      // Aqui você pode armazenar o valor da rua no estado
+      setBillingStreet1(values.billingAddress.street1);
+      console.log('Formik Values:', values);
+
       makePayment(values);
       // Redirecionar para /payment após o pagamento completo
-      window.location.href = "/payment";
+     // window.location.href = "/payment"
+     navigation('/payment', { state: { billingStreet1: values.billingAddress.street1 } });
+
+
     }
   }}
 >
@@ -204,7 +215,8 @@ const Checkout = () => {
       </Box>
 
      
-      {/* Footer aqui */}
+      </div>
+
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
@@ -248,7 +260,7 @@ const Checkout = () => {
       <div className="last-text">
         <p className="text-sub-footer">maremansa</p>
       </div>
-    </div>
+    </>
   );
 };
 

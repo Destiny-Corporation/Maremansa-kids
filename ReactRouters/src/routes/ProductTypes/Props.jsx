@@ -61,6 +61,7 @@ const Props = () => {
   });
   const [cartVisible, setCartVisible] = useState(false);
   const [isComponentReady, setIsComponentReady] = useState(false);
+  
   const [favoriteItems, setFavoriteItems] = useState(() => {
     const savedFavoriteItems = localStorage.getItem("favoriteItems");
     return savedFavoriteItems ? JSON.parse(savedFavoriteItems) : [];
@@ -71,13 +72,8 @@ const Props = () => {
     );
   
     if (existingItemIndex === -1) {
-      // Se o item não está nos favoritos, adicione-o
       setFavoriteItems([...favoriteItems, { ...produto }]);
     }
-  
-    // ... Lógica para adicionar o item aos favoritos
-  
-    // Exiba a mensagem e defina um temporizador para ocultá-la
     setIsItemAdded(true);
     setTimeout(() => {
       setIsItemAdded(false);
@@ -121,10 +117,6 @@ const Props = () => {
       // Se o item não está no carrinho, adicione-o com quantidade 1
       setCartItems([...cartItems, { ...produto, quantidade: 1 }]);
     }
-
-    // ... Lógica para adicionar o item ao carrinho
-
-    // Após adicionar o item, exiba a mensagem e defina um temporizador para ocultá-la
     setIsItemAdded(true);
     setTimeout(() => {
       setIsItemAdded(false);
@@ -211,20 +203,19 @@ const Props = () => {
     setIsFilterActive(!isFilterActive);
     setMaxPrice("");
   };
-  const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
+
+  {/*const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
     if (isFilterActive && maxPrice !== null) {
-      // Verifica se o preço está no formato correto (por exemplo, "R$ 50,00")
       if (produto.preço && typeof produto.preço === "string") {
         const precoNumerico = parseFloat(
           produto.preço.replace("R$ ", "").replace(",", ".")
         );
         return precoNumerico <= maxPrice;
       }
-      // Se o preço não estiver no formato esperado, não filtra por preço
       return true;
     }
     return true;
-  });
+  });*/}
 
   useEffect(() => {
     // Configura a manipulação do DOM após o componente ter sido montado
@@ -237,7 +228,7 @@ const Props = () => {
   }, []);
 
   return (
-    <div className="main">
+    <><div className="main">
       <header className="main-header">
         <div className="search-container-header">
           <input
@@ -365,25 +356,45 @@ const Props = () => {
 
       <div className="container-subheader-1">
         <div className="container-menu-buttons-1">
-          <div className="button-menu-1">
+          <div className="button-menu-2">
+          <img
+              src="/assets/promotion.png"
+              alt="filtro"
+              className="button-image-2"
+            />
             <Link to="/sale">
               <h6>PROMOÇÕES</h6>
             </Link>
           </div>
 
-          <div className="button-menu-1">
-            <Link to="female">
+          <div className="button-menu-2">
+          <img
+              src="/assets/may.png"
+              alt="filtro"
+              className="button-image-2"
+            />
+            <Link to="/female">
               <h6>FEMININO</h6>
             </Link>
           </div>
 
-          <div className="button-menu-1">
-            <Link to="male">
+          <div className="button-menu-2">
+          <img
+              src="/assets/swim-suit.png"
+              alt="filtro"
+              className="button-image-2"
+            />
+            <Link to="/male">
               <h6>MASCULINO</h6>
             </Link>
           </div>
 
-          <div className="button-menu-1">
+          <div className="button-menu-2">
+          <img
+              src="/assets/sunglasses-1.png"
+              alt="filtro"
+              className="button-image-2"
+            />
             <Link to="/props">
               <h6>ACESSÓRIOS</h6>
             </Link>
@@ -465,61 +476,49 @@ const Props = () => {
           </select>
         </div>
 
-        <div className="container-clothes">
-          {currentPageProdutos.map((produto, index) => (
-            <div className="clothes" key={index} style={{ width: "20%" }}>
-              <Link to={`/product/${"Props"}/${produto.nome_prop}`}>
-                <img
-                  className="img_prod"
-                  src={produto.url_image}
-                  alt={produto.nome_prop}
-                />
-              </Link>
-              <Link to={`/product/${"Props"}/${produto.nome_prop}`}>
-                <h6 className="nome_prod">{produto.nome_prop}</h6>
-              </Link>
-              <div className="des">
-                <h6 className="price">R$ {produto.preço}</h6>
-                <i
-                  className="bx bx-heart bt-header pd"
-                  style={{ color: "#48a3a9" }}
-                  onClick={() => {
-                    handleAddToFavorites(produto);
-                    showAddedToFavoriteNotification();
-                  }}
-                ></i>
-                <i
-                  className="bx bx-cart bt-header pd"
-                  style={{ color: "#48a3a9", marginRight: "100px" }}
-                  onClick={() => {
-                    handleAddToCart(produto);
-                    showAddedToCartNotification();
-                  }}
-                ></i>
-              </div>
+        {filteredProdutos.length === 0 ? (
+  <p className="no-results-message">Nenhum produto encontrado.</p>
+) : (
+  <div className="container-clothes">
+    {currentPageProdutos.map((produto, index) => (
+      <div className="clothes" key={index} style={{ width: "20%" }}>
+        <Link to={`/product/${"Props"}/${produto.nome_prop}`}>
+          <img
+            className="img_prod"
+            src={produto.url_image}
+            alt={produto.nome_prop}
+          />
+        </Link>
+        <div className="info-container1">
+          <Link to={`/product/${"Props"}/${produto.nome_prop}`}>
+            <h6 className="text-card-h">{produto.nome_prop}</h6>
+          </Link>
+          <div className="price-and-icons">
+            <h6 className="price">R$ {produto.preço}</h6>
+            <div className="icons-container">
+              <i
+                className="bx bx-cart bt-header carto"
+                style={{ color: "#48a3a9" }}
+                onClick={() => {
+                  handleAddToCart(produto);
+                  showAddedToCartNotification();
+                }}
+              ></i>
+              <i
+                className="bx bx-heart bt-header heartho"
+                style={{ color: "#48a3a9" }}
+                onClick={() => {
+                  handleAddToFavorites(produto);
+                  showAddedToFavoriteNotification();
+                }}
+              ></i>
             </div>
-          ))}
+          </div>
         </div>
+      </div>
+    ))}
 
-        {showNotification && (
-          <div className={`notification ${isItemAdded ? "active" : ""}`}>
-            <p className="not">Item adicionado ao carrinho!</p>
-            <Link to="/cart2" className="go-to-cart-button">
-              Ir para o Carrinho
-            </Link>
-          </div>
-        )}
-
-         {showNotification2 && (
-          <div className={`notification ${isItemAdded ? "active" : ""}`}>
-            <p className="not">Item adicionado a lista de desejo!</p>
-            <Link to="/wishlist2" className="go-to-cart-button">
-              Ir para a Lista de Desejo
-            </Link>
-          </div>
-        )}
-
-        <div className="pagination-container">
+<div className="pagination-container">
           <ReactPaginate
             previousLabel={<button className="custom-button">Anterior</button>}
             nextLabel={<button className="custom-button">Próximo</button>}
@@ -537,7 +536,33 @@ const Props = () => {
             pageLinkClassName={"page-link"}
           />{" "}
         </div>
+  </div>
+
+  
+  
+)}
+
+
+        {showNotification && (
+          <div className={`notification ${isItemAdded ? "active" : ""}`}>
+            <p className="not">Item adicionado ao carrinho!</p>
+            <Link to="/cart2" className="go-to-cart-button">
+              Ir para o Carrinho
+            </Link>
+          </div>
+        )}
+
+         {showNotification2 && (
+          <div className={`notification ${isItemAdded ? "active" : ""}`}>
+            <p className="not">Item adicionado a lista de desejo!</p>
+            <Link to="/wishlist" className="go-to-cart-button">
+              Ir para a Lista de Desejo
+            </Link>
+          </div>
+        )}
+
       </div>
+    </div>
 
       <footer>
         <section className="footer-section">
@@ -582,7 +607,8 @@ const Props = () => {
       <div className="last-text">
         <p className="text-sub-footer">maremansa</p>
       </div>
-    </div>
+    </>
+    
   );
 };
 
