@@ -110,13 +110,6 @@ const Checkout = () => {
         </div>
       </div>
 
-      <div className="container-subheader">
-        <div className="container-wishlist">
-          <i className="bx bx-map bt-header"></i>
-          <h6>| Endereço</h6>
-        </div>
-      </div>
-
       <Box width="80%" m="100px auto">
         <Stepper activeStep={activeStep} sx={{ m: "20px 0" }}>
           <Step>

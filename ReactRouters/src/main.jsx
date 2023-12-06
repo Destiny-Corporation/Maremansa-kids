@@ -24,6 +24,7 @@ import Sitemap from "./routes/Support/Sitemap.jsx";
 import Product from "./routes/Product.jsx";
 import Protected from "./routes/Protected.jsx";
 import Requests from "./routes/HeaderPaths/Requests.jsx";
+import Requests2 from "./routes/HeaderPaths/Requests2.jsx";
 import FemBaby from './routes/ProductTypes/Female/FemBaby.jsx';
 import FemChildren from './routes/ProductTypes/Female/FemChildren.jsx';
 import FemJuvenile from './routes/ProductTypes/Female/FemJuvenile.jsx';
@@ -172,6 +173,10 @@ const router = createBrowserRouter([
   {
     path: "/requests",
     element: <Requests />,
+  },
+  {
+    path: "/requests2",
+    element: <Requests2 />,
   },
   {
     path: "/product/:collectionName/:productName",

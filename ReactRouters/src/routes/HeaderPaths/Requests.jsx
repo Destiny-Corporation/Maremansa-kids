@@ -88,7 +88,7 @@ if (localStorage.getItem("user") !== null) {
 
      <div className="container-subheader">
         <div className="container-request">
-          <i className='bx bx-heart bt-header'></i>
+          <i className='bx bx-box bt-header'></i>
           <h6>| Meus Pedidos (0)</h6>
         </div>
       </div>
