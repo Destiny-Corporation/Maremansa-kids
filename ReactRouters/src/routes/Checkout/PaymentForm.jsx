@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import "../../styles/PaymentForm.css";
+
 
 const PaymentForm = () => {
   const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
   const [total, setTotal] = useState(0);
   const [formaPagamento, setFormaPagamento] = useState("");
+  const location = useLocation();
+  const billingStreet1 = location.state?.billingStreet1 || "Rua 123";
   const [resumoPedido, setResumoPedido] = useState({
     total: total, // Substitua por seu valor real
     itens: [cartItems], // Substitua por seus itens reais
-    endereco: "Rua das Carnaúbas, 123", // Substitua por seu endereço real
+    endereco: [billingStreet1], // Substitua por seu endereço real
   });
 
   const calculateTotal = () => {
@@ -250,8 +253,7 @@ const PaymentForm = () => {
   };
 
   return (
-    <>
-    <div className="main">
+    <><div className="main">
     <header className="main-header">
       <div className="search-container-header">
         <input
@@ -288,38 +290,53 @@ const PaymentForm = () => {
       </div>
     </header>
 
-    <div className="payment-container">
-      <div className="payment-header">
-        <h1 className="payment-title">Finalizar Pagamento</h1>
-        <div id="resumo-pedido" className="resumo-pedido">
-          <h2>Resumo do Pedido</h2>
-          <p>Total: R$ $ {total} </p>
+    <div className="container-subheader">
+        <div className="container-wishlist">
+          <i className="bx bx-card bt-header"></i>
+          <h6>| Finalizando Pagamento</h6>
+        </div>
+      </div>
 
-          <p>Itens no Carrinho:
+  <div className="finalizando-pagamento">
+
+      <div id="opcoes-pagamento" className="opcoes-pagamento">
+        {renderOpcoesPagamento()}
+
+
+    </div>
+
+    <div id="resumo-pedido" className="resumo-pedido">
+          <h2 style={{ color: "#48A3A9" }}>Resumo do Pedido</h2>
+          <hr size="1" />
+
+          <p style={{ color: "#48A3A9" }}>Itens no Carrinho:
              <ul>
     {cartItems.map((item, index) => (
       <li key={index}>
-        {item.quantidade}x {item.nome_prop} - R$ {item.preço}
+        {item.quantidade}x  {item.nome_prodmale ||
+                      item.nome_prop ||
+                      item.nome_prodpromo ||
+                      item.nome_prodfemme} - R$ {item.preço}
+      
       </li>
     ))}
   </ul>
           </p>
   
-          <p>Endereço de entrega: {resumoPedido.endereco}</p>
-        </div>
-      </div>
+          <p style={{ color: "#48A3A9" }}>Endereço de entrega: {resumoPedido.endereco}</p>
+          <hr size="1" />
+          <p style={{ color: "#48A3A9" }}>Total: R$ $ {total} </p>
 
-      <div id="opcoes-pagamento" className="opcoes-pagamento">
-        {renderOpcoesPagamento()}
-      </div>
+          <hr size="1" />
 
-      {formaPagamento && (
+          {formaPagamento && (
         <div>
           <button className="concluir-btn" onClick={concluirPagamento}>
-            Concluir Pagamento
+            Finalizar Pagamento
           </button>
         </div>
       )}
+    </div>
     </div>
     </div>
 
