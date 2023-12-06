@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import "../../styles/PaymentForm.css";
+
 
 const PaymentForm = () => {
   const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
   const [total, setTotal] = useState(0);
   const [formaPagamento, setFormaPagamento] = useState("");
+  const location = useLocation();
+  const billingStreet1 = location.state?.billingStreet1 || "Rua 123";
   const [resumoPedido, setResumoPedido] = useState({
     total: total, // Substitua por seu valor real
     itens: [cartItems], // Substitua por seus itens reais
-    endereco: "Rua das Carnaúbas, 123", // Substitua por seu endereço real
+    endereco: [billingStreet1], // Substitua por seu endereço real
   });
 
   const calculateTotal = () => {
@@ -310,7 +313,11 @@ const PaymentForm = () => {
              <ul>
     {cartItems.map((item, index) => (
       <li key={index}>
-        {item.quantidade}x {item.nome_prop} - R$ {item.preço}
+        {item.quantidade}x  {item.nome_prodmale ||
+                      item.nome_prop ||
+                      item.nome_prodpromo ||
+                      item.nome_prodfemme} - R$ {item.preço}
+      
       </li>
     ))}
   </ul>

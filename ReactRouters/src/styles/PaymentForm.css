@@ -9,6 +9,17 @@
   text-decoration: none;
   list-style: none;
 }
+@import url("https://fonts.googleapis.com/css2?family=Stylish&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Stylish&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+  text-decoration: none;
+  list-style: none;
+}
 
 .payment-container {
   display: flex;
@@ -64,9 +75,11 @@
   .opcoes-pagamento label {
     margin-bottom: 10px;
     color: #48A3A9;
+    color: #48A3A9;
   }
   
   .opcao-pagamento {
+    border-bottom: 1px solid #48A3A9;
     border-bottom: 1px solid #48A3A9;
     padding: 10px 0;
   }
@@ -74,6 +87,7 @@
   .opcao-titulo {
     font-weight: bold;
     margin-bottom: 5px;
+    color: #48A3A9;
     color: #48A3A9;
   }
   
@@ -92,7 +106,9 @@
     padding: 8px;
     margin-bottom: 10px;
     border: 1px solid #48A3A9;
+    border: 1px solid #48A3A9;
     border-radius: 4px;
+
 
   }
   
@@ -108,10 +124,19 @@
     font-size: 16px;
     margin-bottom: 20px;
     align-items: center;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 20px;
+    align-items: center;
   }
   
   .concluir-btn:hover {
     background-color: #3CA2A2;
+    align-items: center;
   }
 
 .cartao-imagem {

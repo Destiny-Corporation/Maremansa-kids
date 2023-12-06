@@ -55,7 +55,7 @@
 }
 
 .icons i {
-  font-size: 28px;
+  font-size: 25px;
   color: #ffffff;
 }
 
@@ -159,6 +159,7 @@
     padding: 8px;
     border: none;
     background: transparent;
+    margin-bottom: 0px;
   }
   
   .search-button-header {

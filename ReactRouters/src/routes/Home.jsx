@@ -193,7 +193,7 @@ const Home = () => {
           <i className="bx bx-search"></i>
         </button>
         </div>
-        <p className="home-t">Bem vindo!<br></br>Entre ou cadastre-se</p>
+        <Link to="/login"><p className="home-t">Bem vindo!<br></br>Entre ou cadastre-se</p></Link>
         <div className="icons-home">
 
             <Link to="/login">
@@ -359,9 +359,11 @@ const Home = () => {
                 <Link to={`/product/${"Prodfemme"}/${produto.nome_prodfemme}`}>
                   <img src={produto.url_image} alt={produto.nome_prodfemme} />
                 </Link>
+
                 <Link to={`/product/${"Prodfemme"}/${produto.nome_prodfemme}`}>
                   <h6 className="text-card">{produto.nome_prodfemme}</h6>
                 </Link>
+                <div className="info-container">
                 <h6 className="text-card">R$ {produto.preço}</h6>
                 <i
                   className="bx bx-cart bt-header pd"
@@ -370,7 +372,7 @@ const Home = () => {
                     handleAddToCart(produto);
                     showAddedToCartNotification();
                   }}
-                ></i>
+                ></i></div>
               </div>
             ))}
             {showNotification && (

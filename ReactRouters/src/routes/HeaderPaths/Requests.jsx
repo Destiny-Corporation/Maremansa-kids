@@ -109,9 +109,9 @@ if (localStorage.getItem("user") !== null) {
           <div className="empty-request">
             <img src="/assets/empty-requests.png" />
             <div className="effect">
-              <div className="button">
+            <Link to="/"><div className="button">
                 <img src="/assets/shopping-button.png" alt="Ir às Compras" />
-              </div>
+              </div></Link>
             </div>
           </div>
         </div>
@@ -121,9 +121,9 @@ if (localStorage.getItem("user") !== null) {
           <div className="empty-request">
             <img src="/assets/empty-requests-login.png" />
             <div className="effect">
-              <div className="button">
-              <Link to="/login"><img src="/assets/login.png" alt="Ir às Compras" /></Link>
-              </div>
+            <Link to="/login"><div className="button">
+              <img src="/assets/login.png" alt="Ir às Compras" />
+              </div></Link>
             </div>
           </div>
         </div>
