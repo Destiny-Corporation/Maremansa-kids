@@ -52,6 +52,7 @@ if (localStorage.getItem("user") !== null) {
   }, []);
 
   return (
+    <>
     <div className="main">
     <header className="main-header">
         <div className="search-container-header">
@@ -129,50 +130,52 @@ if (localStorage.getItem("user") !== null) {
         </div>
       )}
 
-      <footer>
-        <section className="footer-section">
-          <div className="footer-section-div">
-            <img src="/assets/whale.png" />
-          </div>
-
-          <div className="footer-section-div">
-            <h3>SOBRE NÓS</h3>
-            <li>
-                <Link to="/company">A EMPRESA</Link>
-            </li>
-            <li>
-                <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
-            </li>
-            <li>
-                <Link to="/partners">NOSSOS PARCEIROS</Link>
-            </li>
-          </div>
-
-          <div className="footer-section-div">
-            <h3>SUPORTE</h3>
-            <li>
-                <Link to="/services">ATENDIMENTO</Link>
-            </li>
-            <li>
-                <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
-            </li>
-            <li>
-                <Link to="/sitemap">MAPA DO SITE</Link>
-            </li>
-          </div>
-
-          <div className="footer-section-div">
-            <h3>CONTATOS</h3>
-              <i className="fa fa-whatsapp"></i>
-              <i className="fa fa-google"></i>
-              <i className="fa fa-instagram"></i>
-          </div>
-        </section>
-      </footer>
-    <div className="last-text">
-    <p className="text-sub-footer">maremansa</p>
-  </div>
 </div>
+
+<footer>
+  <section className="footer-section">
+    <div className="footer-section-div">
+      <img src="/assets/whale.png" />
+    </div>
+
+    <div className="footer-section-div">
+      <h3>SOBRE NÓS</h3>
+      <li>
+        <Link to="/company">A EMPRESA</Link>
+      </li>
+      <li>
+        <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
+      </li>
+      <li>
+        <Link to="/partners">NOSSOS PARCEIROS</Link>
+      </li>
+    </div>
+
+    <div className="footer-section-div">
+      <h3>SUPORTE</h3>
+      <li>
+        <Link to="/services">ATENDIMENTO</Link>
+      </li>
+      <li>
+        <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
+      </li>
+      <li>
+        <Link to="/sitemap">MAPA DO SITE</Link>
+      </li>
+    </div>
+
+    <div className="footer-section-div">
+      <h3>CONTATOS</h3>
+      <i className="fa fa-whatsapp"></i>
+      <i className="fa fa-google"></i>
+      <i className="fa fa-instagram"></i>
+    </div>
+  </section>
+</footer>
+<div className="last-text">
+  <p className="text-sub-footer">maremansa</p>
+</div>
+</>
   );
 };
 

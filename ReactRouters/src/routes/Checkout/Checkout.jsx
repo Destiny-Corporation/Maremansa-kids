@@ -66,6 +66,7 @@ const Checkout = () => {
   }
 
   return (
+    <>
     <div className="main">
       <header className="main-header">
         <div className="search-container-header">
@@ -215,7 +216,8 @@ const Checkout = () => {
       </Box>
 
      
-      {/* Footer aqui */}
+      </div>
+
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
@@ -259,7 +261,7 @@ const Checkout = () => {
       <div className="last-text">
         <p className="text-sub-footer">maremansa</p>
       </div>
-    </div>
+    </>
   );
 };
 

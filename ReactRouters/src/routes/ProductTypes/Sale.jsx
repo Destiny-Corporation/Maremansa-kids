@@ -22,6 +22,7 @@ export const firestore = getFirestore(app);
 const Sale = () => {
   const [isItemAdded, setIsItemAdded] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
+  const [showNotification2, setShowNotification2] = useState(false);
 
   const showAddedToCartNotification = () => {
     setShowNotification(true);
@@ -29,6 +30,14 @@ const Sale = () => {
       setShowNotification(false);
     }, 2000);
   };
+
+  const showAddedToFavoriteNotification = () => {
+    setShowNotification2(true);
+    setTimeout(() => {
+      setShowNotification2(false);
+    }, 2000);
+  };
+
   const [produtos, setProdutos] = useState([]);
   const [overlayVisible, setOverlayVisible] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
@@ -51,6 +60,29 @@ const Sale = () => {
   });
   const [cartVisible, setCartVisible] = useState(false);
   const [isComponentReady, setIsComponentReady] = useState(false);
+
+  const [favoriteItems, setFavoriteItems] = useState(() => {
+    const savedFavoriteItems = localStorage.getItem("favoriteItems");
+    return savedFavoriteItems ? JSON.parse(savedFavoriteItems) : [];
+  });
+  const handleAddToFavorites = (produto) => {
+    const existingItemIndex = favoriteItems.findIndex(
+      (item) => item.nome_prop === produto.nome_prop
+    );
+  
+    if (existingItemIndex === -1) {
+      setFavoriteItems([...favoriteItems, { ...produto }]);
+    }
+    setIsItemAdded(true);
+    setTimeout(() => {
+      setIsItemAdded(false);
+    }, 5000);
+  }; 
+  
+  useEffect(() => {
+    localStorage.setItem("favoriteItems", JSON.stringify(favoriteItems));
+  }, [favoriteItems]);
+
 
   const handleCartIconClick = () => {
     setCartVisible(!cartVisible);
@@ -190,12 +222,27 @@ const Sale = () => {
   };
 
   return (
-    <div className="main">
+    <><div className="main">
       <header className="main-header">
-        <div className="logo-product">
+        <div className="search-container-header">
+        <input
+          type="text"
+          className="search-bar"
+          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <button className="search-button" type="submit">
+          <i className="bx bx-search"></i>
+        </button>
+        </div>
+        <div className="header-logo-center">
           <Link to="/">
-            {" "}
-            <img src="/assets/logo.png" alt="Logo" />{" "}
+            <img
+              src="/assets/logo.png"
+              alt="Logo"
+              className="header-logo-center"
+            />
           </Link>
         </div>
         <div className="icons-about">
@@ -211,6 +258,7 @@ const Sale = () => {
               style={{ color: "#ffffff" }}
             ></i>
           </Link>
+
           <i
             className="bx bx-cart bt-header"
             style={{ color: "#ffffff" }}
@@ -300,26 +348,35 @@ const Sale = () => {
           ></i>
         </div>
       </header>
-      <div className="search-container-about">
-        <input
-          type="text"
-          className="search-bar"
-          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <button className="search-button" type="submit">
-          <i className="bx bx-search"></i>
-        </button>
-        {searchTerm && (
-          <button
-            className="button-search-bar"
-            onClick={() => setSearchTerm("")}
-          >
-            Limpar
-          </button>
-        )}
+
+      <div className="container-subheader-1">
+        <div className="container-menu-buttons-1">
+          <div className="button-menu-1">
+            <Link to="/sale">
+              <h6>PROMOÇÕES</h6>
+            </Link>
+          </div>
+
+          <div className="button-menu-1">
+            <Link to="/female">
+              <h6>FEMININO</h6>
+            </Link>
+          </div>
+
+          <div className="button-menu-1">
+            <Link to="/male">
+              <h6>MASCULINO</h6>
+            </Link>
+          </div>
+
+          <div className="button-menu-1">
+            <Link to="/props">
+              <h6>ACESSÓRIOS</h6>
+            </Link>
+          </div>
+        </div>
       </div>
+
       <div className="title-section">
         <h1 className="general-title">PROMOÇÕES</h1>
         <button className="filter" onClick={handleFilterButtonClick}>
@@ -378,21 +435,36 @@ const Sale = () => {
       <div className="container-clothes">
         {currentPageProdutos.map((produto, index) => (
           <div className="clothes" key={index} style={{ width: "20%" }}>
-            <Link to={`/product/${"Prodpomo"}/${produto.nome_prodpromo}`}>
-              <img src={produto.url_image} alt={produto.nome_prodpromo} />
+            <Link to={`/product/${"ProdPomo"}/${produto.nome_prodpromo}`}>
+              <img className='img_prod' src={produto.url_image} alt={produto.nome_prodpromo} />
             </Link>
-            <Link to={`/product/${"Prodpomo"}/${produto.nome_prop}`}>
-              <h6 className="text-card-clothes">{produto.nome_prodpromo}</h6>
-            </Link>
-            <h6 className="price">R$ {produto.preço}</h6>
-            <i
-              className="bx bx-cart bt-header pd"
-              style={{ color: "#48a3a9" }}
-              onClick={() => {
-                handleAddToCart(produto);
-                showAddedToCartNotification();
-              }}
-            ></i>
+
+<div className="info-container1">
+  <Link to={`/product/${"Prodpromo"}/${produto.nome_prodpromo}`}>
+    <h6 className="text-card-h">{produto.nome_prodpromo}</h6>
+  </Link>
+  <div className="price-and-icons">
+    <h6 className="price">R$ {produto.preço}</h6>
+    <div className="icons-container">
+      <i
+        className="bx bx-cart bt-header carto"
+        style={{ color: "#48a3a9" }}
+        onClick={() => {
+          handleAddToCart(produto);
+          showAddedToCartNotification();
+        }}
+      ></i>
+      <i
+        className="bx bx-heart bt-header heartho"
+        style={{ color: "#48a3a9" }}
+        onClick={() => {
+          handleAddToFavorites(produto);
+          showAddedToFavoriteNotification();
+        }}
+      ></i>
+    </div>
+  </div>
+</div>
           </div>
         ))}
       </div>
@@ -404,6 +476,16 @@ const Sale = () => {
           </Link>
         </div>
       )}
+
+{showNotification2 && (
+          <div className={`notification ${isItemAdded ? "active" : ""}`}>
+            <p className="not">Item adicionado a lista de desejo!</p>
+            <Link to="/wishlist" className="go-to-cart-button">
+              Ir para a Lista de Desejo
+            </Link>
+          </div>
+        )}
+
 
       <div className="pagination-container">
         <ReactPaginate
@@ -422,6 +504,8 @@ const Sale = () => {
           pageClassName={"page-count"}
           pageLinkClassName={"page-link"}
         />{" "}
+      </div>
+
       </div>
 
       <footer>
@@ -467,7 +551,7 @@ const Sale = () => {
       <div className="last-text">
         <p className="text-sub-footer">maremansa</p>
       </div>
-    </div>
+    </>
   );
 };
 

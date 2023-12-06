@@ -29,6 +29,7 @@ export const firestore = getFirestore(app);
 const MaleChildren = () => {
   const [isItemAdded, setIsItemAdded] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
+  const [overlayVisible, setOverlayVisible] = useState(false);
 
   const showAddedToCartNotification = () => {
     setShowNotification(true);
@@ -198,16 +199,30 @@ const MaleChildren = () => {
     setMaxPrice("");
   };
   return (
-    <div className="main">
+    <><div className="main">
       <header className="main-header">
-        <div className="logo">
+        <div className="search-container-header">
+          <input
+            type="text"
+            className="search-bar-header"
+            placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
+          />
+          <button className="search-button-header" type="submit">
+            <i className="bx bx-search"></i>
+          </button>
+        </div>
+        <div className="header-logo-center">
           <Link to="/">
             {" "}
-            <img src="/assets/logo.png" alt="Logo" />{" "}
+            <img
+              src="/assets/logo.png"
+              alt="Logo"
+              className="header-logo-center"
+            />{" "}
           </Link>
         </div>
-        <div className="icons">
-          <Link to="/requests">
+        <div className="icons-about">
+          <Link to="/login">
             <i
               className="bx bx-user bt-header"
               style={{ color: "#ffffff" }}
@@ -219,6 +234,7 @@ const MaleChildren = () => {
               style={{ color: "#ffffff" }}
             ></i>
           </Link>
+
           <i
             className="bx bx-cart bt-header"
             style={{ color: "#ffffff" }}
@@ -226,59 +242,65 @@ const MaleChildren = () => {
             onClick={handleCartIconClick}
           ></i>
         </div>
+
+        <div
+          className={`overlay ${overlayVisible ? "active" : ""}`}
+          onClick={handleCloseCartClick}
+        ></div>
         <div className={`cart ${cartVisible ? "active" : ""}`}>
-          <h2 className="cart-title">Your Cart</h2>
-          <div className="cart-content">
+          <h2 className="cart-title-1">MEU CARRINHO</h2>
+          <div className="cart-content-1">
             {cartItems.map((produto, index) => (
               <div className="cart-item" key={index}>
                 <img
                   src={produto.url_image}
-                  alt={produto.nome_prodmale}
-                  className="cart-item-image"
+                  alt={produto.nome_prop}
+                  className="cart-item-image-1"
                   style={{
                     width: "100px",
                     height: "100px",
                     objectFit: "contain",
                     padding: "10px",
+                    borderRadius: "60px",
                   }}
                 />
 
                 <div className="cart-item-details">
-                  <div className="cart-item-name">
+                  <div className="cart-item-name-1">
                     {produto.nome_prodmale ||
                       produto.nome_prop ||
                       produto.nome_prodpromo ||
                       produto.nome_prodfemme}
                   </div>
-                  <div className="cart-item-price">R$ {produto.preço}</div>
+                  <div className="cart-item-price-1">R$ {produto.preço}</div>
                   <input
                     type="number"
-                    className="cart-quantity"
-                    value={produto.quantidade} // Atualiza o valor do input com a quantidade do item no carrinho
+                    className="cart-quantity-1"
+                    value={produto.quantidade}
                     onChange={(e) => {
-                      // Atualiza a quantidade do item no carrinho quando o input é alterado
                       const updatedCartItems = [...cartItems];
                       updatedCartItems[index].quantidade =
                         parseInt(e.target.value, 10) || 0;
                       setCartItems(updatedCartItems);
                     }}
                     style={{
-                      border: "1px solid black",
-                      outlineColor: "whitesmoke",
-                      width: "2.4rem",
+                      border: "1.2px solid #48a3a9",
+                      outlineColor: "#48a3a9",
+                      width: "2.6rem",
                       textAlign: "center",
-                      fontSize: "1rem",
+                      fontSize: "0.8rem",
                     }}
                   />
                 </div>
                 <i
-                  className="bx bxs-trash-alt cart-remove cart-item-remove"
+                  className="bx bxs-trash-alt cart-remove cart-item-remove-1"
                   onClick={() => handleRemoveFromCart(index)}
                 ></i>
               </div>
             ))}
           </div>
           <div className="cart-box"></div>
+          <hr></hr>
           <div className="total">
             <div className="total-title">Total</div>
             <div className="total-price">$ {total}</div>
@@ -286,13 +308,13 @@ const MaleChildren = () => {
 
           <Link to="/checkout">
             <button type="button" className="btn-buy">
-              Buy Now
+              COMPRAR AGORA
             </button>
           </Link>
 
           <Link to="/cart2">
             <button type="button" className="btn-buy">
-              Ver meu carrinho
+              VER MEU CARRINHO
             </button>
           </Link>
           <i
@@ -303,18 +325,34 @@ const MaleChildren = () => {
         </div>
       </header>
 
-      <div className="space">
-        <div className="search-container-about">
-          <input
-            type="text"
-            className="search-bar"
-            placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
-          />
-          <button className="search-button" type="submit">
-            <i className="bx bx-search"></i>
-          </button>
-        </div>
+      <div className="container-subheader-1">
+        <div className="container-menu-buttons-1">
+          <div className="button-menu-1">
+            <Link to="/sale">
+              <h6>PROMOÇÕES</h6>
+            </Link>
+          </div>
 
+          <div className="button-menu-1">
+            <Link to="/female">
+              <h6>FEMININO</h6>
+            </Link>
+          </div>
+
+          <div className="button-menu-1">
+            <Link to="/male">
+              <h6>MASCULINO</h6>
+            </Link>
+          </div>
+
+          <div className="button-menu-1">
+            <Link to="/props">
+              <h6>ACESSÓRIOS</h6>
+            </Link>
+          </div>
+        </div>
+      </div>
+      <div className="space">
         <div className="title-section">
           <h1 className="general-title">MASCULINO | INFANTIL</h1>
           <button className="filter" onClick={handleFilterButtonClick}>
@@ -384,20 +422,33 @@ const MaleChildren = () => {
                   alt={produto.nome_prodmale}
                 />
               </Link>
-              <Link to={`/product/${"Prodmale"}/${produto.nome_prodmale}`}>
-                <h6 className="nome_prod">{produto.nome_prodmale}</h6>
-              </Link>
-              <div className="des">
-                <h6 className="price">R$ {produto.preço}</h6>
-                <i
-                  className="bx bx-cart bt-header pd"
-                  style={{ color: "#48a3a9" }}
-                  onClick={() => {
-                    handleAddToCart(produto);
-                    showAddedToCartNotification();
-                  }}
-                ></i>
-              </div>
+
+              <div className="info-container1">
+  <Link to={`/product/${"Prodmale"}/${produto.nome_prodmale}`}>
+    <h6 className="text-card-h">{produto.nome_prodmale}</h6>
+  </Link>
+  <div className="price-and-icons">
+    <h6 className="price">R$ {produto.preço}</h6>
+    <div className="icons-container">
+      <i
+        className="bx bx-cart bt-header carto"
+        style={{ color: "#48a3a9" }}
+        onClick={() => {
+          handleAddToCart(produto);
+          showAddedToCartNotification();
+        }}
+      ></i>
+      <i
+        className="bx bx-heart bt-header heartho"
+        style={{ color: "#48a3a9" }}
+        onClick={() => {
+          handleAddToFavorites(produto);
+          showAddedToFavoriteNotification();
+        }}
+      ></i>
+    </div>
+  </div>
+</div>
             </div>
           ))}
         </div>
@@ -428,6 +479,8 @@ const MaleChildren = () => {
           pageClassName={"page-count"}
           pageLinkClassName={"page-link"}
         />{" "}
+      </div>
+
       </div>
 
       <footer>
@@ -473,7 +526,7 @@ const MaleChildren = () => {
       <div className="last-text">
         <p className="text-sub-footer">maremansa</p>
       </div>
-    </div>
+    </>
   );
 };
 

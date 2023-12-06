@@ -1,4 +1,3 @@
-
 import "../styles/Product.css";
 import { Link, useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
@@ -44,7 +43,11 @@ const Cart = () => {
 
   const LoadingContainer = () => (
     <div className="loading-container">
-      <img src="/assets/espera.gif" alt="Carregando..." style={{ width: '130px', height: '130px' }}/>
+      <img
+        src="/assets/espera.gif"
+        alt="Carregando..."
+        style={{ width: "130px", height: "130px" }}
+      />
     </div>
   );
 
@@ -70,11 +73,9 @@ const Cart = () => {
     fetchProductData();
   }, [collectionName, productName]);
 
-  
   if (productLoading) {
     return <LoadingContainer />;
   }
-  
 
   const handleAddToCart1 = () => {
     const data = {
@@ -103,7 +104,9 @@ const Cart = () => {
         };
         setCart([...cart, newItem]);
       } else {
-        alert("Por favor, selecione cor e tamanho antes de adicionar ao carrinho.");
+        alert(
+          "Por favor, selecione cor e tamanho antes de adicionar ao carrinho."
+        );
       }
     };
 
@@ -160,13 +163,15 @@ const Cart = () => {
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
     }, [cartItems]);
 
-    {/*function getSize(size, element) {
+    {
+      /*function getSize(size, element) {
       const sizeOptions = document.querySelectorAll(".size-option");
       sizeOptions.forEach((option) => {
         option.classList.remove("selected");
       });
       element.classList.add("selected");
-    }*/}
+    }*/
+    }
 
     var valorAtual = 1;
     var valorElement = document.getElementById("valor");
@@ -182,7 +187,7 @@ const Cart = () => {
         valorElement.textContent = valorAtual;
       }
     }
-    
+
     function buscarCEP() {
       var cep = document.getElementById("cep").value;
       $.ajax({
@@ -212,18 +217,30 @@ const Cart = () => {
   };
 
   return (
-    <div className="main">
-      <header className="main-header">
-        <div className="search-container-header">
-            <input type="text" className="search-bar-header" placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"/>
-                <button className="search-button-header" type="submit">
-                  <i className="bx bx-search"></i>
-                </button>
-        </div>
-        <div className="header-logo-center">
-        <Link to="/"> <img src="/assets/logo.png" alt="Logo" className="header-logo-center"/> </Link>
-        </div>
-        <div className="icons-about">
+    <>
+      <div className="main">
+        <header className="main-header">
+          <div className="search-container-header">
+            <input
+              type="text"
+              className="search-bar-header"
+              placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
+            />
+            <button className="search-button-header" type="submit">
+              <i className="bx bx-search"></i>
+            </button>
+          </div>
+          <div className="header-logo-center">
+            <Link to="/">
+              {" "}
+              <img
+                src="/assets/logo.png"
+                alt="Logo"
+                className="header-logo-center"
+              />{" "}
+            </Link>
+          </div>
+          <div className="icons-about">
             <Link to="/requests">
               <i
                 className="bx bx-user bt-header"
@@ -242,220 +259,250 @@ const Cart = () => {
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
-        </div>
-      </header>
-      <div className="container-subheader-1">
-      <div className="container-menu-buttons-1">
-        <div className="button-menu-1">
-          <Link to="/sale">
-            <h6>PROMOÇÕES</h6>
-          </Link>
-        </div>
+          </div>
+        </header>
+        <div className="container-subheader-1">
+          <div className="container-menu-buttons-1">
+            <div className="button-menu-1">
+              <Link to="/sale">
+                <h6>PROMOÇÕES</h6>
+              </Link>
+            </div>
 
-        <div className="button-menu-1">
-          <Link to="female">
-            <h6>FEMININO</h6>
-          </Link>
-        </div>
+            <div className="button-menu-1">
+              <Link to="female">
+                <h6>FEMININO</h6>
+              </Link>
+            </div>
 
-        <div className="button-menu-1">
-          <Link to="male">
-            <h6>MASCULINO</h6>
-          </Link>
-        </div>
+            <div className="button-menu-1">
+              <Link to="male">
+                <h6>MASCULINO</h6>
+              </Link>
+            </div>
 
-        <div className="button-menu-1">
-          <Link to="/props">
-            <h6>ACESSÓRIOS</h6>
-          </Link>
-        </div>
-      </div>
-      </div>
-     
-
-      <section className="main-products">
-        <div className="container">
-          <div className="products-left">
-            <div className="imagens">
-              <img className='small-images'
-                src="/assets/principal.png"
-                onClick={() => handleImageClick("/assets/principal.png")}
-              />
-
-              <img className="small-images"
-                src="/assets/image-2.png"
-                onClick={() => handleImageClick("/assets/image-2.png")}
-              />
-
-              <img className="small-images"
-                src="/assets/image-3.png"
-                onClick={() => handleImageClick("/assets/image-3.png")}
-              />
+            <div className="button-menu-1">
+              <Link to="/props">
+                <h6>ACESSÓRIOS</h6>
+              </Link>
             </div>
           </div>
         </div>
 
-        <div className="container">
-          <div className="left-side">
-            <div className="items">
-              <div className="select-image">
-                <img src={productData ? productData.url_image : ""} />
+        <section className="main-products">
+          <div className="container">
+            <div className="products-left">
+              <div className="imagens">
+                <img
+                  className="small-images"
+                  src="/assets/principal.png"
+                  onClick={() => handleImageClick("/assets/principal.png")}
+                />
+
+                <img
+                  className="small-images"
+                  src="/assets/image-2.png"
+                  onClick={() => handleImageClick("/assets/image-2.png")}
+                />
+
+                <img
+                  className="small-images"
+                  src="/assets/image-3.png"
+                  onClick={() => handleImageClick("/assets/image-3.png")}
+                />
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="container">
-          <div className="right-side">
-            <div className="content">
-              <h4 className="title-prod">{productName}</h4>
-              <hr className="hr-prod" size="1" />
-
-              <span className="off">R$ 199,90</span>
-              <span className="price-pd">
-                R$ {productData ? productData.preço : ""}
-              </span>
-
-              <br></br>
-              <p className="text-prod">Selecione a cor do produto:</p>
-              <div className="color-buttons">
-  <button
-    className="color-button"
-    style={{
-      backgroundColor: "pink",
-      padding: "18px",
-      cursor: "pointer",
-      borderRadius: "10px",
-    }}
-    onClick={() => selectColor("rosa")}
-  ></button>
-  <button
-    className="color-button"
-    style={{
-      backgroundColor: "#7d6cdb",
-      padding: "18px",
-      cursor: "pointer",
-      borderRadius: "10px",
-    }}
-    onClick={() => selectColor("roxo")}
-  ></button>
-  <button
-    className="color-button"
-    style={{
-      backgroundColor: "#42e0a3",
-      padding: "18px",
-      cursor: "pointer",
-      borderRadius: "10px",
-    }}
-    onClick={() => selectColor("verde")}
-  ></button>
-  <button
-    className="color-button"
-    style={{
-      backgroundColor: "yellow",
-      padding: "18px",
-      cursor: "pointer",
-      borderRadius: "10px",
-    }}
-    onClick={() => selectColor("amarelo")}
-  ></button>
+          <div className="container">
+            <div className="left-side">
+              <div className="items">
+                <div className="select-image">
+                  <img src={productData ? productData.url_image : ""} />
+                </div>
               </div>
-
-              <div id="selected-color" style={{ color: selectedColor }}>
-  Cor selecionada: {selectedColor}
-</div>
-
-  {/*{showSelectedColor && (
-  <button className="selected-color-button">{selectColor}</button>
-  )} */}
-
-
-<p className="text-prod">Tamanhos:</p>
-      <div className="size-options">
-        <div
-          className={`size-option ${selectedSize === "06" ? "selected" : ""}`}
-          onClick={() => handleSizeSelect("06")}
-        >
-          06
-        </div>
-        <div
-          className={`size-option ${selectedSize === "08" ? "selected" : ""}`}
-          onClick={() => handleSizeSelect("08")}
-        >
-          08
-        </div>
-        <div
-          className={`size-option ${selectedSize === "10" ? "selected" : ""}`}
-          onClick={() => handleSizeSelect("10")}
-        >
-          10
-        </div>
-        <div
-          className={`size-option ${selectedSize === "12" ? "selected" : ""}`}
-          onClick={() => handleSizeSelect("12")}
-        >
-          12
-        </div>
-        <div
-          className={`size-option ${selectedSize === "14" ? "selected" : ""}`}
-          onClick={() => handleSizeSelect("14")}
-        >
-          14
-        </div>
-        <div
-          className={`size-option ${selectedSize === "16" ? "selected" : ""}`}
-          onClick={() => handleSizeSelect("16")}
-        >
-          16
-        </div>
-      </div>
-
-      {/*<div id="selected-size">Tamanho selecionado: {selectedSize}</div>*/}
-
-      <div className="options">
-        <div className="amount">
-          <button
-            onClick={() => handleQuantityChange(selectedQuantity - 1)}
-          >
-            -
-          </button>
-          <span id="valor">{selectedQuantity}</span>
-          <button
-            onClick={() => handleQuantityChange(selectedQuantity + 1)}
-          >
-            +
-          </button>
-        </div>
-      </div>
-
-      {/*<div id="selected-quantity">Quantidade selecionada: {selectedQuantity}</div>*/}
-              <button className="buttons-cart">
-                <span>Comprar agora</span>
-              </button>
-              <button className="buttons-cart">
-                <i className="bx bx-cart bt-header"></i>
-                <span>Adicionar ao carrinho</span>
-              </button>
-
-              <div className="cep-text">
-                <i
-                  className="bx bxs-truck"
-                  style={{ color: "#48a3a9", marginRight: "5px" }}
-                ></i>
-                <p style={{ display: "inline", verticalAlign: "middle" }}>
-                  Consulte o frete
-                </p>
-              </div>
-
-              <div className="cep">
-                <input className='cep' type="text" placeholder="DIGITE SEU CEP" id="cep" />
-                <button onclick="buscarCEP()">OK</button>
-              </div>
-              <div id="resultado"></div>
             </div>
           </div>
-        </div>
-      </section>
+
+          <div className="container">
+            <div className="right-side">
+              <div className="content">
+                <h4 className="title-prod">{productName}</h4>
+                <hr className="hr-prod" size="1" />
+
+                <span className="off">R$ 199,90</span>
+                <span className="price-pd">
+                  R$ {productData ? productData.preço : ""}
+                </span>
+
+                <br></br>
+                <p className="text-prod">Selecione a cor do produto:</p>
+                <ul>
+                  {productData.color.map((color) => (
+                    <button
+                      className="color-button"
+                      style={{
+                        backgroundColor: color,
+                        padding: "18px",
+                        cursor: "pointer",
+                        borderRadius: "10px",
+                      }}
+                      onClick={() => selectColor("preto")}
+                    ></button>
+                  ))}
+                </ul>
+
+                <div className="color-buttons">
+                  <button
+                    className="color-button"
+                    style={{
+                      backgroundColor: "pink",
+                      padding: "18px",
+                      cursor: "pointer",
+                      borderRadius: "10px",
+                    }}
+                    onClick={() => selectColor("rosa")}
+                  ></button>
+                  <button
+                    className="color-button"
+                    style={{
+                      backgroundColor: "#7d6cdb",
+                      padding: "18px",
+                      cursor: "pointer",
+                      borderRadius: "10px",
+                    }}
+                    onClick={() => selectColor("roxo")}
+                  ></button>
+                  <button
+                    className="color-button"
+                    style={{
+                      backgroundColor: "#42e0a3",
+                      padding: "18px",
+                      cursor: "pointer",
+                      borderRadius: "10px",
+                    }}
+                    onClick={() => selectColor("verde")}
+                  ></button>
+                  <button
+                    className="color-button"
+                    style={{
+                      backgroundColor: "yellow",
+                      padding: "18px",
+                      cursor: "pointer",
+                      borderRadius: "10px",
+                    }}
+                    onClick={() => selectColor("amarelo")}
+                  ></button>
+                </div>
+
+                <div id="selected-color" style={{ color: selectedColor }}>
+                  Cor selecionada: {selectedColor}
+                </div>
+
+                <p className="text-prod">Tamanhos:</p>
+                <div className="size-options">
+                  <div
+                    className={`size-option ${
+                      selectedSize === "06" ? "selected" : ""
+                    }`}
+                    onClick={() => handleSizeSelect("06")}
+                  >
+                    06
+                  </div>
+                  <div
+                    className={`size-option ${
+                      selectedSize === "08" ? "selected" : ""
+                    }`}
+                    onClick={() => handleSizeSelect("08")}
+                  >
+                    08
+                  </div>
+                  <div
+                    className={`size-option ${
+                      selectedSize === "10" ? "selected" : ""
+                    }`}
+                    onClick={() => handleSizeSelect("10")}
+                  >
+                    10
+                  </div>
+                  <div
+                    className={`size-option ${
+                      selectedSize === "12" ? "selected" : ""
+                    }`}
+                    onClick={() => handleSizeSelect("12")}
+                  >
+                    12
+                  </div>
+                  <div
+                    className={`size-option ${
+                      selectedSize === "14" ? "selected" : ""
+                    }`}
+                    onClick={() => handleSizeSelect("14")}
+                  >
+                    14
+                  </div>
+                  <div
+                    className={`size-option ${
+                      selectedSize === "16" ? "selected" : ""
+                    }`}
+                    onClick={() => handleSizeSelect("16")}
+                  >
+                    16
+                  </div>
+                </div>
+
+                {/*<div id="selected-size">Tamanho selecionado: {selectedSize}</div>*/}
+
+                <div className="options">
+                  <div className="amount">
+                    <button
+                      onClick={() => handleQuantityChange(selectedQuantity - 1)}
+                    >
+                      -
+                    </button>
+                    <span id="valor">{selectedQuantity}</span>
+                    <button
+                      onClick={() => handleQuantityChange(selectedQuantity + 1)}
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+
+                {/*<div id="selected-quantity">Quantidade selecionada: {selectedQuantity}</div>*/}
+                <button className="buttons-cart">
+                  <span>Comprar agora</span>
+                </button>
+                <button className="buttons-cart">
+                  <i className="bx bx-cart bt-header"></i>
+                  <span>Adicionar ao carrinho</span>
+                </button>
+
+                <div className="cep-text">
+                  <i
+                    className="bx bxs-truck"
+                    style={{ color: "#48a3a9", marginRight: "5px" }}
+                  ></i>
+                  <p style={{ display: "inline", verticalAlign: "middle" }}>
+                    Consulte o frete
+                  </p>
+                </div>
+
+                <div className="cep">
+                  <input
+                    className="cep"
+                    type="text"
+                    placeholder="DIGITE SEU CEP"
+                    id="cep"
+                  />
+                  <button onclick="buscarCEP()">OK</button>
+                </div>
+                <div id="resultado"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
 
       <footer>
         <section className="footer-section">
@@ -488,51 +535,19 @@ const Cart = () => {
               <Link to="/sitemap">MAPA DO SITE</Link>
             </li>
           </div>
-          <div className="footer-section-div">
-            <h3>SOBRE NÓS</h3>
-            <li>
-              <Link to="/company">A EMPRESA</Link>
-            </li>
-            <li>
-              <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
-            </li>
-            <li>
-              <Link to="/partners">NOSSOS PARCEIROS</Link>
-            </li>
-          </div>
-
-          <div className="footer-section-div">
-            <h3>SUPORTE</h3>
-            <li>
-              <Link to="/services">ATENDIMENTO</Link>
-            </li>
-            <li>
-              <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
-            </li>
-            <li>
-              <Link to="/sitemap">MAPA DO SITE</Link>
-            </li>
-          </div>
 
           <div className="footer-section-div">
             <h3>CONTATOS</h3>
-            <a href="https://whatsapp.com">
-              <i className="fa fa-whatsapp"></i>
-            </a>
-            <a href="https://google.com">
-              <i className="fa fa-google"></i>
-            </a>
-            <a href="https://instagram.com">
-              <i className="fa fa-instagram"></i>
-            </a>
+            <i className="fa fa-whatsapp"></i>
+            <i className="fa fa-google"></i>
+            <i className="fa fa-instagram"></i>
           </div>
         </section>
-        </footer>
-
-        <div className="last-text">
-          <p className="text-sub-footer">maremansa</p>
-        </div>
-    </div>
+      </footer>
+      <div className="last-text">
+        <p className="text-sub-footer">maremansa</p>
+      </div>
+    </>
   );
 };
 export default Cart;

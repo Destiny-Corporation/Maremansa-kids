@@ -25,6 +25,7 @@ export const firestore = getFirestore(app);
 const Home = () => {
   const [isItemAdded, setIsItemAdded] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
+  const [showNotification2, setShowNotification2] = useState(false);
 
   const showAddedToCartNotification = () => {
     setShowNotification(true);
@@ -32,6 +33,14 @@ const Home = () => {
       setShowNotification(false);
     }, 2000);
   };
+
+  const showAddedToFavoriteNotification = () => {
+    setShowNotification2(true);
+    setTimeout(() => {
+      setShowNotification2(false);
+    }, 2000);
+  };
+
   const [overlayVisible, setOverlayVisible] = useState(false);
   const [produtos, setProdutos] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
@@ -53,6 +62,29 @@ const Home = () => {
     // Chame a função debouncedSearchFunction() de forma assíncrona
     debouncedSearchFunction();
   }, [searchValue]);
+
+  const [favoriteItems, setFavoriteItems] = useState(() => {
+    const savedFavoriteItems = localStorage.getItem("favoriteItems");
+    return savedFavoriteItems ? JSON.parse(savedFavoriteItems) : [];
+  });
+  const handleAddToFavorites = (produto) => {
+    const existingItemIndex = favoriteItems.findIndex(
+      (item) => item.nome_prop === produto.nome_prop
+    );
+  
+    if (existingItemIndex === -1) {
+      setFavoriteItems([...favoriteItems, { ...produto }]);
+    }
+    setIsItemAdded(true);
+    setTimeout(() => {
+      setIsItemAdded(false);
+    }, 5000);
+  }; 
+  
+  useEffect(() => {
+    localStorage.setItem("favoriteItems", JSON.stringify(favoriteItems));
+  }, [favoriteItems]);
+
 
   const [total, setTotal] = useState(0);
   const [cartItems, setCartItems] = useState(() => {
@@ -148,7 +180,7 @@ const Home = () => {
   const displayedProducts = produtos.slice(startIndex, endIndex);
 
   return (
-    <div className="main">
+    <><div className="main">
       <header className="main-header">
         <div className="logo-home">
           <img src="/assets/logo.png" alt="Logo" />
@@ -353,37 +385,60 @@ const Home = () => {
             disabled={currentPage === 0}
           ></i>
 
-          <div className="container-clothes">
-            {produtos.slice(startIndex, endIndex).map((produto, index) => (
-              <div className="clothes" key={index} style={{ width: "20%" }}>
-                <Link to={`/product/${"Prodfemme"}/${produto.nome_prodfemme}`}>
-                  <img src={produto.url_image} alt={produto.nome_prodfemme} />
-                </Link>
+<div className="container-clothes">
+  {produtos.slice(startIndex, endIndex).map((produto, index) => (
+    <div className="clothes" key={index} style={{ width: "22%" }}>
+      <Link to={`/product/${"Prodfemme"}/${produto.nome_prodfemme}`}>
+        <img src={produto.url_image} alt={produto.nome_prodfemme} />
+      </Link>
 
-                <Link to={`/product/${"Prodfemme"}/${produto.nome_prodfemme}`}>
-                  <h6 className="text-card">{produto.nome_prodfemme}</h6>
-                </Link>
-                <div className="info-container">
-                <h6 className="text-card">R$ {produto.preço}</h6>
-                <i
-                  className="bx bx-cart bt-header pd"
-                  style={{ color: "#48a3a9" }}
-                  onClick={() => {
-                    handleAddToCart(produto);
-                    showAddedToCartNotification();
-                  }}
-                ></i></div>
-              </div>
-            ))}
-            {showNotification && (
-              <div className={`notification ${isItemAdded ? "active" : ""}`}>
-                <p className="not">Item adicionado ao carrinho!</p>
-                <Link to="/cart2" className="go-to-cart-button">
-                  Ir para o Carrinho
-                </Link>
-              </div>
-            )}
+      <div className="info-container">
+  <Link to={`/product/${"Prodfemme"}/${produto.nome_prodfemme}`}>
+    <h6 className="text-card-h">{produto.nome_prodfemme}</h6>
+  </Link>
+  <div className="price-and-icons">
+    <h6 className="price">R$ {produto.preço}</h6>
+    <div className="icons-container">
+      <i
+        className="bx bx-cart bt-header carth"
+        style={{ color: "#48a3a9" }}
+        onClick={() => {
+          handleAddToCart(produto);
+          showAddedToCartNotification();
+        }}
+      ></i>
+      <i
+        className="bx bx-heart bt-header hearth"
+        style={{ color: "#48a3a9" }}
+        onClick={() => {
+          handleAddToFavorites(produto);
+          showAddedToFavoriteNotification();
+        }}
+      ></i>
+    </div>
+  </div>
+</div>
+    </div>
+  ))}
+  {showNotification && (
+    <div className={`notification ${isItemAdded ? "active" : ""}`}>
+      <p className="not">Item adicionado ao carrinho!</p>
+      <Link to="/cart2" className="go-to-cart-button">
+        Ir para o Carrinho
+      </Link>
+    </div>
+  )}
+
+  {showNotification2 && (
+          <div className={`notification ${isItemAdded ? "active" : ""}`}>
+            <p className="not">Item adicionado a lista de desejo!</p>
+            <Link to="/wishlist" className="go-to-cart-button">
+              Ir para a Lista de Desejo
+            </Link>
           </div>
+        )}
+</div>
+
 
           <i
             className="bx bx-chevron-right"
@@ -393,48 +448,52 @@ const Home = () => {
           ></i>
         </div>
       </div>
-      <footer>
-        <section className="footer-section">
-          <div className="footer-section-div">
-            <img src="/assets/whale.png" />
-          </div>
-          <div className="footer-section-div">
-            <h3>SOBRE NÓS</h3>
-            <li>
-              <Link to="/company">A EMPRESA</Link>
-            </li>
-            <li>
-              <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
-            </li>
-            <li>
-              <Link to="/partners">NOSSOS PARCEIROS</Link>
-            </li>
-          </div>
-          <div className="footer-section-div">
-            <h3>SUPORTE</h3>
-            <li>
-              <Link to="/services">ATENDIMENTO</Link>
-            </li>
-            <li>
-              <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
-            </li>
-            <li>
-              <Link to="/sitemap">MAPA DO SITE</Link>
-            </li>
-          </div>
-
-          <div className="footer-section-div">
-            <h3>CONTATOS</h3>
-            <i className="fa fa-whatsapp"></i>
-            <i className="fa fa-google"></i>
-            <i className="fa fa-instagram"></i>
-          </div>
-        </section>
-      </footer>
-      <div className="last-text">
-        <p className="text-sub-footer">maremansa</p>
       </div>
+
+<footer>
+  <section className="footer-section">
+    <div className="footer-section-div">
+      <img src="/assets/whale.png" />
     </div>
+
+    <div className="footer-section-div">
+      <h3>SOBRE NÓS</h3>
+      <li>
+        <Link to="/company">A EMPRESA</Link>
+      </li>
+      <li>
+        <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
+      </li>
+      <li>
+        <Link to="/partners">NOSSOS PARCEIROS</Link>
+      </li>
+    </div>
+
+    <div className="footer-section-div">
+      <h3>SUPORTE</h3>
+      <li>
+        <Link to="/services">ATENDIMENTO</Link>
+      </li>
+      <li>
+        <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
+      </li>
+      <li>
+        <Link to="/sitemap">MAPA DO SITE</Link>
+      </li>
+    </div>
+
+    <div className="footer-section-div">
+      <h3>CONTATOS</h3>
+      <i className="fa fa-whatsapp"></i>
+      <i className="fa fa-google"></i>
+      <i className="fa fa-instagram"></i>
+    </div>
+  </section>
+</footer>
+<div className="last-text">
+  <p className="text-sub-footer">maremansa</p>
+</div>
+</>
   );
 };
 export default Home;

@@ -5,12 +5,47 @@
   gap: 6px;
 }
 
+.button-menu-2 {
+  margin: 0;
+}
+
+.button-image-2 {
+  margin: 0;
+}
+
 .product {
-  text-align: center;
+  text-align: left;
   border: transparent;
   padding: 10px;
   margin-top: 5px;
   margin-right: -6px;
+}
+
+.price-and-icons {
+  display: flex;
+  align-items: center;
+}
+
+.info-container1 {
+  flex-direction: column; 
+  justify-content: flex-start;
+  align-items: flex-start;
+  display: flex;
+  gap: 5px; 
+  text-align: left;
+  margin-left: 10px;
+}
+
+.carto {
+  font-size: 20px !important;
+  margin-left: 60px;
+  margin-bottom: 2px;
+}
+
+.heartho {
+  font-size: 20px !important;
+  margin-left: 10px;
+  margin-bottom: 2px;
 }
 
 .hr-sections {
@@ -36,10 +71,6 @@
   display: block;
   background: #2a767ca4; 
 }
-
-
-/* Resto do seu CSS ... */
-
 
 .filter {
   position: absolute;
@@ -378,3 +409,11 @@
 #close-cart :hover{
   color: #2a777c;
 }
+
+.no-results-message {
+  text-align: center;
+  margin-top: 10px;
+  color: #ff0000; /* Cor vermelha (ou a cor desejada) */
+  font-weight: bold;
+}
+
