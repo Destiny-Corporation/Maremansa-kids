@@ -209,15 +209,17 @@ const MaleBaby = () => {
     <>
     <div className="main">
       <header className="main-header">
-        <div className="search-container-header">
-          <input
-            type="text"
-            className="search-bar-header"
-            placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
-          />
-          <button className="search-button-header" type="submit">
-            <i className="bx bx-search"></i>
-          </button>
+      <div className="search-container-header">
+        <input
+          type="text"
+          className="search-bar"
+          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <button className="search-button" type="submit">
+          <i className="bx bx-search"></i>
+        </button>
         </div>
         <div className="header-logo-center">
           <Link to="/">
