@@ -12,6 +12,7 @@
 
 body {
   margin: 0;
+  min-height: 100vh;
 }
 
 .main {
@@ -41,8 +42,8 @@ body {
 }
 
 .header-items {
-  display: flex; /* Adiciona um display flex para os itens serem exibidos em linha */
-  align-items: center; /* Centraliza verticalmente os itens na div pai */
+  display: flex; 
+  align-items: center; 
 }
 
 .items-home li a{
@@ -218,11 +219,48 @@ a {
   font-size: 14px;
 }
 
+.carth {
+  font-size: 20px !important;
+  margin-left: 60px;
+  margin-bottom: 2px;
+}
+
 .info-container {
+  flex-direction: column; 
+  justify-content: flex-start;
+  align-items: flex-start;
   display: flex;
-  justify-content: space-between;
+  gap: 5px; 
+  text-align: left;
+  margin-left: 10px;
+}
+
+.carth {
+  font-size: 20px !important;
+  margin-left: 25px;
+  margin-bottom: 2px;
+}
+
+.hearth {
+  font-size: 18px !important;
+  margin-left: 10px;
+  margin-bottom: 2px;
+}
+
+.price-and-cart {
+  display: flex;
   align-items: center;
 }
+
+.text-card-h {
+  margin-left: 22px;
+  margin-right: 10px;
+  margin-top: 20px; 
+  color:rgb(72, 163, 169);
+  letter-spacing: 2px;
+  text-align: left;
+}
+
 
 .home-t {
   color: #48a3a9;
@@ -234,7 +272,7 @@ a {
 }
 
 .home-t:hover {
-  color:#247479;
+  color: #48A3A9;
   text-decoration: underline;
 }
 
@@ -335,21 +373,11 @@ a {
 }
 
 .bx-chevron-right {
-  font-size: 88px;
+  font-size: 80px;
 }
 
 .bx-chevron-left {
-  font-size: 88px;
-}
-
-hr {
-  width: 90%; 
-  height: 2px;
-  background-color: #50b2b9; 
-  border: none; 
-  margin: 0 auto;
-  margin-top: 18px;
-  opacity: 1;
+  font-size: 80px;
 }
 
 hr {
@@ -377,13 +405,6 @@ hr {
 .cards img {
   height: auto;
   transition: 0.35s ease;
-}
-
-.text-card {
-  font-size: 12px;
-  margin: 4px 0 2px;
-  color: #48a3a9;
-  letter-spacing: 2px;
 }
 
 .cards img:hover {
@@ -532,6 +553,8 @@ hr {
 .text-sub-footer {
   font-family: "Stylish", sans-serif;
   font-size: 20px;
+  margin-bottom: 0px;
   letter-spacing: 1px;
   color: white;
+  background-color: #247479;
 }

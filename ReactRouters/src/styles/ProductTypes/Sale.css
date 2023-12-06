@@ -1,3 +1,5 @@
+
+
 .clothes img {
   width: 200px;
   height: 250px;
@@ -142,7 +144,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 40px;
+  margin-right: 0px;
   margin-top: 80px;
 }
 

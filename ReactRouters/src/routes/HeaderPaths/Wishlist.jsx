@@ -25,6 +25,7 @@ const Wishlist = () => {
   };
 
   return (
+    <>
     <div className="main">
        <header className="main-header">
         <div className="search-container-header">
@@ -154,10 +155,12 @@ const Wishlist = () => {
             </div>
           </div>
         )}
+
+      </div>
       </div>
 
       <footer>
-      <section className="footer-section">
+        <section className="footer-section">
           <div className="footer-section-div">
             <img src="/assets/whale.png" />
           </div>
@@ -196,11 +199,10 @@ const Wishlist = () => {
           </div>
         </section>
       </footer>
-
       <div className="last-text">
         <p className="text-sub-footer">maremansa</p>
       </div>
-    </div>
+    </>
   );
 };
 

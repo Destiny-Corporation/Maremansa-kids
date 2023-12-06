@@ -169,10 +169,12 @@
     border: none;
     background: transparent;
     margin-bottom: 0px;
+    color: #48a3a9;
   }
 
     .search-bar {
       margin-bottom: 0px;
+      color: #48a3a9;
     }
   
   .search-button-header {

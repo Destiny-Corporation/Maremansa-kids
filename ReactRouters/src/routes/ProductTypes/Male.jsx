@@ -98,7 +98,7 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
     setMaxPrice("");
   };
   return (
-    <div className="main">
+    <><div className="main">
       <header className="main-header">
         <div className="logo-product">
           <Link to="/">
@@ -171,6 +171,8 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
           </div>
   </div>*/}
 
+</div>
+</div>
 
       <footer>
         <section className="footer-section">
@@ -215,8 +217,7 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
       <div className="last-text">
         <p className="text-sub-footer">maremansa</p>
       </div>
-    </div>
-    </div>
+    </>
   );
 };
 

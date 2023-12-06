@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/Protected.css";
 import { Link, useNavigate  } from "react-router-dom";
 import { initializeApp } from "firebase/app";
@@ -145,7 +145,7 @@ const Home = () => {
   const endIndex = startIndex + productsPerPage;
   const displayedProducts = produtos.slice(startIndex, endIndex);
   return (
-    <div className="main">
+    <><div className="main">
       <header className="main-header">
         <div className="logo-home">
           <img src="/assets/logo.png" alt="Logo" />
@@ -462,11 +462,14 @@ const Home = () => {
           ></i>
         </div>
       </div>
+      </div>
+
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
             <img src="/assets/whale.png" />
           </div>
+
           <div className="footer-section-div">
             <h3>SOBRE NÓS</h3>
             <li>
@@ -479,6 +482,7 @@ const Home = () => {
               <Link to="/partners">NOSSOS PARCEIROS</Link>
             </li>
           </div>
+
           <div className="footer-section-div">
             <h3>SUPORTE</h3>
             <li>
@@ -503,7 +507,7 @@ const Home = () => {
       <div className="last-text">
         <p className="text-sub-footer">maremansa</p>
       </div>
-    </div>
+    </>
   );
 };
 export default Home;

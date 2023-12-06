@@ -429,7 +429,7 @@ footer {
     color: #fff;
     text-align: center;
     z-index: 999;
-    margin-top: 20px !important;
+    /* margin-top: 20px !important; */
 }
 
 .footer-section {

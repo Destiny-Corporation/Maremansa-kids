@@ -212,7 +212,7 @@ const Cart = () => {
   };
 
   return (
-    <div className="main">
+    <><div className="main">
       <header className="main-header">
         <div className="search-container-header">
             <input type="text" className="search-bar-header" placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"/>
@@ -457,6 +457,8 @@ const Cart = () => {
         </div>
       </section>
 
+      </div>
+
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
@@ -488,51 +490,19 @@ const Cart = () => {
               <Link to="/sitemap">MAPA DO SITE</Link>
             </li>
           </div>
-          <div className="footer-section-div">
-            <h3>SOBRE NÓS</h3>
-            <li>
-              <Link to="/company">A EMPRESA</Link>
-            </li>
-            <li>
-              <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
-            </li>
-            <li>
-              <Link to="/partners">NOSSOS PARCEIROS</Link>
-            </li>
-          </div>
-
-          <div className="footer-section-div">
-            <h3>SUPORTE</h3>
-            <li>
-              <Link to="/services">ATENDIMENTO</Link>
-            </li>
-            <li>
-              <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
-            </li>
-            <li>
-              <Link to="/sitemap">MAPA DO SITE</Link>
-            </li>
-          </div>
 
           <div className="footer-section-div">
             <h3>CONTATOS</h3>
-            <a href="https://whatsapp.com">
-              <i className="fa fa-whatsapp"></i>
-            </a>
-            <a href="https://google.com">
-              <i className="fa fa-google"></i>
-            </a>
-            <a href="https://instagram.com">
-              <i className="fa fa-instagram"></i>
-            </a>
+            <i className="fa fa-whatsapp"></i>
+            <i className="fa fa-google"></i>
+            <i className="fa fa-instagram"></i>
           </div>
         </section>
-        </footer>
-
-        <div className="last-text">
-          <p className="text-sub-footer">maremansa</p>
-        </div>
-    </div>
+      </footer>
+      <div className="last-text">
+        <p className="text-sub-footer">maremansa</p>
+      </div>
+    </>
   );
 };
 export default Cart;
