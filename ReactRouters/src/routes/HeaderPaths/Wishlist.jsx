@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../styles/HeaderPaths/Wishlist.css";
 import { Link } from "react-router-dom";
+import { initializeApp } from "firebase/app";
+import { getStorage } from "firebase/storage";
+import { getFirestore, collection, doc, getDocs } from "firebase/firestore";
 
 const Wishlist = () => {
   let isLoggedIn = false;
