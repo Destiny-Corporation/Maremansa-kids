@@ -21,6 +21,7 @@ export const storage = getStorage(app);
 export const firestore = getFirestore(app);
 
 const Cart = () => {
+  const [showDescription, setShowDescription] = useState(false);
   const [productLoading, setProductLoading] = useState(true);
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
@@ -48,11 +49,50 @@ const Cart = () => {
     </div>
   );
 
+  // const [favoriteItems, setFavoriteItems] = useState(() => {
+  //   const savedFavoriteItems = localStorage.getItem("favoriteItems");
+  //   return savedFavoriteItems ? JSON.parse(savedFavoriteItems) : [];
+  // });
+  // const handleAddToFavorites = (produto) => {
+  //   const existingItemIndex = favoriteItems.findIndex(
+  //     (item) => item.nome_prop === produto.nome_prop
+  //   );
+  
+  //   if (existingItemIndex === -1) {
+  //     setFavoriteItems([...favoriteItems, { ...produto }]);
+  //   }
+  //   setIsItemAdded(true);
+  //   setTimeout(() => {
+  //     setIsItemAdded(false);
+  //   }, 5000);
+  // };
+
+  // useEffect(() => {
+  //   const fetchProductData = async () => {
+  //     try {
+  //       console.log(productName);
+  //       const productData = doc(firestore, collectionName, productName); // Substitua "products" pelo nome da sua coleção
+  //       const productSnapshot = await getDoc(productData);
+  //       if (productSnapshot.exists()) {
+  //         setProductData(productSnapshot.data());
+  //       } else {
+  //         // Handle the case when the product is not found
+  //       }
+  //       setProductLoading(false);
+  //     } catch (error) {
+  //       console.error("Erro ao buscar dados do produto:", error);
+  //       // Handle the error state appropriately
+  //       setProductLoading(false);
+  //     }
+  //   };
+
+  //   fetchProductData();
+  // }, [collectionName, productName]);
+
   useEffect(() => {
     const fetchProductData = async () => {
       try {
-        console.log(productName);
-        const productData = doc(firestore, collectionName, productName); // Substitua "products" pelo nome da sua coleção
+        const productData = doc(firestore, collectionName, productName);
         const productSnapshot = await getDoc(productData);
         if (productSnapshot.exists()) {
           setProductData(productSnapshot.data());
@@ -69,7 +109,6 @@ const Cart = () => {
 
     fetchProductData();
   }, [collectionName, productName]);
-
   
   if (productLoading) {
     return <LoadingContainer />;
@@ -253,13 +292,13 @@ const Cart = () => {
         </div>
 
         <div className="button-menu-1">
-          <Link to="female">
+          <Link to="/female">
             <h6>FEMININO</h6>
           </Link>
         </div>
 
         <div className="button-menu-1">
-          <Link to="male">
+          <Link to="/male">
             <h6>MASCULINO</h6>
           </Link>
         </div>
@@ -311,12 +350,10 @@ const Cart = () => {
               <h4 className="title-prod">{productName}</h4>
               <hr className="hr-prod" size="1" />
 
-              <span className="off">R$ 199,90</span>
+              {/* <span className="off">R$ 199,90</span>*/}
               <span className="price-pd">
                 R$ {productData ? productData.preço : ""}
-              </span>
-
-              <br></br>
+              </span> 
               <p className="text-prod">Selecione a cor do produto:</p>
               <div className="color-buttons">
   <button
@@ -432,9 +469,16 @@ const Cart = () => {
               <button className="buttons-cart">
                 <span>Comprar agora</span>
               </button>
-              <button className="buttons-cart">
+              <button className="buttons-cart"
+              // onClick={() => {
+              //     console.log("OLAAAAAA")
+              //     handleAddToFavorites(produto);
+              //     showAddedToFavoriteNotification();
+              //   }} 
+                >
                 <i className="bx bx-cart bt-header"></i>
                 <span>Adicionar ao carrinho</span>
+                
               </button>
 
               <div className="cep-text">
@@ -457,6 +501,23 @@ const Cart = () => {
         </div>
       </section>
 
+      <div className="description-section">
+      <hr className="hr-prod-1" size="1" />
+      <h4 className="title-prod-1">
+                Descrição do Produto{" "}
+                <button
+          className={`show-more-button-1 ${showDescription ? "expanded" : ""}`}
+          onClick={() => setShowDescription(!showDescription)}
+        >
+          {showDescription ? "-" : "+"}
+        </button>
+              </h4>
+              <hr className="hr-prod-1" size="1" />
+
+              <p className='description-text'>
+                {showDescription ? productData?.descrição : ''}
+              </p>
+              </div>
       </div>
 
       <footer>

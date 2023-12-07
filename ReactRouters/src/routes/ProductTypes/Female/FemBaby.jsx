@@ -30,6 +30,8 @@ const FemBaby = () => {
   const [isItemAdded, setIsItemAdded] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [overlayVisible, setOverlayVisible] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState("Todos");
 
   const showAddedToCartNotification = () => {
     setShowNotification(true);
@@ -123,21 +125,25 @@ const FemBaby = () => {
 
   useEffect(() => {
     const fetchProdutos = async () => {
-      const produtosCollection = collection(firestore, "Prodfemme");
-      const produtosQuery = query(
-        produtosCollection,
-        where("category_prodfemme", "==", "Baby")
-      );
-      const produtosSnapshot = await getDocs(produtosQuery);
-      const produtosData = produtosSnapshot.docs.map((doc) => doc.data());
-      setProdutos(produtosData);
-      console.log(produtosData);
+      try {
+        const produtosCollection = collection(firestore, "Prodfemme");
+        const produtosQuery = query(
+          produtosCollection,
+          where("category_prodfemme", "==", "Baby")
+        );
+        const produtosSnapshot = await getDocs(produtosQuery);
+        const produtosData = produtosSnapshot.docs.map((doc) => doc.data());
+        setProdutos(produtosData);
+        setLoading(false); // Definindo loading como falso após o carregamento dos produtos
+        console.log(produtosData);
+      } catch (error) {
+        console.error("Erro ao carregar produtos:", error);
+        setLoading(false); // Definindo loading como falso em caso de erro
+      }
     };
 
     fetchProdutos();
   }, []);
-
-  const [filterParam, setFilterParam] = useState("All");
 
   const handleFilterChange = (e) => {
     setFilterParam(e.target.value);
@@ -145,30 +151,13 @@ const FemBaby = () => {
 
   const filteredProdutos = produtos.filter((produto) => {
     if (
-      produto.nome_prodfemme &&
-      (filterParam === "All" ||
-        produto.nome_prodfemme
-          .toLowerCase()
-          .includes(filterParam.toLowerCase()))
+      (selectedCategory === "Todos" ||
+        produto.nome_prodfemme.toLowerCase().includes(selectedCategory.toLowerCase())) &&
+      produto.nome_prodfemme.toLowerCase().includes(searchTerm.toLowerCase())
     ) {
-      return produto.nome_prodfemme
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase());
+      return true;
     }
     return false;
-  });
-
-  const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
-    if (isFilterActive && maxPrice !== null) {
-      // Verifica se o preço está no formato correto (por exemplo, "R$ 50,00")
-      if (produto.preço_atacado && typeof produto.preço_atacado === "string") {
-        const precoNumerico = parseFloat(
-          produto.preço_atacado.replace("R$ ", "").replace(",", ".")
-        );
-        return precoNumerico <= maxPrice;
-      }
-    }
-    return true;
   });
 
   const pageCount = Math.ceil(filteredProdutos.length / itemsPerPage);
@@ -202,7 +191,12 @@ const FemBaby = () => {
   };
   return (
     <>
-    <div className="main">
+     {loading ? ( 
+        <div className="loading-container">
+      <img src="/assets/espera.gif" alt="Carregando..." style={{ width: '130px', height: '130px' }}/>
+    </div>
+      ) : (
+        <div className="main">
       <header className="main-header">
         <div className="search-container-header">
           <input
@@ -371,37 +365,40 @@ const FemBaby = () => {
 
         {isFilterActive && (
           <div className="filter-container">
-            <div className="filter-content">
-              <p className="filter-title">FILTRAR</p>
-              <hr className="filter-hr" />
-
-              <ul className="filter-list">
-                <li>
-                  <label className="filter-label">CATEGORIAS:</label>
-                </li>
-                {nomesProdutos.map((nome, index) => (
-                  <li className="filter-item" key={index}>
-                    <button
-                      className="filter-option"
-                      onClick={() =>
-                        handleFilterChange({ target: { value: nome } })
-                      }
-                    >
-                      {nome}
-                    </button>
-                  </li>
-                ))}
-                <li>
+          <div className="filter-content">
+            <p className="filter-title">FILTRAR</p>
+            <hr className="filter-hr" />
+    
+            <ul className="filter-list">
+              <li>
+                <label className="filter-label">CATEGORIAS:</label>
+              </li>
+              <li className="filter-item">
+                <button
+                  className={`filter-option ${selectedCategory === "Todos" ? "active" : ""}`}
+                  onClick={() => setSelectedCategory("Todos")}
+                >
+                  Todos
+                </button>
+              </li>
+              {nomesProdutos.map((nome, index) => (
+                <li className="filter-item" key={index}>
                   <button
-                    className="close-button"
-                    onClick={handleFilterButtonClick}
+                    className={`filter-option ${selectedCategory === nome ? "active" : ""}`}
+                    onClick={() => setSelectedCategory(nome)}
                   >
-                    X
+                    {nome}
                   </button>
                 </li>
-              </ul>
-            </div>
+              ))}
+              <li>
+                <button className="close-button" onClick={handleFilterButtonClick}>
+                  X
+                </button>
+              </li>
+            </ul>
           </div>
+        </div>
         )}
 
         <div className="items-per-page">
@@ -530,6 +527,7 @@ const FemBaby = () => {
         <p className="text-sub-footer">maremansa</p>
       </div>
     </div>
+      )}
     </>
   );
 };
