@@ -438,6 +438,7 @@ const Sale = () => {
             <Link to={`/product/${"ProdPomo"}/${produto.nome_prodpromo}`}>
               <img className='img_prod' src={produto.url_image} alt={produto.nome_prodpromo} />
             </Link>
+          
 
 <div className="info-container1">
   <Link to={`/product/${"Prodpromo"}/${produto.nome_prodpromo}`}>
