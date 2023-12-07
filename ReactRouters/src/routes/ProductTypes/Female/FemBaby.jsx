@@ -207,6 +207,7 @@ const FemBaby = () => {
     return true;
   });
 
+  
   const pageCount = Math.ceil(filteredProdutos.length / itemsPerPage);
   const offset = currentPage * itemsPerPage;
   const currentPageProdutos = filteredProdutos.slice(

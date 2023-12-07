@@ -179,24 +179,20 @@ const MaleBaby = () => {
   };
 
   const filteredProdutos = produtos.filter((produto) => {
-    // Verifica se o produto corresponde à categoria selecionada ou se a categoria é "All".
     if (
-      filterParam === "All" ||
-      (produto.nome_prodpromo &&
-        produto.nome_prodpromo.toLowerCase &&
-        produto.nome_prodpromo
+      produto.nome_prodmale &&
+      (filterParam === "All" ||
+        produto.nome_prodmale
           .toLowerCase()
           .includes(filterParam.toLowerCase()))
     ) {
-      // Verifica se o produto corresponde ao termo de pesquisa.
-      return (
-        produto.nome_prodpromo &&
-        produto.nome_prodpromo.toLowerCase &&
-        produto.nome_prodpromo.toLowerCase().includes(searchTerm.toLowerCase())
-      );
+      return produto.nome_prodmale
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
     }
-    return false; // Produto não corresponde à categoria selecionada.
+    return false;
   });
+
 
   const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
     if (isFilterActive && maxPrice !== null) {
@@ -470,7 +466,7 @@ const MaleBaby = () => {
         </div>
 
         <div className="container-clothes">
-          {produtos.map((produto, index) => (
+          {filteredProdutos.map((produto, index) => (
             <div className="clothes" key={index} style={{ width: "20%" }}>
               <Link to={`/product/${"Prodmale"}/${produto.nome_prodmale}`}>
                 <img
@@ -484,6 +480,10 @@ const MaleBaby = () => {
   <Link to={`/product/${"Prodmale"}/${produto.nome_prodmale}`}>
     <h6 className="text-card-h">{produto.nome_prodmale}</h6>
   </Link>
+ 
+
+
+
   <div className="price-and-icons">
     <h6 className="price">R$ {produto.preço}</h6>
     <div className="icons-container">

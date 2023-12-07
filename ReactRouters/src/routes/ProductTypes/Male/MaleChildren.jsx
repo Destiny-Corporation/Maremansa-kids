@@ -447,7 +447,7 @@ const MaleChildren = () => {
         </div>
 
         <div className="container-clothes">
-          {produtos.map((produto, index) => (
+          {filteredProdutosWithPrice.map((produto, index) => (
             <div className="clothes" key={index} style={{ width: "20%" }}>
               <Link to={`/product/${"Prodmale"}/${produto.nome_prodmale}`}>
                 <img
