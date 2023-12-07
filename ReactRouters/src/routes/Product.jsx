@@ -28,6 +28,13 @@ const Cart = () => {
   const [shippingCost, setShippingCost] = useState(0);
   const [productData, setProductData] = useState(null);
   const { collectionName, productName } = useParams();
+  const selectColor = (color) => {
+    setSelectedColor(color);
+  };
+
+  const handleSizeSelect = (size) => {
+    setSelectedSize(size);
+  };
   const [productRef, setProductRef] = useState(null);
   const [selectedQuantity, setSelectedQuantity] = useState(1);
   const [total, setTotal] = useState(0);
@@ -148,7 +155,11 @@ const Cart = () => {
     const handleCloseCartClick = () => {
       setCartVisible(false); // Esconde o carrinho quando o usuário clica no ícone de fechar
     };
-
+    const handleQuantityChange = (newQuantity) => {
+      if (newQuantity >= 1) {
+        setSelectedQuantity(newQuantity);
+      }
+    };
     const calculateTotal = () => {
       let total = 0;
       for (const item of cartItems) {
@@ -336,130 +347,94 @@ const Cart = () => {
                 </span>
 
                 <br></br>
-                <p className="text-prod">Selecione a cor do produto:</p>
-                <ul>
-                  {productData.color.map((color) => (
-                    <button
-                      className="color-button"
-                      style={{
-                        backgroundColor: color,
-                        padding: "18px",
-                        cursor: "pointer",
-                        borderRadius: "10px",
-                      }}
-                      onClick={() => selectColor("preto")}
-                    ></button>
-                  ))}
-                </ul>
+                {productData &&
+                  productData.color &&
+                  productData.color.length > 0 && (
+                    <>
+                      <p className="text-prod">Selecione a cor do produto:</p>
+                      <ul>
+                        {productData.color.map((color) => (
+                          <button
+                            key={color}
+                            className="color-button"
+                            style={{
+                              backgroundColor: color,
+                              padding: "18px",
+                              cursor: "pointer",
+                              borderRadius: "10px",
+                              border:
+                                selectedColor === color
+                                  ? "2px solid #000"
+                                  : "none",
+                            }}
+                            onClick={() => selectColor(color)}
+                          >
+                            {selectedColor === color && (
+                              <div
+                                style={{
+                                  width: "16px",
+                                  height: "16px",
+                                  borderRadius: "50%",
+                                  backgroundColor: selectedColor,
+                                  display: "inline-block",
+                                  marginLeft: "8px",
+                                }}
+                              />
+                            )}
+                          </button>
+                        ))}
+                      </ul>
 
-                <div className="color-buttons">
-                  <button
-                    className="color-button"
-                    style={{
-                      backgroundColor: "pink",
-                      padding: "18px",
-                      cursor: "pointer",
-                      borderRadius: "10px",
-                    }}
-                    onClick={() => selectColor("rosa")}
-                  ></button>
-                  <button
-                    className="color-button"
-                    style={{
-                      backgroundColor: "#7d6cdb",
-                      padding: "18px",
-                      cursor: "pointer",
-                      borderRadius: "10px",
-                    }}
-                    onClick={() => selectColor("roxo")}
-                  ></button>
-                  <button
-                    className="color-button"
-                    style={{
-                      backgroundColor: "#42e0a3",
-                      padding: "18px",
-                      cursor: "pointer",
-                      borderRadius: "10px",
-                    }}
-                    onClick={() => selectColor("verde")}
-                  ></button>
-                  <button
-                    className="color-button"
-                    style={{
-                      backgroundColor: "yellow",
-                      padding: "18px",
-                      cursor: "pointer",
-                      borderRadius: "10px",
-                    }}
-                    onClick={() => selectColor("amarelo")}
-                  ></button>
-                </div>
+                      <div id="selected-color">
+                        Cor selecionada:{" "}
+                        <div
+                          style={{
+                            width: "16px",
+                            height: "16px",
+                            borderRadius: "50%",
+                            backgroundColor: selectedColor,
+                            display: "inline-block",
+                            marginLeft: "8px",
+                          }}
+                        />
+                      </div>
+                    </>
+                  )}
 
-                <div id="selected-color" style={{ color: selectedColor }}>
-                  Cor selecionada: {selectedColor}
-                </div>
+                {productData.size && productData.size.length > 0 && (
+                  <div className="size-options">
+                    <p className="text-prod">Tamanhos:</p>
+                    {productData.size.map((size) => (
+                      <div
+                        key={size}
+                        className={`size-option ${
+                          selectedSize === size ? "selected" : ""
+                        }`}
+                        onClick={() => handleSizeSelect(size)}
+                      >
+                        {size}
+                      </div>
+                    ))}
+                  </div>
+                )}
 
-                <p className="text-prod">Tamanhos:</p>
-                <div className="size-options">
-                  <div
-                    className={`size-option ${
-                      selectedSize === "06" ? "selected" : ""
-                    }`}
-                    onClick={() => handleSizeSelect("06")}
-                  >
-                    06
+                {selectedSize && (
+                  <div id="selected-size">
+                    Tamanho selecionado: {selectedSize}
                   </div>
-                  <div
-                    className={`size-option ${
-                      selectedSize === "08" ? "selected" : ""
-                    }`}
-                    onClick={() => handleSizeSelect("08")}
-                  >
-                    08
-                  </div>
-                  <div
-                    className={`size-option ${
-                      selectedSize === "10" ? "selected" : ""
-                    }`}
-                    onClick={() => handleSizeSelect("10")}
-                  >
-                    10
-                  </div>
-                  <div
-                    className={`size-option ${
-                      selectedSize === "12" ? "selected" : ""
-                    }`}
-                    onClick={() => handleSizeSelect("12")}
-                  >
-                    12
-                  </div>
-                  <div
-                    className={`size-option ${
-                      selectedSize === "14" ? "selected" : ""
-                    }`}
-                    onClick={() => handleSizeSelect("14")}
-                  >
-                    14
-                  </div>
-                  <div
-                    className={`size-option ${
-                      selectedSize === "16" ? "selected" : ""
-                    }`}
-                    onClick={() => handleSizeSelect("16")}
-                  >
-                    16
-                  </div>
-                </div>
-
-                {/*<div id="selected-size">Tamanho selecionado: {selectedSize}</div>*/}
+                )}
 
                 <div className="options">
                   <div className="amount">
-                    <button
-                      onClick={() => handleQuantityChange(selectedQuantity - 1)}
-                    >
-                      -
-                    </button>
+                    {selectedQuantity > 0 && (
+                      <button
+                        onClick={() =>
+                          handleQuantityChange(selectedQuantity - 1)
+                        }
+                      >
+                        -
+                      </button>
+                    )}
                     <span id="valor">{selectedQuantity}</span>
                     <button
                       onClick={() => handleQuantityChange(selectedQuantity + 1)}
@@ -469,7 +444,12 @@ const Cart = () => {
                   </div>
                 </div>
 
-                {/*<div id="selected-quantity">Quantidade selecionada: {selectedQuantity}</div>*/}
+                {selectedQuantity > 0 && (
+                  <div id="selected-quantity">
+                    Quantidade selecionada: {selectedQuantity}
+                  </div>
+                )}
+
                 <button className="buttons-cart">
                   <span>Comprar agora</span>
                 </button>
