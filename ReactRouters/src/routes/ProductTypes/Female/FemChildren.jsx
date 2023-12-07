@@ -451,20 +451,19 @@ const FemChildren = () => {
         </div>
 
         <div className="container-clothes">
-          {produtos.map((produto, index) => (
-            <div className="clothes" key={index} style={{ width: "20%" }}>
-              <Link to={`/product/${"Prodfemme"}/${produto.nome_prodfemme}`}>
-                <img
-                  className="img_prod"
-                  src={produto.url_image}
-                  alt={produto.nome_prodfemme}
-                />
-              </Link>
-
-              <div className="info-container1">
-  <Link to={`/product/${"Prodfemme"}/${produto.nome_prodfemme}`}>
-    <h6 className="text-card-h">{produto.nome_prodfemme}</h6>
-  </Link>
+  {filteredProdutosWithPrice.map((produto, index) => (
+    <div className="clothes" key={index} style={{ width: "20%" }}>
+      <Link to={`/product/${"Prodfemme"}/${produto.nome_prodfemme}`}>
+        <img
+          className="img_prod"
+          src={produto.url_image}
+          alt={produto.nome_prodfemme}
+        />
+      </Link>
+      <div className="info-container1">
+        <Link to={`/product/${"Prodfemme"}/${produto.nome_prodfemme}`}>
+          <h6 className="text-card-h">{produto.nome_prodfemme}</h6>
+        </Link>
   <div className="price-and-icons">
     <h6 className="price">R$ {produto.preço}</h6>
     <div className="icons-container">

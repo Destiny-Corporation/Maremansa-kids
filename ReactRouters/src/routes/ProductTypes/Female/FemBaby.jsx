@@ -241,11 +241,13 @@ const FemBaby = () => {
     <div className="main">
       <header className="main-header">
         <div className="search-container-header">
-          <input
-            type="text"
-            className="search-bar-header"
-            placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
-          />
+        <input
+          type="text"
+          className="search-bar"
+          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
           <button className="search-button-header" type="submit">
             <i className="bx bx-search"></i>
           </button>
@@ -453,20 +455,19 @@ const FemBaby = () => {
         </div>
 
         <div className="container-clothes">
-          {produtos.map((produto, index) => (
-            <div className="clothes" key={index} style={{ width: "20%" }}>
-              <Link to={`/product/${"Prodfemme"}/${produto.nome_prodfemme}`}>
-                <img
-                  className="img_prod"
-                  src={produto.url_image}
-                  alt={produto.nome_prodfemme}
-                />
-              </Link>
-
-              <div className="info-container1">
-  <Link to={`/product/${"Prodfemme"}/${produto.nome_prodfemme}`}>
-    <h6 className="text-card-h">{produto.nome_prodfemme}</h6>
-  </Link>
+  {filteredProdutosWithPrice.map((produto, index) => (
+    <div className="clothes" key={index} style={{ width: "20%" }}>
+      <Link to={`/product/${"Prodfemme"}/${produto.nome_prodfemme}`}>
+        <img
+          className="img_prod"
+          src={produto.url_image}
+          alt={produto.nome_prodfemme}
+        />
+      </Link>
+      <div className="info-container1">
+        <Link to={`/product/${"Prodfemme"}/${produto.nome_prodfemme}`}>
+          <h6 className="text-card-h">{produto.nome_prodfemme}</h6>
+        </Link>
   <div className="price-and-icons">
     <h6 className="price">R$ {produto.preço}</h6>
     <div className="icons-container">
