@@ -29,6 +29,7 @@ export const firestore = getFirestore(app);
 const FemBaby = () => {
   const [isItemAdded, setIsItemAdded] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
+  const [showNotification2, setShowNotification2] = useState(false);
   const [overlayVisible, setOverlayVisible] = useState(false);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("Todos");
@@ -39,6 +40,14 @@ const FemBaby = () => {
       setShowNotification(false);
     }, 2000);
   };
+
+  const showAddedToFavoriteNotification = () => {
+    setShowNotification2(true);
+    setTimeout(() => {
+      setShowNotification2(false);
+    }, 2000);
+  };
+
   const [produtos, setProdutos] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
@@ -60,10 +69,37 @@ const FemBaby = () => {
   });
   const [cartVisible, setCartVisible] = useState(false);
   const [isComponentReady, setIsComponentReady] = useState(false);
+
+  const [favoriteItems, setFavoriteItems] = useState(() => {
+    const savedFavoriteItems = localStorage.getItem("favoriteItems");
+    return savedFavoriteItems ? JSON.parse(savedFavoriteItems) : [];
+  });
+
+  const handleAddToFavorites = (produto) => {
+    const existingItemIndex = favoriteItems.findIndex(
+      (item) => item.nome_prodfemme === produto.nome_prodfemme
+    );
+  
+    if (existingItemIndex === -1) {
+      setFavoriteItems([...favoriteItems, { ...produto }]);
+    }
+    setIsItemAdded(true);
+    setTimeout(() => {
+      setIsItemAdded(false);
+    }, 5000);
+  }; 
+  
+  useEffect(() => {
+    localStorage.setItem("favoriteItems", JSON.stringify(favoriteItems));
+  }, [favoriteItems]);
+
+
   const handleCartIconClick = () => {
     setCartVisible(!cartVisible);
     setOverlayVisible(!cartVisible);
   };
+
+  
 
   const handleCloseCartClick = () => {
     setCartVisible(false);
@@ -160,6 +196,20 @@ const FemBaby = () => {
     return false;
   });
 
+  const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
+    if (isFilterActive && maxPrice !== null) {
+      // Verifica se o preço está no formato correto (por exemplo, "R$ 50,00")
+      if (produto.preço_atacado && typeof produto.preço_atacado === "string") {
+        const precoNumerico = parseFloat(
+          produto.preço_atacado.replace("R$ ", "").replace(",", ".")
+        );
+        return precoNumerico <= maxPrice;
+      }
+    }
+    return true;
+  });
+
+  
   const pageCount = Math.ceil(filteredProdutos.length / itemsPerPage);
   const offset = currentPage * itemsPerPage;
   const currentPageProdutos = filteredProdutos.slice(
@@ -199,11 +249,13 @@ const FemBaby = () => {
         <div className="main">
       <header className="main-header">
         <div className="search-container-header">
-          <input
-            type="text"
-            className="search-bar-header"
-            placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
-          />
+        <input
+          type="text"
+          className="search-bar"
+          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
           <button className="search-button-header" type="submit">
             <i className="bx bx-search"></i>
           </button>
@@ -414,20 +466,19 @@ const FemBaby = () => {
         </div>
 
         <div className="container-clothes">
-          {produtos.map((produto, index) => (
-            <div className="clothes" key={index} style={{ width: "20%" }}>
-              <Link to={`/product/${"Prodfemme"}/${produto.nome_prodfemme}`}>
-                <img
-                  className="img_prod"
-                  src={produto.url_image}
-                  alt={produto.nome_prodfemme}
-                />
-              </Link>
-
-              <div className="info-container1">
-  <Link to={`/product/${"Prodfemme"}/${produto.nome_prodfemme}`}>
-    <h6 className="text-card-h">{produto.nome_prodfemme}</h6>
-  </Link>
+  {filteredProdutosWithPrice.map((produto, index) => (
+    <div className="clothes" key={index} style={{ width: "20%" }}>
+      <Link to={`/product/${"Prodfemme"}/${produto.nome_prodfemme}`}>
+        <img
+          className="img_prod"
+          src={produto.url_image}
+          alt={produto.nome_prodfemme}
+        />
+      </Link>
+      <div className="info-container1">
+        <Link to={`/product/${"Prodfemme"}/${produto.nome_prodfemme}`}>
+          <h6 className="text-card-h">{produto.nome_prodfemme}</h6>
+        </Link>
   <div className="price-and-icons">
     <h6 className="price">R$ {produto.preço}</h6>
     <div className="icons-container">
@@ -455,13 +506,28 @@ const FemBaby = () => {
         </div>
 
         {showNotification && (
+        <div className={`notification ${isItemAdded ? "active" : ""}`}>
+          <p className="not">Item adicionado ao carrinho!</p>
+          <Link to="/cart2" className="go-to-cart-button">
+            Ir para o Carrinho
+          </Link>
+        </div>
+      )}
+
+{showNotification2 && (
           <div className={`notification ${isItemAdded ? "active" : ""}`}>
-            <p className="not">Item adicionado ao carrinho!</p>
-            <Link to="/cart2" className="go-to-cart-button">
-              Ir para o Carrinho
+            <p className="not">Item adicionado a lista de desejo!</p>
+            <Link to="/wishlist" className="go-to-cart-button">
+              Ir para a Lista de Desejo
             </Link>
           </div>
         )}
+
+
+
+
+
+
       </div>
 
       <div className="pagination-container">

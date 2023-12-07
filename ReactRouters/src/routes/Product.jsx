@@ -1,4 +1,3 @@
-
 import "../styles/Product.css";
 import { Link, useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
@@ -30,6 +29,13 @@ const Cart = () => {
   const [shippingCost, setShippingCost] = useState(0);
   const [productData, setProductData] = useState(null);
   const { collectionName, productName } = useParams();
+  const selectColor = (color) => {
+    setSelectedColor(color);
+  };
+
+  const handleSizeSelect = (size) => {
+    setSelectedSize(size);
+  };
   const [productRef, setProductRef] = useState(null);
   const [selectedQuantity, setSelectedQuantity] = useState(1);
   const [total, setTotal] = useState(0);
@@ -45,7 +51,11 @@ const Cart = () => {
 
   const LoadingContainer = () => (
     <div className="loading-container">
-      <img src="/assets/espera.gif" alt="Carregando..." style={{ width: '130px', height: '130px' }}/>
+      <img
+        src="/assets/espera.gif"
+        alt="Carregando..."
+        style={{ width: "130px", height: "130px" }}
+      />
     </div>
   );
 
@@ -109,11 +119,10 @@ const Cart = () => {
 
     fetchProductData();
   }, [collectionName, productName]);
-  
+
   if (productLoading) {
     return <LoadingContainer />;
   }
-  
 
   const handleAddToCart1 = () => {
     const data = {
@@ -142,7 +151,9 @@ const Cart = () => {
         };
         setCart([...cart, newItem]);
       } else {
-        alert("Por favor, selecione cor e tamanho antes de adicionar ao carrinho.");
+        alert(
+          "Por favor, selecione cor e tamanho antes de adicionar ao carrinho."
+        );
       }
     };
 
@@ -184,7 +195,11 @@ const Cart = () => {
     const handleCloseCartClick = () => {
       setCartVisible(false); // Esconde o carrinho quando o usuário clica no ícone de fechar
     };
-
+    const handleQuantityChange = (newQuantity) => {
+      if (newQuantity >= 1) {
+        setSelectedQuantity(newQuantity);
+      }
+    };
     const calculateTotal = () => {
       let total = 0;
       for (const item of cartItems) {
@@ -199,13 +214,15 @@ const Cart = () => {
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
     }, [cartItems]);
 
-    {/*function getSize(size, element) {
+    {
+      /*function getSize(size, element) {
       const sizeOptions = document.querySelectorAll(".size-option");
       sizeOptions.forEach((option) => {
         option.classList.remove("selected");
       });
       element.classList.add("selected");
-    }*/}
+    }*/
+    }
 
     var valorAtual = 1;
     var valorElement = document.getElementById("valor");
@@ -221,7 +238,7 @@ const Cart = () => {
         valorElement.textContent = valorAtual;
       }
     }
-    
+
     function buscarCEP() {
       var cep = document.getElementById("cep").value;
       $.ajax({
@@ -251,18 +268,30 @@ const Cart = () => {
   };
 
   return (
-    <><div className="main">
-      <header className="main-header">
-        <div className="search-container-header">
-            <input type="text" className="search-bar-header" placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"/>
-                <button className="search-button-header" type="submit">
-                  <i className="bx bx-search"></i>
-                </button>
-        </div>
-        <div className="header-logo-center">
-        <Link to="/"> <img src="/assets/logo.png" alt="Logo" className="header-logo-center"/> </Link>
-        </div>
-        <div className="icons-about">
+    <>
+      <div className="main">
+        <header className="main-header">
+          <div className="search-container-header">
+            <input
+              type="text"
+              className="search-bar-header"
+              placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
+            />
+            <button className="search-button-header" type="submit">
+              <i className="bx bx-search"></i>
+            </button>
+          </div>
+          <div className="header-logo-center">
+            <Link to="/">
+              {" "}
+              <img
+                src="/assets/logo.png"
+                alt="Logo"
+                className="header-logo-center"
+              />{" "}
+            </Link>
+          </div>
+          <div className="icons-about">
             <Link to="/requests">
               <i
                 className="bx bx-user bt-header"
@@ -281,15 +310,15 @@ const Cart = () => {
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
-        </div>
-      </header>
-      <div className="container-subheader-1">
-      <div className="container-menu-buttons-1">
-        <div className="button-menu-1">
-          <Link to="/sale">
-            <h6>PROMOÇÕES</h6>
-          </Link>
-        </div>
+          </div>
+        </header>
+        <div className="container-subheader-1">
+          <div className="container-menu-buttons-1">
+            <div className="button-menu-1">
+              <Link to="/sale">
+                <h6>PROMOÇÕES</h6>
+              </Link>
+            </div>
 
         <div className="button-menu-1">
           <Link to="/female">
@@ -303,52 +332,54 @@ const Cart = () => {
           </Link>
         </div>
 
-        <div className="button-menu-1">
-          <Link to="/props">
-            <h6>ACESSÓRIOS</h6>
-          </Link>
-        </div>
-      </div>
-      </div>
-     
-
-      <section className="main-products">
-        <div className="container">
-          <div className="products-left">
-            <div className="imagens">
-              <img className='small-images'
-                src="/assets/principal.png"
-                onClick={() => handleImageClick("/assets/principal.png")}
-              />
-
-              <img className="small-images"
-                src="/assets/image-2.png"
-                onClick={() => handleImageClick("/assets/image-2.png")}
-              />
-
-              <img className="small-images"
-                src="/assets/image-3.png"
-                onClick={() => handleImageClick("/assets/image-3.png")}
-              />
+            <div className="button-menu-1">
+              <Link to="/props">
+                <h6>ACESSÓRIOS</h6>
+              </Link>
             </div>
           </div>
         </div>
 
-        <div className="container">
-          <div className="left-side">
-            <div className="items">
-              <div className="select-image">
-                <img src={productData ? productData.url_image : ""} />
+        <section className="main-products">
+          <div className="container">
+            <div className="products-left">
+              <div className="imagens">
+                <img
+                  className="small-images"
+                  src="/assets/principal.png"
+                  onClick={() => handleImageClick("/assets/principal.png")}
+                />
+
+                <img
+                  className="small-images"
+                  src="/assets/image-2.png"
+                  onClick={() => handleImageClick("/assets/image-2.png")}
+                />
+
+                <img
+                  className="small-images"
+                  src="/assets/image-3.png"
+                  onClick={() => handleImageClick("/assets/image-3.png")}
+                />
               </div>
             </div>
           </div>
-        </div>
 
-        <div className="container">
-          <div className="right-side">
-            <div className="content">
-              <h4 className="title-prod">{productName}</h4>
-              <hr className="hr-prod" size="1" />
+          <div className="container">
+            <div className="left-side">
+              <div className="items">
+                <div className="select-image">
+                  <img src={productData ? productData.url_image : ""} />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="container">
+            <div className="right-side">
+              <div className="content">
+                <h4 className="title-prod">{productName}</h4>
+                <hr className="hr-prod" size="1" />
 
               {/* <span className="off">R$ 199,90</span>*/}
               <span className="price-pd">
@@ -448,76 +479,147 @@ const Cart = () => {
       </div>
 
       {/*<div id="selected-size">Tamanho selecionado: {selectedSize}</div>*/}
+                <span className="off">R$ 199,90</span>
+                <span className="price-pd">
+                  R$ {productData ? productData.preço : ""}
+                </span>
 
-      <div className="options">
-        <div className="amount">
-          <button
-            onClick={() => handleQuantityChange(selectedQuantity - 1)}
-          >
-            -
-          </button>
-          <span id="valor">{selectedQuantity}</span>
-          <button
-            onClick={() => handleQuantityChange(selectedQuantity + 1)}
-          >
-            +
-          </button>
-        </div>
-      </div>
+                <br></br>
+                {productData &&
+                  productData.color &&
+                  productData.color.length > 0 && (
+                    <>
+                      <p className="text-prod">Selecione a cor do produto:</p>
+                      <ul>
+                        {productData.color.map((color) => (
+                          <button
+                            key={color}
+                            className="color-button"
+                            style={{
+                              backgroundColor: color,
+                              padding: "18px",
+                              cursor: "pointer",
+                              borderRadius: "10px",
+                              border:
+                                selectedColor === color
+                                  ? "2px solid #000"
+                                  : "none",
+                            }}
+                            onClick={() => selectColor(color)}
+                          >
+                            {selectedColor === color && (
+                              <div
+                                style={{
+                                  width: "16px",
+                                  height: "16px",
+                                  borderRadius: "50%",
+                                  backgroundColor: selectedColor,
+                                  display: "inline-block",
+                                  marginLeft: "8px",
+                                }}
+                              />
+                            )}
+                          </button>
+                        ))}
+                      </ul>
 
-      {/*<div id="selected-quantity">Quantidade selecionada: {selectedQuantity}</div>*/}
-              <button className="buttons-cart">
-                <span>Comprar agora</span>
-              </button>
-              <button className="buttons-cart"
-              // onClick={() => {
-              //     console.log("OLAAAAAA")
-              //     handleAddToFavorites(produto);
-              //     showAddedToFavoriteNotification();
-              //   }} 
-                >
-                <i className="bx bx-cart bt-header"></i>
-                <span>Adicionar ao carrinho</span>
-                
-              </button>
+                      <div id="selected-color">
+                        Cor selecionada:{" "}
+                        <div
+                          style={{
+                            width: "16px",
+                            height: "16px",
+                            borderRadius: "50%",
+                            backgroundColor: selectedColor,
+                            display: "inline-block",
+                            marginLeft: "8px",
+                          }}
+                        />
+                      </div>
+                    </>
+                  )}
 
-              <div className="cep-text">
-                <i
-                  className="bx bxs-truck"
-                  style={{ color: "#48a3a9", marginRight: "5px" }}
-                ></i>
-                <p style={{ display: "inline", verticalAlign: "middle" }}>
-                  Consulte o frete
-                </p>
+                {productData.size && productData.size.length > 0 && (
+                  <div className="size-options">
+                    <p className="text-prod">Tamanhos:</p>
+                    {productData.size.map((size) => (
+                      <div
+                        key={size}
+                        className={`size-option ${
+                          selectedSize === size ? "selected" : ""
+                        }`}
+                        onClick={() => handleSizeSelect(size)}
+                      >
+                        {size}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {selectedSize && (
+                  <div id="selected-size">
+                    Tamanho selecionado: {selectedSize}
+                  </div>
+                )}
+
+                <div className="options">
+                  <div className="amount">
+                    {selectedQuantity > 0 && (
+                      <button
+                        onClick={() =>
+                          handleQuantityChange(selectedQuantity - 1)
+                        }
+                      >
+                        -
+                      </button>
+                    )}
+                    <span id="valor">{selectedQuantity}</span>
+                    <button
+                      onClick={() => handleQuantityChange(selectedQuantity + 1)}
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+
+                {selectedQuantity > 0 && (
+                  <div id="selected-quantity">
+                    Quantidade selecionada: {selectedQuantity}
+                  </div>
+                )}
+
+                <button className="buttons-cart">
+                  <span>Comprar agora</span>
+                </button>
+                <button className="buttons-cart">
+                  <i className="bx bx-cart bt-header"></i>
+                  <span>Adicionar ao carrinho</span>
+                </button>
+
+                <div className="cep-text">
+                  <i
+                    className="bx bxs-truck"
+                    style={{ color: "#48a3a9", marginRight: "5px" }}
+                  ></i>
+                  <p style={{ display: "inline", verticalAlign: "middle" }}>
+                    Consulte o frete
+                  </p>
+                </div>
+
+                <div className="cep">
+                  <input
+                    className="cep"
+                    type="text"
+                    placeholder="DIGITE SEU CEP"
+                    id="cep"
+                  />
+                  <button onclick="buscarCEP()">OK</button>
+                </div>
+                <div id="resultado"></div>
               </div>
-
-              <div className="cep">
-                <input className='cep' type="text" placeholder="DIGITE SEU CEP" id="cep" />
-                <button onclick="buscarCEP()">OK</button>
-              </div>
-              <div id="resultado"></div>
             </div>
           </div>
-        </div>
-      </section>
-
-      <div className="description-section">
-      <hr className="hr-prod-1" size="1" />
-      <h4 className="title-prod-1">
-                Descrição do Produto{" "}
-                <button
-          className={`show-more-button-1 ${showDescription ? "expanded" : ""}`}
-          onClick={() => setShowDescription(!showDescription)}
-        >
-          {showDescription ? "-" : "+"}
-        </button>
-              </h4>
-              <hr className="hr-prod-1" size="1" />
-
-              <p className='description-text'>
-                {showDescription ? productData?.descrição : ''}
-              </p>
-              </div>
+        </section>
       </div>
 
       <footer>
