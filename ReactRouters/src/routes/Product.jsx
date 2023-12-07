@@ -385,104 +385,11 @@ const Cart = () => {
               <span className="price-pd">
                 R$ {productData ? productData.preço : ""}
               </span> 
-              <p className="text-prod">Selecione a cor do produto:</p>
-              <div className="color-buttons">
-  <button
-    className="color-button"
-    style={{
-      backgroundColor: "pink",
-      padding: "18px",
-      cursor: "pointer",
-      borderRadius: "10px",
-    }}
-    onClick={() => selectColor("rosa")}
-  ></button>
-  <button
-    className="color-button"
-    style={{
-      backgroundColor: "#7d6cdb",
-      padding: "18px",
-      cursor: "pointer",
-      borderRadius: "10px",
-    }}
-    onClick={() => selectColor("roxo")}
-  ></button>
-  <button
-    className="color-button"
-    style={{
-      backgroundColor: "#42e0a3",
-      padding: "18px",
-      cursor: "pointer",
-      borderRadius: "10px",
-    }}
-    onClick={() => selectColor("verde")}
-  ></button>
-  <button
-    className="color-button"
-    style={{
-      backgroundColor: "yellow",
-      padding: "18px",
-      cursor: "pointer",
-      borderRadius: "10px",
-    }}
-    onClick={() => selectColor("amarelo")}
-  ></button>
-              </div>
-
-              <div id="selected-color" style={{ color: selectedColor }}>
-  Cor selecionada: {selectedColor}
-</div>
+              
 
   {/*{showSelectedColor && (
   <button className="selected-color-button">{selectColor}</button>
   )} */}
-
-
-<p className="text-prod">Tamanhos:</p>
-      <div className="size-options">
-        <div
-          className={`size-option ${selectedSize === "06" ? "selected" : ""}`}
-          onClick={() => handleSizeSelect("06")}
-        >
-          06
-        </div>
-        <div
-          className={`size-option ${selectedSize === "08" ? "selected" : ""}`}
-          onClick={() => handleSizeSelect("08")}
-        >
-          08
-        </div>
-        <div
-          className={`size-option ${selectedSize === "10" ? "selected" : ""}`}
-          onClick={() => handleSizeSelect("10")}
-        >
-          10
-        </div>
-        <div
-          className={`size-option ${selectedSize === "12" ? "selected" : ""}`}
-          onClick={() => handleSizeSelect("12")}
-        >
-          12
-        </div>
-        <div
-          className={`size-option ${selectedSize === "14" ? "selected" : ""}`}
-          onClick={() => handleSizeSelect("14")}
-        >
-          14
-        </div>
-        <div
-          className={`size-option ${selectedSize === "16" ? "selected" : ""}`}
-          onClick={() => handleSizeSelect("16")}
-        >
-          16
-        </div>
-      </div>
-
-      {/*<div id="selected-size">Tamanho selecionado: {selectedSize}</div>*/}
-                <span className="off">R$ 199,90</span>
-                <span className="price-pd">
-                  R$ {productData ? productData.preço : ""}
-                </span>
 
                 <br></br>
                 {productData &&
@@ -538,6 +445,46 @@ const Cart = () => {
                       </div>
                     </>
                   )}
+
+<p className="text-prod">Tamanhos:</p>
+      <div className="size-options">
+        <div
+          className={`size-option ${selectedSize === "06" ? "selected" : ""}`}
+          onClick={() => handleSizeSelect("06")}
+        >
+          06
+        </div>
+        <div
+          className={`size-option ${selectedSize === "08" ? "selected" : ""}`}
+          onClick={() => handleSizeSelect("08")}
+        >
+          08
+        </div>
+        <div
+          className={`size-option ${selectedSize === "10" ? "selected" : ""}`}
+          onClick={() => handleSizeSelect("10")}
+        >
+          10
+        </div>
+        <div
+          className={`size-option ${selectedSize === "12" ? "selected" : ""}`}
+          onClick={() => handleSizeSelect("12")}
+        >
+          12
+        </div>
+        <div
+          className={`size-option ${selectedSize === "14" ? "selected" : ""}`}
+          onClick={() => handleSizeSelect("14")}
+        >
+          14
+        </div>
+        <div
+          className={`size-option ${selectedSize === "16" ? "selected" : ""}`}
+          onClick={() => handleSizeSelect("16")}
+        >
+          16
+        </div>
+      </div>
 
                 {productData.size && productData.size.length > 0 && (
                   <div className="size-options">
