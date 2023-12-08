@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../styles/Home.css";
 import { Link } from "react-router-dom";
-import Carousel from '../routes/Carousel.jsx'
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 import { getFirestore, collection, doc, getDocs } from "firebase/firestore";
@@ -101,6 +100,18 @@ const Home = () => {
 
   const handleCloseCartClick = () => {
     setCartVisible(false);
+    setOverlayVisible(false);
+  };
+
+  const [userVisible, setUserVisible] = useState(false);
+
+  const handleUserIconClick = () => {
+    setUserVisible(!userVisible);
+    setOverlayVisible(!userVisible);
+  };
+
+  const handleCloseUserClick = () => {
+    setUserVisible(false);
     setOverlayVisible(false);
   };
 
@@ -222,12 +233,53 @@ const Home = () => {
         <Link to="/login"><p className="home-t">Bem vindo!<br></br>Entre ou cadastre-se</p></Link>
         <div className="icons-home">
 
-            <Link to="/login">
+          <Link>
+            <i
+              className="bx bx-user bt-header animation"
+              style={{ color: " #48A3A9" }}
+              onClick={handleUserIconClick}
+            ></i></Link>
+            <div
+              className={`overlay ${overlayVisible ? "active" : ""}`}
+              onClick={handleCloseUserClick}
+            ></div>
+            <div className={`user ${userVisible ? "active" : ""}`}>
+              <h2 className="cart-title-1">USUÁRIO</h2>
+              <div className="cart-content-1">
+              <h3 className="user-title-1">Olá, usuário</h3>
+              </div>
+
+              <Link to="/login">
+                <button type="button" className="btn-buy">
+                  FAZER LOGIN
+                </button>
+              </Link>
+
+              <Link to="/Requests2">
+                <button type="button" className="btn-buy">
+                  MEUS PEDIDOS
+                </button>
+              </Link>
+
+              <Link to="/Wishlist">
+                <button type="button" className="btn-buy">
+                  LISTA DE DESJOS
+                </button>
+              </Link>
+
+              <Link to="/cart2">
+                <button type="button" className="btn-buy">
+                  VER MEU CARRINHO
+                </button>
+              </Link>
+
+              
               <i
-                className="bx bx-user bt-header animation"
-                style={{ color: "#48A3A9" }}
+                className="bx bx-x"
+                id="close-user"
+                onClick={handleCloseUserClick}
               ></i>
-            </Link>
+            </div>
 
             <Link to="/wishlist">
               <i
