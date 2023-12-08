@@ -6,11 +6,13 @@
 }
 
 .button-menu-2 {
-  margin: 0;
+  display: flex;
+  align-items: center;
 }
 
 .button-image-2 {
-  margin: 0;
+  margin-bottom: 4px;
+  width: 25px;
 }
 
 .product {
@@ -36,16 +38,41 @@
   margin-left: 10px;
 }
 
+.rotating-jumping-image {
+  width: 100px; 
+  height: 100px; 
+  transition: transform 0.5s ease-in-out, margin-top 0.5s ease-in-out;
+}
+
+.rotating-jumping-image:hover {
+  transform: rotate(360deg) scale(1.2); 
+  margin-top: -8px; 
+}
+
 .carto {
   font-size: 20px !important;
   margin-left: 60px;
   margin-bottom: 2px;
+  border-radius: 50%; 
+  transition: background-color 0.3s ease; 
+}
+
+.carto:hover {
+  color: #fff !important;
+  background-color: #48a3a9; 
 }
 
 .heartho {
   font-size: 20px !important;
   margin-left: 10px;
   margin-bottom: 2px;
+  border-radius: 50%; 
+  transition: background-color 0.3s ease; 
+}
+
+.heartho:hover {
+  color: #fff !important;
+  background-color: #48a3a9; 
 }
 
 .hr-sections {
@@ -98,6 +125,15 @@
 .filter :hover {
   border: none !important;
 }
+
+.footer-animation-title {
+  transition: transform 0.3s ease-in-out;
+}
+
+.footer-animation-title:hover {
+  transform: translateX(10px);
+}
+
 
 .title-section {
   text-align: center;
@@ -311,6 +347,10 @@
   gap: 1rem;
   margin-top: 1rem;
   color: #48a3a9;
+}
+
+#cart-icon {
+  margin-left: 5px;
 }
 
 .cart-box {

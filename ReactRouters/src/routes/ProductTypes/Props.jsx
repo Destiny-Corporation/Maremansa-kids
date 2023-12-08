@@ -23,6 +23,9 @@ const Props = () => {
   const [isItemAdded, setIsItemAdded] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [showNotification2, setShowNotification2] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("Todos");
+  const [loading, setLoading] = useState(true);
+
 
   const showAddedToCartNotification = () => {
     setShowNotification(true);
@@ -45,12 +48,12 @@ const Props = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [isFilterActive, setIsFilterActive] = useState(false);
-  const [maxPrice, setMaxPrice] = useState(null);
+  const [maxPrice, setMaxPrice] = useState("");
   const nomesProdutos = [
     "Conjunto",
     "Boia",
     "Óculos",
-    "Relógia",
+    "Relógio",
     "Sandália",
     "Colete",
   ];
@@ -83,7 +86,6 @@ const Props = () => {
   useEffect(() => {
     localStorage.setItem("favoriteItems", JSON.stringify(favoriteItems));
   }, [favoriteItems]);
-
 
   const handleCartIconClick = () => {
     setCartVisible(!cartVisible);
@@ -146,10 +148,17 @@ const Props = () => {
 
   useEffect(() => {
     const fetchProdutos = async () => {
-      const produtosCollection = collection(firestore, "Props");
-      const produtosSnapshot = await getDocs(produtosCollection);
-      const produtosData = produtosSnapshot.docs.map((doc) => doc.data());
-      setProdutos(produtosData);
+      try {
+        const produtosCollection = collection(firestore, "Props");
+        const produtosSnapshot = await getDocs(produtosCollection);
+        const produtosData = produtosSnapshot.docs.map((doc) => doc.data());
+        setProdutos(produtosData);
+        setLoading(false); // Definindo loading como falso após o carregamento dos produtos
+        console.log(produtosData);
+      } catch (error) {
+        console.error("Erro ao carregar produtos:", error);
+        setLoading(false); // Definindo loading como falso em caso de erro
+      }
     };
 
     fetchProdutos();
@@ -161,17 +170,23 @@ const Props = () => {
     setFilterParam(e.target.value);
   };
 
+  const handleFilterButtonClick = () => {
+    setIsFilterActive(!isFilterActive);
+    setMaxPrice("");
+  };
+
   const filteredProdutos = produtos.filter((produto) => {
-    // Verifica se o produto corresponde à categoria selecionada ou se a categoria é "All".
-    if (
-      filterParam === "All" ||
-      produto.nome_prop.toLowerCase().includes(filterParam.toLowerCase())
-    ) {
-      // Verifica se o produto corresponde ao termo de pesquisa.
-      return produto.nome_prop.toLowerCase().includes(searchTerm.toLowerCase());
-    }
-    return false; // Produto não corresponde à categoria selecionada.
+    const categoryMatch =
+      selectedCategory === "Todos" ||
+      produto.nome_prop.toLowerCase().includes(selectedCategory.toLowerCase());
+  
+    const searchMatch = produto.nome_prop.toLowerCase().includes(searchTerm.toLowerCase());
+  
+    // Adicione aqui a lógica do filtro de preço se necessário
+  
+    return categoryMatch && searchMatch;
   });
+  
 
   const pageCount = Math.ceil(filteredProdutos.length / itemsPerPage);
   const offset = currentPage * itemsPerPage;
@@ -199,24 +214,6 @@ const Props = () => {
     setCurrentPage(selected);
   };
 
-  const handleFilterButtonClick = () => {
-    setIsFilterActive(!isFilterActive);
-    setMaxPrice("");
-  };
-
-  {/*const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
-    if (isFilterActive && maxPrice !== null) {
-      if (produto.preço && typeof produto.preço === "string") {
-        const precoNumerico = parseFloat(
-          produto.preço.replace("R$ ", "").replace(",", ".")
-        );
-        return precoNumerico <= maxPrice;
-      }
-      return true;
-    }
-    return true;
-  });*/}
-
   useEffect(() => {
     // Configura a manipulação do DOM após o componente ter sido montado
     setIsComponentReady(true);
@@ -228,17 +225,26 @@ const Props = () => {
   }, []);
 
   return (
-    <><div className="main">
+    <>
+    {loading ? ( 
+      <div className="loading-container">
+    <img src="/assets/espera.gif" alt="Carregando..." style={{ width: '130px', height: '130px' }}/>
+  </div>
+    ) : (
+    <>
+    <div className="main">
       <header className="main-header">
-        <div className="search-container-header">
-          <input
-            type="text"
-            className="search-bar-header"
-            placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
-          />
-          <button className="search-button-header" type="submit">
-            <i className="bx bx-search"></i>
-          </button>
+      <div className="search-container-header">
+        <input
+          type="text"
+          className="search-bar"
+          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <button className="search-button" type="submit">
+          <i className="bx bx-search"></i>
+        </button>
         </div>
         <div className="header-logo-center">
           <Link to="/">
@@ -356,45 +362,45 @@ const Props = () => {
 
       <div className="container-subheader-1">
         <div className="container-menu-buttons-1">
-          <div className="button-menu-2">
-          <img
+          <div className="button-menu-1">
+          {/* <img
               src="/assets/promotion.png"
               alt="filtro"
               className="button-image-2"
-            />
+            /> */}
             <Link to="/sale">
               <h6>PROMOÇÕES</h6>
             </Link>
           </div>
 
-          <div className="button-menu-2">
-          <img
-              src="/assets/may.png"
+          <div className="button-menu-1">
+          {/* <img
+              src="/assets/woman.png"
               alt="filtro"
               className="button-image-2"
-            />
+            /> */}
             <Link to="/female">
               <h6>FEMININO</h6>
             </Link>
           </div>
 
-          <div className="button-menu-2">
-          <img
-              src="/assets/swim-suit.png"
+          <div className="button-menu-1">
+          {/* <img
+              src="/assets/man.png"
               alt="filtro"
               className="button-image-2"
-            />
+            /> */}
             <Link to="/male">
               <h6>MASCULINO</h6>
             </Link>
           </div>
 
-          <div className="button-menu-2">
-          <img
+          <div className="button-menu-1">
+          {/* <img
               src="/assets/sunglasses-1.png"
               alt="filtro"
               className="button-image-2"
-            />
+            /> */}
             <Link to="/props">
               <h6>ACESSÓRIOS</h6>
             </Link>
@@ -417,37 +423,40 @@ const Props = () => {
 
         {isFilterActive && (
           <div className="filter-container">
-            <div className="filter-content">
-              <p className="filter-title">FILTRAR</p>
-              <hr className="filter-hr" />
-
-              <ul className="filter-list">
-                <li>
-                  <label className="filter-label">CATEGORIAS:</label>
-                </li>
-                {nomesProdutos.map((nome, index) => (
-                  <li className="filter-item" key={index}>
-                    <button
-                      className="filter-option"
-                      onClick={() =>
-                        handleFilterChange({ target: { value: nome } })
-                      }
-                    >
-                      {nome}
-                    </button>
-                  </li>
-                ))}
-                <li>
+          <div className="filter-content">
+            <p className="filter-title">FILTRAR</p>
+            <hr className="filter-hr" />
+    
+            <ul className="filter-list">
+              <li>
+                <label className="filter-label">CATEGORIAS:</label>
+              </li>
+              <li className="filter-item">
+                <button
+                  className={`filter-option ${selectedCategory === "Todos" ? "active" : ""}`}
+                  onClick={() => setSelectedCategory("Todos")}
+                >
+                  Todos
+                </button>
+              </li>
+              {nomesProdutos.map((nome, index) => (
+                <li className="filter-item" key={index}>
                   <button
-                    className="close-button"
-                    onClick={handleFilterButtonClick}
+                    className={`filter-option ${selectedCategory === nome ? "active" : ""}`}
+                    onClick={() => setSelectedCategory(nome)}
                   >
-                    X
+                    {nome}
                   </button>
                 </li>
-              </ul>
-            </div>
+              ))}
+              <li>
+                <button className="close-button" onClick={handleFilterButtonClick}>
+                  X
+                </button>
+              </li>
+            </ul>
           </div>
+        </div>
         )}
 
         {/*<li className="price-filter">
@@ -478,7 +487,7 @@ const Props = () => {
 
         {filteredProdutos.length === 0 ? (
   <p className="no-results-message">Nenhum produto encontrado.</p>
-) : (
+) : ( <div className="test">
   <div className="container-clothes">
     {currentPageProdutos.map((produto, index) => (
       <div className="clothes" key={index} style={{ width: "20%" }}>
@@ -517,28 +526,27 @@ const Props = () => {
         </div>
       </div>
     ))}
-
-<div className="pagination-container">
-          <ReactPaginate
-            previousLabel={<button className="custom-button">Anterior</button>}
-            nextLabel={<button className="custom-button">Próximo</button>}
-            breakLabel={"..."}
-            pageCount={pageCount}
-            marginPagesDisplayed={2}
-            pageRangeDisplayed={5}
-            onPageChange={handlePageChange}
-            containerClassName={"pagination"}
-            subContainerClassName={"pages pagination"}
-            activeClassName={"active"}
-            previousClassName={prevButtonClass}
-            nextClassName={nextButtonClass}
-            pageClassName={"page-count"}
-            pageLinkClassName={"page-link"}
-          />{" "}
-        </div>
   </div>
 
-  
+ <div className="pagination-container">
+ <ReactPaginate
+   previousLabel={<button className="custom-button">Anterior</button>}
+   nextLabel={<button className="custom-button">Próximo</button>}
+   breakLabel={"..."}
+   pageCount={pageCount}
+   marginPagesDisplayed={2}
+   pageRangeDisplayed={5}
+   onPageChange={handlePageChange}
+   containerClassName={"pagination"}
+   subContainerClassName={"pages pagination"}
+   activeClassName={"active"}
+   previousClassName={prevButtonClass}
+   nextClassName={nextButtonClass}
+   pageClassName={"page-count"}
+   pageLinkClassName={"page-link"}
+ />{" "}
+</div>
+</div>
   
 )}
 
@@ -562,16 +570,17 @@ const Props = () => {
         )}
 
       </div>
-    </div>
+      </div>
+
 
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
-            <img src="/assets/whale.png" />
+        <Link to="/"><img className="rotating-jumping-image" src="/assets/whale.png" /></Link>
           </div>
 
           <div className="footer-section-div">
-            <h3>SOBRE NÓS</h3>
+            <h3 className='footer-animation-title'>SOBRE NÓS</h3>
             <li>
               <Link to="/company">A EMPRESA</Link>
             </li>
@@ -584,7 +593,7 @@ const Props = () => {
           </div>
 
           <div className="footer-section-div">
-            <h3>SUPORTE</h3>
+            <h3 className='footer-animation-title'>SUPORTE</h3>
             <li>
               <Link to="/services">ATENDIMENTO</Link>
             </li>
@@ -597,7 +606,7 @@ const Props = () => {
           </div>
 
           <div className="footer-section-div">
-            <h3>CONTATOS</h3>
+            <h3 className='footer-animation-title'>CONTATOS</h3>
             <i className="fa fa-whatsapp"></i>
             <i className="fa fa-google"></i>
             <i className="fa fa-instagram"></i>
@@ -607,8 +616,9 @@ const Props = () => {
       <div className="last-text">
         <p className="text-sub-footer">maremansa</p>
       </div>
+      </>
+    )}
     </>
-    
   );
 };
 

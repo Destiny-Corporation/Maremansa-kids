@@ -29,7 +29,10 @@ export const firestore = getFirestore(app);
 const FemBaby = () => {
   const [isItemAdded, setIsItemAdded] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
+  const [showNotification2, setShowNotification2] = useState(false);
   const [overlayVisible, setOverlayVisible] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState("Todos");
 
   const showAddedToCartNotification = () => {
     setShowNotification(true);
@@ -37,6 +40,14 @@ const FemBaby = () => {
       setShowNotification(false);
     }, 2000);
   };
+
+  const showAddedToFavoriteNotification = () => {
+    setShowNotification2(true);
+    setTimeout(() => {
+      setShowNotification2(false);
+    }, 2000);
+  };
+
   const [produtos, setProdutos] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
@@ -58,10 +69,37 @@ const FemBaby = () => {
   });
   const [cartVisible, setCartVisible] = useState(false);
   const [isComponentReady, setIsComponentReady] = useState(false);
+
+  const [favoriteItems, setFavoriteItems] = useState(() => {
+    const savedFavoriteItems = localStorage.getItem("favoriteItems");
+    return savedFavoriteItems ? JSON.parse(savedFavoriteItems) : [];
+  });
+
+  const handleAddToFavorites = (produto) => {
+    const existingItemIndex = favoriteItems.findIndex(
+      (item) => item.nome_prodfemme === produto.nome_prodfemme
+    );
+  
+    if (existingItemIndex === -1) {
+      setFavoriteItems([...favoriteItems, { ...produto }]);
+    }
+    setIsItemAdded(true);
+    setTimeout(() => {
+      setIsItemAdded(false);
+    }, 5000);
+  }; 
+  
+  useEffect(() => {
+    localStorage.setItem("favoriteItems", JSON.stringify(favoriteItems));
+  }, [favoriteItems]);
+
+
   const handleCartIconClick = () => {
     setCartVisible(!cartVisible);
     setOverlayVisible(!cartVisible);
   };
+
+  
 
   const handleCloseCartClick = () => {
     setCartVisible(false);
@@ -123,21 +161,25 @@ const FemBaby = () => {
 
   useEffect(() => {
     const fetchProdutos = async () => {
-      const produtosCollection = collection(firestore, "Prodfemme");
-      const produtosQuery = query(
-        produtosCollection,
-        where("category_prodfemme", "==", "Baby")
-      );
-      const produtosSnapshot = await getDocs(produtosQuery);
-      const produtosData = produtosSnapshot.docs.map((doc) => doc.data());
-      setProdutos(produtosData);
-      console.log(produtosData);
+      try {
+        const produtosCollection = collection(firestore, "Prodfemme");
+        const produtosQuery = query(
+          produtosCollection,
+          where("category_prodfemme", "==", "Baby")
+        );
+        const produtosSnapshot = await getDocs(produtosQuery);
+        const produtosData = produtosSnapshot.docs.map((doc) => doc.data());
+        setProdutos(produtosData);
+        setLoading(false); // Definindo loading como falso após o carregamento dos produtos
+        console.log(produtosData);
+      } catch (error) {
+        console.error("Erro ao carregar produtos:", error);
+        setLoading(false); // Definindo loading como falso em caso de erro
+      }
     };
 
     fetchProdutos();
   }, []);
-
-  const [filterParam, setFilterParam] = useState("All");
 
   const handleFilterChange = (e) => {
     setFilterParam(e.target.value);
@@ -145,15 +187,11 @@ const FemBaby = () => {
 
   const filteredProdutos = produtos.filter((produto) => {
     if (
-      produto.nome_prodfemme &&
-      (filterParam === "All" ||
-        produto.nome_prodfemme
-          .toLowerCase()
-          .includes(filterParam.toLowerCase()))
+      (selectedCategory === "Todos" ||
+        produto.nome_prodfemme.toLowerCase().includes(selectedCategory.toLowerCase())) &&
+      produto.nome_prodfemme.toLowerCase().includes(searchTerm.toLowerCase())
     ) {
-      return produto.nome_prodfemme
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase());
+      return true;
     }
     return false;
   });
@@ -171,6 +209,7 @@ const FemBaby = () => {
     return true;
   });
 
+  
   const pageCount = Math.ceil(filteredProdutos.length / itemsPerPage);
   const offset = currentPage * itemsPerPage;
   const currentPageProdutos = filteredProdutos.slice(
@@ -202,14 +241,21 @@ const FemBaby = () => {
   };
   return (
     <>
-    <div className="main">
+     {loading ? ( 
+        <div className="loading-container">
+      <img src="/assets/espera.gif" alt="Carregando..." style={{ width: '130px', height: '130px' }}/>
+    </div>
+      ) : (
+        <div className="main">
       <header className="main-header">
         <div className="search-container-header">
-          <input
-            type="text"
-            className="search-bar-header"
-            placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
-          />
+        <input
+          type="text"
+          className="search-bar"
+          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
           <button className="search-button-header" type="submit">
             <i className="bx bx-search"></i>
           </button>
@@ -371,37 +417,40 @@ const FemBaby = () => {
 
         {isFilterActive && (
           <div className="filter-container">
-            <div className="filter-content">
-              <p className="filter-title">FILTRAR</p>
-              <hr className="filter-hr" />
-
-              <ul className="filter-list">
-                <li>
-                  <label className="filter-label">CATEGORIAS:</label>
-                </li>
-                {nomesProdutos.map((nome, index) => (
-                  <li className="filter-item" key={index}>
-                    <button
-                      className="filter-option"
-                      onClick={() =>
-                        handleFilterChange({ target: { value: nome } })
-                      }
-                    >
-                      {nome}
-                    </button>
-                  </li>
-                ))}
-                <li>
+          <div className="filter-content">
+            <p className="filter-title">FILTRAR</p>
+            <hr className="filter-hr" />
+    
+            <ul className="filter-list">
+              <li>
+                <label className="filter-label">CATEGORIAS:</label>
+              </li>
+              <li className="filter-item">
+                <button
+                  className={`filter-option ${selectedCategory === "Todos" ? "active" : ""}`}
+                  onClick={() => setSelectedCategory("Todos")}
+                >
+                  Todos
+                </button>
+              </li>
+              {nomesProdutos.map((nome, index) => (
+                <li className="filter-item" key={index}>
                   <button
-                    className="close-button"
-                    onClick={handleFilterButtonClick}
+                    className={`filter-option ${selectedCategory === nome ? "active" : ""}`}
+                    onClick={() => setSelectedCategory(nome)}
                   >
-                    X
+                    {nome}
                   </button>
                 </li>
-              </ul>
-            </div>
+              ))}
+              <li>
+                <button className="close-button" onClick={handleFilterButtonClick}>
+                  X
+                </button>
+              </li>
+            </ul>
           </div>
+        </div>
         )}
 
         <div className="items-per-page">
@@ -417,20 +466,19 @@ const FemBaby = () => {
         </div>
 
         <div className="container-clothes">
-          {produtos.map((produto, index) => (
-            <div className="clothes" key={index} style={{ width: "20%" }}>
-              <Link to={`/product/${"Prodfemme"}/${produto.nome_prodfemme}`}>
-                <img
-                  className="img_prod"
-                  src={produto.url_image}
-                  alt={produto.nome_prodfemme}
-                />
-              </Link>
-
-              <div className="info-container1">
-  <Link to={`/product/${"Prodfemme"}/${produto.nome_prodfemme}`}>
-    <h6 className="text-card-h">{produto.nome_prodfemme}</h6>
-  </Link>
+  {filteredProdutosWithPrice.map((produto, index) => (
+    <div className="clothes" key={index} style={{ width: "20%" }}>
+      <Link to={`/product/${"Prodfemme"}/${produto.nome_prodfemme}`}>
+        <img
+          className="img_prod"
+          src={produto.url_image}
+          alt={produto.nome_prodfemme}
+        />
+      </Link>
+      <div className="info-container1">
+        <Link to={`/product/${"Prodfemme"}/${produto.nome_prodfemme}`}>
+          <h6 className="text-card-h">{produto.nome_prodfemme}</h6>
+        </Link>
   <div className="price-and-icons">
     <h6 className="price">R$ {produto.preço}</h6>
     <div className="icons-container">
@@ -458,13 +506,28 @@ const FemBaby = () => {
         </div>
 
         {showNotification && (
+        <div className={`notification ${isItemAdded ? "active" : ""}`}>
+          <p className="not">Item adicionado ao carrinho!</p>
+          <Link to="/cart2" className="go-to-cart-button">
+            Ir para o Carrinho
+          </Link>
+        </div>
+      )}
+
+{showNotification2 && (
           <div className={`notification ${isItemAdded ? "active" : ""}`}>
-            <p className="not">Item adicionado ao carrinho!</p>
-            <Link to="/cart2" className="go-to-cart-button">
-              Ir para o Carrinho
+            <p className="not">Item adicionado a lista de desejo!</p>
+            <Link to="/wishlist" className="go-to-cart-button">
+              Ir para a Lista de Desejo
             </Link>
           </div>
         )}
+
+
+
+
+
+
       </div>
 
       <div className="pagination-container">
@@ -530,6 +593,7 @@ const FemBaby = () => {
         <p className="text-sub-footer">maremansa</p>
       </div>
     </div>
+      )}
     </>
   );
 };
