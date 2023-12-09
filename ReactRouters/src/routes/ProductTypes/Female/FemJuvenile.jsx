@@ -236,11 +236,11 @@ const FemJuvenile = () => {
   return (
     <>
     <div className="main">
-      <header className="main-header">
+    <header className="main-header">
       <div className="search-container-header">
         <input
           type="text"
-          className="search-bar"
+          className="search-bar-header"
           placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -259,22 +259,22 @@ const FemJuvenile = () => {
             />{" "}
           </Link>
         </div>
-        <div className="icons-about">
+        <div className="icons-w">
           <Link to="/login">
             <i
-              className="bx bx-user bt-header"
+              className="bx bx-user bt-header animation"
               style={{ color: "#ffffff" }}
             ></i>
           </Link>
           <Link to="/wishlist">
             <i
-              className="bx bx-heart bt-header"
+              className="bx bx-heart bt-header animation"
               style={{ color: "#ffffff" }}
             ></i>
           </Link>
 
           <i
-            className="bx bx-cart bt-header"
+            className="bx bx-cart bt-header animation"
             style={{ color: "#ffffff" }}
             id="cart-icon"
             onClick={handleCartIconClick}
@@ -398,7 +398,7 @@ const FemJuvenile = () => {
             <img
               src="/assets/filter.png"
               alt="filtro"
-              className="button-image"
+              className="button-image animation"
             />
           </button>
           <hr className="hr-sections" />
@@ -512,8 +512,8 @@ const FemJuvenile = () => {
 
       <div className="pagination-container">
         <ReactPaginate
-          previousLabel={<button className="custom-button">ANTERIOR</button>}
-          nextLabel={<button className="custom-button">PRÓXIMO</button>}
+          previousLabel={<button className="btn-6">ANTERIOR</button>}
+          nextLabel={<button className="btn-6">PRÓXIMO</button>}
           breakLabel={"..."}
           pageCount={pageCount}
           marginPagesDisplayed={2}
@@ -533,11 +533,11 @@ const FemJuvenile = () => {
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
-            <img src="/assets/whale.png" />
+        <Link to="/"><img className="rotating-jumping-image" src="/assets/whale.png" /></Link>
           </div>
 
           <div className="footer-section-div">
-            <h3>SOBRE NÓS</h3>
+            <h3 className='footer-animation-title'>SOBRE NÓS</h3>
             <li>
               <Link to="/company">A EMPRESA</Link>
             </li>
@@ -550,7 +550,7 @@ const FemJuvenile = () => {
           </div>
 
           <div className="footer-section-div">
-            <h3>SUPORTE</h3>
+            <h3 className='footer-animation-title'>SUPORTE</h3>
             <li>
               <Link to="/services">ATENDIMENTO</Link>
             </li>
@@ -563,7 +563,7 @@ const FemJuvenile = () => {
           </div>
 
           <div className="footer-section-div">
-            <h3>CONTATOS</h3>
+            <h3 className='footer-animation-title'>CONTATOS</h3>
             <i className="fa fa-whatsapp"></i>
             <i className="fa fa-google"></i>
             <i className="fa fa-instagram"></i>

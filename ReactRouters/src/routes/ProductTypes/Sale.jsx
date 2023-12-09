@@ -225,40 +225,43 @@ const Sale = () => {
     <><div className="main">
       <header className="main-header">
       <div className="search-container-header">
-          <input
-            type="text"
-            className="search-bar-header"
-            placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
-          />
-          <button className="search-button-header" type="submit">
-            <i className="bx bx-search"></i>
-          </button>
+        <input
+          type="text"
+          className="search-bar-header"
+          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <button className="search-button" type="submit">
+          <i className="bx bx-search"></i>
+        </button>
         </div>
         <div className="header-logo-center">
           <Link to="/">
+            {" "}
             <img
               src="/assets/logo.png"
               alt="Logo"
               className="header-logo-center"
-            />
+            />{" "}
           </Link>
         </div>
-        <div className="icons-about">
+        <div className="icons-w">
           <Link to="/login">
             <i
-              className="bx bx-user bt-header"
+              className="bx bx-user bt-header animation"
               style={{ color: "#ffffff" }}
             ></i>
           </Link>
           <Link to="/wishlist">
             <i
-              className="bx bx-heart bt-header"
+              className="bx bx-heart bt-header animation"
               style={{ color: "#ffffff" }}
             ></i>
           </Link>
 
           <i
-            className="bx bx-cart bt-header"
+            className="bx bx-cart bt-header animation"
             style={{ color: "#ffffff" }}
             id="cart-icon"
             onClick={handleCartIconClick}
@@ -382,7 +385,7 @@ const Sale = () => {
             <img
               src="/assets/filter.png"
               alt="filtro"
-              className="button-image-12"
+              className="button-image-12 animation"
             />
           </button>
           <hr className="hr-sections"></hr>
@@ -483,8 +486,8 @@ const Sale = () => {
 
  <div className="pagination-container">
  <ReactPaginate
-   previousLabel={<button className="custom-button">Anterior</button>}
-   nextLabel={<button className="custom-button">Próximo</button>}
+   previousLabel={<button className="btn-6">Anterior</button>}
+   nextLabel={<button className="btn-6">Próximo</button>}
    breakLabel={"..."}
    pageCount={pageCount}
    marginPagesDisplayed={2}

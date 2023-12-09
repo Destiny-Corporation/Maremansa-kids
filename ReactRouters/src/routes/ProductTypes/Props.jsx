@@ -237,7 +237,7 @@ const Props = () => {
       <div className="search-container-header">
         <input
           type="text"
-          className="search-bar"
+          className="search-bar-header"
           placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
@@ -256,22 +256,22 @@ const Props = () => {
             />{" "}
           </Link>
         </div>
-        <div className="icons-about">
+        <div className="icons-w">
           <Link to="/login">
             <i
-              className="bx bx-user bt-header"
+              className="bx bx-user bt-header animation" 
               style={{ color: "#ffffff" }}
             ></i>
           </Link>
           <Link to="/wishlist">
             <i
-              className="bx bx-heart bt-header"
+              className="bx bx-heart bt-header animation"
               style={{ color: "#ffffff" }}
             ></i>
           </Link>
 
           <i
-            className="bx bx-cart bt-header"
+            className="bx bx-cart bt-header animation"
             style={{ color: "#ffffff" }}
             id="cart-icon"
             onClick={handleCartIconClick}
@@ -415,7 +415,7 @@ const Props = () => {
             <img
               src="/assets/filter.png"
               alt="filtro"
-              className="button-image-12"
+              className="button-image-12 animation"
             />
           </button>
           <hr className="hr-sections"></hr>
@@ -530,8 +530,8 @@ const Props = () => {
 
  <div className="pagination-container">
  <ReactPaginate
-   previousLabel={<button className="custom-button">Anterior</button>}
-   nextLabel={<button className="custom-button">Próximo</button>}
+   previousLabel={<button className="btn-6"> Anterior </button>}
+   nextLabel={<button className="btn-6"> Próximo </button>}
    breakLabel={"..."}
    pageCount={pageCount}
    marginPagesDisplayed={2}

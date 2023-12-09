@@ -34,7 +34,7 @@
 }
 
 .filter-option:hover {
-  color: #237379; 
+  background: radial-gradient(circle, #48a3a9 0%, #24787e 100%);
 }
 
 .filter-hr {
@@ -174,8 +174,18 @@ button {
   cursor: pointer;
 }
 
+.active > .page-link,
+.page-link.active {
+    z-index: 3;
+    color: var(--bs-pagination-active-color);
+    background-color: transparent; /* Set background to transparent */
+    border-color: var(--bs-pagination-active-border-color);
+}
+
+
 .active {
-  background-color: #48a3a9;
+  background-color: transparent;
+  background: radial-gradient(circle, #48a3a9 0%, #2a777c 100%);
   color: #fff;
 }
 
@@ -187,7 +197,6 @@ button {
   display: block;
   margin-top: -1px;
   margin-left: -2px;
-  color: var(--bs-pagination-color);
   text-decoration: none;
   background-color: transparent;
   border-radius: 8px;

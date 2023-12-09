@@ -70,7 +70,7 @@ const Cart2 = () => {
           </div>
         </header>
 
-        <div className="container-subheader">
+        {/* <div className="container-subheader">
           <div className="container-cart">
             <i className="bx bx-cart bt-header"></i>
             <h6>| Carrinho ({cartItems.length})</h6>
@@ -118,7 +118,7 @@ const Cart2 = () => {
   ))}
   </div>
   {/* Botão "Comprar Agora" */}
-  {cartItems.length > 0 && (
+  {/* {cartItems.length > 0 && (
           <Link to="/checkout">
             <button className="comprar-agora-btn">Comprar Agora</button>
           </Link>
@@ -166,8 +166,8 @@ const Cart2 = () => {
         </section>
       </footer>
       <div className="last-text">
-        <p className="text-sub-footer">maremansa</p>
-      </div>
+  <p className="text-sub-footer">maremansa</p>*/}
+      </div> 
     </>
   );
 };
