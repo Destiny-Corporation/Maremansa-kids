@@ -7,7 +7,7 @@ import { getFirestore, collection, doc, getDoc } from "firebase/firestore";
 import ReactPaginate from "react-paginate";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDTKUI6nV-DZjIsUo1BMkjIUWOQbT9gU3Q",
+  apiKey: "AIzaSyDTKUI6nV-DZxjIsUo1BMkjIUWOQbT9gU3Q",
   authDomain: "auth-amanda.firebaseapp.com",
   projectId: "auth-amanda",
   storageBucket: "auth-amanda.appspot.com",
@@ -130,6 +130,12 @@ const Cart = () => {
       }
     }, []); // O segundo argumento vazio garante que este efeito seja executado apenas uma vez, após a montagem inicial do componente.
 
+    const handleQuantityChange = (newQuantity) => {
+      if (newQuantity >= 1) {
+        setSelectedQuantity(newQuantity);
+      }
+    };
+
     const handleAddToCart = (produto) => {
       const existingItemIndex = cartItems.findIndex(
         (item) => item.nome_prop === produto.nome_prop
@@ -155,11 +161,7 @@ const Cart = () => {
     const handleCloseCartClick = () => {
       setCartVisible(false); // Esconde o carrinho quando o usuário clica no ícone de fechar
     };
-    const handleQuantityChange = (newQuantity) => {
-      if (newQuantity >= 1) {
-        setSelectedQuantity(newQuantity);
-      }
-    };
+
     const calculateTotal = () => {
       let total = 0;
       for (const item of cartItems) {
