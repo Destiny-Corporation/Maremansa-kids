@@ -23,6 +23,8 @@ const Sale = () => {
   const [isItemAdded, setIsItemAdded] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [showNotification2, setShowNotification2] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("Todos");
+  const [loading, setLoading] = useState(true);
 
   const showAddedToCartNotification = () => {
     setShowNotification(true);
@@ -67,7 +69,7 @@ const Sale = () => {
   });
   const handleAddToFavorites = (produto) => {
     const existingItemIndex = favoriteItems.findIndex(
-      (item) => item.nome_prop === produto.nome_prop
+      (item) => item.nome_prodpromo === produto.nome_prodpromo
     );
   
     if (existingItemIndex === -1) {
@@ -77,7 +79,7 @@ const Sale = () => {
     setTimeout(() => {
       setIsItemAdded(false);
     }, 5000);
-  }; 
+  };
   
   useEffect(() => {
     localStorage.setItem("favoriteItems", JSON.stringify(favoriteItems));
@@ -149,10 +151,17 @@ const Sale = () => {
 
   useEffect(() => {
     const fetchProdutos = async () => {
-      const produtosCollection = collection(firestore, "ProdPomo");
-      const produtosSnapshot = await getDocs(produtosCollection);
-      const produtosData = produtosSnapshot.docs.map((doc) => doc.data());
-      setProdutos(produtosData);
+      try {
+        const produtosCollection = collection(firestore, "ProdPomo");
+        const produtosSnapshot = await getDocs(produtosCollection);
+        const produtosData = produtosSnapshot.docs.map((doc) => doc.data());
+        setProdutos(produtosData);
+        setLoading(false); // Definindo loading como falso após o carregamento dos produtos
+        console.log(produtosData);
+      } catch (error) {
+        console.error("Erro ao carregar produtos:", error);
+        setLoading(false); // Definindo loading como falso em caso de erro
+      }
     };
 
     fetchProdutos();
@@ -165,30 +174,15 @@ const Sale = () => {
   };
 
   const filteredProdutos = produtos.filter((produto) => {
-    // Verifica se o produto corresponde à categoria selecionada ou se a categoria é "All".
-    if (
-      filterParam === "All" ||
-      produto.nome_prodpromo.toLowerCase().includes(filterParam.toLowerCase())
-    ) {
-      // Verifica se o produto corresponde ao termo de pesquisa.
-      return produto.nome_prodpromo
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase());
-    }
-    return false; // Produto não corresponde à categoria selecionada.
-  });
-
-  const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
-    if (isFilterActive && maxPrice !== null) {
-      // Verifica se o preço está no formato correto (por exemplo, "R$ 50,00")
-      if (produto.preço && typeof produto.preço === "string") {
-        const precoNumerico = parseFloat(
-          produto.preço.replace("R$ ", "").replace(",", ".")
-        );
-        return precoNumerico <= maxPrice;
-      }
-    }
-    return true;
+    const categoryMatch =
+      selectedCategory === "Todos" ||
+      produto.nome_prodpromo.toLowerCase().includes(selectedCategory.toLowerCase());
+  
+    const searchMatch = produto.nome_prodpromo.toLowerCase().includes(searchTerm.toLowerCase());
+  
+    // Adicione aqui a lógica do filtro de preço se necessário
+  
+    return categoryMatch && searchMatch;
   });
 
   const pageCount = Math.ceil(filteredProdutos.length / itemsPerPage);
@@ -222,19 +216,23 @@ const Sale = () => {
   };
 
   return (
+    <>
+    {loading ? ( 
+      <div className="loading-container">
+    <img src="/assets/espera.gif" alt="Carregando..." style={{ width: '130px', height: '130px' }}/>
+  </div>
+    ) : (
     <><div className="main">
       <header className="main-header">
-        <div className="search-container-header">
-        <input
-          type="text"
-          className="search-bar"
-          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <button className="search-button" type="submit">
-          <i className="bx bx-search"></i>
-        </button>
+      <div className="search-container-header">
+          <input
+            type="text"
+            className="search-bar-header"
+            placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
+          />
+          <button className="search-button-header" type="submit">
+            <i className="bx bx-search"></i>
+          </button>
         </div>
         <div className="header-logo-center">
           <Link to="/">
@@ -278,7 +276,7 @@ const Sale = () => {
               <div className="cart-item" key={index}>
                 <img
                   src={produto.url_image}
-                  alt={produto.nome_prop}
+                  alt={produto.nome_prodpromo}
                   className="cart-item-image-1"
                   style={{
                     width: "100px",
@@ -377,48 +375,56 @@ const Sale = () => {
         </div>
       </div>
 
-      <div className="title-section">
-        <h1 className="general-title">PROMOÇÕES</h1>
-        <button className="filter" onClick={handleFilterButtonClick}>
-          <img src="/assets/filter.png" alt="filtro" className="button-image" />
-        </button>
-        <hr className="hr-sections" />
-      </div>
+      <div className="space">
+        <div className="title-section">
+          <h1 className="general-title-1">PROMOÇÕES</h1>
+          <button className="filter" onClick={handleFilterButtonClick}>
+            <img
+              src="/assets/filter.png"
+              alt="filtro"
+              className="button-image-12"
+            />
+          </button>
+          <hr className="hr-sections"></hr>
+        </div>
 
       {isFilterActive && (
-        <div className="filter-container">
+          <div className="filter-container">
           <div className="filter-content">
             <p className="filter-title">FILTRAR</p>
             <hr className="filter-hr" />
-
+    
             <ul className="filter-list">
               <li>
                 <label className="filter-label">CATEGORIAS:</label>
               </li>
+              <li className="filter-item">
+                <button
+                  className={`filter-option ${selectedCategory === "Todos" ? "active" : ""}`}
+                  onClick={() => setSelectedCategory("Todos")}
+                >
+                  Todos
+                </button>
+              </li>
               {nomesProdutos.map((nome, index) => (
                 <li className="filter-item" key={index}>
                   <button
-                    className="filter-option"
-                    onClick={() =>
-                      handleFilterChange({ target: { value: nome } })
-                    }
+                    className={`filter-option ${selectedCategory === nome ? "active" : ""}`}
+                    onClick={() => setSelectedCategory(nome)}
                   >
                     {nome}
                   </button>
                 </li>
               ))}
               <li>
-                <button
-                  className="close-button"
-                  onClick={handleFilterButtonClick}
-                >
+                <button className="close-button" onClick={handleFilterButtonClick}>
                   X
                 </button>
               </li>
             </ul>
           </div>
         </div>
-      )}
+        )}
 
       <div className="items-per-page">
         <label>Itens por página:</label>
@@ -432,53 +438,82 @@ const Sale = () => {
         </select>
       </div>
 
-      <div className="container-clothes">
-        {currentPageProdutos.map((produto, index) => (
-          <div className="clothes" key={index} style={{ width: "20%" }}>
-            <Link to={`/product/${"ProdPomo"}/${produto.nome_prodpromo}`}>
-              <img className='img_prod' src={produto.url_image} alt={produto.nome_prodpromo} />
-            </Link>
-          
-
-<div className="info-container1">
-  <Link to={`/product/${"Prodpromo"}/${produto.nome_prodpromo}`}>
-    <h6 className="text-card-h">{produto.nome_prodpromo}</h6>
-  </Link>
-  <div className="price-and-icons">
-    <h6 className="price">R$ {produto.preço}</h6>
-    <div className="icons-container">
-      <i
-        className="bx bx-cart bt-header carto"
-        style={{ color: "#48a3a9" }}
-        onClick={() => {
-          handleAddToCart(produto);
-          showAddedToCartNotification();
-        }}
-      ></i>
-      <i
-        className="bx bx-heart bt-header heartho"
-        style={{ color: "#48a3a9" }}
-        onClick={() => {
-          handleAddToFavorites(produto);
-          showAddedToFavoriteNotification();
-        }}
-      ></i>
-    </div>
-  </div>
-</div>
-          </div>
-        ))}
-      </div>
-      {showNotification && (
-        <div className={`notification ${isItemAdded ? "active" : ""}`}>
-          <p className="not">Item adicionado ao carrinho!</p>
-          <Link to="/cart2" className="go-to-cart-button">
-            Ir para o Carrinho
+      {filteredProdutos.length === 0 ? (
+  <p className="no-results-message">Nenhum produto encontrado.</p>
+) : ( <div className="test">
+  <div className="container-clothes">
+    {currentPageProdutos.map((produto, index) => (
+      <div className="clothes" key={index} style={{ width: "20%" }}>
+        <Link to={`/product/${"ProdPomo"}/${produto.nome_prodpromo}`}>
+          <img
+            className="img_prod"
+            src={produto.url_image}
+            alt={produto.nome_prodpromo}
+          />
+        </Link>
+        <div className="info-container1">
+          <Link to={`/product/${"ProdPomo"}/${produto.nome_prodpromo}`}>
+            <h6 className="text-card-h">{produto.nome_prodpromo}</h6>
           </Link>
+          <div className="price-and-icons">
+            <h6 className="price">R$ {produto.preço}</h6>
+            <div className="icons-container">
+              <i
+                className="bx bx-cart bt-header carto"
+                style={{ color: "#48a3a9" }}
+                onClick={() => {
+                  handleAddToCart(produto);
+                  showAddedToCartNotification();
+                }}
+              ></i>
+              <i
+                className="bx bx-heart bt-header heartho"
+                style={{ color: "#48a3a9" }}
+                onClick={() => {
+                  handleAddToFavorites(produto);
+                  showAddedToFavoriteNotification();
+                }}
+              ></i>
+            </div>
+          </div>
         </div>
-      )}
+      </div>
+    ))}
+  </div>
 
-{showNotification2 && (
+ <div className="pagination-container">
+ <ReactPaginate
+   previousLabel={<button className="custom-button">Anterior</button>}
+   nextLabel={<button className="custom-button">Próximo</button>}
+   breakLabel={"..."}
+   pageCount={pageCount}
+   marginPagesDisplayed={2}
+   pageRangeDisplayed={5}
+   onPageChange={handlePageChange}
+   containerClassName={"pagination"}
+   subContainerClassName={"pages pagination"}
+   activeClassName={"active"}
+   previousClassName={prevButtonClass}
+   nextClassName={nextButtonClass}
+   pageClassName={"page-count"}
+   pageLinkClassName={"page-link"}
+ />{" "}
+</div>
+</div>
+  
+)}
+
+
+        {showNotification && (
+          <div className={`notification ${isItemAdded ? "active" : ""}`}>
+            <p className="not">Item adicionado ao carrinho!</p>
+            <Link to="/cart2" className="go-to-cart-button">
+              Ir para o Carrinho
+            </Link>
+          </div>
+        )}
+
+         {showNotification2 && (
           <div className={`notification ${isItemAdded ? "active" : ""}`}>
             <p className="not">Item adicionado a lista de desejo!</p>
             <Link to="/wishlist" className="go-to-cart-button">
@@ -487,36 +522,18 @@ const Sale = () => {
           </div>
         )}
 
-
-      <div className="pagination-container">
-        <ReactPaginate
-          previousLabel={<button className="custom-button">ANTERIOR</button>}
-          nextLabel={<button className="custom-button">PRÓXIMO</button>}
-          breakLabel={"..."}
-          pageCount={pageCount}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={5}
-          onPageChange={handlePageChange}
-          containerClassName={"pagination"}
-          subContainerClassName={"pages pagination"}
-          activeClassName={"active"}
-          previousClassName={prevButtonClass}
-          nextClassName={nextButtonClass}
-          pageClassName={"page-count"}
-          pageLinkClassName={"page-link"}
-        />{" "}
+      </div>
       </div>
 
-      </div>
 
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
-            <img src="/assets/whale.png" />
+        <Link to="/"><img className="rotating-jumping-image" src="/assets/whale.png" /></Link>
           </div>
 
           <div className="footer-section-div">
-            <h3>SOBRE NÓS</h3>
+            <h3 className='footer-animation-title'>SOBRE NÓS</h3>
             <li>
               <Link to="/company">A EMPRESA</Link>
             </li>
@@ -529,7 +546,7 @@ const Sale = () => {
           </div>
 
           <div className="footer-section-div">
-            <h3>SUPORTE</h3>
+            <h3 className='footer-animation-title'>SUPORTE</h3>
             <li>
               <Link to="/services">ATENDIMENTO</Link>
             </li>
@@ -542,7 +559,7 @@ const Sale = () => {
           </div>
 
           <div className="footer-section-div">
-            <h3>CONTATOS</h3>
+            <h3 className='footer-animation-title'>CONTATOS</h3>
             <i className="fa fa-whatsapp"></i>
             <i className="fa fa-google"></i>
             <i className="fa fa-instagram"></i>
@@ -552,6 +569,8 @@ const Sale = () => {
       <div className="last-text">
         <p className="text-sub-footer">maremansa</p>
       </div>
+      </>
+    )}
     </>
   );
 };

@@ -20,6 +20,7 @@ export const storage = getStorage(app);
 export const firestore = getFirestore(app);
 
 const Cart = () => {
+  const [showDescription, setShowDescription] = useState(false);
   const [productLoading, setProductLoading] = useState(true);
   const [selectedColor, setSelectedColor] = useState("");
   const [selectedSize, setSelectedSize] = useState("");
@@ -58,11 +59,50 @@ const Cart = () => {
     </div>
   );
 
+  // const [favoriteItems, setFavoriteItems] = useState(() => {
+  //   const savedFavoriteItems = localStorage.getItem("favoriteItems");
+  //   return savedFavoriteItems ? JSON.parse(savedFavoriteItems) : [];
+  // });
+  // const handleAddToFavorites = (produto) => {
+  //   const existingItemIndex = favoriteItems.findIndex(
+  //     (item) => item.nome_prop === produto.nome_prop
+  //   );
+  
+  //   if (existingItemIndex === -1) {
+  //     setFavoriteItems([...favoriteItems, { ...produto }]);
+  //   }
+  //   setIsItemAdded(true);
+  //   setTimeout(() => {
+  //     setIsItemAdded(false);
+  //   }, 5000);
+  // };
+
+  // useEffect(() => {
+  //   const fetchProductData = async () => {
+  //     try {
+  //       console.log(productName);
+  //       const productData = doc(firestore, collectionName, productName); // Substitua "products" pelo nome da sua coleção
+  //       const productSnapshot = await getDoc(productData);
+  //       if (productSnapshot.exists()) {
+  //         setProductData(productSnapshot.data());
+  //       } else {
+  //         // Handle the case when the product is not found
+  //       }
+  //       setProductLoading(false);
+  //     } catch (error) {
+  //       console.error("Erro ao buscar dados do produto:", error);
+  //       // Handle the error state appropriately
+  //       setProductLoading(false);
+  //     }
+  //   };
+
+  //   fetchProductData();
+  // }, [collectionName, productName]);
+
   useEffect(() => {
     const fetchProductData = async () => {
       try {
-        console.log(productName);
-        const productData = doc(firestore, collectionName, productName); // Substitua "products" pelo nome da sua coleção
+        const productData = doc(firestore, collectionName, productName);
         const productSnapshot = await getDoc(productData);
         if (productSnapshot.exists()) {
           setProductData(productSnapshot.data());
@@ -282,17 +322,17 @@ const Cart = () => {
               </Link>
             </div>
 
-            <div className="button-menu-1">
-              <Link to="female">
-                <h6>FEMININO</h6>
-              </Link>
-            </div>
+        <div className="button-menu-1">
+          <Link to="/female">
+            <h6>FEMININO</h6>
+          </Link>
+        </div>
 
-            <div className="button-menu-1">
-              <Link to="male">
-                <h6>MASCULINO</h6>
-              </Link>
-            </div>
+        <div className="button-menu-1">
+          <Link to="/male">
+            <h6>MASCULINO</h6>
+          </Link>
+        </div>
 
             <div className="button-menu-1">
               <Link to="/props">
@@ -343,10 +383,15 @@ const Cart = () => {
                 <h4 className="title-prod">{productName}</h4>
                 <hr className="hr-prod" size="1" />
 
-                <span className="off">R$ 199,90</span>
-                <span className="price-pd">
-                  R$ {productData ? productData.preço : ""}
-                </span>
+              {/* <span className="off">R$ 199,90</span>*/}
+              <span className="price-pd">
+                R$ {productData ? productData.preço : ""}
+              </span> 
+              
+
+  {/*{showSelectedColor && (
+  <button className="selected-color-button">{selectColor}</button>
+  )} */}
 
                 <br></br>
                 {productData &&
@@ -402,6 +447,46 @@ const Cart = () => {
                       </div>
                     </>
                   )}
+
+<p className="text-prod">Tamanhos:</p>
+      <div className="size-options">
+        <div
+          className={`size-option ${selectedSize === "06" ? "selected" : ""}`}
+          onClick={() => handleSizeSelect("06")}
+        >
+          06
+        </div>
+        <div
+          className={`size-option ${selectedSize === "08" ? "selected" : ""}`}
+          onClick={() => handleSizeSelect("08")}
+        >
+          08
+        </div>
+        <div
+          className={`size-option ${selectedSize === "10" ? "selected" : ""}`}
+          onClick={() => handleSizeSelect("10")}
+        >
+          10
+        </div>
+        <div
+          className={`size-option ${selectedSize === "12" ? "selected" : ""}`}
+          onClick={() => handleSizeSelect("12")}
+        >
+          12
+        </div>
+        <div
+          className={`size-option ${selectedSize === "14" ? "selected" : ""}`}
+          onClick={() => handleSizeSelect("14")}
+        >
+          14
+        </div>
+        <div
+          className={`size-option ${selectedSize === "16" ? "selected" : ""}`}
+          onClick={() => handleSizeSelect("16")}
+        >
+          16
+        </div>
+      </div>
 
                 {productData.size && productData.size.length > 0 && (
                   <div className="size-options">

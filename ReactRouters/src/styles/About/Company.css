@@ -97,6 +97,7 @@
 .icons-about i {
   font-size: 24px;
   color: #ffffff;
+  margin: 0px;
 }
 
 .icons-about i :hover {

@@ -94,7 +94,12 @@ const Cart2 = () => {
           className="cart-item-image"
         />
         <div className="cart-item-details">
-          <div className="cart-item-name">{produto.nome_prop}</div>
+        <div className="cart-item-name">
+                    {produto.nome_prodmale ||
+                      produto.nome_prop ||
+                      produto.nome_prodpromo ||
+                      produto.nome_prodfemme}
+                  </div>
           <div className="cart-item-price">R$ {produto.preço}</div>
           <div className="cart-item-options">
             <div>

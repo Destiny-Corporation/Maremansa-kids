@@ -174,9 +174,12 @@ const Home = () => {
     setCurrentPage(selected);
   };
 
+
+
   const startIndex = currentPage * productsPerPage;
   const endIndex = startIndex + productsPerPage;
   const displayedProducts = produtos.slice(startIndex, endIndex);
+
   return (
     <><div className="main">
       <header className="main-header">
@@ -186,22 +189,14 @@ const Home = () => {
 
         <div className="header-items">
           <div className="header-item1">
-            <img
-              className="items-home"
-              src="/assets/comente.png"
-              alt="Comente"
-            />
+          <i class='bx bx-chat'></i>
             <li>
               <Link to="#">ATENDIMENTO</Link>
             </li>
           </div>
 
           <div className="header-item2">
-            <img
-              className="items-home"
-              src="/assets/placeholder.png"
-              alt="Localização"
-            />
+          <i class='bx bx-map'></i>
             <li>
               <Link to="#">LOCALIZAÇÃO</Link>
             </li>
@@ -228,21 +223,21 @@ const Home = () => {
 
             <Link to="/login">
               <i
-                className="bx bx-user bt-header"
+                className="bx bx-user bt-header animation"
                 style={{ color: "#48A3A9" }}
               ></i>
             </Link>
 
             <Link to="/wishlist">
               <i
-                className="bx bx-heart bt-header"
+                className="bx bx-heart bt-header animation"
                 style={{ color: "#48A3A9" }}
               ></i>
             </Link>
 
           <Link>
             <i
-              className="bx bx-cart bt-header"
+              className="bx bx-cart bt-header animation"
               style={{ color: " #48A3A9" }}
               onClick={handleCartIconClick}
             ></i></Link>
@@ -332,82 +327,83 @@ const Home = () => {
         </div>
 
         <div className="carousel-container">
-          <div id="carouselExampleIndicators" className="carousel slide">
-            <div className="carousel-indicators">
-              <button
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide-to="0"
-                className="active btc"
-                aria-current="true"
-                aria-label="Slide 1"
-              ></button>
-              <button
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide-to="1"
-                aria-label="Slide 2"
-              ></button>
-              <button
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide-to="2"
-                aria-label="Slide 3"
-              ></button>
-            </div>
+  <div id="carouselExampleIndicators" className="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
+    <div className="carousel-indicators">
+      <button
+        type="button"
+        data-bs-target="#carouselExampleIndicators"
+        data-bs-slide-to="0"
+        className="active btc"
+        aria-current="true"
+        aria-label="Slide 1"
+      ></button>
+      <button
+        type="button"
+        data-bs-target="#carouselExampleIndicators"
+        data-bs-slide-to="1"
+        aria-label="Slide 2"
+      ></button>
+      <button
+        type="button"
+        data-bs-target="#carouselExampleIndicators"
+        data-bs-slide-to="2"
+        aria-label="Slide 3"
+      ></button>
+    </div>
 
-            <div className="carousel-inner">
-              <div className="carousel-item active">
-                <img
-                  src="/assets/banner-sale.png"
-                  className="d-block w-100"
-                  alt="..."
-                />
-              </div>
+    <div className="carousel-inner">
+      <div className="carousel-item active">
+        <img
+          src="/assets/banner-sale.png"
+          className="d-block w-100"
+          alt="..."
+        />
+      </div>
 
-              <div className="carousel-item">
-                <img
-                  src="/assets/banner-sale-2.png"
-                  className="d-block w-100"
-                  alt="..."
-                />
-              </div>
+      <div className="carousel-item">
+        <img
+          src="/assets/banner-sale-2.png"
+          className="d-block w-100"
+          alt="..."
+        />
+      </div>
 
-              <div className="carousel-item">
-                <img
-                  src="/assets/banner.png"
-                  className="d-block w-100"
-                  alt="..."
-                />
-              </div>
-            </div>
+      <div className="carousel-item">
+        <img
+          src="/assets/banner.png"
+          className="d-block w-100"
+          alt="..."
+        />
+      </div>
+    </div>
 
-            <button
-              className="carousel-control-prev"
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide="prev"
-            >
-              <span
-                className="carousel-control-prev-icon"
-                aria-hidden="true"
-              ></span>
-              <span className="visually-hidden">Previous</span>
-            </button>
-            <button
-              className="carousel-control-next"
-              type="button"
-              data-bs-target="#carouselExampleIndicators"
-              data-bs-slide="next"
-            >
-              <span
-                className="carousel-control-next-icon"
-                aria-hidden="true"
-              ></span>
-              <span className="visually-hidden">Next</span>
-            </button>
-          </div>
-        </div>
+    <button
+      className="carousel-control-prev"
+      type="button"
+      data-bs-target="#carouselExampleIndicators"
+      data-bs-slide="prev"
+    >
+      <span
+        className="carousel-control-prev-icon"
+        aria-hidden="true"
+      ></span>
+      <span className="visually-hidden">Previous</span>
+    </button>
+    <button
+      className="carousel-control-next"
+      type="button"
+      data-bs-target="#carouselExampleIndicators"
+      data-bs-slide="next"
+    >
+      <span
+        className="carousel-control-next-icon"
+        aria-hidden="true"
+      ></span>
+      <span className="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
+
 
         <div className="container-menu-buttons">
           <div className="button-menu">
@@ -415,7 +411,7 @@ const Home = () => {
               <img src="/assets/sale.png" alt="" />
             </Link>
             <Link to="/sale">
-              <h6>PROMOÇÕES</h6>
+              <h6 className="home-sections-bt">PROMOÇÕES</h6>
             </Link>
           </div>
 
@@ -424,7 +420,7 @@ const Home = () => {
               <img src="/assets/female.png" alt="" />
             </Link>
             <Link to="female">
-              <h6>FEMININO</h6>
+              <h6 className="home-sections-bt">FEMININO</h6>
             </Link>
           </div>
 
@@ -433,7 +429,7 @@ const Home = () => {
               <img src="/assets/male.png" alt="" />
             </Link>
             <Link to="male">
-              <h6>MASCULINO</h6>
+              <h6 className="home-sections-bt">MASCULINO</h6>
             </Link>
           </div>
 
@@ -442,7 +438,7 @@ const Home = () => {
               <img src="/assets/accessories.png" alt="" />
             </Link>
             <Link to="/props">
-              <h6>ACESSÓRIOS</h6>
+              <h6 className="home-sections-bt">ACESSÓRIOS</h6>
             </Link>
           </div>
         </div>
@@ -520,7 +516,10 @@ const Home = () => {
           ></i>
         </div>
       </div>
+      <div className="space-1"></div>
       </div>
+
+
 
 <footer>
   <section className="footer-section">
