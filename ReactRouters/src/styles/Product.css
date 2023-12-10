@@ -93,13 +93,17 @@
 }
 
 .icons i {
-  font-size: 28px;
+  font-size: 25px;
   color: #ffffff;
+}
+
+.select-image img {
+  max-height: 450px;
 }
 
 .main-products {
   gap: 0.2rem;
-  justify-content: flex-start;
+  justify-content:center;
   padding: 10px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, auto));
@@ -122,7 +126,7 @@
 
 .container {
   text-align: left;
-  margin-left: 85%;
+  /* margin-left: 85%; */
 }
 
 .products-left {
@@ -206,6 +210,39 @@
   font-weight: 600;
 }
 
+.show-more-button-1 {
+  font-size: 22px;
+  background-color: transparent;
+  color: #48a3a9;
+  margin-left: -1%;
+  transition: transform 0.3s ease-in-out;
+}
+
+.expanded {
+  transform: rotate(180deg);
+}
+
+.description-text {
+  margin-left: 6%;
+  margin-right: 8%;
+  margin-bottom: 4%;
+  color: #48a3a9;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.title-prod-1 {
+  margin-bottom: -10px;
+  margin-top: -10px;
+  color:#48a3a9;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 600;
+  margin-left: 5%;
+}
+
 .color-buttons {
   display: flex;
   font-size: 10px;
@@ -235,6 +272,18 @@
 
 .hr-prod {
   width: 100%;
+  height: 2px;
+  background-color: #50b2b9;
+  border: none;
+  margin: 0 auto;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  opacity: 1;
+}
+
+.hr-prod-1 {
+  text-align: left;
+  width: 90%;
   height: 2px;
   background-color: #50b2b9;
   border: none;
@@ -426,7 +475,7 @@
 }
 
 footer {
-  position: static;
+  position: relative;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -510,7 +559,7 @@ section h1 {
   background-color: #247479;
   color: #fff;
   padding: 0.5rem 0;
-  position: static;
+  position: relative;
   bottom: 0;
   left: 0;
   width: 100%;

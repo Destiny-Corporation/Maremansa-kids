@@ -32,7 +32,7 @@
 }
 
 .logo img {
-  max-width: 100%;
+  max-width: 80%;
 }
 
 .search-container {
@@ -89,6 +89,7 @@
   padding: 8px;
   border: none;
   background: transparent;
+  color: #48a3a9;
 }
 
 .search-button {
@@ -116,7 +117,7 @@
 }
 
 .icons i {
-  font-size: 28px;
+  font-size: 25px;
   color: #ffffff;
 }
 
@@ -162,7 +163,7 @@
 }
 
 footer {
-    position: static;
+    position: relative;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -250,7 +251,7 @@ section h1 {
   background-color: #247479;
   color: #fff;
   padding: 0.5rem 0; 
-  position: static; 
+  position: relative; 
   bottom: 0;
   left: 0;
   width: 100%;

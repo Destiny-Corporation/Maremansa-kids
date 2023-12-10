@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 
 const Sitemap = () => {
   return (
-    <div className='main'>
+    <><div className='main'>
       <header className="main-header">
-        <div className="logo">
+        <div className="logo-about">
         <Link to="/"> <img src="/assets/logo.png" alt="Logo" /> </Link>
         </div>
-        <div className="icons">
+        <div className="icons-about">
             <Link to="/login">
               <i
                 className="bx bx-user bt-header"
@@ -31,7 +31,7 @@ const Sitemap = () => {
         </div>
       </header>
 
-      <div className="search-container-geral">
+      <div className="search-container-about">
         <input
           type="text"
           className="search-bar"
@@ -79,9 +79,9 @@ const Sitemap = () => {
       <ul>     
             <li><Link to="/female">Feminino</Link>
                 <ul>
-                    <li className="sub-list"><Link to="/">Baby</Link></li>
-                    <li className="sub-list"><Link to="/">Infantil</Link></li>
-                    <li className="sub-list"><Link to="/">Juvenil</Link></li>
+                    <li className="sub-list"><Link to="/female/fem-baby">Baby</Link></li>
+                    <li className="sub-list"><Link to="/female/fem-children">Infantil</Link></li>
+                    <li className="sub-list"><Link to="/female/fem-juvenile">Juvenil</Link></li>
                 </ul>
             </li> </ul> </div>
       <div className="map"><img className='image-map' src="/assets/maleabout.jpeg"/></div>
@@ -89,56 +89,64 @@ const Sitemap = () => {
         <ul>  
       <li><Link to="/male">Masculino</Link>
                 <ul>
-                    <li className="sub-list"><Link to="/">Baby</Link></li>
-                    <li className="sub-list"><Link to="/">Infantil</Link></li>
-                    <li className="sub-list"><Link to="/">Juvenil</Link></li>
+                    <li className="sub-list"><Link to="/male/male-baby">Baby</Link></li>
+                    <li className="sub-list"><Link to="/male/male-children">Infantil</Link></li>
+                    <li className="sub-list"><Link to="/male/male-juvenile">Juvenil</Link></li>
                 </ul>
             </li> </ul> </div>
 
-      <footer style={{position: "static" }}>
+            </div>
+
+            <footer>
         <section className="footer-section">
           <div className="footer-section-div">
-            <img src="/assets/whale.png" />
+        <Link to="/"><img className="rotating-jumping-image" src="/assets/whale.png" /></Link>
           </div>
 
           <div className="footer-section-div">
-            <h3>SOBRE NÓS</h3>
+            <h3 className='footer-animation-title'>SOBRE NÓS</h3>
             <li>
-                <Link to="/company">A EMPRESA</Link>
+              <Link to="/company">A EMPRESA</Link>
             </li>
             <li>
-                <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
+              <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
             </li>
             <li>
-                <Link to="/partners">NOSSOS PARCEIROS</Link>
-            </li>
-          </div>
-
-          <div className="footer-section-div">
-            <h3>SUPORTE</h3>
-            <li>
-                <Link to="/services">ATENDIMENTO</Link>
-            </li>
-            <li>
-                <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
-            </li>
-            <li>
-                <Link to="/sitemap">MAPA DO SITE</Link>
+              <Link to="/partners">NOSSOS PARCEIROS</Link>
             </li>
           </div>
 
           <div className="footer-section-div">
-            <h3>CONTATOS</h3>
-              <i className="fa fa-whatsapp"></i>
-              <i className="fa fa-google"></i>
-              <i className="fa fa-instagram"></i>
+            <h3 className='footer-animation-title'>SUPORTE</h3>
+            <li>
+              <Link to="/services">ATENDIMENTO</Link>
+            </li>
+            <li>
+              <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
+            </li>
+            <li>
+              <Link to="/sitemap">MAPA DO SITE</Link>
+            </li>
           </div>
+
+          <div className="footer-section-div">
+  <h3 className='footer-animation-title'>CONTATOS</h3>
+  <a href="https://web.whatsapp.com/send?phone=5585986056136" target="_blank" title="whatsapp">
+    <i className="fa fa-whatsapp"></i>
+  </a>
+  <a href="https://www.facebook.com/maremansakidss" target="_blank" title="facebook">
+    <i className="fa fa-facebook"></i>
+  </a>
+  <a href="https://www.instagram.com/maremansakids/" target="_blank" title="instagram">
+    <i className="fa fa-instagram"></i>
+  </a>
+</div>
         </section>
       </footer>
       <div className="last-text">
         <p className="text-sub-footer">maremansa</p>
       </div>
-    </div>
+</>
   );
 };
 

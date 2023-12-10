@@ -38,6 +38,11 @@
     max-width: 90%;
   }
 
+  .header-logo-center {
+    margin-top: 3px;
+    max-width: 90%;
+  }
+
 
 .icons {
   display: flex;
@@ -50,7 +55,7 @@
 }
 
 .icons i {
-  font-size: 28px;
+  font-size: 25px;
   color: #ffffff;
 }
 
@@ -124,8 +129,8 @@
 }
 
   .search-container-header {
-    width: 35%;
-    height: 35px;
+    width: 28%;
+    height: 30px;
     margin: 12px auto;
     background-color: #dcebeb;
     display: flex;
@@ -154,6 +159,7 @@
     padding: 8px;
     border: none;
     background: transparent;
+    margin-bottom: 0px;
   }
   
   .search-button-header {
@@ -166,6 +172,6 @@
   
   .search-bar-header::placeholder {
     color: #48a3a9;
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: 2px;
   }

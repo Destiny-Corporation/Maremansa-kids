@@ -34,12 +34,12 @@
 }
 
 .logo img {
-  max-width: 100%;
+  max-width: 90%;
 }
 
-.search-container {
-  width: 98%;
-  height: 40px;
+.search-container-error {
+  width: 90%;
+  height: 34px;
   margin: 12px auto;
   background-color: #dcebeb;
   display: flex;
@@ -53,14 +53,14 @@
   font-size: 14px;
 }
 
-.search-container:hover {
+.search-container-error:hover {
   background-color: #bdd6d6;
 }
 
-.search-container input:focus,
-.search-container button:focus {
+.search-container-error input:focus,
+.search-container-error button:focus {
   outline: none;
-  border: 1px solid transparent;
+  border: 0px solid transparent;
 }
 
 .search-bar {
@@ -68,6 +68,7 @@
   padding: 8px;
   border: none;
   background: transparent;
+  color: #48a3a9;
 }
 
 .search-button {
@@ -80,7 +81,7 @@
 
 .search-bar::placeholder {
   color: #48a3a9;
-  font-size: 11px;
+  font-size: 10px;
   letter-spacing: 2px;
 }
 
@@ -124,7 +125,7 @@
 }
 
 .icons i {
-  font-size: 28px;
+  font-size: 25px;
   color: #ffffff;
 }
 
@@ -185,7 +186,7 @@
 }
 
 footer {
-    position: static;
+    position: relative;
     bottom: 0;
     left: 0;
     width: 100%;

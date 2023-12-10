@@ -101,15 +101,14 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
     setMaxPrice("");
   };
   return (
-    <div className="main">
+    <><div className="main">
       <header className="main-header">
-        <div className="logo">
+        <div className="logo-product">
           <Link to="/">
-            {" "}
-            <img src="/assets/logo.png" alt="Logo" />{" "}
+            <img src="/assets/logo.png" alt="Logo" />
           </Link>
         </div>
-        <div className="icons">
+        <div className="icons-about">
           <Link to="/requests">
             <i
               className="bx bx-user bt-header"
@@ -143,22 +142,25 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
         <hr className="hr-sections"></hr>
 
         <div className="container-female">
-            <div className="roupa-fundo-female"></div>
-            <div className="roupa-female" style={{ backgroundImage: "url('/assets/female-baby.png')" }}>
-              <Link to="/female/female-baby"></Link>
-            </div>
-  
+  <div className="roupa-fundo-female"></div>
 
-           <div className="roupa-female" style={{ backgroundImage: "url('/assets/female-children.png')" }}>
-            <Link to="/female/female-children"></Link>
-          </div>
+<div>
+<Link to="/female/fem-baby">
+  <div className="roupa-female" style={{ backgroundImage: "url('/assets/female-baby.png')" }}>
+  </div>
+  <div><p className="roupa-title-1">BABY</p></div></Link></div>
 
-          <div className="roupa-female" style={{ backgroundImage: "url('/assets/female-juvenile.png')" }}>
-            <Link to="/female/female-juvenile"></Link>
-          </div>
-        </div>
+  <div>
+  <Link to="/female/fem-children"><div className="roupa-female" style={{ backgroundImage: "url('/assets/female-children.png')" }}>
+  </div><div><p className="roupa-title-1">INFANTIL</p></div></Link></div>
 
-        <div className="female-sections">
+  <div>
+  <Link to="/female/fem-juvenile"><div className="roupa-female" style={{ backgroundImage: "url('/assets/female-juvenile.png')" }}>
+  </div><div><p className="roupa-title-1">JUVENIL</p></div></Link></div>
+</div>
+
+
+        {/*<div className="female-sections">
           <div className="female-sections1">
             <img src="/assets/sections-title1.png" /> 
           </div>
@@ -170,17 +172,19 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
           <div className="female-sections1">
             <img src="/assets/sections-title3.png" /> 
           </div>
-        </div>
+  </div>*/}
 
+</div>
+</div>
 
-      <footer>
+<footer>
         <section className="footer-section">
           <div className="footer-section-div">
-            <img src="/assets/whale.png" />
+        <Link to="/"><img className="rotating-jumping-image" src="/assets/whale.png" /></Link>
           </div>
 
           <div className="footer-section-div">
-            <h3>SOBRE NÓS</h3>
+            <h3 className='footer-animation-title'>SOBRE NÓS</h3>
             <li>
               <Link to="/company">A EMPRESA</Link>
             </li>
@@ -193,7 +197,7 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
           </div>
 
           <div className="footer-section-div">
-            <h3>SUPORTE</h3>
+            <h3 className='footer-animation-title'>SUPORTE</h3>
             <li>
               <Link to="/services">ATENDIMENTO</Link>
             </li>
@@ -206,7 +210,7 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
           </div>
 
           <div className="footer-section-div">
-            <h3>CONTATOS</h3>
+            <h3 className='footer-animation-title'>CONTATOS</h3>
             <i className="fa fa-whatsapp"></i>
             <i className="fa fa-google"></i>
             <i className="fa fa-instagram"></i>
@@ -216,8 +220,7 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
       <div className="last-text">
         <p className="text-sub-footer">maremansa</p>
       </div>
-    </div>
-    </div>
+</>
   );
 };
 

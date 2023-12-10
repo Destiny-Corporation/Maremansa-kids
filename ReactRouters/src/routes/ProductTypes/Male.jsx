@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import "../../styles/ProductTypes/Male.css";
+import "../../styles/ProductTypes/Female.css";
 import { Link } from "react-router-dom";
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 import { getFirestore, collection, doc, getDocs } from "firebase/firestore";
 import ReactPaginate from "react-paginate";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyDTKUI6nV-DZjIsUo1BMkjIUWOQbT9gU3Q",
@@ -30,7 +31,7 @@ const Male = () => {
  
   useEffect(() => {
     const fetchProdutos = async () => {
-      const produtosCollection = collection(firestore, "Prodmale");
+      const produtosCollection = collection(firestore, "Prodfemme");
       const produtosSnapshot = await getDocs(produtosCollection);
       const produtosData = produtosSnapshot.docs.map((doc) => doc.data());
       setProdutos(produtosData);
@@ -47,11 +48,12 @@ const handleFilterChange = (e) => {
 
 
 const filteredProdutos = produtos.filter((produto) => {
-  if (produto.nome_prodmale && (filterParam === "All" || produto.nome_prodmale.toLowerCase().includes(filterParam.toLowerCase()))) {
-    return produto.nome_prodmale.toLowerCase().includes(searchTerm.toLowerCase());
+  if (produto.nome_prodfemme && (filterParam === "All" || produto.nome_prodfemme.toLowerCase().includes(filterParam.toLowerCase()))) {
+    return produto.nome_prodfemme.toLowerCase().includes(searchTerm.toLowerCase());
   }
   return false;
 });
+
 
 const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
   if (isFilterActive && maxPrice !== null) {
@@ -96,36 +98,38 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
     setMaxPrice("");
   };
   return (
-    <div className="main">
-    <header className="main-header">
-        <div className="logo">
-        <Link to="/"> <img src="/assets/logo.png" alt="Logo" /> </Link>
+    <><div className="main">
+      <header className="main-header">
+        <div className="logo-product">
+          <Link to="/">
+            <img src="/assets/logo.png" alt="Logo" />
+          </Link>
         </div>
-        <div className="icons">
-            <Link to="/requests">
-              <i
-                className="bx bx-user bt-header"
-                style={{ color: "#ffffff" }}
-              ></i>
-            </Link>
-            <Link to="/wishlist">
-              <i
-                className="bx bx-heart bt-header"
-                style={{ color: "#ffffff" }}
-              ></i>
-            </Link>
-            <Link to="/cart">
-              <i
-                className="bx bx-cart bt-header"
-                style={{ color: "#ffffff" }}
-              ></i>
-            </Link>
+        <div className="icons-about">
+          <Link to="/requests">
+            <i
+              className="bx bx-user bt-header"
+              style={{ color: "#ffffff" }}
+            ></i>
+          </Link>
+          <Link to="/wishlist">
+            <i
+              className="bx bx-heart bt-header"
+              style={{ color: "#ffffff" }}
+            ></i>
+          </Link>
+          <Link to="/cart">
+            <i
+              className="bx bx-cart bt-header"
+              style={{ color: "#ffffff" }}
+            ></i>
+          </Link>
         </div>
       </header>
 
       <div className="title-section">
-      <h1 className="general-title">MASCULINO</h1>
-      <button class="filter" onClick={handleFilterButtonClick}>
+        <h1 className="general-title">MASCULINO</h1>
+        <button class="filter" onClick={handleFilterButtonClick}>
             <img
               src="/assets/filter.png"
               alt="filtro"
@@ -133,83 +137,92 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
             />
           </button>
         <hr className="hr-sections"></hr>
-      </div>
+
+        <div className="container-female">
+  <div className="roupa-fundo-female"></div>
+
+<div>
+<Link to="/male/male-baby">
+  <div className="roupa-female" style={{ backgroundImage: "url('/assets/male-baby.png')" }}>
+  </div>
+  <div><p className="roupa-title-1">BABY</p></div></Link></div>
+
+  <div>
+  <Link to="/male/male-children"><div className="roupa-female" style={{ backgroundImage: "url('/assets/male-children.png')" }}>
+  </div><div><p className="roupa-title-1">INFANTIL</p></div></Link></div>
+
+  <div>
+  <Link to="/male/male-juvenile"><div className="roupa-female" style={{ backgroundImage: "url('/assets/male-juvenile.png')" }}>
+  </div><div><p className="roupa-title-1">JUVENIL</p></div></Link></div>
+</div>
 
 
-      <div className="containers-male">
-            <div className="roupa-fundo-male"></div>
-            <div className="roupa-male" style={{ backgroundImage: "url('/assets/male-baby.png')" }}>
-              <Link to="/male/male-baby"></Link>
-            </div>
-
-           <div className="roupa-male" style={{ backgroundImage: "url('/assets/male-children.png')" }}>
-            <Link to="/male/male-children"></Link>
-          </div>
-
-          <div className="roupa-male" style={{ backgroundImage: "url('/assets/male-juvenile.png')" }}>
-            <Link to="/male/male-juvenile"></Link>
-          </div>
-        </div>
-
-        <div className="male-sections">
-          <div className="male-sections1">
+        {/*<div className="female-sections">
+          <div className="female-sections1">
             <img src="/assets/sections-title1.png" /> 
           </div>
 
-          <div className="male-sections1">
+          <div className="female-sections1">
             <img src="/assets/sections-title2.png" /> 
           </div>
 
-          <div className="male-sections1">
+          <div className="female-sections1">
             <img src="/assets/sections-title3.png" /> 
           </div>
-        </div>
+  </div>*/}
 
-      
-        <footer>
+</div>
+</div>
+
+<footer>
         <section className="footer-section">
           <div className="footer-section-div">
-            <img src="/assets/whale.png" />
+        <Link to="/"><img className="rotating-jumping-image" src="/assets/whale.png" /></Link>
           </div>
 
           <div className="footer-section-div">
-            <h3>SOBRE NÓS</h3>
+            <h3 className='footer-animation-title'>SOBRE NÓS</h3>
             <li>
-                <Link to="/company">A EMPRESA</Link>
+              <Link to="/company">A EMPRESA</Link>
             </li>
             <li>
-                <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
+              <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
             </li>
             <li>
-                <Link to="/partners">NOSSOS PARCEIROS</Link>
-            </li>
-          </div>
-
-          <div className="footer-section-div">
-            <h3>SUPORTE</h3>
-            <li>
-                <Link to="/services">ATENDIMENTO</Link>
-            </li>
-            <li>
-                <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
-            </li>
-            <li>
-                <Link to="/sitemap">MAPA DO SITE</Link>
+              <Link to="/partners">NOSSOS PARCEIROS</Link>
             </li>
           </div>
 
           <div className="footer-section-div">
-            <h3>CONTATOS</h3>
-              <i className="fa fa-whatsapp"></i>
-              <i className="fa fa-google"></i>
-              <i className="fa fa-instagram"></i>
+            <h3 className='footer-animation-title'>SUPORTE</h3>
+            <li>
+              <Link to="/services">ATENDIMENTO</Link>
+            </li>
+            <li>
+              <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
+            </li>
+            <li>
+              <Link to="/sitemap">MAPA DO SITE</Link>
+            </li>
           </div>
+          <div className="footer-section-div">
+  <h3 className='footer-animation-title'>CONTATOS</h3>
+  <a href="https://web.whatsapp.com/send?phone=5585986056136" target="_blank" title="whatsapp">
+    <i className="fa fa-whatsapp"></i>
+  </a>
+  <a href="https://www.facebook.com/maremansakidss" target="_blank" title="facebook">
+    <i className="fa fa-facebook"></i>
+  </a>
+  <a href="https://www.instagram.com/maremansakids/" target="_blank" title="instagram">
+    <i className="fa fa-instagram"></i>
+  </a>
+</div>
         </section>
       </footer>
       <div className="last-text">
         <p className="text-sub-footer">maremansa</p>
       </div>
-    </div>
+    </>
   );
 };
 

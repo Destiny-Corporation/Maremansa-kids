@@ -1,13 +1,13 @@
 import { useSelector } from "react-redux";
 import { Box, Button, Stepper, Step, StepLabel } from "@mui/material";
-import { Formik } from "formik";
+import { Formik, Field } from 'formik';
 import { useState } from "react";
 import * as yup from "yup";
 import { shades } from "./theme";
 import Payment from "./Payment";
 import Shipping from "./Shipping";
 import { loadStripe } from "@stripe/stripe-js";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const stripePromise = loadStripe(
@@ -19,6 +19,8 @@ const Checkout = () => {
   const cart = useSelector((state) => state.cart.cart);
   const isFirstStep = activeStep === 0;
   const isSecondStep = activeStep === 1;
+  const navigation = useNavigate()
+  const [billingStreet1, setBillingStreet1] = useState("");
 
   const handleFormSubmit = async (values, actions) => {
     setActiveStep(activeStep + 1);
@@ -48,7 +50,7 @@ const Checkout = () => {
         count,
       })),
     };
-
+  
     const response = await fetch("http://localhost:5173/order", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -58,53 +60,54 @@ const Checkout = () => {
     await stripe.redirectToCheckout({
       sessionId: session.id,
     });
+  
+    // Redirecionamento para /payment após o pagamento completo
+    window.location.href = "/payment";
   }
 
   return (
+    <>
     <div className="main">
-      <header className="main-header">
-        <div className="search-container-header">
-          <input
-            type="text"
-            className="search-bar-header"
-            placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
-          />
-          <button className="search-button-header" type="submit">
-            <i className="bx bx-search"></i>
-          </button>
+    <header className="main-header">
+        <div className="logo-about">
+        <Link to="/"> <img src="/assets/logo.png" alt="Logo" /> </Link>
         </div>
-        <div className="logo">
-          <Link to="/">
-            <img
-              src="/assets/logo.png"
-              alt="Logo"
-              className="header-logo-center"
-            />
-          </Link>
-        </div>
-        <div className="icons">
-          <Link to="/requests">
-            <i className="bx bx-user bt-header" style={{ color: "#ffffff" }}></i>
-          </Link>
-          <Link to="/wishlist">
-            <i
-              className="bx bx-heart bt-header"
-              style={{ color: "#ffffff" }}
-            ></i>
-          </Link>
-          <Link to="/cart">
-            <i className="bx bx-cart bt-header" style={{ color: "#ffffff" }}></i>
-          </Link>
-        </div>
+        <div className="icons-about">
+            <Link to="/login">
+              <i
+                className="bx bx-user bt-header"
+                style={{ color: "#ffffff" }}
+              ></i>
+            </Link>
+            <Link to="/wishlist">
+              <i
+                className="bx bx-heart bt-header"
+                style={{ color: "#ffffff" }}
+              ></i>
+            </Link>
+            <Link to="/cart">
+              <i
+                className="bx bx-cart bt-header"
+                style={{ color: "#ffffff" }}
+              ></i>
+            </Link>
+         </div>
       </header>
+
+      <div className="container-subheader">
+        <div className="container-wishlist">
+          <i className="bx bx-map bt-header"></i>
+          <h6>| Endereço</h6>
+        </div>
+      </div>
 
       <Box width="80%" m="100px auto">
         <Stepper activeStep={activeStep} sx={{ m: "20px 0" }}>
           <Step>
-            <StepLabel>Billing</StepLabel>
+            <StepLabel>Endereço</StepLabel>
           </Step>
           <Step>
-            <StepLabel>Payment</StepLabel>
+            <StepLabel>Pagamento</StepLabel>
           </Step>
         </Stepper>
         <Box>
@@ -143,6 +146,7 @@ const Checkout = () => {
                     setFieldValue={setFieldValue}
                   />
                 )}
+                {/* Adicione o campo street1 aqui */}
                 <Box display="flex" justifyContent="space-between" gap="50px">
                   {!isFirstStep && (
                     <Button
@@ -158,23 +162,40 @@ const Checkout = () => {
                       }}
                       onClick={() => setActiveStep(activeStep - 1)}
                     >
-                      Back
+                      Voltar
                     </Button>
                   )}
-                  <Button
-                    fullWidth
-                    type="submit"
-                    color="primary"
-                    variant="contained"
-                    sx={{
-                      backgroundColor: shades.primary[400],
-                      boxShadow: "none",
-                      color: "white",
-                      borderRadius: 0,
-                      padding: "15px 40px",
-                    }}
-                  >
-                    {!isSecondStep ? "Next" : "Place Order"}
+                 <Button
+  fullWidth
+  type="submit"
+  color="primary"
+  variant="contained"
+  sx={{
+    backgroundColor: '#48A3A9',
+    boxShadow: "none",
+    color: "white",
+    borderRadius: 0,
+    padding: "15px 40px",
+  }}
+  onClick={() => {
+    if (!isSecondStep) {
+      setActiveStep(activeStep + 1);
+    } else {
+      // Aqui você pode armazenar o valor da rua no estado
+      setBillingStreet1(values.billingAddress.street1);
+      console.log('Formik Values:', values);
+
+      makePayment(values);
+      // Redirecionar para /payment após o pagamento completo
+     // window.location.href = "/payment"
+     navigation('/payment', { state: { billingStreet1: values.billingAddress.street1 } });
+
+
+    }
+  }}
+>
+                  
+                    {!isSecondStep ? "Próximo" : "Próximo"}
                   </Button>
                 </Box>
               </form>
@@ -184,15 +205,16 @@ const Checkout = () => {
       </Box>
 
      
-      {/* Footer aqui */}
+      </div>
+
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
-            <img src="/assets/whale.png" />
+        <Link to="/"><img className="rotating-jumping-image" src="/assets/whale.png" /></Link>
           </div>
 
           <div className="footer-section-div">
-            <h3>SOBRE NÓS</h3>
+            <h3 className='footer-animation-title'>SOBRE NÓS</h3>
             <li>
               <Link to="/company">A EMPRESA</Link>
             </li>
@@ -205,7 +227,7 @@ const Checkout = () => {
           </div>
 
           <div className="footer-section-div">
-            <h3>SUPORTE</h3>
+            <h3 className='footer-animation-title'>SUPORTE</h3>
             <li>
               <Link to="/services">ATENDIMENTO</Link>
             </li>
@@ -218,17 +240,23 @@ const Checkout = () => {
           </div>
 
           <div className="footer-section-div">
-            <h3>CONTATOS</h3>
-            <i className="fa fa-whatsapp"></i>
-            <i className="fa fa-google"></i>
-            <i className="fa fa-instagram"></i>
-          </div>
+  <h3 className='footer-animation-title'>CONTATOS</h3>
+  <a href="https://web.whatsapp.com/send?phone=5585986056136" target="_blank" title="whatsapp">
+    <i className="fa fa-whatsapp"></i>
+  </a>
+  <a href="https://www.facebook.com/maremansakidss" target="_blank" title="facebook">
+    <i className="fa fa-facebook"></i>
+  </a>
+  <a href="https://www.instagram.com/maremansakids/" target="_blank" title="instagram">
+    <i className="fa fa-instagram"></i>
+  </a>
+</div>
         </section>
       </footer>
       <div className="last-text">
         <p className="text-sub-footer">maremansa</p>
       </div>
-    </div>
+    </>
   );
 };
 
@@ -261,51 +289,51 @@ const initialValues = {
 const checkoutSchema = [
   yup.object().shape({
     billingAddress: yup.object().shape({
-      firstName: yup.string().required("required"),
-      lastName: yup.string().required("required"),
-      country: yup.string().required("required"),
-      street1: yup.string().required("required"),
+      firstName: yup.string().required("obrigatório"),
+      lastName: yup.string().required("obrigatório"),
+      country: yup.string().required("obrigatório"),
+      street1: yup.string().required("obrigatório"),
       street2: yup.string(),
-      city: yup.string().required("required"),
-      state: yup.string().required("required"),
-      zipCode: yup.string().required("required"),
+      city: yup.string().required("obrigatório"),
+      state: yup.string().required("obrigatório"),
+      zipCode: yup.string().required("obrigatório"),
     }),
     shippingAddress: yup.object().shape({
       isSameAddress: yup.boolean(),
       firstName: yup.string().when("isSameAddress", {
         is: false,
-        then: yup.string().required("required"),
+        then: yup.string().required("obrigatório"),
       }),
       lastName: yup.string().when("isSameAddress", {
         is: false,
-        then: yup.string().required("required"),
+        then: yup.string().required("obrigatório"),
       }),
       country: yup.string().when("isSameAddress", {
         is: false,
-        then: yup.string().required("required"),
+        then: yup.string().required("obrigatório"),
       }),
       street1: yup.string().when("isSameAddress", {
         is: false,
-        then: yup.string().required("required"),
+        then: yup.string().required("obrigatório"),
       }),
       street2: yup.string(),
       city: yup.string().when("isSameAddress", {
         is: false,
-        then: yup.string().required("required"),
+        then: yup.string().required("obrigatório"),
       }),
       state: yup.string().when("isSameAddress", {
         is: false,
-        then: yup.string().required("required"),
+        then: yup.string().required("obrigatório"),
       }),
       zipCode: yup.string().when("isSameAddress", {
         is: false,
-        then: yup.string().required("required"),
+        then: yup.string().required("obrigatório"),
       }),
     }),
   }),
   yup.object().shape({
-    email: yup.string().required("required"),
-    phoneNumber: yup.string().required("required"),
+    email: yup.string().required("obrigatório"),
+    phoneNumber: yup.string().required("obrigatório"),
   }),
 ];
 

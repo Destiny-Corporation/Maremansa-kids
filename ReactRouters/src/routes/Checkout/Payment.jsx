@@ -8,7 +8,7 @@ const Payment = ({ values, touched, errors, handleBlur, handleChange }) => {
       {/* CONTACT INFO */}
       <Box>
         <Typography sx={{ mb: "15px" }} fontSize="18px">
-          Contact Info
+          Informações de Contato
         </Typography>
         <TextField
           fullWidth
@@ -25,7 +25,7 @@ const Payment = ({ values, touched, errors, handleBlur, handleChange }) => {
         <TextField
           fullWidth
           type="text"
-          label="Phone Number"
+          label="Telefone"
           onBlur={handleBlur}
           onChange={handleChange}
           value={values.phoneNumber}
