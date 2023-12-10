@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "../../styles/User/Login.css";
 import { Link } from "react-router-dom";
 import { initializeApp } from 'firebase/app';
+import { getStorage } from "firebase/storage";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
 import {
   getAuth,
   signInWithEmailAndPassword,
@@ -18,6 +20,10 @@ const firebaseConfig = {
   messagingSenderId: "376069750475",
   appId: "1:376069750475:web:bfb216cfd8928a23e8a54e",
 };
+
+export const app = initializeApp(firebaseConfig);
+export const storage = getStorage(app);
+export const firestore = getFirestore(app);
 
 const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp);
