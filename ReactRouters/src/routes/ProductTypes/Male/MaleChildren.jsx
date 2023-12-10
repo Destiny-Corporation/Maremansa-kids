@@ -53,12 +53,8 @@ const MaleChildren = () => {
   const [isFilterActive, setIsFilterActive] = useState(false);
   const [maxPrice, setMaxPrice] = useState(null);
   const nomesProdutos = [
-    "Conjunto",
-    "Maiô",
-    "Óculos",
     "Sunga",
-    "Vestidinho",
-    "Colete",
+    "Sunga Box",
   ];
   const [total, setTotal] = useState(0);
   const [cartItems, setCartItems] = useState(() => {
@@ -346,7 +342,7 @@ const MaleChildren = () => {
             </button>
           </Link>
 
-          <Link to="/cart2">
+          <Link to="/cart">
             <button type="button" className="btn-buy">
               VER MEU CARRINHO
             </button>
@@ -559,11 +555,17 @@ const MaleChildren = () => {
           </div>
 
           <div className="footer-section-div">
-            <h3 className='footer-animation-title'>CONTATOS</h3>
-            <i className="fa fa-whatsapp"></i>
-            <i className="fa fa-google"></i>
-            <i className="fa fa-instagram"></i>
-          </div>
+  <h3 className='footer-animation-title'>CONTATOS</h3>
+  <a href="https://web.whatsapp.com/send?phone=5585986056136" target="_blank" title="whatsapp">
+    <i className="fa fa-whatsapp"></i>
+  </a>
+  <a href="https://www.facebook.com/maremansakidss" target="_blank" title="facebook">
+    <i className="fa fa-facebook"></i>
+  </a>
+  <a href="https://www.instagram.com/maremansakids/" target="_blank" title="instagram">
+    <i className="fa fa-instagram"></i>
+  </a>
+</div>
         </section>
       </footer>
       <div className="last-text">
