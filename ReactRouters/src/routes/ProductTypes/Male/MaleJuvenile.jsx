@@ -342,7 +342,7 @@ const MaleJuvenile = () => {
             </button>
           </Link>
 
-          <Link to="/cart2">
+          <Link to="/cart">
             <button type="button" className="btn-buy">
               VER MEU CARRINHO
             </button>
