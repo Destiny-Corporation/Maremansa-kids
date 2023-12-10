@@ -48,12 +48,12 @@ const Sale = () => {
   const [isFilterActive, setIsFilterActive] = useState(false);
   const [maxPrice, setMaxPrice] = useState(null);
   const nomesProdutos = [
+    "Colete",
     "Conjunto",
     "Maiô",
     "Óculos",
     "Sunga",
-    "Vestidinho",
-    "Colete",
+    "Vestido",
   ];
   const [total, setTotal] = useState(0);
   const [cartItems, setCartItems] = useState(() => {

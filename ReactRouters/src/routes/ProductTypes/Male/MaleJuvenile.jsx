@@ -53,12 +53,8 @@ const MaleJuvenile = () => {
   const [isFilterActive, setIsFilterActive] = useState(false);
   const [maxPrice, setMaxPrice] = useState(null);
   const nomesProdutos = [
-    "Conjunto",
-    "Maiô",
-    "Óculos",
     "Sunga",
-    "Vestidinho",
-    "Colete",
+    "Sunga Box",
   ];
   const [total, setTotal] = useState(0);
   const [cartItems, setCartItems] = useState(() => {
