@@ -67,7 +67,7 @@ const Cart = () => {
   //   const existingItemIndex = favoriteItems.findIndex(
   //     (item) => item.nome_prop === produto.nome_prop
   //   );
-  
+
   //   if (existingItemIndex === -1) {
   //     setFavoriteItems([...favoriteItems, { ...produto }]);
   //   }
@@ -322,17 +322,17 @@ const Cart = () => {
               </Link>
             </div>
 
-        <div className="button-menu-1">
-          <Link to="/female">
-            <h6>FEMININO</h6>
-          </Link>
-        </div>
+            <div className="button-menu-1">
+              <Link to="/female">
+                <h6>FEMININO</h6>
+              </Link>
+            </div>
 
-        <div className="button-menu-1">
-          <Link to="/male">
-            <h6>MASCULINO</h6>
-          </Link>
-        </div>
+            <div className="button-menu-1">
+              <Link to="/male">
+                <h6>MASCULINO</h6>
+              </Link>
+            </div>
 
             <div className="button-menu-1">
               <Link to="/props">
@@ -383,13 +383,12 @@ const Cart = () => {
                 <h4 className="title-prod">{productName}</h4>
                 <hr className="hr-prod" size="1" />
 
-              {/* <span className="off">R$ 199,90</span>*/}
-              <span className="price-pd">
-                R$ {productData ? productData.preço : ""}
-              </span> 
-              
+                {/* <span className="off">R$ 199,90</span>*/}
+                <span className="price-pd">
+                  R$ {productData ? productData.preço : ""}
+                </span>
 
-  {/*{showSelectedColor && (
+                {/*{showSelectedColor && (
   <button className="selected-color-button">{selectColor}</button>
   )} */}
 
@@ -448,45 +447,57 @@ const Cart = () => {
                     </>
                   )}
 
-<p className="text-prod">Tamanhos:</p>
-      <div className="size-options">
-        <div
-          className={`size-option ${selectedSize === "06" ? "selected" : ""}`}
-          onClick={() => handleSizeSelect("06")}
-        >
-          06
-        </div>
-        <div
-          className={`size-option ${selectedSize === "08" ? "selected" : ""}`}
-          onClick={() => handleSizeSelect("08")}
-        >
-          08
-        </div>
-        <div
-          className={`size-option ${selectedSize === "10" ? "selected" : ""}`}
-          onClick={() => handleSizeSelect("10")}
-        >
-          10
-        </div>
-        <div
-          className={`size-option ${selectedSize === "12" ? "selected" : ""}`}
-          onClick={() => handleSizeSelect("12")}
-        >
-          12
-        </div>
-        <div
-          className={`size-option ${selectedSize === "14" ? "selected" : ""}`}
-          onClick={() => handleSizeSelect("14")}
-        >
-          14
-        </div>
-        <div
-          className={`size-option ${selectedSize === "16" ? "selected" : ""}`}
-          onClick={() => handleSizeSelect("16")}
-        >
-          16
-        </div>
-      </div>
+                <p className="text-prod">Tamanhos:</p>
+                <div className="size-options">
+                  <div
+                    className={`size-option ${
+                      selectedSize === "06" ? "selected" : ""
+                    }`}
+                    onClick={() => handleSizeSelect("06")}
+                  >
+                    06
+                  </div>
+                  <div
+                    className={`size-option ${
+                      selectedSize === "08" ? "selected" : ""
+                    }`}
+                    onClick={() => handleSizeSelect("08")}
+                  >
+                    08
+                  </div>
+                  <div
+                    className={`size-option ${
+                      selectedSize === "10" ? "selected" : ""
+                    }`}
+                    onClick={() => handleSizeSelect("10")}
+                  >
+                    10
+                  </div>
+                  <div
+                    className={`size-option ${
+                      selectedSize === "12" ? "selected" : ""
+                    }`}
+                    onClick={() => handleSizeSelect("12")}
+                  >
+                    12
+                  </div>
+                  <div
+                    className={`size-option ${
+                      selectedSize === "14" ? "selected" : ""
+                    }`}
+                    onClick={() => handleSizeSelect("14")}
+                  >
+                    14
+                  </div>
+                  <div
+                    className={`size-option ${
+                      selectedSize === "16" ? "selected" : ""
+                    }`}
+                    onClick={() => handleSizeSelect("16")}
+                  >
+                    16
+                  </div>
+                </div>
 
                 {productData.size && productData.size.length > 0 && (
                   <div className="size-options">
