@@ -1,13 +1,17 @@
-import "../styles/Product.css";
-import { Link, useParams } from "react-router-dom";
-import React, { useState, useEffect } from "react";
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
-import { getFirestore, collection, doc, getDoc } from "firebase/firestore";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
+import React, { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
+import { Link, useParams } from "react-router-dom";
+
+import "../styles/Product.css";  // Certifique-se de que o caminho do seu arquivo CSS está correto
+
+// Restante do seu código...
+
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDTKUI6nV-DZxjIsUo1BMkjIUWOQbT9gU3Q",
+  apiKey: "AIzaSyDTKUI6nV-DZjIsUo1BMkjIUWOQbT9gU3Q",
   authDomain: "auth-amanda.firebaseapp.com",
   projectId: "auth-amanda",
   storageBucket: "auth-amanda.appspot.com",
@@ -19,6 +23,9 @@ export const app = initializeApp(firebaseConfig);
 export const storage = getStorage(app);
 export const firestore = getFirestore(app);
 
+// Restante do seu código...
+
+
 const Cart = () => {
   const [showDescription, setShowDescription] = useState(false);
   const [productLoading, setProductLoading] = useState(true);
@@ -27,7 +34,9 @@ const Cart = () => {
   const [cart, setCart] = useState([]);
   const [zipcode, setZipcode] = useState("");
   const [shippingCost, setShippingCost] = useState(0);
-  const [productData, setProductData] = useState(null);
+  // const [productData, setProductData] = useState(null);
+  const [productData, setProductData] = useState({});
+
   const { collectionName, productName } = useParams();
   const selectColor = (color) => {
     setSelectedColor(color);
@@ -489,7 +498,7 @@ const Cart = () => {
       </div>
 
                 {productData.size && productData.size.length > 0 && (
-                  <div className="size-options">
+                    <div className="size-options">
                     <p className="text-prod">Tamanhos:</p>
                     {productData.size.map((size) => (
                       <div
