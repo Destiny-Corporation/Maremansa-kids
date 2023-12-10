@@ -3,6 +3,8 @@ import "../../styles/User/Register.css";
 import { Route } from "react-router-dom";
 import { Link} from 'react-router-dom'; 
 import { initializeApp } from 'firebase/app';
+import { getStorage } from "firebase/storage";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { getDatabase, ref, set } from 'firebase/database';
 import { getAnalytics } from "firebase/analytics";
@@ -17,7 +19,10 @@ const firebaseConfig = {
   appId: "1:376069750475:web:bfb216cfd8928a23e8a54e",
 };
 
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
+export const storage = getStorage(app);
+export const firestore = getFirestore(app);
+
 const auth = getAuth(app); 
 const database = getDatabase(app);
 const analytics = getAnalytics(app);
@@ -163,46 +168,45 @@ const Register = () => {
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
-            <img src="/assets/whale.png" />
+        <Link to="/"><img className="rotating-jumping-image" src="/assets/whale.png" /></Link>
           </div>
 
           <div className="footer-section-div">
-            <h3>SOBRE NÓS</h3>
+            <h3 className='footer-animation-title'>SOBRE NÓS</h3>
             <li>
-                <Link to="/company">A EMPRESA</Link>
+              <Link to="/company">A EMPRESA</Link>
             </li>
             <li>
-                <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
+              <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
             </li>
             <li>
-                <Link to="/partners">NOSSOS PARCEIROS</Link>
-            </li>
-          </div>
-
-          <div className="footer-section-div">
-            <h3>SUPORTE</h3>
-            <li>
-                <Link to="/services">ATENDIMENTO</Link>
-            </li>
-            <li>
-                <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
-            </li>
-            <li>
-                <Link to="/sitemap">MAPA DO SITE</Link>
+              <Link to="/partners">NOSSOS PARCEIROS</Link>
             </li>
           </div>
 
           <div className="footer-section-div">
-            <h3>CONTATOS</h3>
-              <i className="fa fa-whatsapp"></i>
-              <i className="fa fa-google"></i>
-              <i className="fa fa-instagram"></i>
+            <h3 className='footer-animation-title'>SUPORTE</h3>
+            <li>
+              <Link to="/services">ATENDIMENTO</Link>
+            </li>
+            <li>
+              <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
+            </li>
+            <li>
+              <Link to="/sitemap">MAPA DO SITE</Link>
+            </li>
+          </div>
+
+          <div className="footer-section-div">
+            <h3 className='footer-animation-title'>CONTATOS</h3>
+            <i className="fa fa-whatsapp"></i>
+            <i className="fa fa-google"></i>
+            <i className="fa fa-instagram"></i>
           </div>
         </section>
       </footer>
-
-      <div className="sub-footer">
-        <p>maremansa</p>
+      <div className="last-text">
+        <p className="text-sub-footer">maremansa</p>
       </div>
     </>
   );

@@ -248,17 +248,17 @@ const FemBaby = () => {
       ) : (
         <div className="main">
       <header className="main-header">
-        <div className="search-container-header">
+      <div className="search-container-header">
         <input
           type="text"
-          className="search-bar"
+          className="search-bar-header"
           placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-          <button className="search-button-header" type="submit">
-            <i className="bx bx-search"></i>
-          </button>
+        <button className="search-button" type="submit">
+          <i className="bx bx-search"></i>
+        </button>
         </div>
         <div className="header-logo-center">
           <Link to="/">
@@ -270,22 +270,22 @@ const FemBaby = () => {
             />{" "}
           </Link>
         </div>
-        <div className="icons-about">
+        <div className="icons-w">
           <Link to="/login">
             <i
-              className="bx bx-user bt-header"
+              className="bx bx-user bt-header animation"
               style={{ color: "#ffffff" }}
             ></i>
           </Link>
           <Link to="/wishlist">
             <i
-              className="bx bx-heart bt-header"
+              className="bx bx-heart bt-header animation"
               style={{ color: "#ffffff" }}
             ></i>
           </Link>
 
           <i
-            className="bx bx-cart bt-header"
+            className="bx bx-cart bt-header animation"
             style={{ color: "#ffffff" }}
             id="cart-icon"
             onClick={handleCartIconClick}
@@ -409,7 +409,7 @@ const FemBaby = () => {
             <img
               src="/assets/filter.png"
               alt="filtro"
-              className="button-image"
+              className="button-image animation"
             />
           </button>
           <hr className="hr-sections" />
@@ -532,8 +532,8 @@ const FemBaby = () => {
 
       <div className="pagination-container">
         <ReactPaginate
-          previousLabel={<button className="custom-button">ANTERIOR</button>}
-          nextLabel={<button className="custom-button">PRÓXIMO</button>}
+          previousLabel={<button className="btn-6">ANTERIOR</button>}
+          nextLabel={<button className="btn-6">PRÓXIMO</button>}
           breakLabel={"..."}
           pageCount={pageCount}
           marginPagesDisplayed={2}
@@ -552,11 +552,11 @@ const FemBaby = () => {
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
-            <img src="/assets/whale.png" />
+        <Link to="/"><img className="rotating-jumping-image" src="/assets/whale.png" /></Link>
           </div>
 
           <div className="footer-section-div">
-            <h3>SOBRE NÓS</h3>
+            <h3 className='footer-animation-title'>SOBRE NÓS</h3>
             <li>
               <Link to="/company">A EMPRESA</Link>
             </li>
@@ -569,7 +569,7 @@ const FemBaby = () => {
           </div>
 
           <div className="footer-section-div">
-            <h3>SUPORTE</h3>
+            <h3 className='footer-animation-title'>SUPORTE</h3>
             <li>
               <Link to="/services">ATENDIMENTO</Link>
             </li>
@@ -582,11 +582,17 @@ const FemBaby = () => {
           </div>
 
           <div className="footer-section-div">
-            <h3>CONTATOS</h3>
-            <i className="fa fa-whatsapp"></i>
-            <i className="fa fa-google"></i>
-            <i className="fa fa-instagram"></i>
-          </div>
+  <h3 className='footer-animation-title'>CONTATOS</h3>
+  <a href="https://web.whatsapp.com/send?phone=5585986056136" target="_blank" title="whatsapp">
+    <i className="fa fa-whatsapp"></i>
+  </a>
+  <a href="https://www.facebook.com/maremansakidss" target="_blank" title="facebook">
+    <i className="fa fa-facebook"></i>
+  </a>
+  <a href="https://www.instagram.com/maremansakids/" target="_blank" title="instagram">
+    <i className="fa fa-instagram"></i>
+  </a>
+</div>
         </section>
       </footer>
       <div className="last-text">

@@ -467,11 +467,11 @@ const Home = () => {
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
-            <img src="/assets/whale.png" />
+        <Link to="/"><img className="rotating-jumping-image" src="/assets/whale.png" /></Link>
           </div>
 
           <div className="footer-section-div">
-            <h3>SOBRE NÓS</h3>
+            <h3 className='footer-animation-title'>SOBRE NÓS</h3>
             <li>
               <Link to="/company">A EMPRESA</Link>
             </li>
@@ -484,7 +484,7 @@ const Home = () => {
           </div>
 
           <div className="footer-section-div">
-            <h3>SUPORTE</h3>
+            <h3 className='footer-animation-title'>SUPORTE</h3>
             <li>
               <Link to="/services">ATENDIMENTO</Link>
             </li>
@@ -497,11 +497,17 @@ const Home = () => {
           </div>
 
           <div className="footer-section-div">
-            <h3>CONTATOS</h3>
-            <i className="fa fa-whatsapp"></i>
-            <i className="fa fa-google"></i>
-            <i className="fa fa-instagram"></i>
-          </div>
+  <h3 className='footer-animation-title'>CONTATOS</h3>
+  <a href="https://web.whatsapp.com/send?phone=5585986056136" target="_blank" title="whatsapp">
+    <i className="fa fa-whatsapp"></i>
+  </a>
+  <a href="https://www.facebook.com/maremansakidss" target="_blank" title="facebook">
+    <i className="fa fa-facebook"></i>
+  </a>
+  <a href="https://www.instagram.com/maremansakids/" target="_blank" title="instagram">
+    <i className="fa fa-instagram"></i>
+  </a>
+</div>
         </section>
       </footer>
       <div className="last-text">

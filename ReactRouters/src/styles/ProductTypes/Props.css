@@ -246,9 +246,6 @@
   font-size: 17px;
 }
 
-
-
-
 .items-per-page {
   margin-top: 20px;
   display: flex;
@@ -295,6 +292,91 @@
   margin-left: 36px;
   color: #48a3a9;
 }
+.btn-6 {
+  background: #48a3a9;
+  background: radial-gradient(circle, #48a3a9 0%, #2a777c 100%);
+  line-height: 32px;
+  width: 100px;
+  padding: 0;
+  border: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-6 span {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.btn-6:before,
+.btn-6:after {
+  position: absolute;
+  content: "";
+  height: 0%;
+  width: 1px;
+  box-shadow:
+    -1px -1px 20px 0px rgba(255, 255, 255, 1),
+    -4px -4px 5px 0px rgba(255, 255, 255, 1),
+    7px 7px 20px 0px rgba(0, 0, 0, .4),
+    4px 4px 5px 0px rgba(0, 0, 0, .3);
+  transition: all 500ms ease;
+}
+
+.btn-6:before {
+  right: 0;
+  top: 0;
+}
+
+.btn-6:after {
+  left: 0;
+  bottom: 0;
+}
+
+.btn-6:hover {
+  background: #eee;
+  color: #48a3a9;
+  box-shadow: none;
+}
+
+.btn-6:hover:before,
+.btn-6:hover:after {
+  height: 100%;
+}
+
+.btn-6 span:before,
+.btn-6 span:after {
+  position: absolute;
+  content: "";
+  box-shadow:
+    -1px -1px 20px 0px rgb(216, 214, 214),
+    -4px -4px 5px 0px rgb(236, 235, 235),
+    7px 7px 20px 0px rgba(0, 0, 0, .4),
+    4px 4px 5px 0px rgba(0, 0, 0, .3);
+  transition: all 500ms ease;
+}
+
+.btn-6 span:before {
+  left: 0;
+  top: 0;
+  width: 0%;
+  height: .5px;
+}
+
+.btn-6 span:after {
+  right: 0;
+  bottom: 0;
+  width: 0%;
+  height: .5px;
+}
+
+.btn-6 span:hover:before,
+.btn-6 span:hover:after {
+  width: 100%;
+}
+
+
 
 .pd {
   margin-left: 116px;

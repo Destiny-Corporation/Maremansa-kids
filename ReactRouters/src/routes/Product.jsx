@@ -1,10 +1,13 @@
-import "../styles/Product.css";
-import { Link, useParams } from "react-router-dom";
-import React, { useState, useEffect } from "react";
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
-import { getFirestore, collection, doc, getDoc } from "firebase/firestore";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
+import React, { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
+import { Link, useParams } from "react-router-dom";
+
+import "../styles/Product.css"; // Certifique-se de que o caminho do seu arquivo CSS está correto
+
+// Restante do seu código...
 
 const firebaseConfig = {
   apiKey: "AIzaSyDTKUI6nV-DZjIsUo1BMkjIUWOQbT9gU3Q",
@@ -19,6 +22,8 @@ export const app = initializeApp(firebaseConfig);
 export const storage = getStorage(app);
 export const firestore = getFirestore(app);
 
+// Restante do seu código...
+
 const Cart = () => {
   const [showDescription, setShowDescription] = useState(false);
   const [productLoading, setProductLoading] = useState(true);
@@ -27,7 +32,9 @@ const Cart = () => {
   const [cart, setCart] = useState([]);
   const [zipcode, setZipcode] = useState("");
   const [shippingCost, setShippingCost] = useState(0);
-  const [productData, setProductData] = useState(null);
+  // const [productData, setProductData] = useState(null);
+  const [productData, setProductData] = useState({});
+
   const { collectionName, productName } = useParams();
   const selectColor = (color) => {
     setSelectedColor(color);
@@ -67,7 +74,7 @@ const Cart = () => {
   //   const existingItemIndex = favoriteItems.findIndex(
   //     (item) => item.nome_prop === produto.nome_prop
   //   );
-  
+
   //   if (existingItemIndex === -1) {
   //     setFavoriteItems([...favoriteItems, { ...produto }]);
   //   }
@@ -170,6 +177,12 @@ const Cart = () => {
       }
     }, []); // O segundo argumento vazio garante que este efeito seja executado apenas uma vez, após a montagem inicial do componente.
 
+    const handleQuantityChange = (newQuantity) => {
+      if (newQuantity >= 1) {
+        setSelectedQuantity(newQuantity);
+      }
+    };
+
     const handleAddToCart = (produto) => {
       const existingItemIndex = cartItems.findIndex(
         (item) => item.nome_prop === produto.nome_prop
@@ -195,11 +208,7 @@ const Cart = () => {
     const handleCloseCartClick = () => {
       setCartVisible(false); // Esconde o carrinho quando o usuário clica no ícone de fechar
     };
-    const handleQuantityChange = (newQuantity) => {
-      if (newQuantity >= 1) {
-        setSelectedQuantity(newQuantity);
-      }
-    };
+
     const calculateTotal = () => {
       let total = 0;
       for (const item of cartItems) {
@@ -320,17 +329,17 @@ const Cart = () => {
               </Link>
             </div>
 
-        <div className="button-menu-1">
-          <Link to="/female">
-            <h6>FEMININO</h6>
-          </Link>
-        </div>
+            <div className="button-menu-1">
+              <Link to="/female">
+                <h6>FEMININO</h6>
+              </Link>
+            </div>
 
-        <div className="button-menu-1">
-          <Link to="/male">
-            <h6>MASCULINO</h6>
-          </Link>
-        </div>
+            <div className="button-menu-1">
+              <Link to="/male">
+                <h6>MASCULINO</h6>
+              </Link>
+            </div>
 
             <div className="button-menu-1">
               <Link to="/props">
@@ -381,13 +390,12 @@ const Cart = () => {
                 <h4 className="title-prod">{productName}</h4>
                 <hr className="hr-prod" size="1" />
 
-              {/* <span className="off">R$ 199,90</span>*/}
-              <span className="price-pd">
-                R$ {productData ? productData.preço : ""}
-              </span> 
-              
+                {/* <span className="off">R$ 199,90</span>*/}
+                <span className="price-pd">
+                  R$ {productData ? productData.preço : ""}
+                </span>
 
-  {/*{showSelectedColor && (
+                {/*{showSelectedColor && (
   <button className="selected-color-button">{selectColor}</button>
   )} */}
 
@@ -446,45 +454,57 @@ const Cart = () => {
                     </>
                   )}
 
-<p className="text-prod">Tamanhos:</p>
-      <div className="size-options">
-        <div
-          className={`size-option ${selectedSize === "06" ? "selected" : ""}`}
-          onClick={() => handleSizeSelect("06")}
-        >
-          06
-        </div>
-        <div
-          className={`size-option ${selectedSize === "08" ? "selected" : ""}`}
-          onClick={() => handleSizeSelect("08")}
-        >
-          08
-        </div>
-        <div
-          className={`size-option ${selectedSize === "10" ? "selected" : ""}`}
-          onClick={() => handleSizeSelect("10")}
-        >
-          10
-        </div>
-        <div
-          className={`size-option ${selectedSize === "12" ? "selected" : ""}`}
-          onClick={() => handleSizeSelect("12")}
-        >
-          12
-        </div>
-        <div
-          className={`size-option ${selectedSize === "14" ? "selected" : ""}`}
-          onClick={() => handleSizeSelect("14")}
-        >
-          14
-        </div>
-        <div
-          className={`size-option ${selectedSize === "16" ? "selected" : ""}`}
-          onClick={() => handleSizeSelect("16")}
-        >
-          16
-        </div>
-      </div>
+                <p className="text-prod">Tamanhos:</p>
+                <div className="size-options">
+                  <div
+                    className={`size-option ${
+                      selectedSize === "06" ? "selected" : ""
+                    }`}
+                    onClick={() => handleSizeSelect("06")}
+                  >
+                    06
+                  </div>
+                  <div
+                    className={`size-option ${
+                      selectedSize === "08" ? "selected" : ""
+                    }`}
+                    onClick={() => handleSizeSelect("08")}
+                  >
+                    08
+                  </div>
+                  <div
+                    className={`size-option ${
+                      selectedSize === "10" ? "selected" : ""
+                    }`}
+                    onClick={() => handleSizeSelect("10")}
+                  >
+                    10
+                  </div>
+                  <div
+                    className={`size-option ${
+                      selectedSize === "12" ? "selected" : ""
+                    }`}
+                    onClick={() => handleSizeSelect("12")}
+                  >
+                    12
+                  </div>
+                  <div
+                    className={`size-option ${
+                      selectedSize === "14" ? "selected" : ""
+                    }`}
+                    onClick={() => handleSizeSelect("14")}
+                  >
+                    14
+                  </div>
+                  <div
+                    className={`size-option ${
+                      selectedSize === "16" ? "selected" : ""
+                    }`}
+                    onClick={() => handleSizeSelect("16")}
+                  >
+                    16
+                  </div>
+                </div>
 
                 {productData.size && productData.size.length > 0 && (
                   <div className="size-options">
@@ -572,11 +592,13 @@ const Cart = () => {
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
-            <img src="/assets/whale.png" />
+            <Link to="/">
+              <img className="rotating-jumping-image" src="/assets/whale.png" />
+            </Link>
           </div>
 
           <div className="footer-section-div">
-            <h3>SOBRE NÓS</h3>
+            <h3 className="footer-animation-title">SOBRE NÓS</h3>
             <li>
               <Link to="/company">A EMPRESA</Link>
             </li>
@@ -589,7 +611,7 @@ const Cart = () => {
           </div>
 
           <div className="footer-section-div">
-            <h3>SUPORTE</h3>
+            <h3 className="footer-animation-title">SUPORTE</h3>
             <li>
               <Link to="/services">ATENDIMENTO</Link>
             </li>
@@ -602,11 +624,17 @@ const Cart = () => {
           </div>
 
           <div className="footer-section-div">
-            <h3>CONTATOS</h3>
-            <i className="fa fa-whatsapp"></i>
-            <i className="fa fa-google"></i>
-            <i className="fa fa-instagram"></i>
-          </div>
+  <h3 className='footer-animation-title'>CONTATOS</h3>
+  <a href="https://web.whatsapp.com/send?phone=5585986056136" target="_blank" title="whatsapp">
+    <i className="fa fa-whatsapp"></i>
+  </a>
+  <a href="https://www.facebook.com/maremansakidss" target="_blank" title="facebook">
+    <i className="fa fa-facebook"></i>
+  </a>
+  <a href="https://www.instagram.com/maremansakids/" target="_blank" title="instagram">
+    <i className="fa fa-instagram"></i>
+  </a>
+</div>
         </section>
       </footer>
       <div className="last-text">
