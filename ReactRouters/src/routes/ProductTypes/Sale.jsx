@@ -495,7 +495,7 @@ const Sale = () => {
    onPageChange={handlePageChange}
    containerClassName={"pagination"}
    subContainerClassName={"pages pagination"}
-   activeClassName={"active"}
+   activeClassName={"activep"}
    previousClassName={prevButtonClass}
    nextClassName={nextButtonClass}
    pageClassName={"page-count"}
