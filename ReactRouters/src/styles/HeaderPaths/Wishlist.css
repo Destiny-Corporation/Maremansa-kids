@@ -92,6 +92,17 @@
     letter-spacing: 1px;
     color: white;
   }
+
+  .wishlist-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); 
+    gap: 20px; 
+  }
+  
+  .wishlist-item {
+    width: 100%; 
+  }
+  
   
 .container-wishlist {
     display: flex;
@@ -109,6 +120,7 @@
     overflow: hidden;
     flex-direction: column;
 }
+
   
   .effect {
     display: flex;
