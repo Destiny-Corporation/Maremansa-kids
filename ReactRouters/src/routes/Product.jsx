@@ -454,58 +454,6 @@ const Cart = () => {
                     </>
                   )}
 
-                <p className="text-prod">Tamanhos:</p>
-                <div className="size-options">
-                  <div
-                    className={`size-option ${
-                      selectedSize === "06" ? "selected" : ""
-                    }`}
-                    onClick={() => handleSizeSelect("06")}
-                  >
-                    06
-                  </div>
-                  <div
-                    className={`size-option ${
-                      selectedSize === "08" ? "selected" : ""
-                    }`}
-                    onClick={() => handleSizeSelect("08")}
-                  >
-                    08
-                  </div>
-                  <div
-                    className={`size-option ${
-                      selectedSize === "10" ? "selected" : ""
-                    }`}
-                    onClick={() => handleSizeSelect("10")}
-                  >
-                    10
-                  </div>
-                  <div
-                    className={`size-option ${
-                      selectedSize === "12" ? "selected" : ""
-                    }`}
-                    onClick={() => handleSizeSelect("12")}
-                  >
-                    12
-                  </div>
-                  <div
-                    className={`size-option ${
-                      selectedSize === "14" ? "selected" : ""
-                    }`}
-                    onClick={() => handleSizeSelect("14")}
-                  >
-                    14
-                  </div>
-                  <div
-                    className={`size-option ${
-                      selectedSize === "16" ? "selected" : ""
-                    }`}
-                    onClick={() => handleSizeSelect("16")}
-                  >
-                    16
-                  </div>
-                </div>
-
                 {productData.size && productData.size.length > 0 && (
                   <div className="size-options">
                     <p className="text-prod">Tamanhos:</p>

@@ -48,12 +48,12 @@ const Props = () => {
   const [isFilterActive, setIsFilterActive] = useState(false);
   const [maxPrice, setMaxPrice] = useState("");
   const nomesProdutos = [
-    "Conjunto",
     "Boia",
+    "Chapéu",
     "Óculos",
+    "Pulseira",
     "Relógio",
     "Sandália",
-    "Colete",
   ];
   const [total, setTotal] = useState(0);
   const [cartItems, setCartItems] = useState(() => {

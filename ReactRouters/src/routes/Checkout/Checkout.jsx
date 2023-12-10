@@ -68,40 +68,30 @@ const Checkout = () => {
   return (
     <>
     <div className="main">
-      <header className="main-header">
-        <div className="search-container-header">
-          <input
-            type="text"
-            className="search-bar-header"
-            placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
-          />
-          <button className="search-button-header" type="submit">
-            <i className="bx bx-search"></i>
-          </button>
+    <header className="main-header">
+        <div className="logo-about">
+        <Link to="/"> <img src="/assets/logo.png" alt="Logo" /> </Link>
         </div>
-        <div className="logo">
-          <Link to="/">
-            <img
-              src="/assets/logo.png"
-              alt="Logo"
-              className="header-logo-center"
-            />
-          </Link>
-        </div>
-        <div className="icons">
-          <Link to="/requests">
-            <i className="bx bx-user bt-header" style={{ color: "#ffffff" }}></i>
-          </Link>
-          <Link to="/wishlist">
-            <i
-              className="bx bx-heart bt-header"
-              style={{ color: "#ffffff" }}
-            ></i>
-          </Link>
-          <Link to="/cart">
-            <i className="bx bx-cart bt-header" style={{ color: "#ffffff" }}></i>
-          </Link>
-        </div>
+        <div className="icons-about">
+            <Link to="/login">
+              <i
+                className="bx bx-user bt-header"
+                style={{ color: "#ffffff" }}
+              ></i>
+            </Link>
+            <Link to="/wishlist">
+              <i
+                className="bx bx-heart bt-header"
+                style={{ color: "#ffffff" }}
+              ></i>
+            </Link>
+            <Link to="/cart">
+              <i
+                className="bx bx-cart bt-header"
+                style={{ color: "#ffffff" }}
+              ></i>
+            </Link>
+         </div>
       </header>
 
       <div className="container-subheader">

@@ -55,12 +55,8 @@ const FemBaby = () => {
   const [isFilterActive, setIsFilterActive] = useState(false);
   const [maxPrice, setMaxPrice] = useState(null);
   const nomesProdutos = [
-    "Conjunto",
+    "Biquíni",
     "Maiô",
-    "Óculos",
-    "Sunga",
-    "Vestidinho",
-    "Colete",
   ];
   const [total, setTotal] = useState(0);
   const [cartItems, setCartItems] = useState(() => {
