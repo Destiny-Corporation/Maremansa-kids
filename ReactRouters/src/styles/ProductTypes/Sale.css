@@ -119,7 +119,7 @@
 
 
 .pagination {
-  --bs-pagination-color: #48a3a9;
+  /* --bs-pagination-color: #48a3a9; */
   --bs-pagination-bg: var(--bs-body-bg);
   --bs-pagination-border-width: var(--bs-border-width);
   --bs-pagination-border-color: var(--bs-border-color);
@@ -130,9 +130,9 @@
   --bs-pagination-focus-color: #48a3a9;
   --bs-pagination-focus-bg: var(--bs-secondary-bg);
   --bs-pagination-focus-box-shadow: 0 0 0 0.25rem #48a3a977;
-  --bs-pagination-active-color: #fff;
+  /* --bs-pagination-active-color: #fff;
   --bs-pagination-active-bg: #48a3a9;
-  --bs-pagination-active-border-color: #48a3a9;
+  --bs-pagination-active-border-color: #48a3a9; */
   --bs-pagination-disabled-color: var(--bs-secondary-color);
   --bs-pagination-disabled-bg: var(--bs-secondary-bg);
   --bs-pagination-disabled-border-color: var(--bs-border-color);
@@ -166,28 +166,32 @@ button {
 .page-count {
   width: 30px;
   height: 32px;
-  background-color: #eee;
-  color: #333;
+  background-color: #92aaac;
+  color: #48a3a9 !important;
   padding: 2px 2px 2px 2px;
   margin: 5px;
   border-radius: 6px;
   cursor: pointer;
 }
 
-.active > .page-link,
-.page-link.active {
-    z-index: 3;
-    color: var(--bs-pagination-active-color);
-    background-color: transparent; /* Set background to transparent */
-    border-color: var(--bs-pagination-active-border-color);
-}
+/* .page-link.active {
+   background-color: transparent;
+  background: radial-gradient(circle, #48a3a9 0%, #2a777c 100%);
+  color: #fff;
+} */
 
 
-.active {
+.activep {
   background-color: transparent;
   background: radial-gradient(circle, #48a3a9 0%, #2a777c 100%);
   color: #fff;
-}
+} 
+
+.activep:hover {
+  background-color: transparent;
+  background: radial-gradient(circle, #48a3a9 0%, #2a777c 100%);
+  color: #fff;
+} 
 
 .page-link {
   font-size: 12px;
@@ -199,8 +203,14 @@ button {
   margin-left: -2px;
   text-decoration: none;
   background-color: transparent;
+  color: #fff;
   border-radius: 8px;
   border: none;
+}
+
+.page-link:hover {
+  background: radial-gradient(circle, #48a3a9 0%, #2a777c 100%);
+  color: #fff;
 }
 
 .items-per-page {
