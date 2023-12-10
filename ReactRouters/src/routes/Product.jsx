@@ -33,6 +33,26 @@ const Cart = () => {
     setSelectedColor(color);
   };
 
+  try {
+    getApp("[DEFAULT]");
+  } catch (error) {
+    const firebaseConfig = {
+      apiKey: "AIzaSyDTKUI6nV-DZxjIsUo1BMkjIUWOQbT9gU3Q",
+      authDomain: "auth-amanda.firebaseapp.com",
+      projectId: "auth-amanda",
+      storageBucket: "auth-amanda.appspot.com",
+      messagingSenderId: "376069750475",
+      appId: "1:376069750475:web:bfb216cfd8928a23e8a54e",
+    };
+
+    initializeApp(firebaseConfig, "[DEFAULT]");
+  }
+
+  const app = getApp("[DEFAULT]"); // Obtenha a instância do app Firebase
+
+  const storage = getStorage(app);
+  const firestore = getFirestore(app);
+
   const handleSizeSelect = (size) => {
     setSelectedSize(size);
   };
@@ -585,11 +605,13 @@ const Cart = () => {
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
-        <Link to="/"><img className="rotating-jumping-image" src="/assets/whale.png" /></Link>
+            <Link to="/">
+              <img className="rotating-jumping-image" src="/assets/whale.png" />
+            </Link>
           </div>
 
           <div className="footer-section-div">
-            <h3 className='footer-animation-title'>SOBRE NÓS</h3>
+            <h3 className="footer-animation-title">SOBRE NÓS</h3>
             <li>
               <Link to="/company">A EMPRESA</Link>
             </li>
@@ -602,7 +624,7 @@ const Cart = () => {
           </div>
 
           <div className="footer-section-div">
-            <h3 className='footer-animation-title'>SUPORTE</h3>
+            <h3 className="footer-animation-title">SUPORTE</h3>
             <li>
               <Link to="/services">ATENDIMENTO</Link>
             </li>
@@ -615,7 +637,7 @@ const Cart = () => {
           </div>
 
           <div className="footer-section-div">
-            <h3 className='footer-animation-title'>CONTATOS</h3>
+            <h3 className="footer-animation-title">CONTATOS</h3>
             <i className="fa fa-whatsapp"></i>
             <i className="fa fa-google"></i>
             <i className="fa fa-instagram"></i>
