@@ -249,6 +249,7 @@ const PaymentForm = () => {
 
   const concluirPagamento = () => {
     // Adicione lógica de validação e conclusão do pagamento aqui
+    window.location.href = "/confirmation"
     console.log("Concluir pagamento");
   };
 
