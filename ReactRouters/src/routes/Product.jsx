@@ -5,10 +5,9 @@ import React, { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
 import { Link, useParams } from "react-router-dom";
 
-import "../styles/Product.css";  // Certifique-se de que o caminho do seu arquivo CSS está correto
+import "../styles/Product.css"; // Certifique-se de que o caminho do seu arquivo CSS está correto
 
 // Restante do seu código...
-
 
 const firebaseConfig = {
   apiKey: "AIzaSyDTKUI6nV-DZjIsUo1BMkjIUWOQbT9gU3Q",
@@ -25,7 +24,6 @@ export const firestore = getFirestore(app);
 
 // Restante do seu código...
 
-
 const Cart = () => {
   const [showDescription, setShowDescription] = useState(false);
   const [productLoading, setProductLoading] = useState(true);
@@ -41,26 +39,6 @@ const Cart = () => {
   const selectColor = (color) => {
     setSelectedColor(color);
   };
-
-  try {
-    getApp("[DEFAULT]");
-  } catch (error) {
-    const firebaseConfig = {
-      apiKey: "AIzaSyDTKUI6nV-DZxjIsUo1BMkjIUWOQbT9gU3Q",
-      authDomain: "auth-amanda.firebaseapp.com",
-      projectId: "auth-amanda",
-      storageBucket: "auth-amanda.appspot.com",
-      messagingSenderId: "376069750475",
-      appId: "1:376069750475:web:bfb216cfd8928a23e8a54e",
-    };
-
-    initializeApp(firebaseConfig, "[DEFAULT]");
-  }
-
-  const app = getApp("[DEFAULT]"); // Obtenha a instância do app Firebase
-
-  const storage = getStorage(app);
-  const firestore = getFirestore(app);
 
   const handleSizeSelect = (size) => {
     setSelectedSize(size);
@@ -529,7 +507,7 @@ const Cart = () => {
                 </div>
 
                 {productData.size && productData.size.length > 0 && (
-                    <div className="size-options">
+                  <div className="size-options">
                     <p className="text-prod">Tamanhos:</p>
                     {productData.size.map((size) => (
                       <div
