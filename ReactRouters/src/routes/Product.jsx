@@ -5,10 +5,9 @@ import React, { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
 import { Link, useParams } from "react-router-dom";
 
-import "../styles/Product.css";  // Certifique-se de que o caminho do seu arquivo CSS está correto
+import "../styles/Product.css"; // Certifique-se de que o caminho do seu arquivo CSS está correto
 
 // Restante do seu código...
-
 
 const firebaseConfig = {
   apiKey: "AIzaSyDTKUI6nV-DZjIsUo1BMkjIUWOQbT9gU3Q",
@@ -24,7 +23,6 @@ export const storage = getStorage(app);
 export const firestore = getFirestore(app);
 
 // Restante do seu código...
-
 
 const Cart = () => {
   const [showDescription, setShowDescription] = useState(false);
@@ -509,7 +507,7 @@ const Cart = () => {
                 </div>
 
                 {productData.size && productData.size.length > 0 && (
-                    <div className="size-options">
+                  <div className="size-options">
                     <p className="text-prod">Tamanhos:</p>
                     {productData.size.map((size) => (
                       <div
@@ -594,11 +592,13 @@ const Cart = () => {
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
-        <Link to="/"><img className="rotating-jumping-image" src="/assets/whale.png" /></Link>
+            <Link to="/">
+              <img className="rotating-jumping-image" src="/assets/whale.png" />
+            </Link>
           </div>
 
           <div className="footer-section-div">
-            <h3 className='footer-animation-title'>SOBRE NÓS</h3>
+            <h3 className="footer-animation-title">SOBRE NÓS</h3>
             <li>
               <Link to="/company">A EMPRESA</Link>
             </li>
@@ -611,7 +611,7 @@ const Cart = () => {
           </div>
 
           <div className="footer-section-div">
-            <h3 className='footer-animation-title'>SUPORTE</h3>
+            <h3 className="footer-animation-title">SUPORTE</h3>
             <li>
               <Link to="/services">ATENDIMENTO</Link>
             </li>
@@ -624,7 +624,7 @@ const Cart = () => {
           </div>
 
           <div className="footer-section-div">
-            <h3 className='footer-animation-title'>CONTATOS</h3>
+            <h3 className="footer-animation-title">CONTATOS</h3>
             <i className="fa fa-whatsapp"></i>
             <i className="fa fa-google"></i>
             <i className="fa fa-instagram"></i>
