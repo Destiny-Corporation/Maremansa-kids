@@ -541,6 +541,24 @@ const Cart = () => {
             </div>
           </div>
         </section>
+        <div className="description-section">
+      <hr className="hr-prod-1" size="1" />
+      <h4 className="title-prod-1">
+                Descrição do Produto{" "}
+                <button
+          className={`show-more-button-1 ${showDescription ? "expanded" : ""}`}
+          onClick={() => setShowDescription(!showDescription)}
+        >
+          {showDescription ? "-" : "+"}
+        </button>
+              </h4>
+              <hr className="hr-prod-1" size="1" />
+
+              <p className='description-text'>
+                {showDescription ? productData?.descrição : ''}
+              </p>
+              </div>
+      
       </div>
 
       <footer>
