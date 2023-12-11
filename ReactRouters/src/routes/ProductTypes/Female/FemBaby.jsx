@@ -172,19 +172,20 @@ const FemBaby = () => {
           produtosCollection,
           where("category_prodfemme", "==", "Baby")
         );
-        const produtosSnapshot = await getDocs(produtosCollection);
+        const produtosSnapshot = await getDocs(produtosQuery); // Use produtosQuery here
         const produtosData = produtosSnapshot.docs.map((doc) => doc.data());
         setProdutos(produtosData);
-        setLoading(false); // Definindo loading como falso após o carregamento dos produtos
+        setLoading(false);
         console.log(produtosData);
       } catch (error) {
         console.error("Erro ao carregar produtos:", error);
-        setLoading(false); // Definindo loading como falso em caso de erro
+        setLoading(false);
       }
     };
   
-    fetchProdutos();
-  }, []);
+    fetchProdutos(); // Don't forget to invoke the function
+  }, []); // Make sure to provide an empty dependency array to run the effect only once
+  
 
   const handleFilterChange = (e) => {
     setFilterParam(e.target.value);
