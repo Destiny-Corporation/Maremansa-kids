@@ -13,6 +13,8 @@ import {
 } from "firebase/firestore";
 import ReactPaginate from "react-paginate";
 
+let isLoggedIn = false;
+
 const firebaseConfig = {
   apiKey: "AIzaSyDTKUI6nV-DZjIsUo1BMkjIUWOQbT9gU3Q",
   authDomain: "auth-amanda.firebaseapp.com",
@@ -27,10 +29,17 @@ export const storage = getStorage(app);
 export const firestore = getFirestore(app);
 
 const MaleJuvenile = () => {
+  const userIconLink = isLoggedIn ? "/requests" : "/login";
+  if (localStorage.getItem("user") !== null) {
+    localStorage.setItem("loggedIn", "true");
+    isLoggedIn = true;
+  }
   const [isItemAdded, setIsItemAdded] = useState(false);
   const [overlayVisible, setOverlayVisible] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [showNotification2, setShowNotification2] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState("Todos");
 
   const showAddedToCartNotification = () => {
     setShowNotification(true);
@@ -151,17 +160,23 @@ const MaleJuvenile = () => {
 
   useEffect(() => {
     const fetchProdutos = async () => {
-      const produtosCollection = collection(firestore, "Prodmale");
-      const produtosQuery = query(
-        produtosCollection,
-        where("category_prodmale", "==", "Juvenil")
-      );
-      const produtosSnapshot = await getDocs(produtosQuery);
-      const produtosData = produtosSnapshot.docs.map((doc) => doc.data());
-      setProdutos(produtosData);
-      console.log(produtosData);
+      try {
+        const produtosCollection = collection(firestore, "Prodmale");
+        const produtosQuery = query(
+          produtosCollection,
+          where("category_prodmale", "==", "Juvenil")
+        );
+        const produtosSnapshot = await getDocs(produtosCollection);
+        const produtosData = produtosSnapshot.docs.map((doc) => doc.data());
+        setProdutos(produtosData);
+        setLoading(false); // Definindo loading como falso após o carregamento dos produtos
+        console.log(produtosData);
+      } catch (error) {
+        console.error("Erro ao carregar produtos:", error);
+        setLoading(false); // Definindo loading como falso em caso de erro
+      }
     };
-
+  
     fetchProdutos();
   }, []);
 
@@ -227,7 +242,16 @@ const MaleJuvenile = () => {
     setMaxPrice("");
   };
   return (
-    <><div className="main">
+    <>
+      {loading ? (
+        <div className="loading-container">
+          <img
+            src="/assets/espera.gif"
+            alt="Carregando..."
+            style={{ width: "130px", height: "130px" }}
+          />
+        </div>
+      ) : ( <><div className="main">
       <header className="main-header">
       <div className="search-container-header">
         <input
@@ -252,7 +276,7 @@ const MaleJuvenile = () => {
           </Link>
         </div>
         <div className="icons-w">
-          <Link to="/login">
+          <Link to={userIconLink}>
             <i
               className="bx bx-user bt-header animation"
               style={{ color: "#ffffff" }}
@@ -572,6 +596,8 @@ const MaleJuvenile = () => {
       <div className="last-text">
         <p className="text-sub-footer">maremansa</p>
       </div>
+      </>
+      )}
     </>
   );
 };

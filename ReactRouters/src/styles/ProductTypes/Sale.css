@@ -133,6 +133,7 @@
   /* --bs-pagination-active-color: #fff;
   --bs-pagination-active-bg: #48a3a9;
   --bs-pagination-active-border-color: #48a3a9; */
+  --bs-pagination-active-bg: #2a777c;
   --bs-pagination-disabled-color: var(--bs-secondary-color);
   --bs-pagination-disabled-bg: var(--bs-secondary-bg);
   --bs-pagination-disabled-border-color: var(--bs-border-color);
@@ -207,6 +208,8 @@ button {
   border-radius: 8px;
   border: none;
 }
+
+
 
 .page-link:hover {
   background: radial-gradient(circle, #48a3a9 0%, #2a777c 100%);

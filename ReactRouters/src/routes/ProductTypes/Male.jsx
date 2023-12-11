@@ -6,7 +6,7 @@ import { getStorage } from "firebase/storage";
 import { getFirestore, collection, doc, getDocs } from "firebase/firestore";
 import ReactPaginate from "react-paginate";
 
-
+let isLoggedIn = false;
 const firebaseConfig = {
   apiKey: "AIzaSyDTKUI6nV-DZjIsUo1BMkjIUWOQbT9gU3Q",
   authDomain: "auth-amanda.firebaseapp.com",
@@ -21,6 +21,11 @@ export const storage = getStorage(app);
 export const firestore = getFirestore(app);
 
 const Male = () => {
+  const userIconLink = isLoggedIn ? "/requests" : "/login";
+  if (localStorage.getItem("user") !== null) {
+    localStorage.setItem("loggedIn", "true");
+    isLoggedIn = true;
+  }
   const [produtos, setProdutos] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
@@ -106,7 +111,7 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
           </Link>
         </div>
         <div className="icons-about">
-          <Link to="/requests">
+          <Link to={userIconLink}>
             <i
               className="bx bx-user bt-header"
               style={{ color: "#ffffff" }}

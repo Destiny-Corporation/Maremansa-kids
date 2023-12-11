@@ -78,50 +78,55 @@ const Wishlist = () => {
 
       <div className="wishlist-content">
         {isLoggedIn ? (
-          <div className="wishlist-items">
+          <div>
             {favoriteItems.length > 0 ? (
               favoriteItems.map((produto, index) => (
+                <div className="wishlist-items">
                 <div className="wishlist-item" key={index}>
-                  <div className="cart-content">
-                    <div className="cart-item" key={index}>
-                      <div className="cart-item-info">
+                  <div className="wish-content">
+                    <div className="wish-item" key={index}>
+                      <div className="wish-item-info">
                         <div className="delivery-indicator">
                           Favorito {index + 1} de {favoriteItems.length}
                         </div>
-                        <i
-                          className="bx bxs-trash-alt cart-remove cart-item-remove-2"
-                          onClick={() => handleRemoveFromFavorites(index)}
-                        ></i>
+                        <div className='infos-prod'>
                         <img
                           src={produto.url_image}
                           alt={produto.nome_prop}
-                          className="cart-item-image"
+                          className="wish-item-image"
                         />
-                        <div className="cart-item-details">
-                        <div className="cart-item-name">
+                        <div className="wish-item-details">
+                        <div className="wish-item-name">
                      {produto.nome_prodmale ||
                       produto.nome_prop ||
                       produto.nome_prodpromo ||
                       produto.nome_prodfemme}
                       </div>
-                          <div className="cart-item-price">
-                            R$ {produto.preço}
+                          <div className="wish-item-price">
+                            Valor: R$ {produto.preço}
                           </div>
-                          <div className="cart-item-options">
+                          <hr className="hpaths"></hr>
+                         <div className="cart-item-options">
                             <div>
-                              <strong>Cor:</strong> {produto.cor}
+                              <strong className="wish-det">Cor: {produto.cor} </strong> 
                             </div>
                             <div>
-                              <strong>Tamanho:</strong> {produto.tamanho}
+                              <strong className="wish-det">Tamanho: {produto.tamanho} </strong> 
                             </div>
                             <div>
-                              <strong>Quantidade:</strong> {produto.quantidade}
-                            </div>
-                          </div>
+                              <strong className="wish-det">Quantidade: {produto.quantidade} </strong> 
+                            </div> <br></br>
+                            <i
+                          className="bx bxs-trash-alt cart-remove cart-item-remove-2 animation"
+                          onClick={() => handleRemoveFromFavorites(index)}
+                        ></i>
+                          </div> 
+                        </div>
                         </div>
                       </div>
                     </div>
                   </div>
+                </div>
                 </div>
               ))
             ) : (

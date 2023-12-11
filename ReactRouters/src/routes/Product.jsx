@@ -6,7 +6,7 @@ import ReactPaginate from "react-paginate";
 import { Link, useParams } from "react-router-dom";
 
 import "../styles/Product.css"; // Certifique-se de que o caminho do seu arquivo CSS está correto
-
+let isLoggedIn = false;
 // Restante do seu código...
 
 const firebaseConfig = {
@@ -25,6 +25,12 @@ export const firestore = getFirestore(app);
 // Restante do seu código...
 
 const Cart = () => {
+  const userIconLink = isLoggedIn ? "/requests" : "/login";
+  if (localStorage.getItem("user") !== null) {
+    localStorage.setItem("loggedIn", "true");
+    isLoggedIn = true;
+  }
+
   const [showDescription, setShowDescription] = useState(false);
   const [productLoading, setProductLoading] = useState(true);
   const [selectedColor, setSelectedColor] = useState("");
@@ -301,7 +307,7 @@ const Cart = () => {
             </Link>
           </div>
           <div className="icons-about">
-            <Link to="/requests">
+            <Link to={userIconLink}>
               <i
                 className="bx bx-user bt-header"
                 style={{ color: "#ffffff" }}

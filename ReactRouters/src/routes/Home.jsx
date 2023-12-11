@@ -8,6 +8,7 @@ import ReactPaginate from "react-paginate";
 import { useNavigate } from "react-router-dom";
 import debounce from 'debounce';
 
+let isLoggedIn = false;
 
 const firebaseConfig = {
   apiKey: "AIzaSyDTKUI6nV-DZjIsUo1BMkjIUWOQbT9gU3Q",
@@ -22,6 +23,13 @@ export const storage = getStorage(app);
 export const firestore = getFirestore(app);
 
 const Home = () => {
+  
+  if (localStorage.getItem("user") !== null) {
+    localStorage.setItem("loggedIn", "true");
+    isLoggedIn = true;
+  }
+
+
   const [isItemAdded, setIsItemAdded] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [showNotification2, setShowNotification2] = useState(false);
@@ -48,12 +56,20 @@ const Home = () => {
 
   const debouncedSearchFunction = debounce(async () => {
     // Navegue para a rota apropriada com base no valor da pesquisa
-    if (searchValue === "sunga") {
+    if (["sunga", "menino", "conjunto"].includes(searchValue)) {
       await navigate("/male");
-    } else if (searchValue === "biquini") {
+    } else if (["biquini", "biquíni", "conjunto", "vestido", "menina"].includes(searchValue)) {
       await navigate("/female");
-    } else if (["boia", "óculos", "baldinho", "chapeu"].includes(searchValue)) {
+    } else if (["boia", "óculos", "baldinho", "chapéu"].includes(searchValue)) {
       await navigate("/props");
+    } else if (searchValue === "promoções") {
+      await navigate("/sale");
+    } else if (searchValue === "empresa") {
+      await navigate("/about");
+    } else if (searchValue === "loja") {
+      await navigate("/physicalstore");
+    } else if (searchValue === "mapa") {
+      await navigate("/sitemap");
     }
   }, 500);
 
@@ -113,7 +129,7 @@ const Home = () => {
 
   const handleAddToCart = (produto) => {
     const existingItemIndex = cartItems.findIndex(
-      (item) => item.nome_prodfemme === produto.nome_prodfemme
+      (item) => item.nome_prodmale === produto.nome_prodmale
     );
 
     if (existingItemIndex !== -1) {
@@ -158,7 +174,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchProdutos = async () => {
-      const produtosCollection = collection(firestore, "Prodfemme");
+      const produtosCollection = collection(firestore, "Prodmale");
       const produtosSnapshot = await getDocs(produtosCollection);
       const produtosData = produtosSnapshot.docs.map((doc) => doc.data());
       setProdutos(produtosData);
@@ -179,6 +195,7 @@ const Home = () => {
   const startIndex = currentPage * productsPerPage;
   const endIndex = startIndex + productsPerPage;
   const displayedProducts = produtos.slice(startIndex, endIndex);
+  const userIconLink = isLoggedIn ? "/requests" : "/login";
 
   return (
     <><div className="main">
@@ -191,14 +208,14 @@ const Home = () => {
           <div className="header-item1">
           <i class='bx bx-chat'></i>
             <li>
-              <Link to="#">ATENDIMENTO</Link>
+              <Link to="/services">ATENDIMENTO</Link>
             </li>
           </div>
 
           <div className="header-item2">
           <i class='bx bx-map'></i>
             <li>
-              <Link to="#">LOCALIZAÇÃO</Link>
+              <Link to="/physicalstore">LOCALIZAÇÃO</Link>
             </li>
           </div>
         </div>
@@ -221,7 +238,7 @@ const Home = () => {
         <Link to="/login"><p className="home-t">Bem vindo!<br></br>Entre ou cadastre-se</p></Link>
         <div className="icons-home">
 
-            <Link to="/login">
+            <Link to={userIconLink}>
               <i
                 className="bx bx-user bt-header animation"
                 style={{ color: "#48A3A9" }}
@@ -456,13 +473,13 @@ const Home = () => {
 <div className="container-clothes">
   {produtos.slice(startIndex, endIndex).map((produto, index) => (
     <div className="clothes" key={index} style={{ width: "22%" }}>
-      <Link to={`/product/${"Prodfemme"}/${produto.nome_prodfemme}`}>
-        <img src={produto.url_image} alt={produto.nome_prodfemme} />
+      <Link to={`/product/${"Prodmale"}/${produto.nome_prodmale}`}>
+        <img src={produto.url_image} alt={produto.nome_prodmale} />
       </Link>
 
       <div className="info-container">
-  <Link to={`/product/${"Prodfemme"}/${produto.nome_prodfemme}`}>
-    <h6 className="text-card-h">{produto.nome_prodfemme}</h6>
+  <Link to={`/product/${"Prodmale"}/${produto.nome_prodmale}`}>
+    <h6 className="text-card-h">{produto.nome_prodmale}</h6>
   </Link>
   <div className="price-and-icons">
     <h6 className="price">R$ {produto.preço}</h6>

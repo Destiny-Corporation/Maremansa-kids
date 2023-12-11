@@ -28,6 +28,7 @@ const database = getDatabase(app);
 const analytics = getAnalytics(app);
 
 const Register = () => {
+  const [name, setName] = useState(''); 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
@@ -53,6 +54,7 @@ const Register = () => {
 
       const user = userCredential.user;
       await set(ref(database, `users/${user.uid}`), {
+        name: name, // Incluído o campo de nome ao criar o usuário
         email: user.email,
       });
 
@@ -86,27 +88,21 @@ const Register = () => {
         <Link to="/"> <img src="/assets/logo.png" alt="Logo" /> </Link>
         </div>
         <div className="icons-about">
-          <a href="#">
             <Link to="/login">
-              <i className="bx bx-user bt-header" style={{ color: "#ffffff" }}></i>
+              <i className="bx bx-user bt-header animation" style={{ color: "#ffffff" }}></i>
             </Link>
-          </a>
-          <a href="#">
             <Link to="/wishlist">
               <i
-                className="bx bx-heart bt-header"
+                className="bx bx-heart bt-header animation"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
-          </a>
-          <a href="#">
             <Link to="/cart">
               <i
-                className="bx bx-cart bt-header"
+                className="bx bx-cart bt-header animation"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
-          </a>
         </div>
       </header>
 
@@ -118,6 +114,16 @@ const Register = () => {
             className="login-image"
           />
           <h1>Cadastre-se</h1>
+          <div className="input-box">
+            <input
+              type="text"
+              placeholder="NOME"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <i className="bx bx-user"></i>
+          </div>
+
           <div className="input-box">
   <input
     type="text"
@@ -198,11 +204,17 @@ const Register = () => {
           </div>
 
           <div className="footer-section-div">
-            <h3 className='footer-animation-title'>CONTATOS</h3>
-            <i className="fa fa-whatsapp"></i>
-            <i className="fa fa-google"></i>
-            <i className="fa fa-instagram"></i>
-          </div>
+  <h3 className='footer-animation-title'>CONTATOS</h3>
+  <a href="https://web.whatsapp.com/send?phone=5585986056136" target="_blank" title="whatsapp">
+    <i className="fa fa-whatsapp"></i>
+  </a>
+  <a href="https://www.facebook.com/maremansakidss" target="_blank" title="facebook">
+    <i className="fa fa-facebook"></i>
+  </a>
+  <a href="https://www.instagram.com/maremansakids/" target="_blank" title="instagram">
+    <i className="fa fa-instagram"></i>
+  </a>
+</div>
         </section>
       </footer>
       <div className="last-text">

@@ -6,6 +6,8 @@ import { getStorage } from "firebase/storage";
 import { getFirestore, collection, doc, getDocs } from "firebase/firestore";
 import ReactPaginate from "react-paginate";
 
+let isLoggedIn = false;
+
 const firebaseConfig = {
   apiKey: "AIzaSyDTKUI6nV-DZjIsUo1BMkjIUWOQbT9gU3Q",
   authDomain: "auth-amanda.firebaseapp.com",
@@ -20,6 +22,11 @@ export const storage = getStorage(app);
 export const firestore = getFirestore(app);
 
 const Sale = () => {
+  const userIconLink = isLoggedIn ? "/requests" : "/login";
+  if (localStorage.getItem("user") !== null) {
+    localStorage.setItem("loggedIn", "true");
+    isLoggedIn = true;
+  }
   const [isItemAdded, setIsItemAdded] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [showNotification2, setShowNotification2] = useState(false);
@@ -247,7 +254,7 @@ const Sale = () => {
           </Link>
         </div>
         <div className="icons-w">
-          <Link to="/login">
+          <Link to={userIconLink}>
             <i
               className="bx bx-user bt-header animation"
               style={{ color: "#ffffff" }}

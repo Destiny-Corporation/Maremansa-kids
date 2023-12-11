@@ -3,11 +3,12 @@ import { Box, Button, Stepper, Step, StepLabel } from "@mui/material";
 import { Formik, Field } from 'formik';
 import { useState } from "react";
 import * as yup from "yup";
-import { shades } from "./theme";
+ import { shades } from "./theme";
 import Payment from "./Payment";
 import Shipping from "./Shipping";
 import { loadStripe } from "@stripe/stripe-js";
 import { Link, useNavigate } from 'react-router-dom';
+import "./Checkout.css";
 
 
 const stripePromise = loadStripe(
@@ -107,7 +108,7 @@ const Checkout = () => {
       <div className="container-subheader">
         <div className="container-wishlist">
           <i className="bx bx-map bt-header"></i>
-          <h6>| Endereço</h6>
+          <h6>| Local</h6>
         </div>
       </div>
 
@@ -164,10 +165,10 @@ const Checkout = () => {
                       color="primary"
                       variant="contained"
                       sx={{
-                        backgroundColor: shades.primary[200],
+                        backgroundColor: '#48A3A9',
                         boxShadow: "none",
                         color: "white",
-                        borderRadius: 0,
+                        borderRadius: "20px",
                         padding: "15px 40px",
                       }}
                       onClick={() => setActiveStep(activeStep - 1)}
@@ -175,16 +176,15 @@ const Checkout = () => {
                       Voltar
                     </Button>
                   )}
-                 <Button
+                 <Button className="avancar"
   fullWidth
   type="submit"
-  color="primary"
   variant="contained"
   sx={{
-    backgroundColor: '#48A3A9',
+    backgroundColor: 'transparent',
     boxShadow: "none",
-    color: "white",
-    borderRadius: 0,
+    color: "#48a3a9",
+    borderRadius: "20px",
     padding: "15px 40px",
   }}
   onClick={() => {
@@ -299,51 +299,51 @@ const initialValues = {
 const checkoutSchema = [
   yup.object().shape({
     billingAddress: yup.object().shape({
-      firstName: yup.string().required("obrigatório"),
-      lastName: yup.string().required("obrigatório"),
-      country: yup.string().required("obrigatório"),
-      street1: yup.string().required("obrigatório"),
+      firstName: yup.string().required("*obrigatório"),
+      lastName: yup.string().required("*obrigatório"),
+      country: yup.string().required("*obrigatório"),
+      street1: yup.string().required("*obrigatório"),
       street2: yup.string(),
-      city: yup.string().required("obrigatório"),
-      state: yup.string().required("obrigatório"),
-      zipCode: yup.string().required("obrigatório"),
+      city: yup.string().required("*obrigatório"),
+      state: yup.string().required("*obrigatório"),
+      zipCode: yup.string().required("*obrigatório"),
     }),
     shippingAddress: yup.object().shape({
       isSameAddress: yup.boolean(),
-      firstName: yup.string().when("isSameAddress", {
+      firstName: yup.string().when("*o endereço é o mesmo", {
         is: false,
-        then: yup.string().required("obrigatório"),
+        then: yup.string().required("*obrigatório"),
       }),
-      lastName: yup.string().when("isSameAddress", {
+      lastName: yup.string().when("*o endereço é o mesmo", {
         is: false,
-        then: yup.string().required("obrigatório"),
+        then: yup.string().required("*obrigatório"),
       }),
-      country: yup.string().when("isSameAddress", {
+      country: yup.string().when("*o endereço é o mesmo", {
         is: false,
-        then: yup.string().required("obrigatório"),
+        then: yup.string().required("*obrigatório"),
       }),
-      street1: yup.string().when("isSameAddress", {
+      street1: yup.string().when("*o endereço é o mesmo", {
         is: false,
-        then: yup.string().required("obrigatório"),
+        then: yup.string().required("*obrigatório"),
       }),
       street2: yup.string(),
-      city: yup.string().when("isSameAddress", {
+      city: yup.string().when("*o endereço é o mesmo", {
         is: false,
-        then: yup.string().required("obrigatório"),
+        then: yup.string().required("*obrigatório"),
       }),
-      state: yup.string().when("isSameAddress", {
+      state: yup.string().when("*o endereço é o mesmo", {
         is: false,
-        then: yup.string().required("obrigatório"),
+        then: yup.string().required("*obrigatório"),
       }),
-      zipCode: yup.string().when("isSameAddress", {
+      zipCode: yup.string().when("*o endereço é o mesmo", {
         is: false,
-        then: yup.string().required("obrigatório"),
+        then: yup.string().required("*obrigatório"),
       }),
     }),
   }),
   yup.object().shape({
-    email: yup.string().required("obrigatório"),
-    phoneNumber: yup.string().required("obrigatório"),
+    email: yup.string().required("*obrigatório"),
+    phoneNumber: yup.string().required("*obrigatório"),
   }),
 ];
 

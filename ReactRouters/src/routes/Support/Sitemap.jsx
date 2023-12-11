@@ -2,7 +2,14 @@ import React from "react";
 import "../../styles/Support/Sitemap.css";
 import { Link } from "react-router-dom";
 
+let isLoggedIn = false;
 const Sitemap = () => {
+  const userIconLink = isLoggedIn ? "/requests" : "/login";
+  if (localStorage.getItem("user") !== null) {
+    localStorage.setItem("loggedIn", "true");
+    isLoggedIn = true;
+  }
+
   return (
     <><div className='main'>
       <header className="main-header">
@@ -10,21 +17,21 @@ const Sitemap = () => {
         <Link to="/"> <img src="/assets/logo.png" alt="Logo" /> </Link>
         </div>
         <div className="icons-about">
-            <Link to="/login">
+            <Link to={userIconLink}>
               <i
-                className="bx bx-user bt-header"
+                className="bx bx-user bt-header animation"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
             <Link to="/wishlist">
               <i
-                className="bx bx-heart bt-header"
+                className="bx bx-heart bt-header animation"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
             <Link to="/cart">
               <i
-                className="bx bx-cart bt-header"
+                className="bx bx-cart bt-header animation"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>

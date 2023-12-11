@@ -202,3 +202,80 @@
     font-size: 11px;
     letter-spacing: 2px;
   }
+
+  .wish-item-info {
+  display: block;
+  align-items: left;
+  text-align: left;
+  padding: 10px;
+  border: 3px solid #2a777c;
+  margin-top: 10px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  margin-left: 15px;
+  margin-left: 15px;
+  color: #48a3a9;
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 12px;
+}
+
+.wish-item-image {
+  border-radius: 20px;
+  width: 150px;
+  height: 200px;
+  object-fit: fill;
+  padding: 10px;
+}
+
+.wish-item-name {
+  font-size: 13px;
+  color: #48a3a9;
+  letter-spacing: 2px;
+  margin-bottom: -20px;
+  margin-top: 10px;
+}
+
+.delivery-indicator{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  height: 30px;
+  background: radial-gradient(circle, #48a3a9 0%, #2a777c 100%);
+  margin-top: -10px;
+  margin-left: -10px;
+  margin-right: -10px;
+}
+
+.wish-det {
+  font-size: 10px;
+}
+
+.hpaths{
+  width: 100%;
+  text-align: left;
+  margin-top: 8px;
+  margin-bottom: 5px;
+  height: 1px;
+}
+
+.infos-prod {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.wish-item-price {
+  font-size: 14px;
+  font-family: "Stylish", sans-serif;
+  margin-top: 20px;
+  color: #48a3a9;
+  letter-spacing: 2px;
+}
+
+.cart-item-remove-2 {
+  margin-left: auto;
+  font-size: 14px;
+}
