@@ -153,7 +153,7 @@ const Home = () => {
 
   const handleAddToCart = (produto) => {
     const existingItemIndex = cartItems.findIndex(
-      (item) => item.nome_prodmale === produto.nome_prodmale
+      (item) => item.nome_prodfemme === produto.nome_prodfemme
     );
 
     if (existingItemIndex !== -1) {
@@ -198,7 +198,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchProdutos = async () => {
-      const produtosCollection = collection(firestore, "Prodmale");
+      const produtosCollection = collection(firestore, "Prodfemme");
       const produtosSnapshot = await getDocs(produtosCollection);
       const produtosData = produtosSnapshot.docs.map((doc) => doc.data());
       setProdutos(produtosData);
@@ -220,6 +220,7 @@ const Home = () => {
   const endIndex = startIndex + productsPerPage;
   const displayedProducts = produtos.slice(startIndex, endIndex);
   const userIconLink = isLoggedIn ? "/requests" : "/login";
+  const [isSlideAnimationActive, setIsSlideAnimationActive] = useState(false);
 
   return (
     <><div className="main">
@@ -342,10 +343,10 @@ const Home = () => {
                       className="cart-item-image-1"
                       style={{
                         width: "100px",
-                        height: "100px",
-                        objectFit: "contain",
+                        height: "150px",
+                        objectFit: "cover",
                         padding: "10px",
-                        borderRadius: "60px",
+                        borderRadius: "30px",
                       }}
                     />
 
@@ -379,7 +380,7 @@ const Home = () => {
                       />
                     </div>
                     <i
-                      className="bx bxs-trash-alt cart-remove cart-item-remove-1"
+                      className="bx bxs-trash-alt cart-remove cart-item-remove-1 animation"
                       onClick={() => handleRemoveFromCart(index)}
                     ></i>
                   </div>
@@ -389,7 +390,7 @@ const Home = () => {
               <hr></hr>
               <div className="total">
                 <div className="total-title">Total</div>
-                <div className="total-price">$ {total}</div>
+                <div className="total-price-cartl">$ {total}</div>
               </div>
 
               <Link to="/checkout">
@@ -531,26 +532,35 @@ const Home = () => {
 
         <hr size="1" />
 
-        <div className="container-clothes-main">
-          <i
-            className="bx bx-chevron-left"
-            style={{ color: "#48A3A9", cursor: "pointer" }}
-            onClick={() => setCurrentPage(currentPage - 1)}
-            disabled={currentPage === 0}
-          ></i>
+        <div className="container-clothes-main-1">
+  <i
+    className={`bx bx-chevron-left animation ${isSlideAnimationActive ? 'slide-animation' : ''}`}
+    style={{ color: "#48A3A9", cursor: "pointer", fontSize: "80px" }}
+    onClick={() => {
+      setCurrentPage(currentPage - 1);
+      setIsSlideAnimationActive(true);
 
-<div className="container-clothes">
+      // Reset the animation after a short delay (e.g., 0.5 seconds)
+      setTimeout(() => {
+        setIsSlideAnimationActive(false);
+      }, 500);
+    }}
+    disabled={currentPage === 0}
+  ></i>
+
+<div className="container-clothes-home">
+  
   {produtos.slice(startIndex, endIndex).map((produto, index) => (
-    <div className="clothes" key={index} style={{ width: "22%" }}>
-      <Link to={`/product/${"Prodmale"}/${produto.nome_prodmale}`}>
-        <img src={produto.url_image} alt={produto.nome_prodmale} />
+    <div className="clothes-home" key={index} style={{ width: "25%" }}>
+      <Link to={`/product/${"Prodfemme"}/${produto.nome_prodfemme}`}>
+        <img src={produto.url_image} alt={produto.nome_prodfemme} />
       </Link>
 
-      <div className="info-container">
-  <Link to={`/product/${"Prodmale"}/${produto.nome_prodmale}`}>
-    <h6 className="text-card-h">{produto.nome_prodmale}</h6>
+      <div className="info-container-home">
+  <Link to={`/product/${"Prodfemme"}/${produto.nome_prodfemme}`}>
+    <h6 className="text-card-h">{produto.nome_prodfemme}</h6>
   </Link>
-  <div className="price-and-icons">
+  <div className="price-and-icons-home">
     <h6 className="price">R$ {produto.preço}</h6>
     <div className="icons-container">
       <i
@@ -562,7 +572,7 @@ const Home = () => {
         }}
       ></i>
       <i
-        className="bx bx-heart bt-header hearth"
+        className="bx bx-heart bt-header hearth animation"
         style={{ color: "#48a3a9" }}
         onClick={() => {
           handleAddToFavorites(produto);
@@ -594,12 +604,20 @@ const Home = () => {
 </div>
 
 
-          <i
-            className="bx bx-chevron-right"
-            style={{ color: "#48A3A9", cursor: "pointer" }}
-            onClick={() => setCurrentPage(currentPage + 1)}
-            disabled={currentPage === pageCount - 1}
-          ></i>
+           <i
+    className={`bx bx-chevron-right animation ${isSlideAnimationActive ? 'slide-animation' : ''}`}
+    style={{ color: "#48A3A9", cursor: "pointer", fontSize: "80px" }}
+    onClick={() => {
+      setCurrentPage(currentPage + 1);
+      setIsSlideAnimationActive(true);
+
+      // Reset the animation after a short delay (e.g., 0.5 seconds)
+      setTimeout(() => {
+        setIsSlideAnimationActive(false);
+      }, 500);
+    }}
+    disabled={currentPage === pageCount - 1}
+  ></i>
         </div>
       </div>
       <div className="space-1"></div>
