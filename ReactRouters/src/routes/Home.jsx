@@ -70,9 +70,9 @@ const Home = () => {
     // Navegue para a rota apropriada com base no valor da pesquisa
     if (["sunga", "menino", "conjunto"].includes(searchValue)) {
       await navigate("/male");
-    } else if (["biquini", "biquíni", "conjunto", "vestido", "menina"].includes(searchValue)) {
+    } else if (["biquini", "biquíni", "conjunto", "vestido", "menina", "maio", "maiô"].includes(searchValue)) {
       await navigate("/female");
-    } else if (["boia", "óculos", "baldinho", "chapéu"].includes(searchValue)) {
+    } else if (["boia", "óculos", "oculos","baldinho","chapéu", "chapeu","pulseira"].includes(searchValue)) {
       await navigate("/props");
     } else if (searchValue === "promoções") {
       await navigate("/sale");
