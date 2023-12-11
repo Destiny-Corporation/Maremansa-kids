@@ -64,6 +64,9 @@ const PaymentForm = () => {
     }
   };
 
+
+
+
   const renderOpcoesPagamento = () => {
     const opcoes = [
       { valor: "cartao-de-credito", titulo: "Cartão de Crédito", imagem: "/assets/cartao1.png" },
@@ -241,7 +244,13 @@ const PaymentForm = () => {
             </div>
           </div>
         );
-      // Restante do código...
+        case "pix":
+          case "boleto":
+            return (
+              <div className="campos">
+                <img src="/assets/qrcode.jpg" alt="QR Code" className="qrcode-imagem" />
+                </div>
+            );
       default:
         return null;
     }
