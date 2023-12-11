@@ -35,6 +35,13 @@ const Confirmation = () => {
          </div>
       </header>
 
+      <div className="container-subheader">
+        <div className="container-wishlist">
+          <i className="bx bx-card bt-header"></i>
+          <h6>| Pagamento Realizado</h6>
+        </div>
+      </div>
+
       {/* Conteúdo principal */}
       <Box
         m="auto"

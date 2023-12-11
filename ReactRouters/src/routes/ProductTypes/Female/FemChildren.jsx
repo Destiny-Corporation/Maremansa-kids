@@ -62,12 +62,12 @@ const FemChildren = () => {
   const [isFilterActive, setIsFilterActive] = useState(false);
   const [maxPrice, setMaxPrice] = useState(null);
   const nomesProdutos = [
-    "Conjunto",
+    "Biquíni",
+    "Blusa",
+    "Kimono",
     "Maiô",
-    "Óculos",
-    "Sunga",
-    "Vestidinho",
-    "Colete",
+    "Saia",
+    "Vestido",
   ];
   const [total, setTotal] = useState(0);
   const [cartItems, setCartItems] = useState(() => {
@@ -204,6 +204,7 @@ const FemChildren = () => {
     }
     return false;
   });
+  
 
   const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
     if (isFilterActive && maxPrice !== null) {
@@ -217,6 +218,7 @@ const FemChildren = () => {
     }
     return true;
   });
+  
 
   const pageCount = Math.ceil(filteredProdutos.length / itemsPerPage);
   const offset = currentPage * itemsPerPage;

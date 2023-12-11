@@ -65,11 +65,6 @@ const MaleBaby = () => {
   const [maxPrice, setMaxPrice] = useState(null);
   const nomesProdutos = [
     "Conjunto",
-    "Maiô",
-    "Óculos",
-    "Sunga",
-    "Vestidinho",
-    "Colete",
   ];
 
   const [total, setTotal] = useState(0);

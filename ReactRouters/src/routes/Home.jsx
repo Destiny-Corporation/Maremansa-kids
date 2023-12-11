@@ -119,6 +119,18 @@ const Home = () => {
     setOverlayVisible(false);
   };
 
+  const [userVisible, setUserVisible] = useState(false);
+
+  const handleUserIconClick = () => {
+    setUserVisible(!userVisible);
+    setOverlayVisible(!userVisible);
+  };
+
+  const handleCloseUserClick = () => {
+    setUserVisible(false);
+    setOverlayVisible(false);
+  };
+
   useEffect(() => {
     // Recupera os itens do carrinho do localStorage ao carregar a página
     const savedCartItems = localStorage.getItem("cartItems");
@@ -238,12 +250,57 @@ const Home = () => {
         <Link to="/login"><p className="home-t">Bem vindo!<br></br>Entre ou cadastre-se</p></Link>
         <div className="icons-home">
 
+          <Link>
+            <i
+              className="bx bx-user bt-header animation"
+              style={{ color: " #48A3A9" }}
+              onClick={handleUserIconClick}
+            ></i></Link>
+            <div
+              className={`overlay ${overlayVisible ? "active" : ""}`}
+              onClick={handleCloseUserClick}
+            ></div>
+            <div className={`user ${userVisible ? "active" : ""}`}>
+              <h2 className="cart-title-1">USUÁRIO</h2>
+              <div className="cart-content-1">
+              <h3 className="user-title-1">Olá, usuário</h3>
+              </div>
+
             <Link to={userIconLink}>
               <i
                 className="bx bx-user bt-header animation"
                 style={{ color: "#48A3A9" }}
+              <Link to="/login">
+                <button type="button" className="btn-buy">
+                  FAZER LOGIN
+                </button>
+              </Link>
+
+              <Link to="/Requests2">
+                <button type="button" className="btn-buy">
+                  MEUS PEDIDOS
+                </button>
+              </Link>
+
+              <Link to="/Wishlist">
+                <button type="button" className="btn-buy">
+                  LISTA DE DESJOS
+                </button>
+              </Link>
+
+              <Link to="/cart2">
+                <button type="button" className="btn-buy">
+                  VER MEU CARRINHO
+                </button>
+              </Link>
+
+              
+              <i
+                className="bx bx-x"
+                id="close-user"
+                onClick={handleCloseUserClick}
               ></i>
-            </Link>
+            </div>
 
             <Link to="/wishlist">
               <i
@@ -572,15 +629,15 @@ const Home = () => {
 
           <div className="footer-section-div">
   <h3 className='footer-animation-title'>CONTATOS</h3>
-  <a href="https://web.whatsapp.com/send?phone=5585986056136" target="_blank" title="whatsapp">
+  <Link to="https://web.whatsapp.com/send?phone=5585986056136" target="_blank" title="whatsapp">
     <i className="fa fa-whatsapp"></i>
-  </a>
-  <a href="https://www.facebook.com/maremansakidss" target="_blank" title="facebook">
+  </Link>
+  <Link to="https://www.facebook.com/maremansakidss" target="_blank" title="facebook">
     <i className="fa fa-facebook"></i>
-  </a>
-  <a href="https://www.instagram.com/maremansakids/" target="_blank" title="instagram">
+  </Link>
+  <Link to="https://www.instagram.com/maremansakids/" target="_blank" title="instagram">
     <i className="fa fa-instagram"></i>
-  </a>
+  </Link>
 </div>
         </section>
       </footer>
