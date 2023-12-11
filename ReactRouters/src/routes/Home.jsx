@@ -7,7 +7,7 @@ import { getFirestore, collection, doc, getDocs } from "firebase/firestore";
 import ReactPaginate from "react-paginate";
 import { useNavigate } from "react-router-dom";
 import debounce from 'debounce';
-
+import MusicPlayer from '../routes/MusicPlayer.jsx';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDTKUI6nV-DZjIsUo1BMkjIUWOQbT9gU3Q",
@@ -192,6 +192,8 @@ const Home = () => {
   const endIndex = startIndex + productsPerPage;
   const displayedProducts = produtos.slice(startIndex, endIndex);
 
+
+
   return (
     <><div className="main">
       <header className="main-header">
@@ -212,6 +214,10 @@ const Home = () => {
             <li>
               <Link to="#">LOCALIZAÇÃO</Link>
             </li>
+          </div>
+
+          <div className="header-item3">
+            <MusicPlayer />
           </div>
         </div>
       </header>
@@ -572,8 +578,6 @@ const Home = () => {
       <div className="space-1"></div>
       </div>
 
-
-
       <footer>
         <section className="footer-section">
           <div className="footer-section-div">
@@ -623,7 +627,10 @@ const Home = () => {
       <div className="last-text">
         <p className="text-sub-footer">maremansa</p>
       </div>
+
 </>
   );
 };
+
+
 export default Home;

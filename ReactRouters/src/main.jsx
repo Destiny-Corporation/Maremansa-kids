@@ -31,6 +31,7 @@ import FemJuvenile from './routes/ProductTypes/Female/FemJuvenile.jsx';
 import MaleBaby from './routes/ProductTypes/Male/MaleBaby.jsx';
 import MaleChildren from './routes/ProductTypes/Male/MaleChildren.jsx';
 import MaleJuvenile from './routes/ProductTypes/Male/MaleJuvenile.jsx';
+import MusicPlayer from './routes/MusicPlayer.jsx';
 import ErrorPage from './routes/ErrorPage';
 import Checkout from './routes/Checkout/Checkout.jsx';
 import LoadingScreen from './routes/LoadingScreen';
