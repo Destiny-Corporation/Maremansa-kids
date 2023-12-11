@@ -52,8 +52,9 @@ const Props = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [isFilterActive, setIsFilterActive] = useState(false);
-  const [maxPrice, setMaxPrice] = useState("");
-  const nomesProdutos = [
+  const [minPrice, setMinPrice] = useState(localStorage.getItem('minPrice') || '');
+  const [maxPrice, setMaxPrice] = useState(localStorage.getItem('maxPrice') || '');
+  const [applyFilter, setApplyFilter] = useState(localStorage.getItem('applyFilter') === 'true' || false);  const nomesProdutos = [
     "Boia",
     "Chapéu",
     "Óculos",
@@ -176,8 +177,24 @@ const Props = () => {
 
   const handleFilterButtonClick = () => {
     setIsFilterActive(!isFilterActive);
-    setMaxPrice("");
+    handleResetFilter();
   };
+  
+  const handleApplyFilter = () => {
+  setApplyFilter(true);
+  localStorage.setItem('minPrice', minPrice);
+  localStorage.setItem('maxPrice', maxPrice);
+  localStorage.setItem('applyFilter', 'true');
+};
+
+  const handleResetFilter = () => {
+  setMinPrice('');
+  setMaxPrice('');
+  setApplyFilter(false);
+  localStorage.removeItem('minPrice');
+  localStorage.removeItem('maxPrice');
+  localStorage.removeItem('applyFilter');
+};
 
   const filteredProdutos = produtos.filter((produto) => {
     const categoryMatch =
@@ -189,8 +206,11 @@ const Props = () => {
       .includes(searchTerm.toLowerCase());
 
     // Adicione aqui a lógica do filtro de preço se necessário
+    const priceMatch =
+    (minPrice === "" || Number(produto.preço) >= Number(minPrice)) &&
+    (maxPrice === "" || Number(produto.preço) <= Number(maxPrice));
 
-    return categoryMatch && searchMatch;
+  return categoryMatch && searchMatch && (applyFilter ? priceMatch : true);
   });
 
   const pageCount = Math.ceil(filteredProdutos.length / itemsPerPage);
@@ -441,6 +461,8 @@ const Props = () => {
                     <ul className="filter-list">
                       <li>
                         <label className="filter-label">CATEGORIAS:</label>
+                        <label className="filter-label">PREÇO:</label>
+
                       </li>
                       <li className="filter-item">
                         <button
@@ -472,10 +494,30 @@ const Props = () => {
                           X
                         </button>
                       </li>
+                      <div className="filter-price-inputs">
+                       <input
+                       type="number"
+                       placeholder="Mínimo"
+                       value={minPrice}
+                       onChange={(e) => setMinPrice(e.target.value)}
+                       />
+                       <input
+                      type="number"
+                      placeholder="Máximo"
+                      value={maxPrice}
+                      onChange={(e) => setMaxPrice(e.target.value)}
+                       />
+                      </div>
+                      <button className="apply-filter-button" onClick={() => setApplyFilter(true)}>
+                       Aplicar Filtro
+                      </button>
+                      <button className="reset-filter-button" onClick={handleResetFilter}>
+                       Limpar Filtro
+                      </button>
                     </ul>
                   </div>
                 </div>
-              )}
+               )}
 
               {/*<li className="price-filter">
           <label>Preço até:</label>

@@ -158,5 +158,9 @@
   margin-bottom: 20px;
 }
 
+.qrcode-imagem {
+  width: 100px; /* Defina o tamanho desejado em pixels ou outra unidade */
+  height: auto; /* Mantenha a proporção original da imagem */
+}
 
   
