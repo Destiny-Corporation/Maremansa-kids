@@ -97,3 +97,8 @@
   transition: 0.3s;
   max-width: 100%;
 }
+
+
+.total-price {
+  text-transform: uppercase;
+}

@@ -167,18 +167,18 @@ const FemJuvenile = () => {
           produtosCollection,
           where("category_prodfemme", "==", "Juvenil")
         );
-        const produtosSnapshot = await getDocs(produtosCollection);
+        const produtosSnapshot = await getDocs(produtosQuery); // Use produtosQuery here
         const produtosData = produtosSnapshot.docs.map((doc) => doc.data());
         setProdutos(produtosData);
-        setLoading(false); // Definindo loading como falso após o carregamento dos produtos
+        setLoading(false);
         console.log(produtosData);
       } catch (error) {
         console.error("Erro ao carregar produtos:", error);
-        setLoading(false); // Definindo loading como falso em caso de erro
+        setLoading(false);
       }
     };
   
-    fetchProdutos();
+    fetchProdutos(); // Don't forget to invoke the function
   }, []);
   const [filterParam, setFilterParam] = useState("All");
 
