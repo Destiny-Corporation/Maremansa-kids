@@ -159,26 +159,27 @@ const MaleChildren = () => {
   }, [cartItems]);
 
   useEffect(() => {
-  const fetchProdutos = async () => {
-    try {
-      const produtosCollection = collection(firestore, "Prodmale");
-      const produtosQuery = query(
-        produtosCollection,
-        where("category_prodmale", "==", "Infantil")
-      );
-      const produtosSnapshot = await getDocs(produtosCollection);
-      const produtosData = produtosSnapshot.docs.map((doc) => doc.data());
-      setProdutos(produtosData);
-      setLoading(false); // Definindo loading como falso após o carregamento dos produtos
-      console.log(produtosData);
-    } catch (error) {
-      console.error("Erro ao carregar produtos:", error);
-      setLoading(false); // Definindo loading como falso em caso de erro
-    }
-  };
-
-  fetchProdutos();
-}, []);
+    const fetchProdutos = async () => {
+      try {
+        const produtosCollection = collection(firestore, "Prodmale");
+        const produtosQuery = query(
+          produtosCollection,
+          where("category_prodmale", "==", "Infantil")
+        );
+        const produtosSnapshot = await getDocs(produtosQuery); // Use produtosQuery here
+        const produtosData = produtosSnapshot.docs.map((doc) => doc.data());
+        setProdutos(produtosData);
+        setLoading(false);
+        console.log(produtosData);
+      } catch (error) {
+        console.error("Erro ao carregar produtos:", error);
+        setLoading(false);
+      }
+    };
+  
+    fetchProdutos(); // Don't forget to invoke the function
+  }, []); // Make sure to provide an empty dependency array to run the effect only once
+  
 
   const [filterParam, setFilterParam] = useState("All");
 

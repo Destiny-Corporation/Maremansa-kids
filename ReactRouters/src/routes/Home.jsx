@@ -7,6 +7,7 @@ import { getFirestore, collection, doc, getDocs } from "firebase/firestore";
 import ReactPaginate from "react-paginate";
 import { useNavigate } from "react-router-dom";
 import debounce from 'debounce';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 let isLoggedIn = false;
 
@@ -28,6 +29,17 @@ const Home = () => {
     localStorage.setItem("loggedIn", "true");
     isLoggedIn = true;
   }
+  const auth = getAuth();
+  const [user, setUser] = useState(null);
+     
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+
+    // Certifique-se de limpar o listener quando o componente for desmontado
+    return () => unsubscribe();
+  }, [auth]);
 
 
   const [isItemAdded, setIsItemAdded] = useState(false);
@@ -261,10 +273,13 @@ const Home = () => {
               onClick={handleCloseUserClick}
             ></div>
             <div className={`user ${userVisible ? "active" : ""}`}>
-              <h2 className="cart-title-1">USUÁRIO</h2>
-              <div className="cart-content-1">
-              <h3 className="user-title-1">Olá, usuário</h3>
-              </div>
+            <div className="cart-content-1">
+      {user ? (
+        <h3 className="user-title-1">Olá, {user.email.split('@')[0]}</h3>
+      ) : (
+        <h3 className="user-title-1">Olá, usuário</h3>
+      )}
+    </div>
 
             <Link to={userIconLink}>
               <i
