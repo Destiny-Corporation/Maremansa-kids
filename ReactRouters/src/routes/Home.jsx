@@ -269,11 +269,8 @@ const Home = () => {
             <Link to={userIconLink}>
               <i
                 className="bx bx-user bt-header animation"
-                style={{ color: "#48A3A9" }}
-              <Link to="/login">
-                <button type="button" className="btn-buy">
-                  FAZER LOGIN
-                </button>
+                style={{ color: "#48A3A9" }}>
+              </i> 
               </Link>
 
               <Link to="/Requests2">
