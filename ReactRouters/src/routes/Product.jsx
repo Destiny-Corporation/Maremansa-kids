@@ -29,6 +29,12 @@ const Cart = () => {
   const [showNotification, setShowNotification] = useState(false);
   const [showNotification2, setShowNotification2] = useState(false);
 
+  const userIconLink = isLoggedIn ? "/requests" : "/login";
+  if (localStorage.getItem("user") !== null) {
+    localStorage.setItem("loggedIn", "true");
+    isLoggedIn = true;
+  }
+
   const showAddedToCartNotification = () => {
     setShowNotification(true);
     setTimeout(() => {
