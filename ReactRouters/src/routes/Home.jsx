@@ -8,6 +8,7 @@ import ReactPaginate from "react-paginate";
 import { useNavigate } from "react-router-dom";
 import debounce from 'debounce';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import MusicPlayer from '../routes/MusicPlayer.jsx';
 
 let isLoggedIn = false;
 
@@ -242,6 +243,9 @@ const Home = () => {
             <li>
               <Link to="/physicalstore">LOCALIZAÇÃO</Link>
             </li>
+          </div>
+          <div className="header-item3">
+            <MusicPlayer />
           </div>
         </div>
       </header>
