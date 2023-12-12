@@ -6,7 +6,7 @@ import ReactPaginate from "react-paginate";
 import { Link, useParams } from "react-router-dom";
 
 import "../styles/Product.css"; // Certifique-se de que o caminho do seu arquivo CSS está correto
-
+let isLoggedIn = false;
 // Restante do seu código...
 
 const firebaseConfig = {
@@ -408,7 +408,7 @@ const Cart = () => {
             </Link>
           </div>
           <div className="icons-about">
-            <Link to="/requests">
+            <Link to={userIconLink}>
               <i
                 className="bx bx-user bt-header"
                 style={{ color: "#ffffff" }}
@@ -744,6 +744,25 @@ const Cart = () => {
             </div>
           </div>
         </section>
+        <div className="description-section">
+          <hr className="hr-prod-1" size="1" />
+          <h4 className="title-prod-1">
+            Descrição do Produto{" "}
+            <button
+              className={`show-more-button-1 ${
+                showDescription ? "expanded" : ""
+              }`}
+              onClick={() => setShowDescription(!showDescription)}
+            >
+              {showDescription ? "-" : "+"}
+            </button>
+          </h4>
+          <hr className="hr-prod-1" size="1" />
+
+          <p className="description-text">
+            {showDescription ? productData?.descrição : ""}
+          </p>
+        </div>
       </div>
 
       <footer>

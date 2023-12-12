@@ -73,7 +73,7 @@ const Login = () => {
         setUser(user);
   
         localStorage.setItem("user", JSON.stringify(user));
-        window.location.href = "/protected";
+        window.location.href = "/";
       })
       .catch((error) => {
         if (error.code === "auth/wrong-password") {
@@ -135,7 +135,7 @@ const Login = () => {
         setUser(result.user);
         localStorage.setItem("user", JSON.stringify(result.user));
 
-        window.location.href = "/protected";
+        window.location.href = "/";
       })
       .catch((error) => {
         console.log(error);
@@ -167,19 +167,19 @@ const Login = () => {
         <div className="icons-about">
             <Link to="/login">
               <i
-                className="bx bx-user bt-header"
+                className="bx bx-user bt-header animation"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
             <Link to="/wishlist">
               <i
-                className="bx bx-heart bt-header"
+                className="bx bx-heart bt-header animation"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
             <Link to="/cart">
               <i
-                className="bx bx-cart bt-header"
+                className="bx bx-cart bt-header animation"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
@@ -221,7 +221,7 @@ const Login = () => {
               <input className="checkbox" type="checkbox" /> LEMBRAR DE MIM{" "}
             </label>
             <a
-              className="remember-link"
+              className="remember-link animation"
               href="#"
               id="recover-password-button"
               onClick={recoverPassword}
@@ -280,11 +280,17 @@ const Login = () => {
           </div>
 
           <div className="footer-section-div">
-            <h3 className='footer-animation-title'>CONTATOS</h3>
-            <i className="fa fa-whatsapp"></i>
-            <i className="fa fa-google"></i>
-            <i className="fa fa-instagram"></i>
-          </div>
+  <h3 className='footer-animation-title'>CONTATOS</h3>
+  <a href="https://web.whatsapp.com/send?phone=5585986056136" target="_blank" title="whatsapp">
+    <i className="fa fa-whatsapp"></i>
+  </a>
+  <a href="https://www.facebook.com/maremansakidss" target="_blank" title="facebook">
+    <i className="fa fa-facebook"></i>
+  </a>
+  <a href="https://www.instagram.com/maremansakids/" target="_blank" title="instagram">
+    <i className="fa fa-instagram"></i>
+  </a>
+</div>
         </section>
       </footer>
       <div className="last-text">

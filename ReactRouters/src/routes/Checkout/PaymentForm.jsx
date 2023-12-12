@@ -64,6 +64,9 @@ const PaymentForm = () => {
     }
   };
 
+
+
+
   const renderOpcoesPagamento = () => {
     const opcoes = [
       { valor: "cartao-de-credito", titulo: "Cartão de Crédito", imagem: "/assets/cartao1.png" },
@@ -241,7 +244,13 @@ const PaymentForm = () => {
             </div>
           </div>
         );
-      // Restante do código...
+        case "pix":
+          case "boleto":
+            return (
+              <div className="campos">
+                <img src="/assets/qrcode.jpg" alt="QR Code" className="qrcode-imagem" />
+                </div>
+            );
       default:
         return null;
     }
@@ -297,13 +306,11 @@ const PaymentForm = () => {
     </div>
 
     <div id="resumo-pedido" className="resumo-pedido">
-          <h2 style={{ color: "#48A3A9" }}>Resumo do Pedido</h2>
-          <hr size="1" />
-
-          <p style={{ color: "#48A3A9" }}>Itens no Carrinho:
-             <ul>
+          <h2 className="delivery-indicator-2" style={{ color: "#fff" }}>Resumo do Pedido</h2>
+          <p className="data-i" style={{ color: "#48A3A9" }}>Itens no Carrinho:
+             <ul className="data-l">
     {cartItems.map((item, index) => (
-      <li key={index}>
+      <li className="data-li" key={index}>
         {item.quantidade}x  {item.nome_prodmale ||
                       item.nome_prop ||
                       item.nome_prodpromo ||
@@ -314,9 +321,9 @@ const PaymentForm = () => {
   </ul>
           </p>
   
-          <p style={{ color: "#48A3A9" }}>Endereço de entrega: {resumoPedido.endereco}</p>
+          <p className="data-e" style={{ color: "#48A3A9" }}>Endereço de entrega: {resumoPedido.endereco}</p>
           <hr size="1" />
-          <p style={{ color: "#48A3A9" }}>Total: R$ $ {total} </p>
+          <p  className="data-p" style={{ color: "#48A3A9" }}>Total: R$ $ {total} </p>
 
           <hr size="1" />
 

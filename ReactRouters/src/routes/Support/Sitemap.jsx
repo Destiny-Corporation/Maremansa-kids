@@ -1,8 +1,45 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../../styles/Support/Sitemap.css";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import debounce from 'debounce';
 
+let isLoggedIn = false;
 const Sitemap = () => {
+  const userIconLink = isLoggedIn ? "/requests" : "/login";
+  if (localStorage.getItem("user") !== null) {
+    localStorage.setItem("loggedIn", "true");
+    isLoggedIn = true;
+  }
+
+  const [searchValue, setSearchValue] = useState("");
+  const navigate = useNavigate();
+
+  const debouncedSearchFunction = debounce(async () => {
+    // Navegue para a rota apropriada com base no valor da pesquisa
+    if (["sunga", "menino", "conjunto"].includes(searchValue)) {
+      await navigate("/male");
+    } else if (["biquini", "biquíni", "conjunto", "vestido", "menina", "maio", "maiô"].includes(searchValue)) {
+      await navigate("/female");
+    } else if (["boia", "óculos", "oculos","baldinho","chapéu", "chapeu","pulseira"].includes(searchValue)) {
+      await navigate("/props");
+    } else if (searchValue === "promoções") {
+      await navigate("/sale");
+    } else if (searchValue === "empresa") {
+      await navigate("/about");
+    } else if (searchValue === "loja") {
+      await navigate("/physicalstore");
+    } else if (searchValue === "mapa") {
+      await navigate("/sitemap");
+    }
+  }, 500);
+
+  useEffect(() => {
+    // Chame a função debouncedSearchFunction() de forma assíncrona
+    debouncedSearchFunction();
+  }, [searchValue]);
+
+
   return (
     <><div className='main'>
       <header className="main-header">
@@ -10,21 +47,21 @@ const Sitemap = () => {
         <Link to="/"> <img src="/assets/logo.png" alt="Logo" /> </Link>
         </div>
         <div className="icons-about">
-            <Link to="/login">
+            <Link to={userIconLink}>
               <i
-                className="bx bx-user bt-header"
+                className="bx bx-user bt-header animation"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
             <Link to="/wishlist">
               <i
-                className="bx bx-heart bt-header"
+                className="bx bx-heart bt-header animation"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
             <Link to="/cart">
               <i
-                className="bx bx-cart bt-header"
+                className="bx bx-cart bt-header animation"
                 style={{ color: "#ffffff" }}
               ></i>
             </Link>
@@ -36,6 +73,9 @@ const Sitemap = () => {
           type="text"
           className="search-bar"
           placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
+          onChange={(e) => {
+            setSearchValue(e.target.value);
+          }} 
         />
         <button className="search-button" type="submit">
           <i className="bx bx-search"></i>

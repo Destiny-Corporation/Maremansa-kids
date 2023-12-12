@@ -13,6 +13,8 @@ import {
 } from "firebase/firestore";
 import ReactPaginate from "react-paginate";
 
+let isLoggedIn = false;
+
 const firebaseConfig = {
   apiKey: "AIzaSyDTKUI6nV-DZjIsUo1BMkjIUWOQbT9gU3Q",
   authDomain: "auth-amanda.firebaseapp.com",
@@ -27,6 +29,13 @@ export const storage = getStorage(app);
 export const firestore = getFirestore(app);
 
 const FemBaby = () => {
+  const userIconLink = isLoggedIn ? "/requests" : "/login";
+
+  if (localStorage.getItem("user") !== null) {
+    localStorage.setItem("loggedIn", "true");
+    isLoggedIn = true;
+  }
+
   const [isItemAdded, setIsItemAdded] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [showNotification2, setShowNotification2] = useState(false);
@@ -163,19 +172,20 @@ const FemBaby = () => {
           produtosCollection,
           where("category_prodfemme", "==", "Baby")
         );
-        const produtosSnapshot = await getDocs(produtosQuery);
+        const produtosSnapshot = await getDocs(produtosQuery); // Use produtosQuery here
         const produtosData = produtosSnapshot.docs.map((doc) => doc.data());
         setProdutos(produtosData);
-        setLoading(false); // Definindo loading como falso após o carregamento dos produtos
+        setLoading(false);
         console.log(produtosData);
       } catch (error) {
         console.error("Erro ao carregar produtos:", error);
-        setLoading(false); // Definindo loading como falso em caso de erro
+        setLoading(false);
       }
     };
-
-    fetchProdutos();
-  }, []);
+  
+    fetchProdutos(); // Don't forget to invoke the function
+  }, []); // Make sure to provide an empty dependency array to run the effect only once
+  
 
   const handleFilterChange = (e) => {
     setFilterParam(e.target.value);
@@ -267,7 +277,7 @@ const FemBaby = () => {
           </Link>
         </div>
         <div className="icons-w">
-          <Link to="/login">
+          <Link to={userIconLink}>
             <i
               className="bx bx-user bt-header animation"
               style={{ color: "#ffffff" }}

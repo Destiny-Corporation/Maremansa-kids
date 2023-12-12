@@ -154,6 +154,17 @@ body {
   margin: 0 auto;
   width: 90px;
   height: 90px;
+  animation: buttonAnimation 4s ease-in-out;
+}
+
+@keyframes buttonAnimation {
+  0%, 100% {
+    transform: translateX(0) scale(0.5);
+  }
+  50% {
+    background: transparent;
+    transform: translateX(5px) scale(1.2);
+  }
 }
 
 .wrapper .btn {
@@ -241,15 +252,17 @@ body {
   margin-left: -12px;
 }
 
-#recover-password-button {
+.remember-link {
   font-size: 8px;
   letter-spacing: 2px;
-  color: rgb(162, 222, 226);
+  color: #fff;
   padding-left: 10px;
+  text-decoration: underline;
 }
 
-#recover-password-button :hover {
-  color: rgb(180, 236, 240);
+.remember-link:hover {
+  color: #eee;
+  text-decoration: underline;
 }
 
 footer {

@@ -18,10 +18,55 @@
   margin: auto;
   margin-top: 20px;
   padding: 30px;
-  border: 1px solid #3CA2A2;
+  border: 3px solid;
   border-radius: 8px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   background-color: #fff;
+}
+
+.delivery-indicator-2{
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  flex: 1;
+  margin: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  color: #fff;
+  height: 40px;
+  background: radial-gradient(circle, #48a3a9 0%, #2a777c 100%);
+  margin-top: -10px;
+  margin-left: -10px;
+  margin-right: -10px;
+  font-size: 20px;
+}
+
+.data-i {
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  margin-top: 20px;
+}
+
+.data-l {
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+}
+
+.data-li {
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+}
+
+.data-e {
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+}
+
+.data-p {
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
 }
 
 .finalizando-pagamento {
@@ -35,18 +80,12 @@
   flex: 1;
   margin: 0 10px; /* Adicionado espaçamento à esquerda e direita */
   color: #48A3A9;
-  border: 1px solid #3CA2A2;
-  border-radius: 8px;
-  padding: 15px;
+  border: 4px solid #2a777c;
+  border-radius: 18px;
+  padding: 10px;
   margin: 10px;
   margin-top: 2px;
   text-align: center;
-}
-
-.resumo-pedido h2{
-    font-size: 32px;
-    text-align: center;
-    font-family: "Stylish", sans-serif;
 }
 
 .opcoes-pagamento {
@@ -55,12 +94,10 @@
   display: flex;
   flex-direction: column;
   margin-top: 2px;
-  border: 1px solid #3CA2A2;
-  border-radius: 8px;
+  border: 4px solid #2a777c;
+  border-radius: 18px;
   padding: 10px;
 }
-
-
   
   .opcoes-pagamento label {
     margin-bottom: 10px;
@@ -97,8 +134,7 @@
 
   }
   
- 
-  
+
   .concluir-btn {
     background-color: #3CA2A2;
     color: #fff;
@@ -122,5 +158,9 @@
   margin-bottom: 20px;
 }
 
+.qrcode-imagem {
+  width: 100px; /* Defina o tamanho desejado em pixels ou outra unidade */
+  height: auto; /* Mantenha a proporção original da imagem */
+}
 
   
