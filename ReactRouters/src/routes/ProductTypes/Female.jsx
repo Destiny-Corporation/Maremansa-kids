@@ -177,6 +177,7 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
 </div>
 </div>
 
+
 <footer>
         <section className="footer-section">
           <div className="footer-section-div">
@@ -208,6 +209,8 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
               <Link to="/sitemap">MAPA DO SITE</Link>
             </li>
           </div>
+
+
 
           <div className="footer-section-div">
             <h3 className='footer-animation-title'>CONTATOS</h3>
