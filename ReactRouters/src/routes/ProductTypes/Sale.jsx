@@ -6,6 +6,8 @@ import { getStorage } from "firebase/storage";
 import { getFirestore, collection, doc, getDocs } from "firebase/firestore";
 import ReactPaginate from "react-paginate";
 
+let isLoggedIn = false;
+
 const firebaseConfig = {
   apiKey: "AIzaSyDTKUI6nV-DZjIsUo1BMkjIUWOQbT9gU3Q",
   authDomain: "auth-amanda.firebaseapp.com",
@@ -20,6 +22,11 @@ export const storage = getStorage(app);
 export const firestore = getFirestore(app);
 
 const Sale = () => {
+  const userIconLink = isLoggedIn ? "/requests" : "/login";
+  if (localStorage.getItem("user") !== null) {
+    localStorage.setItem("loggedIn", "true");
+    isLoggedIn = true;
+  }
   const [isItemAdded, setIsItemAdded] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [showNotification2, setShowNotification2] = useState(false);
@@ -46,7 +53,9 @@ const Sale = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [isFilterActive, setIsFilterActive] = useState(false);
-  const [maxPrice, setMaxPrice] = useState(null);
+  const [minPrice, setMinPrice] = useState(localStorage.getItem('minPrice') || '');
+  const [maxPrice, setMaxPrice] = useState(localStorage.getItem('maxPrice') || '');
+  const [applyFilter, setApplyFilter] = useState(localStorage.getItem('applyFilter') === 'true' || false);
   const nomesProdutos = [
     "Colete",
     "Conjunto",
@@ -67,6 +76,7 @@ const Sale = () => {
     const savedFavoriteItems = localStorage.getItem("favoriteItems");
     return savedFavoriteItems ? JSON.parse(savedFavoriteItems) : [];
   });
+
   const handleAddToFavorites = (produto) => {
     const existingItemIndex = favoriteItems.findIndex(
       (item) => item.nome_prodpromo === produto.nome_prodpromo
@@ -174,16 +184,18 @@ const Sale = () => {
   };
 
   const filteredProdutos = produtos.filter((produto) => {
-    const categoryMatch =
-      selectedCategory === "Todos" ||
-      produto.nome_prodpromo.toLowerCase().includes(selectedCategory.toLowerCase());
-  
-    const searchMatch = produto.nome_prodpromo.toLowerCase().includes(searchTerm.toLowerCase());
-  
-    // Adicione aqui a lógica do filtro de preço se necessário
-  
-    return categoryMatch && searchMatch;
-  });
+  const categoryMatch =
+    selectedCategory === "Todos" ||
+    produto.nome_prodpromo.toLowerCase().includes(selectedCategory.toLowerCase());
+
+  const searchMatch = produto.nome_prodpromo.toLowerCase().includes(searchTerm.toLowerCase());
+
+  const priceMatch =
+    (minPrice === "" || Number(produto.preço) >= Number(minPrice)) &&
+    (maxPrice === "" || Number(produto.preço) <= Number(maxPrice));
+
+  return categoryMatch && searchMatch && (applyFilter ? priceMatch : true);
+});
 
   const pageCount = Math.ceil(filteredProdutos.length / itemsPerPage);
   const offset = currentPage * itemsPerPage;
@@ -212,8 +224,24 @@ const Sale = () => {
   };
   const handleFilterButtonClick = () => {
     setIsFilterActive(!isFilterActive);
-    setMaxPrice("");
+    handleResetFilter();
   };
+  
+  const handleApplyFilter = () => {
+  setApplyFilter(true);
+  localStorage.setItem('minPrice', minPrice);
+  localStorage.setItem('maxPrice', maxPrice);
+  localStorage.setItem('applyFilter', 'true');
+};
+
+  const handleResetFilter = () => {
+  setMinPrice('');
+  setMaxPrice('');
+  setApplyFilter(false);
+  localStorage.removeItem('minPrice');
+  localStorage.removeItem('maxPrice');
+  localStorage.removeItem('applyFilter');
+};
 
   return (
     <>
@@ -247,7 +275,7 @@ const Sale = () => {
           </Link>
         </div>
         <div className="icons-w">
-          <Link to="/login">
+          <Link to={userIconLink}>
             <i
               className="bx bx-user bt-header animation"
               style={{ color: "#ffffff" }}
@@ -400,6 +428,7 @@ const Sale = () => {
             <ul className="filter-list">
               <li>
                 <label className="filter-label">CATEGORIAS:</label>
+                <label className="filter-label">PREÇO:</label>
               </li>
               <li className="filter-item">
                 <button
@@ -424,10 +453,30 @@ const Sale = () => {
                   X
                 </button>
               </li>
+              <div className="filter-price-inputs">
+              <input
+              type="number"
+              placeholder="Mínimo"
+              value={minPrice}
+              onChange={(e) => setMinPrice(e.target.value)}
+             />
+              <input
+              type="number"
+              placeholder="Máximo"
+              value={maxPrice}
+              onChange={(e) => setMaxPrice(e.target.value)}
+             />
+           </div>
+          <button className="apply-filter-button" onClick={() => setApplyFilter(true)}>
+           Aplicar Filtro
+          </button>
+          <button className="reset-filter-button" onClick={handleResetFilter}>
+           Limpar Filtro
+          </button>
             </ul>
           </div>
         </div>
-        )}
+      )}
 
       <div className="items-per-page">
         <label>Itens por página:</label>

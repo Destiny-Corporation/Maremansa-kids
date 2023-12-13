@@ -299,11 +299,15 @@ a {
 
 .text-card-h {
   margin-left: 22px;
-  margin-right: 10px;
+  margin-right: 10%;
   margin-top: 20px; 
   color:rgb(72, 163, 169);
   letter-spacing: 2px;
   text-align: left;
+}
+
+.total-price-cartl {
+  font-family: "Stylish", sans-serif;
 }
 
 
@@ -417,14 +421,6 @@ a {
   }
 }
 
-.bx-chevron-right {
-  font-size: 80px;
-}
-
-.bx-chevron-left {
-  font-size: 80px;
-}
-
 hr {
   width: 90%; 
   height: 2px;
@@ -457,16 +453,8 @@ hr {
   cursor: pointer;
 }
 
-.container-clothes {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
-  align-items: center;
-  margin-top: 2rem;
-}
 
-.container-clothes img:hover {
+.container-clothes-home img:hover {
   transform: scale(0.9) translateY(-5px);
   cursor: pointer;
   transition: 0.3s;
@@ -477,7 +465,7 @@ hr {
     height: 250px;
 }
 
-.container-clothes-main {
+.container-clothes-main-1 {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -486,16 +474,47 @@ hr {
   margin-top: 2rem;
 }
 
-.container-clothes-main img:hover {
+.container-clothes-main-1 img:hover {
   transform: scale(0.9) translateY(-5px);
   cursor: pointer;
   transition: 0.3s;
 }
 
-.clothes-main img{
-    width: 200px;
-    height: auto;
+.container-clothes-home {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 5px; 
 }
+
+.clothes-home {
+  margin: 0 5px 10px 5px; 
+  box-sizing: border-box; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.clothes-home img {
+  border-radius: 20px;
+  width: 200px; 
+  height: 250px;
+  object-fit: cover; 
+}
+
+.info-container-home {
+  margin-top: 10px;
+}
+
+.price-and-icons-home{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Adjust other styles as needed */
+
 
 footer {
     position: relative;

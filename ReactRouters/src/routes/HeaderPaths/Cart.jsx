@@ -75,46 +75,75 @@ const Cart = () => {
             <h6>| Carrinho ({cartItems.length})</h6>
           </div>
         </div>
+
+    
+      <div className="wishlist-content">
         {isLoggedIn ? (
-          <div className="cart-content">
-            {cartItems.map((produto, index) => (
-              <div className="cart-item" key={index}>
+          <div>
+            {cartItems.length > 0 ? (
+              cartItems.map((produto, index) => (
+                <div className="wishlist-items">
+                <div className="wishlist-item" key={index}>
+              <div className="wish-content">
+              <div className="cart-item-1" key={index}>
                 <div className="cart-item-info">
                   <div className="delivery-indicator">
                     Entrega {index + 1} de {cartItems.length}
                   </div>
-                  <i
-                    className="bx bxs-trash-alt cart-remove cart-item-remove-2"
-                    onClick={() => handleRemoveFromCart(index)}
-                  ></i>
+                  <div className="infos-prod">
                   <img
                     src={produto.url_image}
                     alt={produto.nome_prop}
                     className="cart-item-image"
                   />
-                  <div className="cart-item-details">
+                  <div className="cart-item-details-2">
                     <div className="cart-item-name">
                       {produto.nome_prodmale ||
                         produto.nome_prop ||
                         produto.nome_prodpromo ||
                         produto.nome_prodfemme}
                     </div>
-                    <div className="cart-item-price">R$ {produto.preço}</div>
+                    <div className="cart-item-price"> VALOR: R$ {produto.preço}</div>
+                    <hr className="hpaths"></hr>
                     <div className="cart-item-options">
                       <div>
-                        <strong>Cor:</strong> {produto.cor}
+                        <strong className="wish-det">Cor: {produto.cor} </strong> 
                       </div>
                       <div>
-                        <strong>Tamanho:</strong> {produto.tamanho}
+                        <strong className="wish-det">Tamanho: {produto.tamanho} </strong> 
                       </div>
                       <div>
-                        <strong>Quantidade:</strong> {produto.quantidade}
+                        <strong className="wish-det">Quantidade: {produto.quantidade} </strong> 
                       </div>
+                      <i
+                    className="bx bxs-trash-alt cart-remove cart-item-remove-2 animation"
+                    onClick={() => handleRemoveFromCart(index)}
+                  ></i>
                     </div>
+                  </div>
                   </div>
                 </div>
               </div>
-            ))}
+              </div>
+              </div>
+              </div>
+              ))
+            ) : (
+              <div className="empty-cart">
+                <img
+                  src="/assets/empty-cart.png"
+                  alt="Lista de Desejos Vazia"
+                />
+                <div className="effect">
+                <Link to="/"><div className="button">
+                    <img
+                      src="/assets/shopping-button.png"
+                      alt="Ir às Compras"
+                    />
+                  </div></Link>
+                </div>
+              </div>
+            )}
           </div>
         ) : (
           <div className="login-message">
@@ -136,13 +165,47 @@ const Cart = () => {
             </div>
           </div>
         )}
+      </div>
 
-        {/* Botão "Comprar Agora" */}
-        {cartItems.length > 0 && (
+
+{cartItems.length > 0 && (
           <Link to="/checkout">
-            <button className="comprar-agora-btn">Comprar Agora</button>
-          </Link>
+<div className="buttons">
+      <button className="blob-btn">
+        COMPRAR AGORA
+        <span className="blob-btn__inner">
+          <span className="blob-btn__blobs">
+            <span className="blob-btn__blob"></span>
+            <span className="blob-btn__blob"></span>
+            <span className="blob-btn__blob"></span>
+            <span className="blob-btn__blob"></span>
+          </span>
+        </span>
+      </button>
+      <br />
+
+      <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+        <defs>
+          <filter id="goo">
+            <feGaussianBlur
+              in="SourceGraphic"
+              result="blur"
+              stdDeviation="10"
+            ></feGaussianBlur>
+            <feColorMatrix
+              in="blur"
+              mode="matrix"
+              values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 21 -7"
+              result="goo"
+            ></feColorMatrix>
+            <feBlend in2="goo" in="SourceGraphic" result="mix"></feBlend>
+          </filter>
+        </defs>
+      </svg>
+    </div>
+    </Link>
         )}
+
       </div>
 
       <footer>
