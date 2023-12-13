@@ -8,6 +8,7 @@ import ReactPaginate from "react-paginate";
 import { useNavigate } from "react-router-dom";
 import debounce from 'debounce';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import MusicPlayer from '../routes/MusicPlayer.jsx';
 
 let isLoggedIn = false;
 
@@ -84,9 +85,9 @@ const Home = () => {
     // Navegue para a rota apropriada com base no valor da pesquisa
     if (["sunga", "menino", "conjunto"].includes(searchValue)) {
       await navigate("/male");
-    } else if (["biquini", "biquíni", "conjunto", "vestido", "menina"].includes(searchValue)) {
+    } else if (["biquini", "biquíni", "conjunto", "vestido", "menina", "maio", "maiô"].includes(searchValue)) {
       await navigate("/female");
-    } else if (["boia", "óculos", "baldinho", "chapéu"].includes(searchValue)) {
+    } else if (["boia", "óculos", "oculos","baldinho","chapéu", "chapeu","pulseira"].includes(searchValue)) {
       await navigate("/props");
     } else if (searchValue === "promoções") {
       await navigate("/sale");
@@ -256,6 +257,9 @@ const Home = () => {
             <li>
               <Link to="/physicalstore">LOCALIZAÇÃO</Link>
             </li>
+          </div>
+          <div className="header-item3">
+            <MusicPlayer />
           </div>
         </div>
       </header>
