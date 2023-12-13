@@ -57,6 +57,14 @@
   transition: background-color 0.3s ease; 
 }
 
+.total-title {
+  text-align: right;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-right: 10px;
+  margin-top: 4px;
+}
+
 .carto:hover {
   color: #fff !important;
   background-color: #48a3a9; 
@@ -447,11 +455,11 @@
 
 .cart-item-img-1 {
   width: 100px;
-  height: 100px;
-  object-fit: contain;
+  height: 150px;
+  object-fit: cover;
   padding: 10px;
   color: #48a3a9;
-  border-radius: 10px;
+  border-radius: 20px;
 }
 
 .detail-box {
@@ -467,10 +475,11 @@
 }
 
 .cart-item-price-1 {
+  font-family: "Stylish", sans-serif;
   color: #48a3a9;
   font-weight: 500;
-  font-size: 12px;
-  margin-top: -8px;
+  font-size: 16px;
+  margin-top: -6px;
 }
 
 .cart-quantity-1 {
@@ -587,6 +596,6 @@
 .no-results-message {
   text-align: center;
   margin-top: 10px;
-  color: #ff0000; 
-  font-weight: bold;
+  width: auto;
+  height: auto;
 }

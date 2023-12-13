@@ -300,14 +300,14 @@ const PaymentForm = () => {
   <div className="finalizando-pagamento">
 
       <div id="opcoes-pagamento" className="opcoes-pagamento">
+      <h2 className="delivery-indicator-3" style={{ color: "#fff" }}>MÉTODO DE PAGAMENTO</h2> 
         {renderOpcoesPagamento()}
-
-
+        
     </div>
 
     <div id="resumo-pedido" className="resumo-pedido">
           <h2 className="delivery-indicator-2" style={{ color: "#fff" }}>Resumo do Pedido</h2>
-          <p className="data-i" style={{ color: "#48A3A9" }}>Itens no Carrinho:
+          <p className="data-i" style={{ color: "#48A3A9" }}>Itens no Carrinho:</p>
              <ul className="data-l">
     {cartItems.map((item, index) => (
       <li className="data-li" key={index}>
@@ -319,11 +319,11 @@ const PaymentForm = () => {
       </li>
     ))}
   </ul>
-          </p>
+          
   
           <p className="data-e" style={{ color: "#48A3A9" }}>Endereço de entrega: {resumoPedido.endereco}</p>
           <hr size="1" />
-          <p  className="data-p" style={{ color: "#48A3A9" }}>Total: R$ $ {total} </p>
+          <p  className="data-p" style={{ color: "#48A3A9" }}>Total: R$ {total} </p>
 
           <hr size="1" />
 

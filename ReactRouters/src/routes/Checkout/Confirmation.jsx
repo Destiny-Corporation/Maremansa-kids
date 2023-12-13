@@ -68,7 +68,7 @@ const Confirmation = () => {
           </Typography>
           <Typography>
             Obrigado pela sua compra. Seu pedido foi concluído. Um e-mail de
-            confirmação foi enviado para o seu endereço.
+            confirmação foi enviado para a sua conta.
           </Typography>
           <Button
             variant="contained"
