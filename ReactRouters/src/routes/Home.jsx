@@ -60,6 +60,7 @@ const Home = () => {
   const [isItemAdded, setIsItemAdded] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [showNotification2, setShowNotification2] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const showAddedToCartNotification = () => {
     setShowNotification(true);
@@ -213,11 +214,19 @@ const Home = () => {
 
   useEffect(() => {
     const fetchProdutos = async () => {
-      const produtosCollection = collection(firestore, "Prodfemme");
-      const produtosSnapshot = await getDocs(produtosCollection);
-      const produtosData = produtosSnapshot.docs.map((doc) => doc.data());
-      setProdutos(produtosData);
+      try {
+        const produtosCollection = collection(firestore, "Prodfemme");
+        const produtosSnapshot = await getDocs(produtosCollection);
+        const produtosData = produtosSnapshot.docs.map((doc) => doc.data());
+        setProdutos(produtosData);
+        setLoading(false); // Definindo loading como falso após o carregamento dos produtos
+        console.log(produtosData);
+      } catch (error) {
+        console.error("Erro ao carregar produtos:", error);
+        setLoading(false); // Definindo loading como falso em caso de erro
+      }
     };
+
     fetchProdutos();
   }, []);
 
@@ -238,7 +247,18 @@ const Home = () => {
   const [isSlideAnimationActive, setIsSlideAnimationActive] = useState(false);
 
   return (
-    <><div className="main">
+    <>
+      {loading ? (
+        <div className="loading-container">
+          <img
+            src="/assets/espera.gif"
+            alt="Carregando..."
+            style={{ width: "130px", height: "130px" }}
+          />
+        </div>
+      ) : (
+        <>
+          <div className="main">
       <header className="main-header">
         <div className="logo-home">
           <img src="/assets/logo.png" alt="Logo" />
@@ -694,7 +714,9 @@ const Home = () => {
       <div className="last-text">
         <p className="text-sub-footer">maremansa</p>
       </div>
-</>
+      </>
+      )}
+    </>
   );
 };
 export default Home;

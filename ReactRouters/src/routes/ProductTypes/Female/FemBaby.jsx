@@ -217,11 +217,13 @@ const FemBaby = () => {
 
   
   const pageCount = Math.ceil(filteredProdutos.length / itemsPerPage);
+
   const offset = currentPage * itemsPerPage;
-  const currentPageProdutos = filteredProdutos.slice(
-    offset,
-    offset + itemsPerPage
-  );
+const currentPageProdutos = filteredProdutosWithPrice.slice(
+  offset,
+  offset + itemsPerPage
+);
+ 
   const prevButtonClass =
     currentPage === 0 ? "prevButton disabled" : "prevButton";
   const nextButtonClass =
@@ -472,7 +474,7 @@ const FemBaby = () => {
         </div>
 
         <div className="container-clothes">
-  {filteredProdutosWithPrice.map((produto, index) => (
+  {currentPageProdutos.map((produto, index) => (
     <div className="clothes" key={index} style={{ width: "20%" }}>
       <Link to={`/product/${"Prodfemme"}/${produto.nome_prodfemme}`}>
         <img
