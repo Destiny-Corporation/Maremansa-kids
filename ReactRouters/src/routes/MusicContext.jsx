@@ -1,5 +1,6 @@
-// MusicContext.js
+// MusicProvider.js
 import React, { createContext, useState, useContext } from 'react';
+
 
 const MusicContext = createContext();
 
@@ -19,5 +20,8 @@ export const MusicProvider = ({ children }) => {
 };
 
 export const useMusic = () => {
-  return useContext(MusicContext);
+  const MusicContext = useContext(MusicContext);
+  return MusicContext;
 };
+
+export default MusicContext;

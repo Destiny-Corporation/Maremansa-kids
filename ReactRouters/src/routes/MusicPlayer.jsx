@@ -1,18 +1,18 @@
 // MusicPlayer.jsx
 import React, { useState } from 'react';
-import { MusicProvider } from "../routes/MusicContext.jsx";
+import { useMusic } from "../routes/MusicContext.jsx";
 
 const MusicPlayer = () => {
-  const [isPlaying, setPlaying] = useMusic();
+  const {isPlaying, togglePlay} = useMusic();
 
-  const togglePlay = () => {
+  const handleTogglePlay = () => {
     const audio = document.getElementById('myAudio');
     if (isPlaying) {
       audio.pause();
     } else {
       audio.play();
     }
-    setPlaying(!isPlaying);
+    togglePlay();
   };
 
   const buttonStyle = {
@@ -37,7 +37,7 @@ const MusicPlayer = () => {
 
   return (
     <div>
-      <button style={buttonStyle} onClick={togglePlay}>
+      <button style={buttonStyle} onClick={handleTogglePlay}>
         {isPlaying ? (
           <img
             src="/assets/volume.png"
@@ -61,4 +61,3 @@ const MusicPlayer = () => {
 };
 
 export default MusicPlayer;
-
