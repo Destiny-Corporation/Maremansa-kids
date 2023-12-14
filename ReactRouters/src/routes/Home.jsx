@@ -8,6 +8,7 @@ import ReactPaginate from "react-paginate";
 import { useNavigate } from "react-router-dom";
 import debounce from 'debounce';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import MusicPlayer from '../routes/MusicPlayer.jsx';
 
 let isLoggedIn = false;
 
@@ -23,7 +24,21 @@ export const app = initializeApp(firebaseConfig);
 export const storage = getStorage(app);
 export const firestore = getFirestore(app);
 
+
 const Home = () => {
+  const handleQuantityChange = (index, newQuantity) => {
+    const updatedCartItems = [...cartItems];
+    updatedCartItems[index].quantidade = Math.max(0, newQuantity);
+  
+    // Remove item from the cart if the new quantity is zero
+    if (updatedCartItems[index].quantidade === 0) {
+      updatedCartItems.splice(index, 1);
+    }
+  
+    setCartItems(updatedCartItems);
+  };
+  
+  
   
   if (localStorage.getItem("user") !== null) {
     localStorage.setItem("loggedIn", "true");
@@ -45,6 +60,7 @@ const Home = () => {
   const [isItemAdded, setIsItemAdded] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [showNotification2, setShowNotification2] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const showAddedToCartNotification = () => {
     setShowNotification(true);
@@ -198,11 +214,19 @@ const Home = () => {
 
   useEffect(() => {
     const fetchProdutos = async () => {
-      const produtosCollection = collection(firestore, "Prodfemme");
-      const produtosSnapshot = await getDocs(produtosCollection);
-      const produtosData = produtosSnapshot.docs.map((doc) => doc.data());
-      setProdutos(produtosData);
+      try {
+        const produtosCollection = collection(firestore, "Prodfemme");
+        const produtosSnapshot = await getDocs(produtosCollection);
+        const produtosData = produtosSnapshot.docs.map((doc) => doc.data());
+        setProdutos(produtosData);
+        setLoading(false); // Definindo loading como falso após o carregamento dos produtos
+        console.log(produtosData);
+      } catch (error) {
+        console.error("Erro ao carregar produtos:", error);
+        setLoading(false); // Definindo loading como falso em caso de erro
+      }
     };
+
     fetchProdutos();
   }, []);
 
@@ -223,7 +247,18 @@ const Home = () => {
   const [isSlideAnimationActive, setIsSlideAnimationActive] = useState(false);
 
   return (
-    <><div className="main">
+    <>
+      {loading ? (
+        <div className="loading-container">
+          <img
+            src="/assets/espera.gif"
+            alt="Carregando..."
+            style={{ width: "130px", height: "130px" }}
+          />
+        </div>
+      ) : (
+        <>
+          <div className="main">
       <header className="main-header">
         <div className="logo-home">
           <img src="/assets/logo.png" alt="Logo" />
@@ -242,6 +277,9 @@ const Home = () => {
             <li>
               <Link to="/physicalstore">LOCALIZAÇÃO</Link>
             </li>
+          </div>
+          <div className="header-item3">
+            <MusicPlayer />
           </div>
         </div>
       </header>
@@ -346,7 +384,7 @@ const Home = () => {
                         height: "150px",
                         objectFit: "cover",
                         padding: "10px",
-                        borderRadius: "30px",
+                        borderRadius: "20px",
                       }}
                     />
 
@@ -360,24 +398,26 @@ const Home = () => {
                       <div className="cart-item-price-1">
                         R$ {produto.preço}
                       </div>
-                      <input
-                        type="number"
-                        className="cart-quantity-1"
-                        value={produto.quantidade}
-                        onChange={(e) => {
-                          const updatedCartItems = [...cartItems];
-                          updatedCartItems[index].quantidade =
-                            parseInt(e.target.value, 10) || 0;
-                          setCartItems(updatedCartItems);
-                        }}
-                        style={{
-                          border: "1.2px solid #48a3a9",
-                          outlineColor: "#48a3a9",
-                          width: "2.6rem",
-                          textAlign: "center",
-                          fontSize: "0.8rem",
-                        }}
-                      />
+                    <div className="amount-1">
+                <button
+                  // className="quantity-button"
+                  onClick={() => handleQuantityChange(index, produto.quantidade - 1)}
+                >
+                  -
+                </button>
+
+                <span className="cart-quantity">{produto.quantidade}</span>
+
+                <button
+                  // className="quantity-button"
+                  onClick={() => handleQuantityChange(index, produto.quantidade + 1)}
+                >
+                  +
+                </button>
+              </div>
+
+
+
                     </div>
                     <i
                       className="bx bxs-trash-alt cart-remove cart-item-remove-1 animation"
@@ -390,17 +430,17 @@ const Home = () => {
               <hr></hr>
               <div className="total">
                 <div className="total-title">Total</div>
-                <div className="total-price-cartl">$ {total}</div>
+                <div className="total-price-cartl">R$ {total}</div>
               </div>
 
               <Link to="/checkout">
-                <button type="button" className="btn-buy">
+                <button type="button" className="btn-1">
                   COMPRAR AGORA
                 </button>
               </Link>
 
               <Link to="/cart">
-                <button type="button" className="btn-buy">
+                <button type="button" className="btn-1">
                   VER MEU CARRINHO
                 </button>
               </Link>
@@ -674,7 +714,9 @@ const Home = () => {
       <div className="last-text">
         <p className="text-sub-footer">maremansa</p>
       </div>
-</>
+      </>
+      )}
+    </>
   );
 };
 export default Home;

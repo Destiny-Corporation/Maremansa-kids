@@ -221,7 +221,9 @@ const Sale = () => {
 
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected);
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // Role a página para o topo ao trocar de página
   };
+
   const handleFilterButtonClick = () => {
     setIsFilterActive(!isFilterActive);
     handleResetFilter();
@@ -434,8 +436,8 @@ const Sale = () => {
                 <button
                   className={`filter-option ${selectedCategory === "Todos" ? "active" : ""}`}
                   onClick={() => setSelectedCategory("Todos")}
-                >
-                  Todos
+                ><p>
+                  Todos</p>
                 </button>
               </li>
               {nomesProdutos.map((nome, index) => (
