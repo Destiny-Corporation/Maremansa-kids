@@ -27,7 +27,6 @@ if (localStorage.getItem("user") !== null) {
 };
   const [user, setUser] = useState(null); // Estado do usuário
 
-  // Função para fazer logout
   const logout = () => {
     signOut(auth)
       .then(() => {

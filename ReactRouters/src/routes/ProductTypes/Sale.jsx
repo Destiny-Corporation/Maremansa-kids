@@ -22,6 +22,19 @@ export const storage = getStorage(app);
 export const firestore = getFirestore(app);
 
 const Sale = () => {
+  const handleQuantityChange = (index, newQuantity) => {
+    const updatedCartItems = [...cartItems];
+    updatedCartItems[index].quantidade = Math.max(0, newQuantity);
+  
+    // Remove item from the cart if the new quantity is zero
+    if (updatedCartItems[index].quantidade === 0) {
+      updatedCartItems.splice(index, 1);
+    }
+  
+    setCartItems(updatedCartItems);
+  };
+  
+  
   const userIconLink = isLoggedIn ? "/requests" : "/login";
   if (localStorage.getItem("user") !== null) {
     localStorage.setItem("loggedIn", "true");
@@ -47,6 +60,7 @@ const Sale = () => {
     }, 2000);
   };
 
+  const [isPriceFilterActive, setIsPriceFilterActive] = useState(false);
   const [produtos, setProdutos] = useState([]);
   const [overlayVisible, setOverlayVisible] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
@@ -183,6 +197,33 @@ const Sale = () => {
     setFilterParam(e.target.value);
   };
 
+  const handleFilterButtonClick = () => {
+    setIsFilterActive(!isFilterActive);
+    setIsPriceFilterActive(!isPriceFilterActive); 
+    setSelectedCategory("Todos");
+    setMinPrice("");
+    setMaxPrice("");
+    setApplyFilter(false);
+  };
+  
+  
+  const handleApplyFilter = () => {
+    setApplyFilter(true);
+    localStorage.setItem('minPrice', minPrice);
+    localStorage.setItem('maxPrice', maxPrice);
+    localStorage.setItem('applyFilter', 'true');
+  };
+  
+  const handleResetFilter = () => {
+    setMinPrice('');
+    setMaxPrice('');
+    setApplyFilter(false);
+    localStorage.removeItem('minPrice');
+    localStorage.removeItem('maxPrice');
+    localStorage.removeItem('applyFilter');
+  };
+  
+
   const filteredProdutos = produtos.filter((produto) => {
   const categoryMatch =
     selectedCategory === "Todos" ||
@@ -224,26 +265,15 @@ const Sale = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' }); // Role a página para o topo ao trocar de página
   };
 
-  const handleFilterButtonClick = () => {
-    setIsFilterActive(!isFilterActive);
-    handleResetFilter();
-  };
-  
-  const handleApplyFilter = () => {
-  setApplyFilter(true);
-  localStorage.setItem('minPrice', minPrice);
-  localStorage.setItem('maxPrice', maxPrice);
-  localStorage.setItem('applyFilter', 'true');
-};
+  useEffect(() => {
+    // Configura a manipulação do DOM após o componente ter sido montado
+    setIsComponentReady(true);
 
-  const handleResetFilter = () => {
-  setMinPrice('');
-  setMaxPrice('');
-  setApplyFilter(false);
-  localStorage.removeItem('minPrice');
-  localStorage.removeItem('maxPrice');
-  localStorage.removeItem('applyFilter');
-};
+    // Limpa a manipulação do DOM quando o componente for desmontado
+    return () => {
+      setIsComponentReady(false);
+    };
+  }, []);
 
   return (
     <>
@@ -303,81 +333,85 @@ const Sale = () => {
           onClick={handleCloseCartClick}
         ></div>
         <div className={`cart ${cartVisible ? "active" : ""}`}>
-          <h2 className="cart-title-1">MEU CARRINHO</h2>
-          <div className="cart-content-1">
-            {cartItems.map((produto, index) => (
-              <div className="cart-item" key={index}>
-                <img
-                  src={produto.url_image}
-                  alt={produto.nome_prodpromo}
-                  className="cart-item-image-1"
-                  style={{
-                    width: "100px",
-                    height: "100px",
-                    objectFit: "contain",
-                    padding: "10px",
-                    borderRadius: "60px",
-                  }}
-                />
+              <h2 className="cart-title-1">MEU CARRINHO</h2>
+              <div className="cart-content-1">
+                {cartItems.map((produto, index) => (
+                  <div className="cart-item" key={index}>
+                    <img
+                      src={produto.url_image}
+                      alt={produto.nome_prop}
+                      className="cart-item-image-1"
+                      style={{
+                        width: "100px",
+                        height: "150px",
+                        objectFit: "cover",
+                        padding: "10px",
+                        borderRadius: "20px",
+                      }}
+                    />
 
-                <div className="cart-item-details">
-                  <div className="cart-item-name-1">
-                    {produto.nome_prodmale ||
-                      produto.nome_prop ||
-                      produto.nome_prodpromo ||
-                      produto.nome_prodfemme}
-                  </div>
-                  <div className="cart-item-price-1">R$ {produto.preço}</div>
-                  <input
-                    type="number"
-                    className="cart-quantity-1"
-                    value={produto.quantidade}
-                    onChange={(e) => {
-                      const updatedCartItems = [...cartItems];
-                      updatedCartItems[index].quantidade =
-                        parseInt(e.target.value, 10) || 0;
-                      setCartItems(updatedCartItems);
-                    }}
-                    style={{
-                      border: "1.2px solid #48a3a9",
-                      outlineColor: "#48a3a9",
-                      width: "2.6rem",
-                      textAlign: "center",
-                      fontSize: "0.8rem",
-                    }}
-                  />
-                </div>
-                <i
-                  className="bx bxs-trash-alt cart-remove cart-item-remove-1"
-                  onClick={() => handleRemoveFromCart(index)}
-                ></i>
+                    <div className="cart-item-details">
+                      <div className="cart-item-name-1">
+                        {produto.nome_prodmale ||
+                          produto.nome_prop ||
+                          produto.nome_prodpromo ||
+                          produto.nome_prodfemme}
+                      </div>
+                      <div className="cart-item-price-1">
+                        R$ {produto.preço}
+                      </div>
+                    <div className="amount-1">
+                <button
+                  // className="quantity-button"
+                  onClick={() => handleQuantityChange(index, produto.quantidade - 1)}
+                >
+                  -
+                </button>
+
+                <span className="cart-quantity">{produto.quantidade}</span>
+
+                <button
+                  // className="quantity-button"
+                  onClick={() => handleQuantityChange(index, produto.quantidade + 1)}
+                >
+                  +
+                </button>
               </div>
-            ))}
-          </div>
-          <div className="cart-box"></div>
-          <hr></hr>
-          <div className="total">
-            <div className="total-title">Total</div>
-            <div className="total-price">$ {total}</div>
-          </div>
 
-          <Link to="/checkout">
-            <button type="button" className="btn-buy">
-              COMPRAR AGORA
-            </button>
-          </Link>
 
-          <Link to="/cart">
-            <button type="button" className="btn-buy">
-              VER MEU CARRINHO
-            </button>
-          </Link>
-          <i
-            className="bx bx-x"
-            id="close-cart"
-            onClick={handleCloseCartClick}
-          ></i>
-        </div>
+
+                    </div>
+                    <i
+                      className="bx bxs-trash-alt cart-remove cart-item-remove-1 animation"
+                      onClick={() => handleRemoveFromCart(index)}
+                    ></i>
+                  </div>
+                ))}
+              </div>
+              <div className="cart-box"></div>
+              <hr></hr>
+              <div className="total">
+                <div className="total-title">Total</div>
+                <div className="total-price-cartl">R$ {total}</div>
+              </div>
+
+              <Link to="/checkout">
+                <button type="button" className="btn-1">
+                  COMPRAR AGORA
+                </button>
+              </Link>
+
+              <Link to="/cart">
+                <button type="button" className="btn-1">
+                  VER MEU CARRINHO
+                </button>
+              </Link>
+              <i
+                className="bx bx-x"
+                id="close-cart"
+                onClick={handleCloseCartClick}
+              ></i>
+            </div>
       </header>
 
       <div className="container-subheader-1">
@@ -421,64 +455,125 @@ const Sale = () => {
           <hr className="hr-sections"></hr>
         </div>
 
-      {isFilterActive && (
-          <div className="filter-container">
-          <div className="filter-content">
-            <p className="filter-title">FILTRAR</p>
-            <hr className="filter-hr" />
-    
-            <ul className="filter-list">
-              <li>
-                <label className="filter-label">CATEGORIAS:</label>
-                <label className="filter-label">PREÇO:</label>
-              </li>
-              <li className="filter-item">
-                <button
-                  className={`filter-option ${selectedCategory === "Todos" ? "active" : ""}`}
-                  onClick={() => setSelectedCategory("Todos")}
-                ><p>
-                  Todos</p>
-                </button>
-              </li>
-              {nomesProdutos.map((nome, index) => (
-                <li className="filter-item" key={index}>
-                  <button
-                    className={`filter-option ${selectedCategory === nome ? "active" : ""}`}
-                    onClick={() => setSelectedCategory(nome)}
-                  >
-                    {nome}
-                  </button>
-                </li>
-              ))}
-              <li>
-                <button className="close-button" onClick={handleFilterButtonClick}>
-                  X
-                </button>
-              </li>
-              <div className="filter-price-inputs">
-              <input
-              type="number"
-              placeholder="Mínimo"
-              value={minPrice}
-              onChange={(e) => setMinPrice(e.target.value)}
-             />
-              <input
-              type="number"
-              placeholder="Máximo"
-              value={maxPrice}
-              onChange={(e) => setMaxPrice(e.target.value)}
-             />
-           </div>
-          <button className="apply-filter-button" onClick={() => setApplyFilter(true)}>
-           Aplicar Filtro
-          </button>
-          <button className="reset-filter-button" onClick={handleResetFilter}>
-           Limpar Filtro
-          </button>
-            </ul>
-          </div>
-        </div>
-      )}
+        {isFilterActive && (
+                <div className="filter-container">
+                  <div className="filter-content">
+                    <p className="filter-title">FILTRAR</p>
+                    <hr className="filter-hr" />
+
+                    <ul className="filter-list">
+                      <li>
+                        <label className="filter-label">CATEGORIAS:</label>
+                      </li>
+                      <li className="filter-item">
+                        <button
+                          className={`filter-option ${
+                            selectedCategory === "Todos" ? "active" : ""
+                          }`}
+                          onClick={() => setSelectedCategory("Todos")}
+                        ><p className="filter-text-1">
+                          Todos</p>
+                        </button>
+                      </li>
+                      {nomesProdutos.map((nome, index) => (
+                        <li className="filter-item" key={index}>
+                          <button
+                            className={`filter-option ${
+                              selectedCategory === nome ? "active" : ""
+                            }`}
+                            onClick={() => setSelectedCategory(nome)}
+                          ><p className="filter-text-1">
+                            {nome} </p>
+                          </button>
+                        </li>
+                      ))}
+                      <li className="filter-item">
+  <button
+    className={`filter-option ${
+      isPriceFilterActive ? "active" : ""
+    }`}
+    onClick={() => setIsPriceFilterActive(!isPriceFilterActive)}
+  ><p className="filter-text-1">
+    Preço </p>
+  </button>
+</li>
+
+{isPriceFilterActive && (
+  <li>
+    <div className="filter-price-inputs">
+      <input
+        className="input-filter-price"
+        type="number"
+        placeholder="Mínimo"
+        value={minPrice}
+        onChange={(e) => setMinPrice(e.target.value)}
+      />
+      <input
+        className="input-filter-price"
+        type="number"
+        placeholder="Máximo"
+        value={maxPrice}
+        onChange={(e) => setMaxPrice(e.target.value)}
+      />
+    </div>
+    <button
+      className="apply-filter-button"
+      onClick={handleApplyFilter}
+    ><p className="filter-text">
+      Salvar </p>
+    </button>
+    <button
+      className="reset-filter-button"
+      onClick={() => {
+        setMinPrice("");
+        setMaxPrice("");
+        setIsPriceFilterActive(false);
+      }}
+    ><p className="filter-text-2">
+      Limpar </p>
+    </button>
+  </li>
+)}
+
+
+{/* <li>
+<div className="filter-price-inputs">
+                       <input
+                       type="number"
+                       placeholder="Mínimo"
+                       value={minPrice}
+                       onChange={(e) => setMinPrice(e.target.value)}
+                       />
+                       <input
+                      type="number"
+                      placeholder="Máximo"
+                      value={maxPrice}
+                      onChange={(e) => setMaxPrice(e.target.value)}
+                       />
+                      </div>
+                      <button className="apply-filter-button" onClick={() => setApplyFilter(true)}>
+                       Aplicar Filtro
+                      </button>
+                      <button className="reset-filter-button" onClick={handleResetFilter}>
+                       Limpar Filtro
+                      </button>
+</li> */}
+                      <li>
+                        <button
+                          className="close-button"
+                          onClick={() => {
+                            setIsFilterActive(false);
+                            setIsPriceFilterActive(false);}}
+                          
+                        >
+                          X
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+               )}
+
 
       <div className="items-per-page">
         <label>Itens por página:</label>
@@ -561,7 +656,7 @@ const Sale = () => {
         {showNotification && (
           <div className={`notification ${isItemAdded ? "active" : ""}`}>
             <p className="not">Item adicionado ao carrinho!</p>
-            <Link to="/cart2" className="go-to-cart-button">
+            <Link to="/cart" className="go-to-cart-button">
               Ir para o Carrinho
             </Link>
           </div>

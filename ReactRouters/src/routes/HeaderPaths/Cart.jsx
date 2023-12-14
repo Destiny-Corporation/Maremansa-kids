@@ -78,16 +78,16 @@ const Cart = () => {
           </div>
         </div>
 
-        <div className="wishlist-content">
-          {isLoggedIn ? (
-            <div>
-              {cartItems.length > 0 ? (
-                cartItems.map((produto, index) => (
-                  <div className="wishlist-items">
+        <div className="wishlist-items,three-columns">
+          <div className="wishlist-content">
+            {isLoggedIn ? (
+              <div className="wishlist-items">
+                {cartItems.length > 0 ? (
+                  cartItems.map((produto, index) => (
                     <div className="wishlist-item" key={index}>
                       <div className="wish-content">
-                        <div className="cart-item-1" key={index}>
-                          <div className="cart-item-info">
+                        <div className="wish-item" key={index}>
+                          <div className="wish-item-info">
                             <div className="delivery-indicator">
                               Entrega {index + 1} de {cartItems.length}
                             </div>
@@ -95,36 +95,36 @@ const Cart = () => {
                               <img
                                 src={produto.url_image}
                                 alt={produto.nome_prop}
-                                className="cart-item-image"
+                                className="wish-item-image"
                               />
-                              <div className="cart-item-details-2">
-                                <div className="cart-item-name">
+                              <div className="wish-item-details">
+                                <div className="wish-item-name">
                                   {produto.nome_prodmale ||
                                     produto.nome_prop ||
                                     produto.nome_prodpromo ||
                                     produto.nome_prodfemme}
                                 </div>
-                                <div className="cart-item-price">
-                                  {" "}
-                                  VALOR: R$ {produto.preço}
+                                <div className="wish-item-price">
+                                  Valor: R$ {produto.preço}
                                 </div>
                                 <hr className="hpaths"></hr>
                                 <div className="cart-item-options">
                                   <div>
                                     <strong className="wish-det">
-                                      Cor: {selectedColor}{" "}
+                                      Cor: {produto.cor}{" "}
                                     </strong>
                                   </div>
                                   <div>
                                     <strong className="wish-det">
-                                      Tamanho: {selectedSize}{" "}
+                                      Tamanho: {produto.tamanho}{" "}
                                     </strong>
                                   </div>
                                   <div>
                                     <strong className="wish-det">
                                       Quantidade: {produto.quantidade}{" "}
                                     </strong>
-                                  </div>
+                                  </div>{" "}
+                                  <br></br>
                                   <i
                                     className="bx bxs-trash-alt cart-remove cart-item-remove-2 animation"
                                     onClick={() => handleRemoveFromCart(index)}
@@ -136,41 +136,44 @@ const Cart = () => {
                         </div>
                       </div>
                     </div>
+                  ))
+                ) : (
+                  <div className="empty-cart">
+                    <img
+                      src="/assets/empty-cart.png"
+                      alt="Lista de Desejos Vazia"
+                    />
+                    <div className="effect">
+                      <Link to="/">
+                        <div className="button">
+                          <img
+                            src="/assets/shopping-button.png"
+                            alt="Ir às Compras"
+                          />
+                        </div>
+                      </Link>
+                    </div>
                   </div>
-                ))
-              ) : (
+                )}
+              </div>
+            ) : (
+              <div className="login-message">
                 <div className="empty-cart">
                   <img
-                    src="/assets/empty-cart.png"
-                    alt="Lista de Desejos Vazia"
+                    src="/assets/empty-cart-login.png"
+                    alt="Carrinho Vazio"
                   />
                   <div className="effect">
-                    <Link to="/">
+                    <Link to="/login">
                       <div className="button">
-                        <img
-                          src="/assets/shopping-button.png"
-                          alt="Ir às Compras"
-                        />
+                        <img src="/assets/login.png" alt="Botão de Compras" />
                       </div>
                     </Link>
                   </div>
                 </div>
-              )}
-            </div>
-          ) : (
-            <div className="login-message">
-              <div className="empty-cart">
-                <img src="/assets/empty-cart-login.png" alt="Carrinho Vazio" />
-                <div className="effect">
-                  <Link to="/login">
-                    <div className="button">
-                      <img src="/assets/login.png" alt="Botão de Compras" />
-                    </div>
-                  </Link>
-                </div>
               </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
 
         {cartItems.length > 0 && (

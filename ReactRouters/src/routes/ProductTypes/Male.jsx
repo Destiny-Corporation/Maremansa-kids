@@ -32,7 +32,14 @@ const Male = () => {
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [isFilterActive, setIsFilterActive] = useState(false);
   const [maxPrice, setMaxPrice] = useState(null);
+  const [overlayVisible, setOverlayVisible] = useState(false);
+  const [cartVisible, setCartVisible] = useState(false);
+  const [total, setTotal] = useState(0);
   const nomesProdutos = ["Conjunto", "Maiô", "Óculos", "Sunga", "Vestidinho", "Colete"];
+  const [cartItems, setCartItems] = useState(() => {
+    const savedCartItems = localStorage.getItem("cartItems");
+    return savedCartItems ? JSON.parse(savedCartItems) : [];
+  });
  
   useEffect(() => {
     const fetchProdutos = async () => {
@@ -58,6 +65,16 @@ const filteredProdutos = produtos.filter((produto) => {
   }
   return false;
 });
+
+const handleCartIconClick = () => {
+  setCartVisible(!cartVisible);
+  setOverlayVisible(!cartVisible);
+};
+
+const handleCloseCartClick = () => {
+  setCartVisible(false);
+  setOverlayVisible(false);
+};
 
 
 const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
@@ -105,42 +122,173 @@ const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
   return (
     <><div className="main">
       <header className="main-header">
-        <div className="logo-product">
-          <Link to="/">
-            <img src="/assets/logo.png" alt="Logo" />
-          </Link>
-        </div>
-        <div className="icons-about">
-          <Link to={userIconLink}>
-            <i
-              className="bx bx-user bt-header"
-              style={{ color: "#ffffff" }}
-            ></i>
-          </Link>
-          <Link to="/wishlist">
-            <i
-              className="bx bx-heart bt-header"
-              style={{ color: "#ffffff" }}
-            ></i>
-          </Link>
-          <Link to="/cart">
-            <i
-              className="bx bx-cart bt-header"
-              style={{ color: "#ffffff" }}
-            ></i>
-          </Link>
-        </div>
-      </header>
+              <div className="search-container-header">
+                <input
+                  type="text"
+                  className="search-bar-header"
+                  placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                <button className="search-button" type="submit">
+                  <i className="bx bx-search"></i>
+                </button>
+              </div>
+              <div className="header-logo-center">
+                <Link to="/">
+                  {" "}
+                  <img
+                    src="/assets/logo.png"
+                    alt="Logo"
+                    className="header-logo-center"
+                  />{" "}
+                </Link>
+              </div>
+              <div className="icons-w">
+                <Link to={userIconLink}>
+                  <i
+                    className="bx bx-user bt-header animation"
+                    style={{ color: "#ffffff" }}
+                  ></i>
+                </Link>
+                <Link to="/wishlist">
+                  <i
+                    className="bx bx-heart bt-header animation"
+                    style={{ color: "#ffffff" }}
+                  ></i>
+                </Link>
 
+                <i
+                  className="bx bx-cart bt-header animation"
+                  style={{ color: "#ffffff" }}
+                  id="cart-icon"
+                  onClick={handleCartIconClick}
+                ></i>
+              </div>
+
+              <div
+                className={`overlay ${overlayVisible ? "active" : ""}`}
+                onClick={handleCloseCartClick}
+              ></div>
+              <div className={`cart ${cartVisible ? "active" : ""}`}>
+              <h2 className="cart-title-1">MEU CARRINHO</h2>
+              <div className="cart-content-1">
+                {cartItems.map((produto, index) => (
+                  <div className="cart-item" key={index}>
+                    <img
+                      src={produto.url_image}
+                      alt={produto.nome_prop}
+                      className="cart-item-image-1"
+                      style={{
+                        width: "100px",
+                        height: "150px",
+                        objectFit: "cover",
+                        padding: "10px",
+                        borderRadius: "20px",
+                      }}
+                    />
+
+                    <div className="cart-item-details">
+                      <div className="cart-item-name-1">
+                        {produto.nome_prodmale ||
+                          produto.nome_prop ||
+                          produto.nome_prodpromo ||
+                          produto.nome_prodfemme}
+                      </div>
+                      <div className="cart-item-price-1">
+                        R$ {produto.preço}
+                      </div>
+                    <div className="amount-1">
+                <button
+                  // className="quantity-button"
+                  onClick={() => handleQuantityChange(index, produto.quantidade - 1)}
+                >
+                  -
+                </button>
+
+                <span className="cart-quantity">{produto.quantidade}</span>
+
+                <button
+                  // className="quantity-button"
+                  onClick={() => handleQuantityChange(index, produto.quantidade + 1)}
+                >
+                  +
+                </button>
+              </div>
+
+
+
+                    </div>
+                    <i
+                      className="bx bxs-trash-alt cart-remove cart-item-remove-1 animation"
+                      onClick={() => handleRemoveFromCart(index)}
+                    ></i>
+                  </div>
+                ))}
+              </div>
+              <div className="cart-box"></div>
+              <hr></hr>
+              <div className="total">
+                <div className="total-title">Total</div>
+                <div className="total-price-cartl">R$ {total}</div>
+              </div>
+
+              <Link to="/checkout">
+                <button type="button" className="btn-1">
+                  COMPRAR AGORA
+                </button>
+              </Link>
+
+              <Link to="/cart">
+                <button type="button" className="btn-1">
+                  VER MEU CARRINHO
+                </button>
+              </Link>
+              <i
+                className="bx bx-x"
+                id="close-cart"
+                onClick={handleCloseCartClick}
+              ></i>
+            </div>
+            </header>
+
+            <div className="container-subheader-1">
+        <div className="container-menu-buttons-1">
+          <div className="button-menu-1">
+            <Link to="/sale">
+              <h6>PROMOÇÕES</h6>
+            </Link>
+          </div>
+
+          <div className="button-menu-1">
+            <Link to="/female">
+              <h6>FEMININO</h6>
+            </Link>
+          </div>
+
+          <div className="button-menu-1">
+            <Link to="/male">
+              <h6>MASCULINO</h6>
+            </Link>
+          </div>
+
+          <div className="button-menu-1">
+            <Link to="/props">
+              <h6>ACESSÓRIOS</h6>
+            </Link>
+          </div>
+        </div>
+      </div>
+      
       <div className="title-section">
         <h1 className="general-title">MASCULINO</h1>
-        <button class="filter" onClick={handleFilterButtonClick}>
+        {/* <button class="filter" onClick={handleFilterButtonClick}>
             <img
               src="/assets/filter.png"
               alt="filtro"
               className="button-image"
             />
-          </button>
+          </button> */}
         <hr className="hr-sections"></hr>
 
         <div className="container-female">

@@ -76,6 +76,7 @@ const Wishlist = () => {
         </div>
       </div>
 
+      <div className="wishlist-items,three-columns">
       <div className="wishlist-content">
         {isLoggedIn ? (
           <div className="wishlist-items">
@@ -162,6 +163,7 @@ const Wishlist = () => {
           </div>
         )}
 
+      </div>
       </div>
       </div>
 

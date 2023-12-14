@@ -7,6 +7,7 @@ import { getFirestore, collection, doc, getDocs } from "firebase/firestore";
 import ReactPaginate from "react-paginate";
 import { useNavigate } from "react-router-dom";
 import debounce from 'debounce';
+import { signOut } from 'firebase/auth';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import MusicPlayer from '../routes/MusicPlayer.jsx';
 
@@ -51,6 +52,8 @@ const Home = () => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
     });
+
+    
 
     // Certifique-se de limpar o listener quando o componente for desmontado
     return () => unsubscribe();
@@ -238,12 +241,32 @@ const Home = () => {
     setCurrentPage(selected);
   };
 
+  const logout = () => {
+    signOut(auth)
+      .then(() => {
+        // Limpa o usuário do estado e do armazenamento local
+        setUser(null);
+        localStorage.removeItem("user");
+
+        // Redirecione para a página de login ou qualquer outra página desejada
+        window.location.href = "/login"; // Por exemplo, redirecione para a página de login
+      })
+      .catch((error) => {
+        console.error("Erro ao fazer logout:", error);
+      });
+  };
+
+
 
 
   const startIndex = currentPage * productsPerPage;
   const endIndex = startIndex + productsPerPage;
   const displayedProducts = produtos.slice(startIndex, endIndex);
   const userIconLink = isLoggedIn ? "/requests" : "/login";
+  if (localStorage.getItem("user") !== null) {
+    localStorage.setItem("loggedIn", "true");
+    isLoggedIn = true;
+  }
   const [isSlideAnimationActive, setIsSlideAnimationActive] = useState(false);
 
   return (
@@ -301,57 +324,79 @@ const Home = () => {
         <Link to="/login"><p className="home-t">Bem vindo!<br></br>Entre ou cadastre-se</p></Link>
         <div className="icons-home">
 
-          <Link>
-            <i
-              className="bx bx-user bt-header animation"
-              style={{ color: " #48A3A9" }}
-              onClick={handleUserIconClick}
-            ></i></Link>
-            <div
-              className={`overlay ${overlayVisible ? "active" : ""}`}
-              onClick={handleCloseUserClick}
-            ></div>
-            <div className={`user ${userVisible ? "active" : ""}`}>
-            <div className="cart-content-1">
-      {user ? (
-        <h3 className="user-title-1">Olá, {user.email.split('@')[0]}</h3>
-      ) : (
-        <h3 className="user-title-1">Olá, usuário</h3>
-      )}
+        <Link>
+  {user ? (
+    <i
+      className="bx bx-user bt-header animation"
+      style={{ color: " #48A3A9" }}
+      onClick={handleUserIconClick}
+    ></i>
+  ) : (
+    <Link to="/login">
+      <i className="bx bx-user bt-header animation" style={{ color: " #48A3A9" }}></i>
+    </Link>
+  )}
+</Link>
+<div
+  className={`overlay ${overlayVisible && user ? "active" : ""}`}
+  onClick={handleCloseUserClick}
+></div>
+<div className={`user ${userVisible && user ? "active" : ""}`}>
+  {user && (
+    <div className="profile-content">
+      <Link to={userIconLink}>
+        <i className="bx bx-user profile-icon animation" style={{ color: "#48A3A9" }}></i>
+      </Link>
+      <div className="cart-content-1">
+        <h3 className="profile-title">Olá, {user.email.split('@')[0]}</h3>
+      </div>
+      <Link to={userIconLink}>
+        <button type="button" className="btn-profile">
+          MEUS PEDIDOS
+        </button>
+      </Link>
+      <Link to="/wishlist">
+        <button type="button" className="btn-profile">
+          MINHA LISTA DE DESEJOS
+        </button>
+      </Link>
+
+
+      <Link to="/cart">
+        <button type="button" className="btn-profile">
+          MEU CARRINHO DE COMPRAS
+        </button>
+      </Link>
+
+      <div className="profile-btns">
+        <button
+          className="logout-link"
+          onClick={logout}
+          style={{
+            color: '#267777',
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+          }}>
+          <i className='bx bx-log-out animation' style={{ fontSize: '18px' }}></i>
+        </button>
+        <button
+          className="logout-link"
+          onClick={logout}
+          style={{
+            color: '#267777',
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+          }}>
+          <p className="logout-profile animation">Sair</p>
+        </button>
+      </div>
+      <i className="bx bx-x" id="close-user" onClick={handleCloseUserClick}></i>
     </div>
+  )}
+</div>
 
-            <Link to={userIconLink}>
-              <i
-                className="bx bx-user bt-header animation"
-                style={{ color: "#48A3A9" }}>
-              </i> 
-              </Link>
-
-              <Link to="/Requests2">
-                <button type="button" className="btn-buy">
-                  MEUS PEDIDOS
-                </button>
-              </Link>
-
-              <Link to="/Wishlist">
-                <button type="button" className="btn-buy">
-                  LISTA DE DESJOS
-                </button>
-              </Link>
-
-              <Link to="/cart2">
-                <button type="button" className="btn-buy">
-                  VER MEU CARRINHO
-                </button>
-              </Link>
-
-              
-              <i
-                className="bx bx-x"
-                id="close-user"
-                onClick={handleCloseUserClick}
-              ></i>
-            </div>
 
             <Link to="/wishlist">
               <i
@@ -370,6 +415,7 @@ const Home = () => {
               className={`overlay ${overlayVisible ? "active" : ""}`}
               onClick={handleCloseCartClick}
             ></div>
+            
             <div className={`cart ${cartVisible ? "active" : ""}`}>
               <h2 className="cart-title-1">MEU CARRINHO</h2>
               <div className="cart-content-1">
@@ -627,7 +673,7 @@ const Home = () => {
   {showNotification && (
     <div className={`notification ${isItemAdded ? "active" : ""}`}>
       <p className="not">Item adicionado ao carrinho!</p>
-      <Link to="/cart2" className="go-to-cart-button">
+      <Link to="/cart" className="go-to-cart-button">
         Ir para o Carrinho
       </Link>
     </div>
@@ -719,4 +765,5 @@ const Home = () => {
     </>
   );
 };
+
 export default Home;

@@ -209,7 +209,7 @@
   font-family: "Stylish", sans-serif;
   font-size: 17px;
   opacity: 0;
-  animation: fadeInOut 3s ease-in-out forwards;
+  animation: fadeInOut 4s ease-in-out forwards;
 }
 
 .not {
@@ -496,12 +496,15 @@
   display: grid;
   row-gap: 0.5rem;
   color: #48a3a9;
+  margin-left: 70px;
 }
 
 .cart-item-remove-1 {
-  font-size: 18px;
+  font-size: 16px !important;
   color: #48a3a9;
   cursor: pointer;
+  margin-left: 140px;
+
 }
 
 .user {
