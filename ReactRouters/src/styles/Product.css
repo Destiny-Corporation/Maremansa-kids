@@ -197,10 +197,25 @@
   color: #3dafb37a;
 }
 
+#selected-quantity {
+  text-transform: uppercase;
+  font-weight: bolder;
+  font-size: 9px;
+  letter-spacing: 2px;
+}
+
+#selected-size{
+  text-transform: uppercase;
+  font-weight: bolder;
+  font-size: 9px;
+  letter-spacing: 2px;
+}
+
 .text-prod {
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 2px;
+  margin-right: 5px;
 }
 
 .title-prod {
@@ -338,6 +353,7 @@
 
 .size-options {
   display: flex;
+  margin-left: 10px;
 }
 
 .size-option {
@@ -346,7 +362,7 @@
   cursor: pointer;
   transition: background-color 0.3s;
   border-radius: 5px;
-  height: 30px;
+  height: 10px;
   width: 28px;
   font-size: 14px;
   font-family: "Stylish", sans-serif;

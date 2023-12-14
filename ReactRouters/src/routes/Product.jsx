@@ -654,13 +654,14 @@ const Cart = () => {
                             key={color}
                             className="color-button"
                             style={{
+                              width: "22px",
                               backgroundColor: color,
                               padding: "18px",
                               cursor: "pointer",
                               borderRadius: "10px",
                               border:
                                 selectedColor === color
-                                  ? "2px solid #000"
+                                  ? "2px solid #48a3a9"
                                   : "none",
                             }}
                             onClick={() => selectColor(color)}
