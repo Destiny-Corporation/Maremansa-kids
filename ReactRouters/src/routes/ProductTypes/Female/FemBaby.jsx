@@ -57,12 +57,17 @@ const FemBaby = () => {
     }, 2000);
   };
 
+
+  const [isPriceFilterActive, setIsPriceFilterActive] = useState(false);
   const [produtos, setProdutos] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [isFilterActive, setIsFilterActive] = useState(false);
-  const [maxPrice, setMaxPrice] = useState(null);
+  const [minPrice, setMinPrice] = useState(localStorage.getItem('minPrice') || '');
+  const [maxPrice, setMaxPrice] = useState(localStorage.getItem('maxPrice') || '');
+  const [applyFilter, setApplyFilter] = useState(localStorage.getItem('applyFilter') === 'true' || false); 
+
   const nomesProdutos = [
     "Biquíni",
     "Maiô",
@@ -103,8 +108,6 @@ const FemBaby = () => {
     setCartVisible(!cartVisible);
     setOverlayVisible(!cartVisible);
   };
-
-  
 
   const handleCloseCartClick = () => {
     setCartVisible(false);
@@ -186,21 +189,56 @@ const FemBaby = () => {
     fetchProdutos(); // Don't forget to invoke the function
   }, []); // Make sure to provide an empty dependency array to run the effect only once
   
+  const [filterParam, setFilterParam] = useState("All");
 
   const handleFilterChange = (e) => {
     setFilterParam(e.target.value);
   };
 
+  const handleFilterButtonClick = () => {
+    setIsFilterActive(!isFilterActive);
+    setIsPriceFilterActive(!isPriceFilterActive); 
+    setSelectedCategory("Todos");
+    setMinPrice("");
+    setMaxPrice("");
+    setApplyFilter(false);
+  };
+  
+  
+  const handleApplyFilter = () => {
+    setApplyFilter(true);
+    localStorage.setItem('minPrice', minPrice);
+    localStorage.setItem('maxPrice', maxPrice);
+    localStorage.setItem('applyFilter', 'true');
+  };
+  
+  const handleResetFilter = () => {
+    setMinPrice('');
+    setMaxPrice('');
+    setApplyFilter(false);
+    localStorage.removeItem('minPrice');
+    localStorage.removeItem('maxPrice');
+    localStorage.removeItem('applyFilter');
+  };
+  
+
   const filteredProdutos = produtos.filter((produto) => {
-    if (
-      (selectedCategory === "Todos" ||
-        produto.nome_prodfemme.toLowerCase().includes(selectedCategory.toLowerCase())) &&
-      produto.nome_prodfemme.toLowerCase().includes(searchTerm.toLowerCase())
-    ) {
-      return true;
-    }
-    return false;
+    const categoryMatch =
+      selectedCategory === "Todos" ||
+      produto.nome_prodfemme.toLowerCase().includes(selectedCategory.toLowerCase());
+  
+    const searchMatch = produto.nome_prodfemme
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+  
+    const priceMatch =
+      (!isPriceFilterActive ||
+        (minPrice === "" || parseFloat(produto.preço_atacado) >= parseFloat(minPrice)) &&
+        (maxPrice === "" || parseFloat(produto.preço_atacado) <= parseFloat(maxPrice)));
+  
+    return categoryMatch && searchMatch && (applyFilter ? priceMatch : true);
   });
+  
 
   const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
     if (isFilterActive && maxPrice !== null) {
@@ -242,11 +280,19 @@ const currentPageProdutos = filteredProdutosWithPrice.slice(
 
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected);
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // Role a página para o topo ao trocar de página
   };
-  const handleFilterButtonClick = () => {
-    setIsFilterActive(!isFilterActive);
-    setMaxPrice("");
-  };
+
+  useEffect(() => {
+    // Configura a manipulação do DOM após o componente ter sido montado
+    setIsComponentReady(true);
+
+    // Limpa a manipulação do DOM quando o componente for desmontado
+    return () => {
+      setIsComponentReady(false);
+    };
+  }, []);
+ 
   return (
     <>
      {loading ? ( 
@@ -451,15 +497,72 @@ const currentPageProdutos = filteredProdutosWithPrice.slice(
                   </button>
                 </li>
               ))}
-              <li>
-                <button className="close-button" onClick={handleFilterButtonClick}>
-                  X
-                </button>
-              </li>
-            </ul>
-          </div>
-        </div>
-        )}
+             <li className="filter-item">
+              
+             <button
+    className={`filter-option ${
+      isPriceFilterActive ? "active" : ""
+    }`}
+    onClick={() => setIsPriceFilterActive(!isPriceFilterActive)}
+  ><p className="filter-text-1">
+    Preço </p>
+  </button>
+</li>
+
+{isPriceFilterActive && (
+  <li>
+    <div className="filter-price-inputs">
+      <input
+        className="input-filter-price"
+        type="number"
+        placeholder="Mínimo"
+        value={minPrice}
+        onChange={(e) => setMinPrice(e.target.value)}
+      />
+      <input
+        className="input-filter-price"
+        type="number"
+        placeholder="Máximo"
+        value={maxPrice}
+        onChange={(e) => setMaxPrice(e.target.value)}
+      />
+    </div>
+    <button
+      className="apply-filter-button"
+      onClick={handleApplyFilter}
+    ><p className="filter-text">
+      Salvar </p>
+    </button>
+    <button
+      className="reset-filter-button"
+      onClick={() => {
+        setMinPrice("");
+        setMaxPrice("");
+        setIsPriceFilterActive(false);
+      }}
+    ><p className="filter-text-2">
+      Limpar </p>
+    </button>
+  </li>
+)}
+
+
+<li>
+                        <button
+                          className="close-button"
+                          onClick={() => {
+                            setIsFilterActive(false);
+                            setIsPriceFilterActive(false);}}
+                          
+                        >
+                          X
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+               )}
+
 
         <div className="items-per-page">
           <label>Itens por página:</label>
