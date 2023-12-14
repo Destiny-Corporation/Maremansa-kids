@@ -47,6 +47,7 @@ const Sale = () => {
     }, 2000);
   };
 
+  const [isPriceFilterActive, setIsPriceFilterActive] = useState(false);
   const [produtos, setProdutos] = useState([]);
   const [overlayVisible, setOverlayVisible] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
@@ -183,6 +184,33 @@ const Sale = () => {
     setFilterParam(e.target.value);
   };
 
+  const handleFilterButtonClick = () => {
+    setIsFilterActive(!isFilterActive);
+    setIsPriceFilterActive(!isPriceFilterActive); 
+    setSelectedCategory("Todos");
+    setMinPrice("");
+    setMaxPrice("");
+    setApplyFilter(false);
+  };
+  
+  
+  const handleApplyFilter = () => {
+    setApplyFilter(true);
+    localStorage.setItem('minPrice', minPrice);
+    localStorage.setItem('maxPrice', maxPrice);
+    localStorage.setItem('applyFilter', 'true');
+  };
+  
+  const handleResetFilter = () => {
+    setMinPrice('');
+    setMaxPrice('');
+    setApplyFilter(false);
+    localStorage.removeItem('minPrice');
+    localStorage.removeItem('maxPrice');
+    localStorage.removeItem('applyFilter');
+  };
+  
+
   const filteredProdutos = produtos.filter((produto) => {
   const categoryMatch =
     selectedCategory === "Todos" ||
@@ -224,26 +252,15 @@ const Sale = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' }); // Role a página para o topo ao trocar de página
   };
 
-  const handleFilterButtonClick = () => {
-    setIsFilterActive(!isFilterActive);
-    handleResetFilter();
-  };
-  
-  const handleApplyFilter = () => {
-  setApplyFilter(true);
-  localStorage.setItem('minPrice', minPrice);
-  localStorage.setItem('maxPrice', maxPrice);
-  localStorage.setItem('applyFilter', 'true');
-};
+  useEffect(() => {
+    // Configura a manipulação do DOM após o componente ter sido montado
+    setIsComponentReady(true);
 
-  const handleResetFilter = () => {
-  setMinPrice('');
-  setMaxPrice('');
-  setApplyFilter(false);
-  localStorage.removeItem('minPrice');
-  localStorage.removeItem('maxPrice');
-  localStorage.removeItem('applyFilter');
-};
+    // Limpa a manipulação do DOM quando o componente for desmontado
+    return () => {
+      setIsComponentReady(false);
+    };
+  }, []);
 
   return (
     <>
@@ -421,64 +438,125 @@ const Sale = () => {
           <hr className="hr-sections"></hr>
         </div>
 
-      {isFilterActive && (
-          <div className="filter-container">
-          <div className="filter-content">
-            <p className="filter-title">FILTRAR</p>
-            <hr className="filter-hr" />
-    
-            <ul className="filter-list">
-              <li>
-                <label className="filter-label">CATEGORIAS:</label>
-                <label className="filter-label">PREÇO:</label>
-              </li>
-              <li className="filter-item">
-                <button
-                  className={`filter-option ${selectedCategory === "Todos" ? "active" : ""}`}
-                  onClick={() => setSelectedCategory("Todos")}
-                ><p>
-                  Todos</p>
-                </button>
-              </li>
-              {nomesProdutos.map((nome, index) => (
-                <li className="filter-item" key={index}>
-                  <button
-                    className={`filter-option ${selectedCategory === nome ? "active" : ""}`}
-                    onClick={() => setSelectedCategory(nome)}
-                  >
-                    {nome}
-                  </button>
-                </li>
-              ))}
-              <li>
-                <button className="close-button" onClick={handleFilterButtonClick}>
-                  X
-                </button>
-              </li>
-              <div className="filter-price-inputs">
-              <input
-              type="number"
-              placeholder="Mínimo"
-              value={minPrice}
-              onChange={(e) => setMinPrice(e.target.value)}
-             />
-              <input
-              type="number"
-              placeholder="Máximo"
-              value={maxPrice}
-              onChange={(e) => setMaxPrice(e.target.value)}
-             />
-           </div>
-          <button className="apply-filter-button" onClick={() => setApplyFilter(true)}>
-           Aplicar Filtro
-          </button>
-          <button className="reset-filter-button" onClick={handleResetFilter}>
-           Limpar Filtro
-          </button>
-            </ul>
-          </div>
-        </div>
-      )}
+        {isFilterActive && (
+                <div className="filter-container">
+                  <div className="filter-content">
+                    <p className="filter-title">FILTRAR</p>
+                    <hr className="filter-hr" />
+
+                    <ul className="filter-list">
+                      <li>
+                        <label className="filter-label">CATEGORIAS:</label>
+                      </li>
+                      <li className="filter-item">
+                        <button
+                          className={`filter-option ${
+                            selectedCategory === "Todos" ? "active" : ""
+                          }`}
+                          onClick={() => setSelectedCategory("Todos")}
+                        ><p className="filter-text-1">
+                          Todos</p>
+                        </button>
+                      </li>
+                      {nomesProdutos.map((nome, index) => (
+                        <li className="filter-item" key={index}>
+                          <button
+                            className={`filter-option ${
+                              selectedCategory === nome ? "active" : ""
+                            }`}
+                            onClick={() => setSelectedCategory(nome)}
+                          ><p className="filter-text-1">
+                            {nome} </p>
+                          </button>
+                        </li>
+                      ))}
+                      <li className="filter-item">
+  <button
+    className={`filter-option ${
+      isPriceFilterActive ? "active" : ""
+    }`}
+    onClick={() => setIsPriceFilterActive(!isPriceFilterActive)}
+  ><p className="filter-text-1">
+    Preço </p>
+  </button>
+</li>
+
+{isPriceFilterActive && (
+  <li>
+    <div className="filter-price-inputs">
+      <input
+        className="input-filter-price"
+        type="number"
+        placeholder="Mínimo"
+        value={minPrice}
+        onChange={(e) => setMinPrice(e.target.value)}
+      />
+      <input
+        className="input-filter-price"
+        type="number"
+        placeholder="Máximo"
+        value={maxPrice}
+        onChange={(e) => setMaxPrice(e.target.value)}
+      />
+    </div>
+    <button
+      className="apply-filter-button"
+      onClick={handleApplyFilter}
+    ><p className="filter-text">
+      Salvar </p>
+    </button>
+    <button
+      className="reset-filter-button"
+      onClick={() => {
+        setMinPrice("");
+        setMaxPrice("");
+        setIsPriceFilterActive(false);
+      }}
+    ><p className="filter-text-2">
+      Limpar </p>
+    </button>
+  </li>
+)}
+
+
+{/* <li>
+<div className="filter-price-inputs">
+                       <input
+                       type="number"
+                       placeholder="Mínimo"
+                       value={minPrice}
+                       onChange={(e) => setMinPrice(e.target.value)}
+                       />
+                       <input
+                      type="number"
+                      placeholder="Máximo"
+                      value={maxPrice}
+                      onChange={(e) => setMaxPrice(e.target.value)}
+                       />
+                      </div>
+                      <button className="apply-filter-button" onClick={() => setApplyFilter(true)}>
+                       Aplicar Filtro
+                      </button>
+                      <button className="reset-filter-button" onClick={handleResetFilter}>
+                       Limpar Filtro
+                      </button>
+</li> */}
+                      <li>
+                        <button
+                          className="close-button"
+                          onClick={() => {
+                            setIsFilterActive(false);
+                            setIsPriceFilterActive(false);}}
+                          
+                        >
+                          X
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+               )}
+
 
       <div className="items-per-page">
         <label>Itens por página:</label>
