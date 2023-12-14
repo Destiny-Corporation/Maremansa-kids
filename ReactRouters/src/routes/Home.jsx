@@ -7,6 +7,7 @@ import { getFirestore, collection, doc, getDocs } from "firebase/firestore";
 import ReactPaginate from "react-paginate";
 import { useNavigate } from "react-router-dom";
 import debounce from 'debounce';
+import { signOut } from 'firebase/auth';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import MusicPlayer from '../routes/MusicPlayer.jsx';
 
@@ -51,6 +52,8 @@ const Home = () => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
     });
+
+    
 
     // Certifique-se de limpar o listener quando o componente for desmontado
     return () => unsubscribe();
@@ -321,83 +324,79 @@ const Home = () => {
         <Link to="/login"><p className="home-t">Bem vindo!<br></br>Entre ou cadastre-se</p></Link>
         <div className="icons-home">
 
-          <Link>
-            <i
-              className="bx bx-user bt-header animation"
-              style={{ color: " #48A3A9" }}
-              onClick={handleUserIconClick}
-            ></i></Link>
-            <div
-              className={`overlay ${overlayVisible ? "active" : ""}`}
-              onClick={handleCloseUserClick}
-            ></div>
-            <div className={`user ${userVisible ? "active" : ""}`}>
-
-            <Link to={userIconLink}>
-              <i
-                className="bx bx-user profile-icon animation"
-                style={{ color: "#48A3A9" }}>
-              </i> 
-              </Link>
-            <div className="cart-content-1">
-    
-      {user ? (
+        <Link>
+  {user ? (
+    <i
+      className="bx bx-user bt-header animation"
+      style={{ color: " #48A3A9" }}
+      onClick={handleUserIconClick}
+    ></i>
+  ) : (
+    <Link to="/login">
+      <i className="bx bx-user bt-header animation" style={{ color: " #48A3A9" }}></i>
+    </Link>
+  )}
+</Link>
+<div
+  className={`overlay ${overlayVisible && user ? "active" : ""}`}
+  onClick={handleCloseUserClick}
+></div>
+<div className={`user ${userVisible && user ? "active" : ""}`}>
+  {user && (
+    <div className="profile-content">
+      <Link to={userIconLink}>
+        <i className="bx bx-user profile-icon animation" style={{ color: "#48A3A9" }}></i>
+      </Link>
+      <div className="cart-content-1">
         <h3 className="profile-title">Olá, {user.email.split('@')[0]}</h3>
-      ) : (
-        <h3 className="profile-title">Olá, usuário</h3>
-      )}
+      </div>
+      <Link to={userIconLink}>
+        <button type="button" className="btn-profile">
+          MEUS PEDIDOS
+        </button>
+      </Link>
+      <Link to="/wishlist">
+        <button type="button" className="btn-profile">
+          MINHA LISTA DE DESEJOS
+        </button>
+      </Link>
+
+
+      <Link to="/cart">
+        <button type="button" className="btn-profile">
+          MEU CARRINHO DE COMPRAS
+        </button>
+      </Link>
+
+      <div className="profile-btns">
+        <button
+          className="logout-link"
+          onClick={logout}
+          style={{
+            color: '#267777',
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+          }}>
+          <i className='bx bx-log-out animation' style={{ fontSize: '18px' }}></i>
+        </button>
+        <button
+          className="logout-link"
+          onClick={logout}
+          style={{
+            color: '#267777',
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
+          }}>
+          <p className="logout-profile animation">Sair</p>
+        </button>
+      </div>
+      <i className="bx bx-x" id="close-user" onClick={handleCloseUserClick}></i>
     </div>
+  )}
+</div>
 
-
-              {/* <Link to={userIconLink}>
-                <button type="button" className="btn-profile">
-                  MEUS PEDIDOS
-                </button>
-              </Link> */}
-
-              <Link to="/wishlist">
-                <button type="button" className="btn-profile">
-                  MINHA LISTA DE DESJOS
-                </button>
-              </Link>
-
-              <Link to="/cart">
-                <button type="button" className="btn-profile">
-                 MEU CARRINHO DE COMPRAS
-                </button>
-              </Link>
-
-<div className="profile-btns">
-
-<button
-            className="logout-link"
-            onClick={logout}
-            style={{ 
-              color: '#267777',
-              background: 'none', 
-              border: 'none',
-              cursor: 'pointer', }}> 
-              
-        <i className='bx bx-log-out animation' style={{ fontSize: '18px' }}></i>
-          </button>
-              <button
-            className="logout-link"
-            onClick={logout}
-            style={{ 
-              color: '#267777',
-              background: 'none', 
-              border: 'none',
-              cursor: 'pointer', }}>
-                <p className="logout-profile animation">Sair</p>
-          </button></div>
-
-
-              <i
-                className="bx bx-x"
-                id="close-user"
-                onClick={handleCloseUserClick}
-              ></i>
-            </div>
 
             <Link to="/wishlist">
               <i
@@ -416,6 +415,7 @@ const Home = () => {
               className={`overlay ${overlayVisible ? "active" : ""}`}
               onClick={handleCloseCartClick}
             ></div>
+            
             <div className={`cart ${cartVisible ? "active" : ""}`}>
               <h2 className="cart-title-1">MEU CARRINHO</h2>
               <div className="cart-content-1">

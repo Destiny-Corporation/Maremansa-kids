@@ -29,6 +29,18 @@ export const storage = getStorage(app);
 export const firestore = getFirestore(app);
 
 const FemJuvenile = () => {
+  const handleQuantityChange = (index, newQuantity) => {
+    const updatedCartItems = [...cartItems];
+    updatedCartItems[index].quantidade = Math.max(0, newQuantity);
+  
+    // Remove item from the cart if the new quantity is zero
+    if (updatedCartItems[index].quantidade === 0) {
+      updatedCartItems.splice(index, 1);
+    }
+  
+    setCartItems(updatedCartItems);
+  };
+  
 
   const userIconLink = isLoggedIn ? "/requests" : "/login";
   if (localStorage.getItem("user") !== null) {
@@ -304,82 +316,86 @@ const FemJuvenile = () => {
           className={`overlay ${overlayVisible ? "active" : ""}`}
           onClick={handleCloseCartClick}
         ></div>
-        <div className={`cart ${cartVisible ? "active" : ""}`}>
-          <h2 className="cart-title-1">MEU CARRINHO</h2>
-          <div className="cart-content-1">
-            {cartItems.map((produto, index) => (
-              <div className="cart-item" key={index}>
-                <img
-                  src={produto.url_image}
-                  alt={produto.nome_prop}
-                  className="cart-item-image-1"
-                  style={{
-                    width: "100px",
-                    height: "100px",
-                    objectFit: "contain",
-                    padding: "10px",
-                    borderRadius: "60px",
-                  }}
-                />
+       <div className={`cart ${cartVisible ? "active" : ""}`}>
+              <h2 className="cart-title-1">MEU CARRINHO</h2>
+              <div className="cart-content-1">
+                {cartItems.map((produto, index) => (
+                  <div className="cart-item" key={index}>
+                    <img
+                      src={produto.url_image}
+                      alt={produto.nome_prop}
+                      className="cart-item-image-1"
+                      style={{
+                        width: "100px",
+                        height: "150px",
+                        objectFit: "cover",
+                        padding: "10px",
+                        borderRadius: "20px",
+                      }}
+                    />
 
-                <div className="cart-item-details">
-                  <div className="cart-item-name-1">
-                    {produto.nome_prodmale ||
-                      produto.nome_prop ||
-                      produto.nome_prodpromo ||
-                      produto.nome_prodfemme}
-                  </div>
-                  <div className="cart-item-price-1">R$ {produto.preço}</div>
-                  <input
-                    type="number"
-                    className="cart-quantity-1"
-                    value={produto.quantidade}
-                    onChange={(e) => {
-                      const updatedCartItems = [...cartItems];
-                      updatedCartItems[index].quantidade =
-                        parseInt(e.target.value, 10) || 0;
-                      setCartItems(updatedCartItems);
-                    }}
-                    style={{
-                      border: "1.2px solid #48a3a9",
-                      outlineColor: "#48a3a9",
-                      width: "2.6rem",
-                      textAlign: "center",
-                      fontSize: "0.8rem",
-                    }}
-                  />
-                </div>
-                <i
-                  className="bx bxs-trash-alt cart-remove cart-item-remove-1"
-                  onClick={() => handleRemoveFromCart(index)}
-                ></i>
+                    <div className="cart-item-details">
+                      <div className="cart-item-name-1">
+                        {produto.nome_prodmale ||
+                          produto.nome_prop ||
+                          produto.nome_prodpromo ||
+                          produto.nome_prodfemme}
+                      </div>
+                      <div className="cart-item-price-1">
+                        R$ {produto.preço}
+                      </div>
+                    <div className="amount-1">
+                <button
+                  // className="quantity-button"
+                  onClick={() => handleQuantityChange(index, produto.quantidade - 1)}
+                >
+                  -
+                </button>
+
+                <span className="cart-quantity">{produto.quantidade}</span>
+
+                <button
+                  // className="quantity-button"
+                  onClick={() => handleQuantityChange(index, produto.quantidade + 1)}
+                >
+                  +
+                </button>
               </div>
-            ))}
-          </div>
-          <div className="cart-box"></div>
-          <hr></hr>
-          <div className="total">
-            <div className="total-title">Total</div>
-            <div className="total-price">$ {total}</div>
-          </div>
 
-          <Link to="/checkout">
-            <button type="button" className="btn-buy">
-              COMPRAR AGORA
-            </button>
-          </Link>
 
-          <Link to="/cart">
-            <button type="button" className="btn-buy">
-              VER MEU CARRINHO
-            </button>
-          </Link>
-          <i
-            className="bx bx-x"
-            id="close-cart"
-            onClick={handleCloseCartClick}
-          ></i>
-        </div>
+
+                    </div>
+                    <i
+                      className="bx bxs-trash-alt cart-remove cart-item-remove-1 animation"
+                      onClick={() => handleRemoveFromCart(index)}
+                    ></i>
+                  </div>
+                ))}
+              </div>
+              <div className="cart-box"></div>
+              <hr></hr>
+              <div className="total">
+                <div className="total-title">Total</div>
+                <div className="total-price-cartl">R$ {total}</div>
+              </div>
+
+              <Link to="/checkout">
+                <button type="button" className="btn-1">
+                  COMPRAR AGORA
+                </button>
+              </Link>
+
+              <Link to="/cart">
+                <button type="button" className="btn-1">
+                  VER MEU CARRINHO
+                </button>
+              </Link>
+              <i
+                className="bx bx-x"
+                id="close-cart"
+                onClick={handleCloseCartClick}
+              ></i>
+            </div>
       </header>
 
       <div className="container-subheader-1">

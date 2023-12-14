@@ -76,57 +76,57 @@ const Cart = () => {
           </div>
         </div>
 
-    
-      <div className="wishlist-content">
+        <div className="wishlist-items,three-columns">
+        <div className="wishlist-content">
         {isLoggedIn ? (
-          <div>
+          <div className="wishlist-items">
             {cartItems.length > 0 ? (
               cartItems.map((produto, index) => (
-                <div className="wishlist-items">
                 <div className="wishlist-item" key={index}>
-              <div className="wish-content">
-              <div className="cart-item-1" key={index}>
-                <div className="cart-item-info">
-                  <div className="delivery-indicator">
-                    Entrega {index + 1} de {cartItems.length}
-                  </div>
-                  <div className="infos-prod">
-                  <img
-                    src={produto.url_image}
-                    alt={produto.nome_prop}
-                    className="cart-item-image"
-                  />
-                  <div className="cart-item-details-2">
-                    <div className="cart-item-name">
-                      {produto.nome_prodmale ||
-                        produto.nome_prop ||
-                        produto.nome_prodpromo ||
-                        produto.nome_prodfemme}
+                  <div className="wish-content">
+                    <div className="wish-item" key={index}>
+                      <div className="wish-item-info">
+                        <div className="delivery-indicator">
+                          Entrega {index + 1} de {cartItems.length}
+                        </div>
+                        <div className='infos-prod'>
+                        <img
+                          src={produto.url_image}
+                          alt={produto.nome_prop}
+                          className="wish-item-image"
+                        />
+                        <div className="wish-item-details">
+                        <div className="wish-item-name">
+                     {produto.nome_prodmale ||
+                      produto.nome_prop ||
+                      produto.nome_prodpromo ||
+                      produto.nome_prodfemme}
+                      </div>
+                          <div className="wish-item-price">
+                            Valor: R$ {produto.preço}
+                          </div>
+                          <hr className="hpaths"></hr>
+                         <div className="cart-item-options">
+                            <div>
+                              <strong className="wish-det">Cor: {produto.cor} </strong> 
+                            </div>
+                            <div>
+                              <strong className="wish-det">Tamanho: {produto.tamanho} </strong> 
+                            </div>
+                            <div>
+                              <strong className="wish-det">Quantidade: {produto.quantidade} </strong> 
+                            </div> <br></br>
+                            <i
+                          className="bx bxs-trash-alt cart-remove cart-item-remove-2 animation"
+                          onClick={() => handleRemoveFromCart(index)}
+                        ></i>
+                          </div> 
+                        </div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="cart-item-price"> VALOR: R$ {produto.preço}</div>
-                    <hr className="hpaths"></hr>
-                    <div className="cart-item-options">
-                      <div>
-                        <strong className="wish-det">Cor: {produto.cor} </strong> 
-                      </div>
-                      <div>
-                        <strong className="wish-det">Tamanho: {produto.tamanho} </strong> 
-                      </div>
-                      <div>
-                        <strong className="wish-det">Quantidade: {produto.quantidade} </strong> 
-                      </div>
-                      <i
-                    className="bx bxs-trash-alt cart-remove cart-item-remove-2 animation"
-                    onClick={() => handleRemoveFromCart(index)}
-                  ></i>
-                    </div>
-                  </div>
                   </div>
                 </div>
-              </div>
-              </div>
-              </div>
-              </div>
               ))
             ) : (
               <div className="empty-cart">
@@ -165,6 +165,7 @@ const Cart = () => {
             </div>
           </div>
         )}
+      </div>
       </div>
 
 
