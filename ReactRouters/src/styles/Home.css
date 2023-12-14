@@ -637,6 +637,10 @@ hr {
   font-size: 22px;
 }
 
+.profile-icon {
+  margin-top: 100px;
+}
+
 .btn-1 {
   background-color:  rgb(93, 171, 177);
   color: #ffffff;
@@ -647,4 +651,30 @@ hr {
 .btn-1 :hover {
   background-color: #dcebeb;
   color: #247479;
+}
+
+.btn-profile {
+  width: 300px;
+  letter-spacing: 2px;
+  border-radius: 10px;
+}
+
+.btn-profile:hover {
+  background: radial-gradient(circle, #48a3a9 0%, #24787e 100%);;
+}
+
+.profile-title {
+  color: #48A3A9;
+  letter-spacing: 2px;
+  font-size: 16px;
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+
+.logout-profile {
+  color:#48A3A9;
+  font-weight: 600;
+  font-size: 13px;
+  margin-left: -30px;
+  margin-top: -6px;
 }

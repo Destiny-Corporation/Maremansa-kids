@@ -238,12 +238,32 @@ const Home = () => {
     setCurrentPage(selected);
   };
 
+  const logout = () => {
+    signOut(auth)
+      .then(() => {
+        // Limpa o usuário do estado e do armazenamento local
+        setUser(null);
+        localStorage.removeItem("user");
+
+        // Redirecione para a página de login ou qualquer outra página desejada
+        window.location.href = "/login"; // Por exemplo, redirecione para a página de login
+      })
+      .catch((error) => {
+        console.error("Erro ao fazer logout:", error);
+      });
+  };
+
+
 
 
   const startIndex = currentPage * productsPerPage;
   const endIndex = startIndex + productsPerPage;
   const displayedProducts = produtos.slice(startIndex, endIndex);
   const userIconLink = isLoggedIn ? "/requests" : "/login";
+  if (localStorage.getItem("user") !== null) {
+    localStorage.setItem("loggedIn", "true");
+    isLoggedIn = true;
+  }
   const [isSlideAnimationActive, setIsSlideAnimationActive] = useState(false);
 
   return (
@@ -312,40 +332,66 @@ const Home = () => {
               onClick={handleCloseUserClick}
             ></div>
             <div className={`user ${userVisible ? "active" : ""}`}>
-            <div className="cart-content-1">
-      {user ? (
-        <h3 className="user-title-1">Olá, {user.email.split('@')[0]}</h3>
-      ) : (
-        <h3 className="user-title-1">Olá, usuário</h3>
-      )}
-    </div>
 
             <Link to={userIconLink}>
               <i
-                className="bx bx-user bt-header animation"
+                className="bx bx-user profile-icon animation"
                 style={{ color: "#48A3A9" }}>
               </i> 
               </Link>
+            <div className="cart-content-1">
+    
+      {user ? (
+        <h3 className="profile-title">Olá, {user.email.split('@')[0]}</h3>
+      ) : (
+        <h3 className="profile-title">Olá, usuário</h3>
+      )}
+    </div>
 
-              <Link to="/Requests2">
-                <button type="button" className="btn-buy">
+
+              {/* <Link to={userIconLink}>
+                <button type="button" className="btn-profile">
                   MEUS PEDIDOS
                 </button>
-              </Link>
+              </Link> */}
 
-              <Link to="/Wishlist">
-                <button type="button" className="btn-buy">
-                  LISTA DE DESJOS
+              <Link to="/wishlist">
+                <button type="button" className="btn-profile">
+                  MINHA LISTA DE DESJOS
                 </button>
               </Link>
 
-              <Link to="/cart2">
-                <button type="button" className="btn-buy">
-                  VER MEU CARRINHO
+              <Link to="/cart">
+                <button type="button" className="btn-profile">
+                 MEU CARRINHO DE COMPRAS
                 </button>
               </Link>
 
+<div className="profile-btns">
+
+<button
+            className="logout-link"
+            onClick={logout}
+            style={{ 
+              color: '#267777',
+              background: 'none', 
+              border: 'none',
+              cursor: 'pointer', }}> 
               
+        <i className='bx bx-log-out animation' style={{ fontSize: '18px' }}></i>
+          </button>
+              <button
+            className="logout-link"
+            onClick={logout}
+            style={{ 
+              color: '#267777',
+              background: 'none', 
+              border: 'none',
+              cursor: 'pointer', }}>
+                <p className="logout-profile animation">Sair</p>
+          </button></div>
+
+
               <i
                 className="bx bx-x"
                 id="close-user"
@@ -719,4 +765,5 @@ const Home = () => {
     </>
   );
 };
+
 export default Home;
