@@ -62,17 +62,20 @@ const Cart = () => {
   const [productData, setProductData] = useState({});
 
   const { collectionName, productName } = useParams();
+
   const selectColor = (color) => {
     setSelectedColor(color);
+    setIsAddToCartDisabled(!color || !selectedSize);
   };
 
+  const handleSizeSelect = (size) => {
+    setSelectedSize(size);
+    setIsAddToCartDisabled(!selectedColor || !size);
+  };
   const [selectedImage, setSelectedImage] = useState(
     productData ? productData.url_image : ""
   );
   const [isAddToCartDisabled, setIsAddToCartDisabled] = useState(true);
-  const handleSizeSelect = (size) => {
-    setSelectedSize(size);
-  };
   const [productRef, setProductRef] = useState(null);
   const [selectedQuantity, setSelectedQuantity] = useState(1);
   const [total, setTotal] = useState(0);
@@ -245,6 +248,7 @@ const Cart = () => {
       setSelectedQuantity(newQuantity);
     }
   };
+
   const handleAddToCart1 = () => {
     const data = {
       color: selectedColor,
@@ -578,7 +582,16 @@ const Cart = () => {
             <div className="left-side">
               <div className="items">
                 <div className="select-image">
-                  <img src={selectedImage} alt="Selected" />
+                  <img
+                    src={
+                      selectedImage !== ""
+                        ? selectedImage
+                        : productData
+                        ? productData.url_image
+                        : ""
+                    }
+                    alt="Select"
+                  />
                 </div>
               </div>
             </div>
@@ -703,7 +716,7 @@ const Cart = () => {
                   </div>
                 )}
 
-                <button className="buttons-cart">
+                <button className="buttons-cart" disabled={isAddToCartDisabled}>
                   <span>Comprar agora</span>
                 </button>
                 <button
@@ -712,6 +725,7 @@ const Cart = () => {
                     handleAddToCart(productData);
                     showAddedToCartNotification();
                   }}
+                  disabled={isAddToCartDisabled}
                 >
                   <i className="bx bx-cart bt-header"></i>
                   <span>Adicionar ao carrinho</span>
