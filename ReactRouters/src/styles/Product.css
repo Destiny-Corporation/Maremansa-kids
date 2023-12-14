@@ -310,6 +310,26 @@
   padding: 1px 1px;
 }
 
+.amount-1 {
+  font-family: "Stylish", sans-serif;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  border: 1px solid #48a3a9;
+  width: 70%;
+  height: 20px;
+  padding: 1px 1px;
+}
+
+.amount-1 span {
+  font-family: "Stylish", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  margin-left: -2px;
+  margin-right: 2px;
+}
+
 .amount span {
   font-family: "Stylish", sans-serif;
   font-weight: 600;
@@ -357,7 +377,7 @@
 }
 
 .selected-color-button {
-  border-color: #d811df;
+  border-color: #48a3a9;
 }
 
 
@@ -386,6 +406,20 @@
   height: 20px;
   font-size: 16px;
   font-family: 'Stylish', sans-serif;
+}
+
+.amount-1 button {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: none;
+  color: #48a3a9;
+  background-color: transparent;
+  width: fit-content;
+  height: 20px;
+  font-size: 16px;
+  font-family: 'Stylish', sans-serif;
+  margin-left: -4px;
 }
 
 .buttons-cart {

@@ -308,8 +308,12 @@ a {
 
 .total-price-cartl {
   font-family: "Stylish", sans-serif;
-}
+  text-align: right;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-right: 10px;
 
+}
 
 .home-t {
   color: #48a3a9;
@@ -631,4 +635,16 @@ hr {
 .bx-chat {
   color: white;
   font-size: 22px;
+}
+
+.btn-1 {
+  background-color:  rgb(93, 171, 177);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.btn-1 :hover {
+  background-color: #dcebeb;
+  color: #247479;
 }

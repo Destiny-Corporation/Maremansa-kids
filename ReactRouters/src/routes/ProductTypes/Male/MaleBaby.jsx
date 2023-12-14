@@ -228,9 +228,9 @@ const MaleBaby = () => {
     offset + itemsPerPage
   );
   const prevButtonClass =
-    currentPage === 0 ? "prevButton disabled" : "prevButton";
-  const nextButtonClass =
-    currentPage === pageCount - 1 ? "nextButton disabled" : "nextButton";
+  currentPage === 0 ? "prevButton disabled" : "prevButton";
+const nextButtonClass =
+  currentPage === pageCount - 1 ? "nextButton disabled" : "nextButton";
 
   const customButtonStyle = {
     padding: "10px 15px",
@@ -245,7 +245,9 @@ const MaleBaby = () => {
 
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected);
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // Role a página para o topo ao trocar de página
   };
+
   const handleFilterButtonClick = () => {
     setIsFilterActive(!isFilterActive);
     setMaxPrice("");
@@ -418,17 +420,6 @@ const MaleBaby = () => {
       </div>
 
       <div className="space">
-        <div className="search-container-about">
-          <input
-            type="text"
-            className="search-bar"
-            placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
-          />
-          <button className="search-button" type="submit">
-            <i className="bx bx-search"></i>
-          </button>
-        </div>
-
         <div className="title-section">
           <h1 className="general-title">MASCULINO | BABYS</h1>
           <button className="filter" onClick={handleFilterButtonClick}>
@@ -557,17 +548,17 @@ const MaleBaby = () => {
           previousLabel={<button className="btn-6">ANTERIOR</button>}
           nextLabel={<button className="btn-6">PRÓXIMO</button>}
           breakLabel={"..."}
-          pageCount={pageCount}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={5}
-          onPageChange={handlePageChange}
-          containerClassName={"pagination"}
-          subContainerClassName={"pages pagination"}
-          activeClassName={"active"}
-          previousClassName={prevButtonClass}
-          nextClassName={nextButtonClass}
-          pageClassName={"page-count"}
-          pageLinkClassName={"page-link"}
+                      pageCount={pageCount}
+                      marginPagesDisplayed={2}
+                      pageRangeDisplayed={5}
+                      onPageChange={handlePageChange}
+                      containerClassName={"pagination"}
+                      subContainerClassName={"pages pagination"}
+                      activeClassName={"active"}
+                      previousClassName={prevButtonClass}
+                      nextClassName={nextButtonClass}
+                      pageClassName={"page-count"}
+                      pageLinkClassName={"page-link"}
         />{" "}
       </div>
       </div>

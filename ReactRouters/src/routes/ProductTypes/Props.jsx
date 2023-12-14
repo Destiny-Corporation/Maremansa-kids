@@ -45,7 +45,7 @@ const Props = () => {
       setShowNotification2(false);
     }, 2000);
   };
-
+  const [isPriceFilterActive, setIsPriceFilterActive] = useState(false);
   const [produtos, setProdutos] = useState([]);
   const [overlayVisible, setOverlayVisible] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
@@ -171,23 +171,28 @@ const Props = () => {
 
   const [filterParam, setFilterParam] = useState("All");
 
-  const handleFilterChange = (e) => {
-    setFilterParam(e.target.value);
-  };
+const handleFilterChange = (e) => {
+  setFilterParam(e.target.value);
+};
 
-  const handleFilterButtonClick = () => {
-    setIsFilterActive(!isFilterActive);
-    handleResetFilter();
-  };
-  
-  const handleApplyFilter = () => {
+const handleFilterButtonClick = () => {
+  setIsFilterActive(!isFilterActive);
+  setIsPriceFilterActive(!isPriceFilterActive); 
+  setSelectedCategory("Todos");
+  setMinPrice("");
+  setMaxPrice("");
+  setApplyFilter(false);
+};
+
+
+const handleApplyFilter = () => {
   setApplyFilter(true);
   localStorage.setItem('minPrice', minPrice);
   localStorage.setItem('maxPrice', maxPrice);
   localStorage.setItem('applyFilter', 'true');
 };
 
-  const handleResetFilter = () => {
+const handleResetFilter = () => {
   setMinPrice('');
   setMaxPrice('');
   setApplyFilter(false);
@@ -196,22 +201,23 @@ const Props = () => {
   localStorage.removeItem('applyFilter');
 };
 
-  const filteredProdutos = produtos.filter((produto) => {
-    const categoryMatch =
-      selectedCategory === "Todos" ||
-      produto.nome_prop.toLowerCase().includes(selectedCategory.toLowerCase());
+const filteredProdutos = produtos.filter((produto) => {
+  const categoryMatch =
+    selectedCategory === "Todos" ||
+    produto.nome_prop.toLowerCase().includes(selectedCategory.toLowerCase());
 
-    const searchMatch = produto.nome_prop
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
+  const searchMatch = produto.nome_prop
+    .toLowerCase()
+    .includes(searchTerm.toLowerCase());
 
-    // Adicione aqui a lógica do filtro de preço se necessário
-    const priceMatch =
+  // Adicione aqui a lógica do filtro de preço se necessário
+  const priceMatch =
     (minPrice === "" || Number(produto.preço) >= Number(minPrice)) &&
     (maxPrice === "" || Number(produto.preço) <= Number(maxPrice));
 
   return categoryMatch && searchMatch && (applyFilter ? priceMatch : true);
-  });
+});
+
 
   const pageCount = Math.ceil(filteredProdutos.length / itemsPerPage);
   const offset = currentPage * itemsPerPage;
@@ -237,6 +243,7 @@ const Props = () => {
 
   const handlePageChange = ({ selected }) => {
     setCurrentPage(selected);
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // Role a página para o topo ao trocar de página
   };
 
   useEffect(() => {
@@ -461,8 +468,6 @@ const Props = () => {
                     <ul className="filter-list">
                       <li>
                         <label className="filter-label">CATEGORIAS:</label>
-                        <label className="filter-label">PREÇO:</label>
-
                       </li>
                       <li className="filter-item">
                         <button
@@ -470,8 +475,8 @@ const Props = () => {
                             selectedCategory === "Todos" ? "active" : ""
                           }`}
                           onClick={() => setSelectedCategory("Todos")}
-                        >
-                          Todos
+                        ><p className="filter-text-1">
+                          Todos</p>
                         </button>
                       </li>
                       {nomesProdutos.map((nome, index) => (
@@ -481,20 +486,62 @@ const Props = () => {
                               selectedCategory === nome ? "active" : ""
                             }`}
                             onClick={() => setSelectedCategory(nome)}
-                          >
-                            {nome}
+                          ><p className="filter-text-1">
+                            {nome} </p>
                           </button>
                         </li>
                       ))}
-                      <li>
-                        <button
-                          className="close-button"
-                          onClick={handleFilterButtonClick}
-                        >
-                          X
-                        </button>
-                      </li>
-                      <div className="filter-price-inputs">
+                      <li className="filter-item">
+  <button
+    className={`filter-option ${
+      isPriceFilterActive ? "active" : ""
+    }`}
+    onClick={() => setIsPriceFilterActive(!isPriceFilterActive)}
+  ><p className="filter-text-1">
+    Preço </p>
+  </button>
+</li>
+
+{isPriceFilterActive && (
+  <li>
+    <div className="filter-price-inputs">
+      <input
+        className="input-filter-price"
+        type="number"
+        placeholder="Mínimo"
+        value={minPrice}
+        onChange={(e) => setMinPrice(e.target.value)}
+      />
+      <input
+        className="input-filter-price"
+        type="number"
+        placeholder="Máximo"
+        value={maxPrice}
+        onChange={(e) => setMaxPrice(e.target.value)}
+      />
+    </div>
+    <button
+      className="apply-filter-button"
+      onClick={handleApplyFilter}
+    ><p className="filter-text">
+      Salvar </p>
+    </button>
+    <button
+      className="reset-filter-button"
+      onClick={() => {
+        setMinPrice("");
+        setMaxPrice("");
+        setIsPriceFilterActive(false);
+      }}
+    ><p className="filter-text-2">
+      Limpar </p>
+    </button>
+  </li>
+)}
+
+
+{/* <li>
+<div className="filter-price-inputs">
                        <input
                        type="number"
                        placeholder="Mínimo"
@@ -514,24 +561,23 @@ const Props = () => {
                       <button className="reset-filter-button" onClick={handleResetFilter}>
                        Limpar Filtro
                       </button>
+</li> */}
+                      <li>
+                        <button
+                          className="close-button"
+                          onClick={() => {
+                            setIsFilterActive(false);
+                            setIsPriceFilterActive(false);}}
+                          
+                        >
+                          X
+                        </button>
+                      </li>
                     </ul>
                   </div>
                 </div>
                )}
 
-              {/*<li className="price-filter">
-          <label>Preço até:</label>
-          <select
-            value={maxPrice}
-            onChange={(e) => setMaxPrice(parseFloat(e.target.value))}
-          >
-            <option value="">Selecione o preço</option>
-            <option value="50">Até 50.00</option>
-            <option value="100">Até 100.00</option>
-            <option value="200">Até 200.00</option>
-            Adicione mais opções conforme necessário 
-          </select>
-            </li>*/}
 
               <div className="items-per-page">
                 <label>Itens por página:</label>
@@ -546,7 +592,7 @@ const Props = () => {
               </div>
 
               {filteredProdutos.length === 0 ? (
-                <p className="no-results-message">Nenhum produto encontrado.</p>
+                <div className="error-filter-img"><img className="no-results-message" src="/assets/error-filter.png"></img></div>
               ) : (
                 <div className="test">
                   <div className="container-clothes">

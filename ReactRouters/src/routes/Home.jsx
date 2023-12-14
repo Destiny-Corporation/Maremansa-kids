@@ -24,7 +24,21 @@ export const app = initializeApp(firebaseConfig);
 export const storage = getStorage(app);
 export const firestore = getFirestore(app);
 
+
 const Home = () => {
+  const handleQuantityChange = (index, newQuantity) => {
+    const updatedCartItems = [...cartItems];
+    updatedCartItems[index].quantidade = Math.max(0, newQuantity);
+  
+    // Remove item from the cart if the new quantity is zero
+    if (updatedCartItems[index].quantidade === 0) {
+      updatedCartItems.splice(index, 1);
+    }
+  
+    setCartItems(updatedCartItems);
+  };
+  
+  
   
   if (localStorage.getItem("user") !== null) {
     localStorage.setItem("loggedIn", "true");
@@ -345,7 +359,7 @@ const Home = () => {
                         height: "150px",
                         objectFit: "cover",
                         padding: "10px",
-                        borderRadius: "30px",
+                        borderRadius: "20px",
                       }}
                     />
 
@@ -359,24 +373,26 @@ const Home = () => {
                       <div className="cart-item-price-1">
                         R$ {produto.preço}
                       </div>
-                      <input
-                        type="number"
-                        className="cart-quantity-1"
-                        value={produto.quantidade}
-                        onChange={(e) => {
-                          const updatedCartItems = [...cartItems];
-                          updatedCartItems[index].quantidade =
-                            parseInt(e.target.value, 10) || 0;
-                          setCartItems(updatedCartItems);
-                        }}
-                        style={{
-                          border: "1.2px solid #48a3a9",
-                          outlineColor: "#48a3a9",
-                          width: "2.6rem",
-                          textAlign: "center",
-                          fontSize: "0.8rem",
-                        }}
-                      />
+                    <div className="amount-1">
+                <button
+                  // className="quantity-button"
+                  onClick={() => handleQuantityChange(index, produto.quantidade - 1)}
+                >
+                  -
+                </button>
+
+                <span className="cart-quantity">{produto.quantidade}</span>
+
+                <button
+                  // className="quantity-button"
+                  onClick={() => handleQuantityChange(index, produto.quantidade + 1)}
+                >
+                  +
+                </button>
+              </div>
+
+
+
                     </div>
                     <i
                       className="bx bxs-trash-alt cart-remove cart-item-remove-1 animation"
@@ -389,17 +405,17 @@ const Home = () => {
               <hr></hr>
               <div className="total">
                 <div className="total-title">Total</div>
-                <div className="total-price-cartl">$ {total}</div>
+                <div className="total-price-cartl">R$ {total}</div>
               </div>
 
               <Link to="/checkout">
-                <button type="button" className="btn-buy">
+                <button type="button" className="btn-1">
                   COMPRAR AGORA
                 </button>
               </Link>
 
               <Link to="/cart">
-                <button type="button" className="btn-buy">
+                <button type="button" className="btn-1">
                   VER MEU CARRINHO
                 </button>
               </Link>

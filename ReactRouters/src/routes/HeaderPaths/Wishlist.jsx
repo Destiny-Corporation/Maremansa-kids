@@ -81,10 +81,9 @@ const Wishlist = () => {
 
       <div className="wishlist-content">
         {isLoggedIn ? (
-          <div>
+          <div className="wishlist-items">
             {favoriteItems.length > 0 ? (
               favoriteItems.map((produto, index) => (
-                <div className="wishlist-items">
                 <div className="wishlist-item" key={index}>
                   <div className="wish-content">
                     <div className="wish-item" key={index}>
@@ -129,7 +128,6 @@ const Wishlist = () => {
                       </div>
                     </div>
                   </div>
-                </div>
                 </div>
               ))
             ) : (
