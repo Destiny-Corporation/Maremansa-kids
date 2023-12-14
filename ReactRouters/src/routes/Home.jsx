@@ -4,13 +4,21 @@ import { Link } from "react-router-dom";
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import MusicPlayer from '..MusicPlayer.jsx';
+import MusicPlayer from '../routes/MusicPlayer.jsx';
 let isLoggedIn = false;
 import { getFirestore, collection, doc, getDocs } from "firebase/firestore";
 import ReactPaginate from "react-paginate";
 import { useNavigate } from "react-router-dom";
 import debounce from 'debounce';
 
+ReactDOM.render(
+  <React.StrictMode>
+    <MusicProvider>
+      <App />
+    </MusicProvider>
+  </React.StrictMode>,
+  document.getElementById('root')
+);
 
 const firebaseConfig = {
   apiKey: "AIzaSyDTKUI6nV-DZjIsUo1BMkjIUWOQbT9gU3Q",

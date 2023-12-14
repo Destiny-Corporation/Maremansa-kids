@@ -1,8 +1,9 @@
 // MusicPlayer.jsx
 import React, { useState } from 'react';
+import { MusicProvider } from "../routes/MusicContext.jsx";
 
 const MusicPlayer = () => {
-  const [isPlaying, setPlaying] = useState(false);
+  const [isPlaying, setPlaying] = useMusic();
 
   const togglePlay = () => {
     const audio = document.getElementById('myAudio');

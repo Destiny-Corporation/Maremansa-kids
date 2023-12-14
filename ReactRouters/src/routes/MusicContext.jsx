@@ -1,5 +1,5 @@
 // MusicContext.js
-import { createContext, useContext, useState } from 'react';
+import React, { createContext, useState, useContext } from 'react';
 
 const MusicContext = createContext();
 
@@ -7,25 +7,17 @@ export const MusicProvider = ({ children }) => {
   const [isPlaying, setPlaying] = useState(false);
 
   const togglePlay = () => {
-    setPlaying(prevState => !prevState);
-  };
-
-  const value = {
-    isPlaying,
-    togglePlay,
+    // Adicione lógica para tocar ou pausar a música aqui
+    setPlaying(!isPlaying);
   };
 
   return (
-    <MusicContext.Provider value={value}>
+    <MusicContext.Provider value={{ isPlaying, togglePlay }}>
       {children}
     </MusicContext.Provider>
   );
 };
 
 export const useMusic = () => {
-  const context = useContext(MusicContext);
-  if (!context) {
-    throw new Error('useMusic must be used within a MusicProvider');
-  }
-  return context;
+  return useContext(MusicContext);
 };

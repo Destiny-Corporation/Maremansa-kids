@@ -9,17 +9,6 @@
   text-decoration: none;
   list-style: none;
 }
-@import url("https://fonts.googleapis.com/css2?family=Stylish&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Stylish&display=swap");
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Montserrat", sans-serif;
-  text-decoration: none;
-  list-style: none;
-}
 
 .payment-container {
   display: flex;
