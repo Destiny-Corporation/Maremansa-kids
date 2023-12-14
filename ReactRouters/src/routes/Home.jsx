@@ -673,7 +673,7 @@ const Home = () => {
   {showNotification && (
     <div className={`notification ${isItemAdded ? "active" : ""}`}>
       <p className="not">Item adicionado ao carrinho!</p>
-      <Link to="/cart2" className="go-to-cart-button">
+      <Link to="/cart" className="go-to-cart-button">
         Ir para o Carrinho
       </Link>
     </div>
