@@ -28,6 +28,8 @@ const Cart = () => {
   const [isItemAdded, setIsItemAdded] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [showNotification2, setShowNotification2] = useState(false);
+  const [isColorSelected, setIsColorSelected] = useState(false);
+  const [isSizeSelected, setIsSizeSelected] = useState(false);
 
   const userIconLink = isLoggedIn ? "/requests" : "/login";
   if (localStorage.getItem("user") !== null) {
@@ -75,6 +77,7 @@ const Cart = () => {
   const [selectedImage, setSelectedImage] = useState(
     productData ? productData.url_image : ""
   );
+  const [selectedCartItem, setSelectedCartItem] = useState({});
   const [isAddToCartDisabled, setIsAddToCartDisabled] = useState(true);
   const [productRef, setProductRef] = useState(null);
   const [selectedQuantity, setSelectedQuantity] = useState(1);
@@ -133,6 +136,33 @@ const Cart = () => {
         { ...produto, quantidade: selectedQuantity },
       ]);
     }
+
+    const selectColor = (color) => {
+      setSelectedColor(color);
+      setIsColorSelected(true);
+      setIsAddToCartDisabled(!isColorSelected || !isSizeSelected);
+    };
+
+    const handleSizeSelect = (size) => {
+      setSelectedSize(size);
+      setIsSizeSelected(true);
+      setIsAddToCartDisabled(!isColorSelected || !isSizeSelected);
+    };
+
+    const handleAddToCart = (produto) => {
+      // Verifique se tanto a cor quanto o tamanho foram selecionados
+      if (isColorSelected && isSizeSelected) {
+        const newItem = {
+          nome_prop: productName,
+          cor: selectedColor,
+          tamanho: selectedSize,
+          quantidade: selectedQuantity,
+          preço: productData ? productData.preço : 0,
+          url_image: productData ? productData.url_image : "",
+        };
+        setCartItems([...cartItems, newItem]);
+      }
+    };
 
     // ... Lógica para adicionar o item ao carrinho
 
@@ -651,19 +681,21 @@ const Cart = () => {
                         ))}
                       </ul>
 
-                      <div id="selected-color">
-                        Cor selecionada:{" "}
-                        <div
-                          style={{
-                            width: "16px",
-                            height: "16px",
-                            borderRadius: "50%",
-                            backgroundColor: selectedColor,
-                            display: "inline-block",
-                            marginLeft: "8px",
-                          }}
-                        />
-                      </div>
+                      {isColorSelected && (
+                        <div id="selected-color">
+                          Cor selecionada:{" "}
+                          <div
+                            style={{
+                              width: "16px",
+                              height: "16px",
+                              borderRadius: "50%",
+                              backgroundColor: selectedColor,
+                              display: "inline-block",
+                              marginLeft: "8px",
+                            }}
+                          />
+                        </div>
+                      )}
                     </>
                   )}
 
@@ -725,7 +757,6 @@ const Cart = () => {
                     handleAddToCart(productData);
                     showAddedToCartNotification();
                   }}
-                  disabled={isAddToCartDisabled}
                 >
                   <i className="bx bx-cart bt-header"></i>
                   <span>Adicionar ao carrinho</span>
