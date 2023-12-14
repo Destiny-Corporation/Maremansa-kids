@@ -66,6 +66,9 @@ const FemChildren = () => {
   const nomesProdutos = [
     "Biquíni",
     "Maiô",
+    "Kimono",
+    "Blusa",
+    "Vestido"
   ];
   const [total, setTotal] = useState(0);
   const [cartItems, setCartItems] = useState(() => {
