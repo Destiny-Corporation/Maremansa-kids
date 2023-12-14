@@ -42,18 +42,15 @@ const FemBaby = () => {
   };
   
   const userIconLink = isLoggedIn ? "/requests" : "/login";
-
   if (localStorage.getItem("user") !== null) {
     localStorage.setItem("loggedIn", "true");
     isLoggedIn = true;
   }
-
   const [isItemAdded, setIsItemAdded] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [showNotification2, setShowNotification2] = useState(false);
-  const [overlayVisible, setOverlayVisible] = useState(false);
-  const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState("Todos");
+  const [loading, setLoading] = useState(true);
 
   const showAddedToCartNotification = () => {
     setShowNotification(true);
@@ -68,18 +65,16 @@ const FemBaby = () => {
       setShowNotification2(false);
     }, 2000);
   };
-
-
   const [isPriceFilterActive, setIsPriceFilterActive] = useState(false);
   const [produtos, setProdutos] = useState([]);
+  const [overlayVisible, setOverlayVisible] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [isFilterActive, setIsFilterActive] = useState(false);
   const [minPrice, setMinPrice] = useState(localStorage.getItem('minPrice') || '');
   const [maxPrice, setMaxPrice] = useState(localStorage.getItem('maxPrice') || '');
-  const [applyFilter, setApplyFilter] = useState(localStorage.getItem('applyFilter') === 'true' || false); 
-
+  const [applyFilter, setApplyFilter] = useState(localStorage.getItem('applyFilter') === 'true' || false);  
   const nomesProdutos = [
     "Biquíni",
     "Maiô",
@@ -101,7 +96,7 @@ const FemBaby = () => {
     const existingItemIndex = favoriteItems.findIndex(
       (item) => item.nome_prodfemme === produto.nome_prodfemme
     );
-  
+
     if (existingItemIndex === -1) {
       setFavoriteItems([...favoriteItems, { ...produto }]);
     }
@@ -109,12 +104,11 @@ const FemBaby = () => {
     setTimeout(() => {
       setIsItemAdded(false);
     }, 5000);
-  }; 
-  
+  };
+
   useEffect(() => {
     localStorage.setItem("favoriteItems", JSON.stringify(favoriteItems));
   }, [favoriteItems]);
-
 
   const handleCartIconClick = () => {
     setCartVisible(!cartVisible);
@@ -148,10 +142,6 @@ const FemBaby = () => {
       // Se o item não está no carrinho, adicione-o com quantidade 1
       setCartItems([...cartItems, { ...produto, quantidade: 1 }]);
     }
-
-    // ... Lógica para adicionar o item ao carrinho
-
-    // Após adicionar o item, exiba a mensagem e defina um temporizador para ocultá-la
     setIsItemAdded(true);
     setTimeout(() => {
       setIsItemAdded(false);
@@ -199,81 +189,64 @@ const FemBaby = () => {
     };
   
     fetchProdutos(); // Don't forget to invoke the function
-  }, []); // Make sure to provide an empty dependency array to run the effect only once
-  
+  }, []);
+
   const [filterParam, setFilterParam] = useState("All");
 
-  const handleFilterChange = (e) => {
-    setFilterParam(e.target.value);
-  };
+const handleFilterChange = (e) => {
+  setFilterParam(e.target.value);
+};
 
-  const handleFilterButtonClick = () => {
-    setIsFilterActive(!isFilterActive);
-    setIsPriceFilterActive(!isPriceFilterActive); 
-    setSelectedCategory("Todos");
-    setMinPrice("");
-    setMaxPrice("");
-    setApplyFilter(false);
-  };
-  
-  
-  const handleApplyFilter = () => {
-    setApplyFilter(true);
-    localStorage.setItem('minPrice', minPrice);
-    localStorage.setItem('maxPrice', maxPrice);
-    localStorage.setItem('applyFilter', 'true');
-  };
-  
-  const handleResetFilter = () => {
-    setMinPrice('');
-    setMaxPrice('');
-    setApplyFilter(false);
-    localStorage.removeItem('minPrice');
-    localStorage.removeItem('maxPrice');
-    localStorage.removeItem('applyFilter');
-  };
-  
+const handleFilterButtonClick = () => {
+  setIsFilterActive(!isFilterActive);
+  setIsPriceFilterActive(!isPriceFilterActive); 
+  setSelectedCategory("Todos");
+  setMinPrice("");
+  setMaxPrice("");
+  setApplyFilter(false);
+};
 
-  const filteredProdutos = produtos.filter((produto) => {
-    const categoryMatch =
-      selectedCategory === "Todos" ||
-      produto.nome_prodfemme.toLowerCase().includes(selectedCategory.toLowerCase());
-  
-    const searchMatch = produto.nome_prodfemme
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase());
-  
-    const priceMatch =
-      (!isPriceFilterActive ||
-        (minPrice === "" || parseFloat(produto.preço_atacado) >= parseFloat(minPrice)) &&
-        (maxPrice === "" || parseFloat(produto.preço_atacado) <= parseFloat(maxPrice)));
-  
-    return categoryMatch && searchMatch && (applyFilter ? priceMatch : true);
-  });
-  
 
-  const filteredProdutosWithPrice = filteredProdutos.filter((produto) => {
-    if (isFilterActive && maxPrice !== null) {
-      // Verifica se o preço está no formato correto (por exemplo, "R$ 50,00")
-      if (produto.preço_atacado && typeof produto.preço_atacado === "string") {
-        const precoNumerico = parseFloat(
-          produto.preço_atacado.replace("R$ ", "").replace(",", ".")
-        );
-        return precoNumerico <= maxPrice;
-      }
-    }
-    return true;
-  });
+const handleApplyFilter = () => {
+  setApplyFilter(true);
+  localStorage.setItem('minPrice', minPrice);
+  localStorage.setItem('maxPrice', maxPrice);
+  localStorage.setItem('applyFilter', 'true');
+};
 
-  
+const handleResetFilter = () => {
+  setMinPrice('');
+  setMaxPrice('');
+  setApplyFilter(false);
+  localStorage.removeItem('minPrice');
+  localStorage.removeItem('maxPrice');
+  localStorage.removeItem('applyFilter');
+};
+
+const filteredProdutos = produtos.filter((produto) => {
+  const categoryMatch =
+    selectedCategory === "Todos" ||
+    produto.nome_prodfemme.toLowerCase().includes(selectedCategory.toLowerCase());
+
+  const searchMatch = produto.nome_prodfemme
+    .toLowerCase()
+    .includes(searchTerm.toLowerCase());
+
+  // Adicione aqui a lógica do filtro de preço se necessário
+  const priceMatch =
+    (minPrice === "" || Number(produto.preço) >= Number(minPrice)) &&
+    (maxPrice === "" || Number(produto.preço) <= Number(maxPrice));
+
+  return categoryMatch && searchMatch && (applyFilter ? priceMatch : true);
+});
+
+
   const pageCount = Math.ceil(filteredProdutos.length / itemsPerPage);
-
   const offset = currentPage * itemsPerPage;
-const currentPageProdutos = filteredProdutosWithPrice.slice(
-  offset,
-  offset + itemsPerPage
-);
- 
+  const currentPageProdutos = filteredProdutos.slice(
+    offset,
+    offset + itemsPerPage
+  );
   const prevButtonClass =
     currentPage === 0 ? "prevButton disabled" : "prevButton";
   const nextButtonClass =
@@ -304,59 +277,64 @@ const currentPageProdutos = filteredProdutosWithPrice.slice(
       setIsComponentReady(false);
     };
   }, []);
- 
+
   return (
     <>
-     {loading ? ( 
+      {loading ? (
         <div className="loading-container">
-      <img src="/assets/espera.gif" alt="Carregando..." style={{ width: '130px', height: '130px' }}/>
-    </div>
+          <img
+            src="/assets/espera.gif"
+            alt="Carregando..."
+            style={{ width: "130px", height: "130px" }}
+          />
+        </div>
       ) : (
-        <div className="main">
-      <header className="main-header">
-      <div className="search-container-header">
-        <input
-          type="text"
-          className="search-bar-header"
-          placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <button className="search-button" type="submit">
-          <i className="bx bx-search"></i>
-        </button>
-        </div>
-        <div className="header-logo-center">
-          <Link to="/">
-            {" "}
-            <img
-              src="/assets/logo.png"
-              alt="Logo"
-              className="header-logo-center"
-            />{" "}
-          </Link>
-        </div>
-        <div className="icons-w">
-          <Link to={userIconLink}>
-            <i
-              className="bx bx-user bt-header animation"
-              style={{ color: "#ffffff" }}
-            ></i>
-          </Link>
-          <Link to="/wishlist">
-            <i
-              className="bx bx-heart bt-header animation"
-              style={{ color: "#ffffff" }}
-            ></i>
-          </Link>
+        <>
+          <div className="main">
+            <header className="main-header">
+              <div className="search-container-header">
+                <input
+                  type="text"
+                  className="search-bar-header"
+                  placeholder="O QUE VOCÊ ESTÁ BUSCANDO?"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                <button className="search-button" type="submit">
+                  <i className="bx bx-search"></i>
+                </button>
+              </div>
+              <div className="header-logo-center">
+                <Link to="/">
+                  {" "}
+                  <img
+                    src="/assets/logo.png"
+                    alt="Logo"
+                    className="header-logo-center"
+                  />{" "}
+                </Link>
+              </div>
+              <div className="icons-w">
+                <Link to={userIconLink}>
+                  <i
+                    className="bx bx-user bt-header animation"
+                    style={{ color: "#ffffff" }}
+                  ></i>
+                </Link>
+                <Link to="/wishlist">
+                  <i
+                    className="bx bx-heart bt-header animation"
+                    style={{ color: "#ffffff" }}
+                  ></i>
+                </Link>
 
-          <i
-            className="bx bx-cart bt-header animation"
-            style={{ color: "#ffffff" }}
-            id="cart-icon"
-            onClick={handleCartIconClick}
-          ></i>
-        </div>
+                <i
+                  className="bx bx-cart bt-header animation"
+                  style={{ color: "#ffffff" }}
+                  id="cart-icon"
+                  onClick={handleCartIconClick}
+                ></i>
+              </div>
 
         <div
           className={`overlay ${overlayVisible ? "active" : ""}`}
@@ -444,54 +422,74 @@ const currentPageProdutos = filteredProdutosWithPrice.slice(
             </div>
       </header>
 
-      <div className="container-subheader-1">
-        <div className="container-menu-buttons-1">
-          <div className="button-menu-1">
-            <Link to="/sale">
-              <h6>PROMOÇÕES</h6>
-            </Link>
-          </div>
-
-          <div className="button-menu-1">
-            <Link to="/female">
-              <h6>FEMININO</h6>
-            </Link>
-          </div>
-
-          <div className="button-menu-1">
-            <Link to="/male">
-              <h6>MASCULINO</h6>
-            </Link>
-          </div>
-
-          <div className="button-menu-1">
-            <Link to="/props">
-              <h6>ACESSÓRIOS</h6>
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      <div className="space">
-        <div className="title-section">
-          <h1 className="general-title">FEMININO | BABYS</h1>
-          <button className="filter" onClick={handleFilterButtonClick}>
-            <img
-              src="/assets/filter.png"
+            <div className="container-subheader-1">
+              <div className="container-menu-buttons-1">
+                <div className="button-menu-1">
+                  {/* <img
+              src="/assets/promotion.png"
               alt="filtro"
-              className="button-image animation"
-            />
-          </button>
-          <hr className="hr-sections" />
-        </div>
+              className="button-image-2"
+            /> */}
+                  <Link to="/sale">
+                    <h6>PROMOÇÕES</h6>
+                  </Link>
+                </div>
 
-        {isFilterActive && (
-          <div className="filter-container">
-          <div className="filter-content">
-            <p className="filter-title">FILTRAR</p>
-            <hr className="filter-hr" />
-    
-            <ul className="filter-list">
+                <div className="button-menu-1">
+                  {/* <img
+              src="/assets/woman.png"
+              alt="filtro"
+              className="button-image-2"
+            /> */}
+                  <Link to="/female">
+                    <h6>FEMININO</h6>
+                  </Link>
+                </div>
+
+                <div className="button-menu-1">
+                  {/* <img
+              src="/assets/man.png"
+              alt="filtro"
+              className="button-image-2"
+            /> */}
+                  <Link to="/male">
+                    <h6>MASCULINO</h6>
+                  </Link>
+                </div>
+
+                <div className="button-menu-1">
+                  {/* <img
+              src="/assets/sunglasses-1.png"
+              alt="filtro"
+              className="button-image-2"
+            /> */}
+                  <Link to="/props">
+                    <h6>ACESSÓRIOS</h6>
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            <div className="space">
+              <div className="title-section">
+                <h1 className="general-title-1">FEMININO | BABY</h1>
+                <button className="filter" onClick={handleFilterButtonClick}>
+                  <img
+                    src="/assets/filter.png"
+                    alt="filtro"
+                    className="button-image-12 animation"
+                  />
+                </button>
+                <hr className="hr-sections"></hr>
+              </div>
+
+              {isFilterActive && (
+                <div className="filter-container">
+                  <div className="filter-content">
+                    <p className="filter-title">FILTRAR</p>
+                    <hr className="filter-hr" />
+
+                    <ul className="filter-list">
               <li>
                 <label className="filter-label">CATEGORIAS:</label>
               </li>
@@ -514,8 +512,7 @@ const currentPageProdutos = filteredProdutosWithPrice.slice(
                 </li>
               ))}
              <li className="filter-item">
-              
-             <button
+  <button
     className={`filter-option ${
       isPriceFilterActive ? "active" : ""
     }`}
@@ -563,7 +560,29 @@ const currentPageProdutos = filteredProdutosWithPrice.slice(
 )}
 
 
-<li>
+{/* <li>
+<div className="filter-price-inputs">
+                       <input
+                       type="number"
+                       placeholder="Mínimo"
+                       value={minPrice}
+                       onChange={(e) => setMinPrice(e.target.value)}
+                       />
+                       <input
+                      type="number"
+                      placeholder="Máximo"
+                      value={maxPrice}
+                      onChange={(e) => setMaxPrice(e.target.value)}
+                       />
+                      </div>
+                      <button className="apply-filter-button" onClick={() => setApplyFilter(true)}>
+                       Aplicar Filtro
+                      </button>
+                      <button className="reset-filter-button" onClick={handleResetFilter}>
+                       Limpar Filtro
+                      </button>
+</li> */}
+                      <li>
                         <button
                           className="close-button"
                           onClick={() => {
@@ -580,135 +599,147 @@ const currentPageProdutos = filteredProdutosWithPrice.slice(
                )}
 
 
-        <div className="items-per-page">
-          <label>Itens por página:</label>
-          <select
-            value={itemsPerPage}
-            onChange={(e) => setItemsPerPage(Number(e.target.value))}
-          >
-            <option value={5}>5</option>
-            <option value={10}>10</option>
-            <option value={15}>15</option>
-          </select>
-        </div>
+              <div className="items-per-page">
+                <label>Itens por página:</label>
+                <select
+                  value={itemsPerPage}
+                  onChange={(e) => setItemsPerPage(Number(e.target.value))}
+                >
+                  <option value={5}>5</option>
+                  <option value={10}>10</option>
+                  <option value={15}>15</option>
+                </select>
+              </div>
 
-        <div className="container-clothes">
-  {currentPageProdutos.map((produto, index) => (
-    <div className="clothes" key={index} style={{ width: "20%" }}>
-      <Link to={`/product/${"Prodfemme"}/${produto.nome_prodfemme}`}>
-        <img
-          className="img_prod"
-          src={produto.url_image}
-          alt={produto.nome_prodfemme}
-        />
-      </Link>
-      <div className="info-container1">
-        <Link to={`/product/${"Prodfemme"}/${produto.nome_prodfemme}`}>
-          <h6 className="text-card-h">{produto.nome_prodfemme}</h6>
-        </Link>
-  <div className="price-and-icons">
-    <h6 className="price">R$ {produto.preço}</h6>
-    <div className="icons-container">
-      <i
-        className="bx bx-cart bt-header carto"
-        style={{ color: "#48a3a9" }}
-        onClick={() => {
-          handleAddToCart(produto);
-          showAddedToCartNotification();
-        }}
-      ></i>
-      <i
-        className="bx bx-heart bt-header heartho"
-        style={{ color: "#48a3a9" }}
-        onClick={() => {
-          handleAddToFavorites(produto);
-          showAddedToFavoriteNotification();
-        }}
-      ></i>
-    </div>
-  </div>
-</div>
+              {filteredProdutos.length === 0 ? (
+                <div className="error-filter-img"><img className="no-results-message" src="/assets/error-filter.png"></img></div>
+              ) : (
+                <div className="test">
+                  <div className="container-clothes">
+                    {currentPageProdutos.map((produto, index) => (
+                      <div
+                        className="clothes"
+                        key={index}
+                        style={{ width: "20%" }}
+                      >
+                        <Link to={`/product/${"Prodfemme"}/${produto.nome_prodfemme}`}>
+                          <img
+                            className="img_prod"
+                            src={produto.url_image}
+                            alt={produto.nome_prodfemme}
+                          />
+                        </Link>
+                        <div className="info-container1">
+                          <Link to={`/product/${"Prodfemme"}/${produto.nome_prodfemme}`}>
+                            <h6 className="text-card-h">{produto.nome_prodfemme}</h6>
+                          </Link>
+                          <div className="price-and-icons">
+                            <h6 className="price">R$ {produto.preço}</h6>
+                            <div className="icons-container">
+                              <i
+                                className="bx bx-cart bt-header carto"
+                                style={{ color: "#48a3a9" }}
+                                onClick={() => {
+                                  handleAddToCart(produto);
+                                  showAddedToCartNotification();
+                                }}
+                              ></i>
+                              <i
+                                className="bx bx-heart bt-header heartho"
+                                style={{ color: "#48a3a9" }}
+                                onClick={() => {
+                                  handleAddToFavorites(produto);
+                                  showAddedToFavoriteNotification();
+                                }}
+                              ></i>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="pagination-container">
+                    <ReactPaginate
+                      previousLabel={
+                        <button className="btn-6"> Anterior </button>
+                      }
+                      nextLabel={<button className="btn-6"> Próximo </button>}
+                      breakLabel={"..."}
+                      pageCount={pageCount}
+                      marginPagesDisplayed={2}
+                      pageRangeDisplayed={5}
+                      onPageChange={handlePageChange}
+                      containerClassName={"pagination"}
+                      subContainerClassName={"pages pagination"}
+                      activeClassName={"active"}
+                      previousClassName={prevButtonClass}
+                      nextClassName={nextButtonClass}
+                      pageClassName={"page-count"}
+                      pageLinkClassName={"page-link"}
+                    />{" "}
+                  </div>
+                </div>
+              )}
+
+              {showNotification && (
+                <div className={`notification ${isItemAdded ? "active" : ""}`}>
+                  <p className="not">Item adicionado ao carrinho!</p>
+                  <Link to="/cart" className="go-to-cart-button">
+                    Ir para o Carrinho
+                  </Link>
+                </div>
+              )}
+
+              {showNotification2 && (
+                <div className={`notification ${isItemAdded ? "active" : ""}`}>
+                  <p className="not">Item adicionado a lista de desejo!</p>
+                  <Link to="/wishlist" className="go-to-cart-button">
+                    Ir para a Lista de Desejo
+                  </Link>
+                </div>
+              )}
             </div>
-          ))}
-        </div>
-
-        {showNotification && (
-        <div className={`notification ${isItemAdded ? "active" : ""}`}>
-          <p className="not">Item adicionado ao carrinho!</p>
-          <Link to="/cart2" className="go-to-cart-button">
-            Ir para o Carrinho
-          </Link>
-        </div>
-      )}
-
-{showNotification2 && (
-          <div className={`notification ${isItemAdded ? "active" : ""}`}>
-            <p className="not">Item adicionado a lista de desejo!</p>
-            <Link to="/wishlist" className="go-to-cart-button">
-              Ir para a Lista de Desejo
-            </Link>
-          </div>
-        )}
-
-
-
-
-
-
-      </div>
-
-      <div className="pagination-container">
-        <ReactPaginate
-          previousLabel={<button className="btn-6">ANTERIOR</button>}
-          nextLabel={<button className="btn-6">PRÓXIMO</button>}
-          breakLabel={"..."}
-          pageCount={pageCount}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={5}
-          onPageChange={handlePageChange}
-          containerClassName={"pagination"}
-          subContainerClassName={"pages pagination"}
-          activeClassName={"active"}
-          previousClassName={prevButtonClass}
-          nextClassName={nextButtonClass}
-          pageClassName={"page-count"}
-          pageLinkClassName={"page-link"}
-        />{" "}
-      </div>
-
-      <footer>
-        <section className="footer-section">
-          <div className="footer-section-div">
-        <Link to="/"><img className="rotating-jumping-image" src="/assets/whale.png" /></Link>
           </div>
 
-          <div className="footer-section-div">
-            <h3 className='footer-animation-title'>SOBRE NÓS</h3>
-            <li>
-              <Link to="/company">A EMPRESA</Link>
-            </li>
-            <li>
-              <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
-            </li>
-            <li>
-              <Link to="/partners">NOSSOS PARCEIROS</Link>
-            </li>
-          </div>
+          <footer>
+            <section className="footer-section">
+              <div className="footer-section-div">
+                <Link to="/">
+                  <img
+                    className="rotating-jumping-image"
+                    src="/assets/whale.png"
+                  />
+                </Link>
+              </div>
 
-          <div className="footer-section-div">
-            <h3 className='footer-animation-title'>SUPORTE</h3>
-            <li>
-              <Link to="/services">ATENDIMENTO</Link>
-            </li>
-            <li>
-              <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
-            </li>
-            <li>
-              <Link to="/sitemap">MAPA DO SITE</Link>
-            </li>
-          </div>
+              <div className="footer-section-div">
+                <h3 className="footer-animation-title">SOBRE NÓS</h3>
+                <li>
+                  <Link to="/company">A EMPRESA</Link>
+                </li>
+                <li>
+                  <Link to="/physicalstore">CONHEÇA NOSSA LOJA FÍSICA</Link>
+                </li>
+                <li>
+                  <Link to="/partners">NOSSOS PARCEIROS</Link>
+                </li>
+              </div>
 
-          <div className="footer-section-div">
+              <div className="footer-section-div">
+                <h3 className="footer-animation-title">SUPORTE</h3>
+                <li>
+                  <Link to="/services">ATENDIMENTO</Link>
+                </li>
+                <li>
+                  <Link to="/exchanges">TROCAS E DEVOLUÇÕES</Link>
+                </li>
+                <li>
+                  <Link to="/sitemap">MAPA DO SITE</Link>
+                </li>
+              </div>
+
+              <div className="footer-section-div">
   <h3 className='footer-animation-title'>CONTATOS</h3>
   <a href="https://web.whatsapp.com/send?phone=5585986056136" target="_blank" title="whatsapp">
     <i className="fa fa-whatsapp"></i>
@@ -720,12 +751,12 @@ const currentPageProdutos = filteredProdutosWithPrice.slice(
     <i className="fa fa-instagram"></i>
   </a>
 </div>
-        </section>
-      </footer>
-      <div className="last-text">
-        <p className="text-sub-footer">maremansa</p>
-      </div>
-    </div>
+            </section>
+          </footer>
+          <div className="last-text">
+            <p className="text-sub-footer">maremansa</p>
+          </div>
+        </>
       )}
     </>
   );
