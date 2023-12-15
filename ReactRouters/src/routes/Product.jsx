@@ -29,6 +29,21 @@ const Cart = () => {
   const [shippingCost, setShippingCost] = useState(0);
   const [productData, setProductData] = useState(null);
   const { collectionName, productName } = useParams();
+
+  const selectColor = (color) => {
+    setSelectedColor(color);
+    setIsAddToCartDisabled(!color || !selectedSize);
+  };
+
+  const handleSizeSelect = (size) => {
+    setSelectedSize(size);
+    setIsAddToCartDisabled(!selectedColor || !size);
+  };
+  const [selectedImage, setSelectedImage] = useState(
+    productData ? productData.url_image : ""
+  );
+  const [selectedCartItem, setSelectedCartItem] = useState({});
+  const [isAddToCartDisabled, setIsAddToCartDisabled] = useState(true);
   const [productRef, setProductRef] = useState(null);
   const [selectedQuantity, setSelectedQuantity] = useState(1);
   const [total, setTotal] = useState(0);
@@ -38,9 +53,111 @@ const Cart = () => {
   });
   const [cartVisible, setCartVisible] = useState(false);
   const [isComponentReady, setIsComponentReady] = useState(false);
+
   const handleCartIconClick = () => {
     setCartVisible(!cartVisible);
+    setOverlayVisible(!cartVisible);
   };
+
+  const handleCloseCartClick = () => {
+    setCartVisible(false);
+    setOverlayVisible(false);
+  };
+
+  const [userVisible, setUserVisible] = useState(false);
+
+  const handleUserIconClick = () => {
+    setUserVisible(!userVisible);
+    setOverlayVisible(!userVisible);
+  };
+
+  const handleCloseUserClick = () => {
+    setUserVisible(false);
+    setOverlayVisible(false);
+  };
+
+  useEffect(() => {
+    // Recupera os itens do carrinho do localStorage ao carregar a página
+    const savedCartItems = localStorage.getItem("cartItems");
+    if (savedCartItems) {
+      setCartItems(JSON.parse(savedCartItems));
+    }
+  }, []); // O segundo argumento vazio garante que este efeito seja executado apenas uma vez, após a montagem inicial do componente.
+
+  const handleAddToCart = (produto) => {
+    const existingItemIndex = cartItems.findIndex(
+      (item) => item.productName === productName
+    );
+
+    if (existingItemIndex !== -1) {
+      // Se o item já está no carrinho, aumente a quantidade
+      const updatedCartItems = [...cartItems];
+      updatedCartItems[existingItemIndex].quantidade += 1;
+      setCartItems(updatedCartItems);
+    } else {
+      // Se o item não está no carrinho, adicione-o com quantidade 1
+      setCartItems([
+        ...cartItems,
+        { ...produto, quantidade: selectedQuantity },
+      ]);
+    }
+
+    const selectColor = (color) => {
+      setSelectedColor(color);
+      setIsColorSelected(true);
+      setIsAddToCartDisabled(!isColorSelected || !isSizeSelected);
+    };
+
+    const handleSizeSelect = (size) => {
+      setSelectedSize(size);
+      setIsSizeSelected(true);
+      setIsAddToCartDisabled(!isColorSelected || !isSizeSelected);
+    };
+
+    const handleAddToCart = (produto) => {
+      // Verifique se tanto a cor quanto o tamanho foram selecionados
+      if (isColorSelected && isSizeSelected) {
+        const newItem = {
+          nome_prop: productName,
+          cor: selectedColor,
+          tamanho: selectedSize,
+          quantidade: selectedQuantity,
+          preço: productData ? productData.preço : 0,
+          url_image: productData ? productData.url_image : "",
+        };
+        setCartItems([...cartItems, newItem]);
+      }
+    };
+
+    // ... Lógica para adicionar o item ao carrinho
+
+    // Após adicionar o item, exiba a mensagem e defina um temporizador para ocultá-la
+    setIsItemAdded(true);
+    setTimeout(() => {
+      setIsItemAdded(false);
+    }, 5000); // Oculta a mensagem após 5 segundos (ou você pode definir outro valor)
+  };
+
+  const handleRemoveFromCart = (index) => {
+    const updatedCartItems = cartItems.filter(
+      (_, itemIndex) => itemIndex !== index
+    );
+    setCartItems(updatedCartItems);
+  };
+
+  const calculateTotal = () => {
+    let total = 0;
+    for (const item of cartItems) {
+      total += item.preço * item.quantidade;
+    }
+    return total.toFixed(2);
+  };
+
+  useEffect(() => {
+    setTotal(calculateTotal());
+    // Salva os itens do carrinho no localStorage sempre que o cartItems for modificado
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
 
   const LoadingContainer = () => (
     <div className="loading-container">

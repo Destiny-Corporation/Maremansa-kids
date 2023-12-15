@@ -1,4 +1,7 @@
 /* LoadingScreen.css */
+@import url("https://fonts.googleapis.com/css2?family=Stylish&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Stylish&display=swap");
+
 
 .loading-screen {
     background-color: #e41c1c; /* Cor de fundo */
